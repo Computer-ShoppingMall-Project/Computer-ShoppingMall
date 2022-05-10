@@ -1,5 +1,6 @@
 package vo;
 
+
 public class Customer {
 	private int gpu_no;
 	private String gpu_name;

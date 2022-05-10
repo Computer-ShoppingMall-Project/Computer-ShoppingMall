@@ -1,5 +1,6 @@
 package vo;
 
+
 public class GpuImage {
 	private int gpu_image_no;
 	private String extension;
