@@ -1,4 +1,4 @@
-package dao;
+package vo;
 
 public class CaseImage {
 	private int caseImageNo;
