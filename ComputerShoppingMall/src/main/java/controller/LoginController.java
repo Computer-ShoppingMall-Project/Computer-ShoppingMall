@@ -14,7 +14,6 @@ import vo.Customer;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
-	
 	// 로그인 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -27,7 +26,6 @@ public class LoginController extends HttpServlet {
 		// 로그인 되어있는 멤버라면 리다이렉트
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
-
 	// 로그인 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// if) 이미 로그인 상태면, IndexController 호출
