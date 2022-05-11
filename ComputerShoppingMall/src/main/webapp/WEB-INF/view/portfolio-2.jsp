@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +9,21 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="view/img/favicon.png" rel="icon">
+  <link href="view/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="view/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
-  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+  <link href="view/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="view/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+  <link href="view/lib/hover/hoverex-all.css" rel="stylesheet">
+  <link href="view/lib/jetmenu/jetmenu.css" rel="stylesheet">
+  <link href="view/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
@@ -35,13 +36,12 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
-
 <body>
   <div class="topbar clearfix">
     <div class="container">
       <div class="col-lg-12 text-right">
         <div class="social_buttons">
-        	 <a href="index.html" data-toggle="tooltip" data-placement="bottom">Logout</a>
+        	 <a href="index.jsp" data-toggle="tooltip" data-placement="bottom">Logout</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
       <div class="site-header clearfix">
         <div class="col-lg-3 col-md-3 col-sm-12 title-area">
           <div class="site-title" id="title">
-            <a href="index.html" title="">
+            <a href="index.jsp" title="">
               <h4>MAXI<span>BIZ</span></h4>
             </a>
           </div>
@@ -64,35 +64,35 @@
           <div id="nav" class="right">
             <div class="container clearfix">
               <ul id="jetmenu" class="jetmenu blue">
-                <li><a href="index.html">Home</a>
+                <li><a href="index.jsp">Home</a>
                 </li>
                 <li><a href="#">Pages</a>
                   <ul class="dropdown">
-                    <li><a href="404.html">404 Error</a></li>
-                    <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="404.jsp">404 Error</a></li>
+                    <li><a href="left-sidebar.jsp">Left Sidebar</a></li>
+                    <li><a href="login.jsp">Login</a></li>
+                    <li><a href="register.jsp">Register</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Shop</a>
                   <ul class="dropdown">
-                    <li><a href="digital-download.html">Products Page</a></li>
-                    <li><a href="single-product.html">Single Product</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="account.html">Account Page</a></li>
-                    <li><a href="support.html">Support Center</a></li>
+                    <li><a href="digital-download.jsp">Products Page</a></li>
+                    <li><a href="single-product.jsp">Single Product</a></li>
+                    <li><a href="checkout.jsp">Checkout</a></li>
+                    <li><a href="account.jsp">Account Page</a></li>
+                    <li><a href="support.jsp">Support Center</a></li>
                   </ul>
                 </li>
                 <li class="active"><a href="#">Portfolio</a>
                   <ul class="dropdown">
-                    <li><a href="portfolio-2.html">Portfolio (2 Columns)</a></li>
-                    <li><a href="portfolio-3.html">Portfolio (3 Columns)</a></li>
+                    <li><a href="portfolio-2.jsp">Portfolio (2 Columns)</a></li>
+                    <li><a href="portfolio-3.jsp">Portfolio (3 Columns)</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Blog</a>
                   <ul class="dropdown">
-                    <li><a href="single-with-sidebar.html">Single with Sidebar</a></li>
+                    <li><a href="single-with-sidebar.jsp">Single with Sidebar</a></li>
                   </ul>
                 </li>
               </ul>
@@ -112,7 +112,7 @@
     <div class="container">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.jsp">Home</a></li>
           <li>Portfolio 2 Columns</li>
         </ul>
         <h2>PORTFOLIO 2 COLUMNS</h2>
@@ -153,7 +153,7 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 mockups">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_01.jpg" alt="">
+                <img src="view/img/portfolio_01.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
@@ -176,11 +176,11 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 web-design graphic-design">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_02.jpg" alt="">
+                <img src="view/img/portfolio_02.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                    <a data-rel="prettyPhoto" href="img/portfolio_02.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
+                    <a data-rel="prettyPhoto" href="view/img/portfolio_02.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
                     <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                       <a href="#">web design</a>
@@ -199,11 +199,11 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 graphic-design">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_03.jpg" alt="">
+                <img src="view/img/portfolio_03.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                    <a data-rel="prettyPhoto" href="img/portfolio_03.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
+                    <a data-rel="prettyPhoto" href="view/img/portfolio_03.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
                     <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                       <a href="#">web design</a>
@@ -222,11 +222,11 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 mockups">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_04.jpg" alt="">
+                <img src="view/img/portfolio_04.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                    <a data-rel="prettyPhoto" href="img/portfolio_04.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
+                    <a data-rel="prettyPhoto" href="view/img/portfolio_04.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
                     <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                       <a href="#">web design</a>
@@ -245,11 +245,11 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 web-design">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_05.jpg" alt="">
+                <img src="view/img/portfolio_05.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                    <a data-rel="prettyPhoto" href="img/portfolio_05.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
+                    <a data-rel="prettyPhoto" href="view/img/portfolio_05.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
                     <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                       <a href="#">web design</a>
@@ -268,11 +268,11 @@
 
             <div class="portfolio-item col-lg-6 col-md-6 col-sm-6 col-xs-12 web-design">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_06.jpg" alt="">
+                <img src="view/img/portfolio_06.jpg" alt="">
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                    <a data-rel="prettyPhoto" href="img/portfolio_06.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
+                    <a data-rel="prettyPhoto" href="view/img/portfolio_06.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
                     <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                       <a href="#">web design</a>
@@ -328,12 +328,12 @@
         <h4 class="title">Recent Posts</h4>
         <ul class="recent_posts">
           <li>
-            <a href="home1.html#">
+            <a href="home1.jsp#">
 						<img src="img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
             <a class="readmore" href="#">read more</a>
           </li>
           <li>
-            <a href="home1.html#">
+            <a href="home1.jsp#">
 						<img src="img/recent_post_02.png" alt="" />Design Is In The Air</a>
             <a class="readmore" href="#">read more</a>
           </li>
@@ -355,14 +355,14 @@
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Flickr Stream</h4>
         <ul class="flickr">
-          <li><a href="#"><img alt="" src="img/flickr_01.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_02.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_03.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_04.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_05.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_06.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_07.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_08.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_01.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_02.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_03.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_04.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_05.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_06.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_07.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_08.jpg"></a></li>
         </ul>
       </div>
       <!-- end widget -->
@@ -387,8 +387,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
           <div class="footer-menu right">
             <ul class="menu">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
+              <li><a href="index.jsp">Home</a></li>
+              <li><a href="about.jsp">About</a></li>
               <li><a href="#">Sitemap</a></li>
               <li><a href="#">Site Terms</a></li>
               <li><a href="contact">Contact</a></li>
@@ -405,28 +405,21 @@
   <div class="dmtop">Scroll to Top</div>
 
   <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="lib/php-mail-form/validate.js"></script>
-  <script src="lib/prettyphoto/js/prettyphoto.js"></script>
-  <script src="lib/isotope/isotope.min.js"></script>
-  <script src="lib/hover/hoverdir.js"></script>
-  <script src="lib/hover/hoverex.min.js"></script>
-  <script src="lib/unveil-effects/unveil-effects.js"></script>
-  <script src="lib/owl-carousel/owl-carousel.js"></script>
-  <script src="lib/jetmenu/jetmenu.js"></script>
-  <script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
-  <script src="lib/jigowatt/jigowatt.js"></script>
-  <script src="lib/easypiechart/easypiechart.min.js"></script>
+  <script src="view/lib/jquery/jquery.min.js"></script>
+  <script src="view/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="view/lib/php-mail-form/validate.js"></script>
+  <script src="view/lib/prettyphoto/js/prettyphoto.js"></script>
+  <script src="view/lib/isotope/isotope.min.js"></script>
+  <script src="view/lib/hover/hoverdir.js"></script>
+  <script src="view/lib/hover/hoverex.min.js"></script>
+  <script src="view/lib/unveil-effects/unveil-effects.js"></script>
+  <script src="view/lib/owl-carousel/owl-carousel.js"></script>
+  <script src="view/lib/jetmenu/jetmenu.js"></script>
+  <script src="view/lib/animate-enhanced/animate-enhanced.min.js"></script>
+  <script src="view/lib/jigowatt/jigowatt.js"></script>
+  <script src="view/lib/easypiechart/easypiechart.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
-
+  <script src="view/js/main.js"></script>
 </body>
 </html>
-l>
-pt>
-
-</body>
-</html>
-l>

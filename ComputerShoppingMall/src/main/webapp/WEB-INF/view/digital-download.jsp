@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +9,21 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="view/img/favicon.png" rel="icon">
+  <link href="view/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="view/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
-  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+  <link href="view/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="view/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+  <link href="view/lib/hover/hoverex-all.css" rel="stylesheet">
+  <link href="view/lib/jetmenu/jetmenu.css" rel="stylesheet">
+  <link href="view/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
@@ -35,13 +36,12 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
-
 <body>
   <div class="topbar clearfix">
     <div class="container">
       <div class="col-lg-12 text-right">
         <div class="social_buttons">
-          	 <a href="index.html" data-toggle="tooltip" data-placement="bottom">Logout</a>
+          	 <a href="index.jsp" data-toggle="tooltip" data-placement="bottom">Logout</a>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
       <div class="site-header clearfix">
         <div class="col-lg-3 col-md-3 col-sm-12 title-area">
           <div class="site-title" id="title">
-            <a href="index.html" title="">
+            <a href="index.jsp" title="">
               <h4>MAXI<span>BIZ</span></h4>
             </a>
           </div>
@@ -64,35 +64,35 @@
           <div id="nav" class="right">
             <div class="container clearfix">
               <ul id="jetmenu" class="jetmenu blue">
-                <li><a href="index.html">Home</a>
+                <li><a href="index.jsp">Home</a>
                 </li>
                 <li><a href="#">Pages</a>
                   <ul class="dropdown">
-                    <li><a href="404.html">404 Error</a></li>
-                    <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="404.jsp">404 Error</a></li>
+                    <li><a href="left-sidebar.jsp">Left Sidebar</a></li>
+                    <li><a href="login.jsp">Login</a></li>
+                    <li><a href="register.jsp">Register</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
                   </ul>
                 </li>
                 <li class="active"><a href="#">Shop</a>
                   <ul class="dropdown">
-                    <li><a href="digital-download.html">Products Page</a></li>
-                    <li><a href="single-product.html">Single Product</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="account.html">Account Page</a></li>
-                    <li><a href="support.html">Support Center</a></li>
+                    <li><a href="digital-download.jsp">Products Page</a></li>
+                    <li><a href="single-product.jsp">Single Product</a></li>
+                    <li><a href="checkout.jsp">Checkout</a></li>
+                    <li><a href="account.jsp">Account Page</a></li>
+                    <li><a href="support.jsp">Support Center</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Portfolio</a>
                   <ul class="dropdown">
-                    <li><a href="portfolio-2.html">Portfolio (2 Columns)</a></li>
-                    <li><a href="portfolio-3.html">Portfolio (3 Columns)</a></li>
+                    <li><a href="portfolio-2.jsp">Portfolio (2 Columns)</a></li>
+                    <li><a href="portfolio-3.jsp">Portfolio (3 Columns)</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Blog</a>
                   <ul class="dropdown">
-                    <li><a href="single-with-sidebar.html">Single with Sidebar</a></li>
+                    <li><a href="single-with-sidebar.jsp">Single with Sidebar</a></li>
                   </ul>
                 </li>
               </ul>
@@ -117,7 +117,7 @@
           <p class="mbuttons">
             <a class="dmbutton" href="#">View items</a>
           </p>
-          <img data-effect="fade" class="aligncenter" width="1260" height="400" src="img/market_single_01.png" alt="">
+          <img data-effect="fade" class="aligncenter" width="1260" height="400" src="view/img/market_single_01.png" alt="">
         </header>
       </div>
     </div>
@@ -140,12 +140,12 @@
         <div id="popularitems" class="owl-carousel">
           <div class="col-lg-12">
             <div class="he-wrap tpl6 market-item">
-              <img class="lazyOwl" data-src="img/market_01.png" alt="">
+              <img class="lazyOwl" data-src="view/img/market_01.png" alt="">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">First Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -165,12 +165,12 @@
 
           <div class="col-lg-12">
             <div class="he-wrap tpl6 market-item">
-              <img class="lazyOwl" data-src="img/market_02.png" alt="">
+              <img class="lazyOwl" data-src="view/img/market_02.png" alt="">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">Second Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -190,12 +190,12 @@
 
           <div class="col-lg-12">
             <div class="he-wrap tpl6 market-item">
-              <img class="lazyOwl" data-src="img/market_04.png" alt="">
+              <img class="lazyOwl" data-src="view/img/market_04.png" alt="">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">Third Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -219,8 +219,8 @@
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">Fourth Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -240,12 +240,12 @@
 
           <div class="col-lg-12">
             <div class="he-wrap tpl6 market-item">
-              <img class="lazyOwl" data-src="img/market_05.png" alt="">
+              <img class="lazyOwl" data-src="view/img/market_05.png" alt="">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">Fifth Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -265,12 +265,12 @@
 
           <div class="col-lg-12">
             <div class="he-wrap tpl6 market-item">
-              <img class="lazyOwl" data-src="img/market_06.png" alt="">
+              <img class="lazyOwl" data-src="view/img/market_06.png" alt="">
               <div class="he-view">
                 <div class="bg a0" data-animate="fadeIn">
                   <h3 class="a1" data-animate="fadeInDown">Sixth Item</h3>
-                  <a href="single-product.html" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                  <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
+                  <a href="single-product.jsp" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                  <a href="checkout.jsp" class="dmbutton a2" data-animate="fadeIn">Buy now</a>
                   <div class="rating text-center a2" data-animate="fadeIn">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -406,13 +406,13 @@
         <h4 class="title">Recent Posts</h4>
         <ul class="recent_posts">
           <li>
-            <a href="home1.html#">
-						<img src="img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
+            <a href="home1.jsp#">
+						<img src="view/img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
             <a class="readmore" href="#">read more</a>
           </li>
           <li>
-            <a href="home1.html#">
-						<img src="img/recent_post_02.png" alt="" />Design Is In The Air</a>
+            <a href="home1.jsp#">
+						<img src="view/img/recent_post_02.png" alt="" />Design Is In The Air</a>
             <a class="readmore" href="#">read more</a>
           </li>
         </ul>
@@ -433,14 +433,14 @@
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Flickr Stream</h4>
         <ul class="flickr">
-          <li><a href="#"><img alt="" src="img/flickr_01.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_02.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_03.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_04.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_05.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_06.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_07.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_08.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_01.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_02.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_03.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_04.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_05.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_06.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_07.jpg"></a></li>
+          <li><a href="#"><img alt="" src="view/img/flickr_08.jpg"></a></li>
         </ul>
       </div>
       <!-- end widget -->
@@ -465,8 +465,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
           <div class="footer-menu right">
             <ul class="menu">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
+              <li><a href="index.jsp">Home</a></li>
+              <li><a href="about.jsp">About</a></li>
               <li><a href="#">Sitemap</a></li>
               <li><a href="#">Site Terms</a></li>
               <li><a href="contact">Contact</a></li>
@@ -483,22 +483,21 @@
   <div class="dmtop">Scroll to Top</div>
 
   <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="lib/php-mail-form/validate.js"></script>
-  <script src="lib/prettyphoto/js/prettyphoto.js"></script>
-  <script src="lib/isotope/isotope.min.js"></script>
-  <script src="lib/hover/hoverdir.js"></script>
-  <script src="lib/hover/hoverex.min.js"></script>
-  <script src="lib/unveil-effects/unveil-effects.js"></script>
-  <script src="lib/owl-carousel/owl-carousel.js"></script>
-  <script src="lib/jetmenu/jetmenu.js"></script>
-  <script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
-  <script src="lib/jigowatt/jigowatt.js"></script>
-  <script src="lib/easypiechart/easypiechart.min.js"></script>
+  <script src="view/lib/jquery/jquery.min.js"></script>
+  <script src="view/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="view/lib/php-mail-form/validate.js"></script>
+  <script src="view/lib/prettyphoto/js/prettyphoto.js"></script>
+  <script src="view/lib/isotope/isotope.min.js"></script>
+  <script src="view/lib/hover/hoverdir.js"></script>
+  <script src="view/lib/hover/hoverex.min.js"></script>
+  <script src="view/lib/unveil-effects/unveil-effects.js"></script>
+  <script src="view/lib/owl-carousel/owl-carousel.js"></script>
+  <script src="view/lib/jetmenu/jetmenu.js"></script>
+  <script src="view/lib/animate-enhanced/animate-enhanced.min.js"></script>
+  <script src="view/lib/jigowatt/jigowatt.js"></script>
+  <script src="view/lib/easypiechart/easypiechart.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
-
+  <script src="view/js/main.js"></script>
 </body>
 </html>
