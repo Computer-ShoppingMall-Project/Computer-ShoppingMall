@@ -1,3 +1,5 @@
+<%@page import="vo.Qna"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,54 +42,75 @@
   <!-- header적용 -->
   <jsp:include page="header.jsp"></jsp:include>
 
-  <section class="section1">
-    <div class="container clearfix">
-      <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-        <!-- 고객문의 폼 -->
-          <h4 class="title">QNA</h4>
-          <div id="message"></div>
-          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
-
-            <div class="form-group">
-              <input type="text" name="customerId" class="form-control" id="customerId">
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
-              <div class="validate"></div>
-            </div>
-
-            <div class="loading"></div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your question has been sent. Thank you!</div>
-
-            <div class="form-send">
-              <button type="submit" class="btn btn-large btn-primary">Send</button>
-            </div>
-
+  <section class="post-wrapper-top">
+    <div class="container">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <ul class="breadcrumb">
+          <li><a href="index.jsp">Home</a></li>
+          <li>QNA</li>
+        </ul>
+        <h2>QNA</h2>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <!-- search -->
+        <div class="search-bar">
+          <form action="" method="get">
+            <fieldset>
+              <input type="image" src="img/pixel.gif" class="searchsubmit" alt="" />
+              <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+            </fieldset>
           </form>
         </div>
+        <!-- / end div .search-bar -->
+      </div>
+    </div>
+  </section>
+  <!-- end post-wrapper-top -->
 
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <h4 class="title">Answer</h4>
-          <div class="form-group">
-              <textarea class="form-control text-center" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly">Your answer is not registered</textarea>
-              <div class="validate"></div>
-          </div>
-          <ul class="contact_details">
-            <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-            <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-            <li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-          </ul>
-          <!-- contact_details -->
-        </div>
+  <section class="section1">
+    <div class="container clearfix">
+      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+        <div class="clearfix"></div>
+        <hr>
+
+        <table class="table table-striped" data-effect="fade">
+          <thead class="text-center">
+            <tr>
+              <th>NO</th>
+              <th>TITLE</th>
+              <th>DATE</th>
+              <th>ANSWER</th>
+            </tr>
+          </thead>
+          <tbody>
+			<%
+				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
+			%>
+          </tbody>
+        </table>
+
       </div>
       <!-- end content -->
+
+      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Pages</span>
+                    </h4>
+          <ul class="pages">
+            <li><a href="#">Homepage</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Shopping</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- end sidebar -->
     </div>
     <!-- end container -->
   </section>
