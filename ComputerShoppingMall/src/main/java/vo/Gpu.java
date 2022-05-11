@@ -1,84 +1,84 @@
 package vo;
 
-
 public class Gpu {
-
-	private String customer_id;
+	private int gpuNo;
+	private String gpuName;
+	private String companyName;
+	private String chipsetCompany;
+	private int gpuSize; 
+	private int price;
+	private int quantity;
+	private int gpuImageNo;
+	private String memo;
+	private String updateDate;
+	
+	public int getGpuNo() {
+		return gpuNo;
+	}
+	public void setGpuNo(int gpuNo) {
+		this.gpuNo = gpuNo;
+	}
+	public String getGpuName() {
+		return gpuName;
+	}
+	public void setGpuName(String gpuName) {
+		this.gpuName = gpuName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getChipsetCompany() {
+		return chipsetCompany;
+	}
+	public void setChipsetCompany(String chipsetCompany) {
+		this.chipsetCompany = chipsetCompany;
+	}
+	public int getGpuSize() {
+		return gpuSize;
+	}
+	public void setGpuSize(int gpuSize) {
+		this.gpuSize = gpuSize;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public int getGpuImageNo() {
+		return gpuImageNo;
+	}
+	public void setGpuImageNo(int gpuImageNo) {
+		this.gpuImageNo = gpuImageNo;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+	
 	@Override
 	public String toString() {
-		return "Gpu [customer_id=" + customer_id + ", adrress_id=" + adrress_id + ", name=" + name + ", detail_address="
-				+ detail_address + ", customer_pw=" + customer_pw + ", email=" + email + ", nickname=" + nickname
-				+ ", phone=" + phone + ", create_date=" + create_date + ", updatedate=" + updatedate + "]";
+		return "Gpu [gpuNo=" + gpuNo + ", gpuName=" + gpuName + ", companyName=" + companyName + ", chipsetCompany="
+				+ chipsetCompany + ", gpuSize=" + gpuSize + ", price=" + price + ", quantity=" + quantity
+				+ ", gpuImageNo=" + gpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
 	}
-	private int adrress_id;
-	public String getCustomer_id() {
-		return customer_id;
-	}
-	public void setCustomer_id(String customer_id) {
-		this.customer_id = customer_id;
-	}
-	public int getAdrress_id() {
-		return adrress_id;
-	}
-	public void setAdrress_id(int adrress_id) {
-		this.adrress_id = adrress_id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDetail_address() {
-		return detail_address;
-	}
-	public void setDetail_address(String detail_address) {
-		this.detail_address = detail_address;
-	}
-	public String getCustomer_pw() {
-		return customer_pw;
-	}
-	public void setCustomer_pw(String customer_pw) {
-		this.customer_pw = customer_pw;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public int getPhone() {
-		return phone;
-	}
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
-	public String getCreate_date() {
-		return create_date;
-	}
-	public void setCreate_date(String create_date) {
-		this.create_date = create_date;
-	}
-	public String getUpdatedate() {
-		return updatedate;
-	}
-	public void setUpdatedate(String updatedate) {
-		this.updatedate = updatedate;
-	}
-	private String name;
-	private String detail_address;
-	private String customer_pw;
-	private String email;
-	private String nickname;
-	private int phone;
-	private String create_date;
-	private String updatedate;
-
+	
 	
 }

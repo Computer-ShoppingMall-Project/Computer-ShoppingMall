@@ -11,6 +11,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/QnaController")
 public class test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/contact.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
 	}
 }

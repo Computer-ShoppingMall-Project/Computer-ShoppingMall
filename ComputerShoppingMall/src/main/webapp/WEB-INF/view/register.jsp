@@ -37,6 +37,15 @@
   ======================================================= -->
 </head>
 <body>
+<%
+	// error 메세지 값 받기 코드
+	String msg = "";
+	if(request.getParameter("msg") != null){
+		if(request.getParameter("msg").equals("notMatch")){
+			msg = "Please check your password again";
+		}
+	}
+%>
   <div class="topbar clearfix">
     <div class="container">
       <div class="col-lg-12 text-right">
@@ -164,22 +173,35 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
           <h4 class="title">
                     	<span>Register Form</span>
-                    </h4>
-          <form id="registerform" method="post" name="registerform" action="">
+          </h4>
+          <h2><%=msg%></h2>
+          <form id="registerform" method="post" name="registerform" action="<%=request.getContextPath()%>/InsertMemberController">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="First name">
+              <input type="text" name="customerId" class="form-control" placeholder="ID">
+            </div>
+             <div class="form-group">
+              <input type="password" name="customerPw1" class="form-control" placeholder="Password">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Last name">
+              <input type="password" name="customerPw2" class="form-control" placeholder="Re-enter password">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="text" name="name" class="form-control" placeholder="Name">
+            </div>
+             <div class="form-group">
+              <input type="text" name="nickname" class="form-control" placeholder="Nickname">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="email" name="email" class="form-control" placeholder="Email">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Re-enter password">
+              <input type="number" name="phone" class="form-control" placeholder="Phone number">
+            </div>
+            <div class="form-group">
+              <input type="number" name="addressId" class="form-control" placeholder="Address">
+            </div>
+            <div class="form-group">
+              <input type="text" name="detailAddress" class="form-control" placeholder="Detail address">
             </div>
             <div class="form-group">
               <input type="submit" class="button" value="Register an account">

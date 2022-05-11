@@ -146,13 +146,13 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" name="customerId" class="form-control" placeholder="Username">
               </div>
             </div>
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" name="customerPw" class="form-control" placeholder="Password">
               </div>
             </div>
             <div class="form-group">
@@ -164,7 +164,7 @@
             </div>
             <div class="form-group">
               <button type="submit" class="button">로그인</button>
-              <a href="" class="button" style="background-color: rgb(11, 201, 4);">회원가입</a>
+              <a href="<%=request.getContextPath()%>/InsertMemberController" class="button" style="background-color: rgb(11, 201, 4);">회원가입</a>
             </div>
           </form>
         </div>

@@ -2,23 +2,21 @@ package vo;
 
 
 public class GpuImage {
-	private int gpu_image_no;
+	private int gpuImageNo;
 	private String extension;
 	private String name;
 	private int size;
-	public int getGpu_image_no() {
-		return gpu_image_no;
+	private String kind;
+	
+	// getter + setter
+	public int getGpuImageNo() {
+		return gpuImageNo;
 	}
-	public void setGpu_image_no(int gpu_image_no) {
-		this.gpu_image_no = gpu_image_no;
+	public void setGpuImageNo(int gpuImageNo) {
+		this.gpuImageNo = gpuImageNo;
 	}
 	public String getExtension() {
 		return extension;
-	}
-	@Override
-	public String toString() {
-		return "GpuImage [gpu_image_no=" + gpu_image_no + ", extension=" + extension + ", name=" + name + ", size="
-				+ size + ", kind=" + kind + "]";
 	}
 	public void setExtension(String extension) {
 		this.extension = extension;
@@ -41,6 +39,9 @@ public class GpuImage {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	private String kind;
-	
+	@Override
+	public String toString() {
+		return "GpuImage [gpuImageNo=" + gpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
+				+ ", kind=" + kind + "]";
+	}
 }
