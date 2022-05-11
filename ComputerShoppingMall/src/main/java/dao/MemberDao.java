@@ -11,7 +11,7 @@ import vo.Customer;
 
 public class MemberDao {
 	
-	// 1) 로그인 page
+	// 1) 로그인 page//
 	public String selectMemberByIdPw(Customer member) {
 		// 로그인 실패 -> null
 		String customerId = null; 

@@ -46,7 +46,7 @@
       }
    }
 %>
-  <!-- header적용 -->
+  <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
   <section class="post-wrapper-top">

@@ -59,7 +59,7 @@
             </fieldset>
           </form>
         </div>
-        <!-- / end div .search-bar -->
+        <!-- / end div .search-bar.-->
       </div>
     </div>
   </section>
