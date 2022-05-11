@@ -25,35 +25,35 @@
           <div id="nav" class="right">
             <div class="container clearfix">
               <ul id="jetmenu" class="jetmenu blue">
-                <li><a href="index.jsp">Home</a>
+                <li><a href="IndexController">Home</a>
                 </li>
                 <li class="active"><a href="#">Pages</a>
                   <ul class="dropdown">
-                    <li><a href="404.jsp">404 Error</a></li>
-                    <li><a href="left-sidebar.jsp">Left Sidebar</a></li>
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="register.jsp">Register</a></li>
-                    <li><a href="contact.jsp">Contact</a></li>
+                    <li><a href="Controller404">404 Error</a></li>
+                    <li><a href="leftSidebarController">Left Sidebar</a></li>
+                    <li><a href="LoginController">Login</a></li>
+                    <li><a href="RegisterController">Register</a></li>
+                    <li><a href="ContactController">Contact</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Shop</a>
                   <ul class="dropdown">
-                    <li><a href="digital-download.jsp">Products Page</a></li>
-                    <li><a href="single-product.jsp">Single Product</a></li>
-                    <li><a href="checkout.jsp">Checkout</a></li>
-                    <li><a href="account.jsp">Account Page</a></li>
-                    <li><a href="support.jsp">Support Center</a></li>
+                    <li><a href="DigitalDownloadController">Products Page</a></li>
+                    <li><a href="SingleProductController">Single Product</a></li>
+                    <li><a href="CheckoutController">Checkout</a></li>
+                    <li><a href="AccountController">Account Page</a></li>
+                    <li><a href="SupportController">Support Center</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Portfolio</a>
                   <ul class="dropdown">
-                    <li><a href="portfolio-2.jsp">Portfolio (2 Columns)</a></li>
-                    <li><a href="portfolio-3.jsp">Portfolio (3 Columns)</a></li>
+                    <li><a href="PortfolioController">Portfolio (2 Columns)</a></li>
+                    <li><a href="PortfolioController">Portfolio (3 Columns)</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Blog</a>
                   <ul class="dropdown">
-                    <li><a href="single-with-sidebar.jsp">Single with Sidebar</a></li>
+                    <li><a href="single-with-sidebarController">Single with Sidebar</a></li>
                   </ul>
                 </li>
               </ul>

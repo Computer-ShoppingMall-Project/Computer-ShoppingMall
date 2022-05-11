@@ -6,7 +6,7 @@ public class Ram {
 	private String companyName;
 	private String ramKind;
 	private int price;
-	private String quantity;
+	private int quantity;
 	private int ramImageNo;
 	private String memo;
 	private String updateDate;
@@ -41,10 +41,10 @@ public class Ram {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	public int getRamImageNo() {
@@ -77,6 +77,6 @@ public class Ram {
 				+ ", price=" + price + ", quantity=" + quantity + ", ramImageNo=" + ramImageNo + ", memo=" + memo
 				+ ", updateDate=" + updateDate + ", basketNo=" + basketNo + "]";
 	}
-	
+
 	
 }
