@@ -11,7 +11,7 @@ import vo.Customer;
 
 public class MemberDao {
 	
-	// 1) 로그인 page//
+	// 1) 로그인 page
 	public String selectMemberByIdPw(Customer member) {
 		// 로그인 실패 -> null
 		String customerId = null; 
@@ -56,14 +56,14 @@ public class MemberDao {
 		// DButil
 		conn = DButil.getConnection();
 		String sql = "SELECT customer_id customerId"
-				+ "					,address_id addressId"
 				+ "					,name"
-				+ "					,detail_address detailAddress"
-				+ "					,email"
 				+ "					,nickname"
+				+ "					,email"
 				+ "					,phone"
-				+ "					,create_date createDate "
-				+ "					,update_date updateDate "
+				+ "					,address_id addressId"
+				+ "					,detail_address detailAddress"
+				+ "					,create_date createDate"
+				+ "					,update_date updateDate"
 				+ "		 FROM customer "
 				+ "		 WHERE customer_id=? ";
 		try {
@@ -71,13 +71,13 @@ public class MemberDao {
 			stmt.setString(1, customerId);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				c.setCustomerId(rs.getString("customerID"));
-				c.setAddressId(rs.getInt("addressID"));
+				c.setCustomerId(rs.getString("customerId"));
 				c.setName(rs.getString("name"));
-				c.setDetailAddress(rs.getString("detailAddress"));
-				c.setEmail(rs.getString("email"));
 				c.setNickname(rs.getString("nickname"));
+				c.setEmail(rs.getString("email"));
 				c.setPhone(rs.getString("phone"));
+				c.setAddressId(rs.getInt("addressId"));
+				c.setDetailAddress(rs.getString("detailAddress"));
 				c.setCreateDate(rs.getString("createDate"));
 				c.setUpdateDate(rs.getString("updateDate"));
 			}
@@ -212,23 +212,21 @@ public class MemberDao {
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
-		String sql = "UPDATE customer SET address_id=? "
-				+ "						,name=? "
+		String sql = "UPDATE customer SET name=? "
+				+ "						,nickname=? "
+				+ "						,email=? "
+				+ "						,phone=? "
+				+ "						,address_id "
 				+ "						,detail_address=? "
-				+ "						,email=?"
-				+ "						,nickname=?"
-				+ "						,phone=?"
-				+ "						,update_date=NOW()"
 				+ "	WHERE customer_id=? AND customer_pw=PASSWORD(?)";
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, member.getAddressId());
-			stmt.setString(2, member.getName());
-			stmt.setString(3, member.getDetailAddress());
-			stmt.setString(4, member.getEmail());
-			stmt.setString(5, member.getNickname());
-			stmt.setString(6, member.getPhone());
-			stmt.setString(7, member.getUpdateDate());
+			stmt.setString(1, member.getName());
+			stmt.setString(2, member.getNickname());
+			stmt.setString(3, member.getEmail());
+			stmt.setString(4, member.getPhone());
+			stmt.setInt(5, member.getAddressId());
+			stmt.setString(6, member.getDetailAddress());
 			row = stmt.executeUpdate();
 
 		} catch (Exception e) {
