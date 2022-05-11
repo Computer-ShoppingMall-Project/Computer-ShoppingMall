@@ -8,7 +8,7 @@ public class Customer {
 	private String customerPw;
 	private String email;
 	private String nickname;
-	private int phone;
+	private String phone;
 	private String createDate;
 	private String updateDate;
 	
@@ -54,10 +54,10 @@ public class Customer {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getCreateDate() {

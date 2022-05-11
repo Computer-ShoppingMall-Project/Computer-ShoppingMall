@@ -66,7 +66,7 @@ public class InsertMemberController extends HttpServlet {
 	    c.setName(request.getParameter("name"));
 	    c.setNickname(request.getParameter("nickname"));
 	    c.setEmail(request.getParameter("email"));
-	    c.setPhone(Integer.parseInt(request.getParameter("phone")));
+	    c.setPhone(request.getParameter("phone"));
 	    c.setAddressId(Integer.parseInt(request.getParameter("addressId")));
 	    c.setDetailAddress(request.getParameter("detailAddress"));
 	    // 디버깅

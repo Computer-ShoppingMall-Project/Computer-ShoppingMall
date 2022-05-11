@@ -77,7 +77,7 @@ public class MemberDao {
 				c.setDetailAddress(rs.getString("detailAddress"));
 				c.setEmail(rs.getString("email"));
 				c.setNickname(rs.getString("nickname"));
-				c.setPhone(rs.getInt("phone"));
+				c.setPhone(rs.getString("phone"));
 				c.setCreateDate(rs.getString("createDate"));
 				c.setUpdateDate(rs.getString("updateDate"));
 			}
@@ -124,7 +124,7 @@ public class MemberDao {
 			stmt.setString(3, member.getName());
 			stmt.setString(4, member.getNickname());
 			stmt.setString(5, member.getEmail());
-			stmt.setInt(6, member.getPhone());
+			stmt.setString(6, member.getPhone());
 			stmt.setInt(7, member.getAddressId());
 			stmt.setString(8, member.getDetailAddress());
 			row = stmt.executeUpdate();
@@ -227,7 +227,7 @@ public class MemberDao {
 			stmt.setString(3, member.getDetailAddress());
 			stmt.setString(4, member.getEmail());
 			stmt.setString(5, member.getNickname());
-			stmt.setInt(6, member.getPhone());
+			stmt.setString(6, member.getPhone());
 			stmt.setString(7, member.getUpdateDate());
 			row = stmt.executeUpdate();
 
