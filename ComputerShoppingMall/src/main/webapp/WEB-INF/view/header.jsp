@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <div class="topbar clearfix">
     <div class="container">
-      <div class="col-lg-12 text-right">
+      <div class="col-lg-10 text-right">
         <div class="social_buttons">
           <a href="index.jsp" data-toggle="tooltip" data-placement="bottom">Login</a>
       </div>
     </div>
+    <div class="col-lg-1 text-right">
+    </div>
+      <div class="social_buttons">
+          <a href="<%=request.getContextPath()%>/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom"><%=session.getAttribute("sessionCustomerId") %></a>
+      </div>
     <!-- end container -->
   	</div>
   </div>
