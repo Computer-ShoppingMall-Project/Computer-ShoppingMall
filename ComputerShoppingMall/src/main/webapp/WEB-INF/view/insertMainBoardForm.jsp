@@ -114,13 +114,12 @@
 				</select>
             </div>
             <div class="form-group">
-              <select class="form-group" name="companyName">
+              <select class="form-group" name="socketSize">
               	<option value="" selected disabled hidden>soketSize</option>
-				<option value="ASUS">ASUS</option>
-				<option value="MSI">MSI</option>
-				<option value="GIGABYTE">GIGABYTE</option>
-				<option value="ASRock">ASRock</option>
-				<option value="BIOSTAR">BIOSTAR</option>
+				<option value="인텔(소켓1700)">인텔(소켓1700)</option>
+				<option value="인텔(소켓1200)">인텔(소켓1200)</option>
+				<option value="AMD(소켓AM4)">AMD(소켓AM4)</option>
+				<option value="AMD(소켓TR4)">AMD(소켓TR4)</option>
 				</select>
             </div>
              <div class="form-group">
