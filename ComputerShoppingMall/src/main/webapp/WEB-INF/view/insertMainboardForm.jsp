@@ -73,9 +73,9 @@
           <h4 class="title">
                        <span>상품등록</span>
                     </h4>
-         <form id="insertMainBoardform" method="post" name="insertMainBoardform" action="<%=request.getContextPath()%>/InsertMainBoardController">
+         <form id="insertMainBoardform" method="post" action="<%=request.getContextPath()%>/InsertMainboardController">
              <div class="form-group">
-              <input type="text" name="mainBoardName" class="form-control" placeholder="MainBoardName">
+              <input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
             </div>
             <div class="form-group">
               <select class="form-group" name="companyName">
@@ -127,7 +127,7 @@
               <input type="text" name="chipSet" class="form-control" placeholder="Chipset">
             </div>
             <div class="form-group">
-              <input type="file" name="mainBoardImage" class="form-control" placeholder="Img">
+              <input type="file" name="mainboardImage" class="form-control" placeholder="Img">
             </div>
             <div class="form-group">
               <input type="number" name="quantity" class="form-control" placeholder="Quantity">
