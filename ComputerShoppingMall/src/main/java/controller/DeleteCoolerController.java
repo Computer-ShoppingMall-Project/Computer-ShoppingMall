@@ -32,6 +32,8 @@ public class DeleteCoolerController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(coolerNo+"<-coolerNo");
+		
+		// dao
 		coolerDao = new CoolerDao();
 		coolerDao.deleteCooler(coolerNo);
 		

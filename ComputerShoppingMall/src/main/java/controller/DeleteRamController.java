@@ -33,6 +33,8 @@ public class DeleteRamController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(ramNo+"<-ramNo");
+		
+		// dao
 		ramDao = new RamDao();
 		ramDao.deleteRam(ramNo);
 		

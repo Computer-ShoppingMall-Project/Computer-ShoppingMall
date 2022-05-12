@@ -35,6 +35,8 @@ public class DeleteCaseController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(caseNo+"<-caseNo");
+		
+		// dao
 		caseDao = new CaseDao();
 		caseDao.deleteCase(caseNo);
 		

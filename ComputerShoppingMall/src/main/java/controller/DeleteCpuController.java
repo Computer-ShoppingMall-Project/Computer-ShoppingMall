@@ -33,6 +33,8 @@ public class DeleteCpuController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(cpuNo+"<-cpuNo");
+		
+		// dao
 		cpuDao = new CpuDao();
 		cpuDao.deleteCpu(cpuNo);
 		

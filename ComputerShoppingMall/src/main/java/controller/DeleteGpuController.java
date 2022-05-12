@@ -32,6 +32,8 @@ public class DeleteGpuController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(gpuNo+"<-gpuNo");
+		
+		// dao
 		gpuDao = new GpuDao();
 		gpuDao.deleteGpu(gpuNo);
 		

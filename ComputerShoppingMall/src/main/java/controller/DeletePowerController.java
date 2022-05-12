@@ -32,6 +32,8 @@ public class DeletePowerController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(powerNo+"<-powerNo");
+		
+		// dao
 		powerDao = new PowerDao();
 		powerDao.deletePower(powerNo);
 		

@@ -33,6 +33,8 @@ public class DeleteMainboardController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(mainboardNo+"<-mainboardNo");
+		
+		// dao
 		mainboardDao = new MainboardDao();
 		mainboardDao.deleteMainboard(mainboardNo);
 		

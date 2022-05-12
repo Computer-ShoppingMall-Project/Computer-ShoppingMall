@@ -33,6 +33,8 @@ public class DeleteStorageController extends HttpServlet {
 		}
 		// 디버깅
 		System.out.println(storageNo+"<-storageNo");
+		
+		// dao
 		storageDao = new StorageDao();
 		storageDao.deleteStorage(storageNo);
 		
