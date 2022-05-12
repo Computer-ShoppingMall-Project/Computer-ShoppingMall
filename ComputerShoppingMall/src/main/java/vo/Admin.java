@@ -9,12 +9,19 @@ public class Admin {
 	private String phone;
 	private String createDate;
 	private String updateDate;
+	private int adminCk;
 	
+	public int getAdminCk() {
+		return adminCk;
+	}
+	public void setAdminCk(int adminCk) {
+		this.adminCk = adminCk;
+	}
 	@Override
 	public String toString() {
 		return "Admin [adminId=" + adminId + ", addressId=" + addressId + ", detailAddress=" + detailAddress
 				+ ", adminPw=" + adminPw + ", adminName=" + adminName + ", phone=" + phone + ", createDate="
-				+ createDate + ", updateDate=" + updateDate + "]";
+				+ createDate + ", updateDate=" + updateDate + ", adminCk=" + adminCk + "]";
 	}
 	public String getAdminId() {
 		return adminId;

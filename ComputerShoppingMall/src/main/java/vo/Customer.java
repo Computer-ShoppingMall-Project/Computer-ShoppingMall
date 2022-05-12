@@ -11,12 +11,14 @@ public class Customer {
 	private String phone;
 	private String createDate;
 	private String updateDate;
+	private int customerCk;
 	
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", addressId=" + addressId + ", name=" + name + ", detailAddress="
 				+ detailAddress + ", customerPw=" + customerPw + ", email=" + email + ", nickName=" + nickName
-				+ ", phone=" + phone + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+				+ ", phone=" + phone + ", createDate=" + createDate + ", updateDate=" + updateDate + ", customerCk="
+				+ customerCk + "]";
 	}
 	
 	public String getCustomerId() {
@@ -25,6 +27,14 @@ public class Customer {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
+	public int getCustomerCk() {
+		return customerCk;
+	}
+
+	public void setCustomerCk(int customerCk) {
+		this.customerCk = customerCk;
+	}
+
 	public int getAddressId() {
 		return addressId;
 	}
