@@ -76,7 +76,7 @@
 				// 답변이 없을 경우, 답변 미등록으로 표시, 등록되어 있을 경우 7자+...까지 보여주기
 				for(Qna qna : list) {
 					if(qna.getQnaAnswer() == null) {
-						qna.setQnaAnswer("답변 미등록");
+						qna.setQnaAnswer("NO ANSWER");
 					} else {
 						qna.setQnaAnswer(qna.getQnaAnswer().substring(0, 7)+"...");
 					}

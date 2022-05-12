@@ -128,9 +128,30 @@ public class QnaDao {
 	}
 	
 	// 고객 QNA 수정
-	/*
-	 * public int updateQna(Qna qna) {
-	 * 
-	 * }
-	 */
+	public int updateQna(Qna qna) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql = "UPDATE qna SET qna_title=?, qna_content=?, update_date=NOW()"
+				+ " WHERE customer_id=? AND qna_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, qna.getCustomerId());
+			stmt.setString(2, qna.getQnaTitle());
+			stmt.setString(3, qna.getQnaContent());
+			stmt.setInt(4, qna.getQnaNo());
+			row = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 }
