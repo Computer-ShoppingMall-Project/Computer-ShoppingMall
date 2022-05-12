@@ -75,38 +75,23 @@
                     </h4>
          <form id="insertPowerform" method="post" name="insertPowerform" action="<%=request.getContextPath()%>/InsertPowerController">
              <div class="form-group">
-              <input type="text" name="caseName" class="form-control" placeholder="CaseName">
+              <input type="text" name="powerName" class="form-control" placeholder="PowerName">
             </div>
             <div class="form-group">
-              <select class="form-group" name="caseSize">
-					<option value="빅타워">빅타워</option>
-					<option value="미들타워">미들타워</option>
-					<option value="미니타워">미니타워</option>
-					<option value="미니ITX">미니ITX</option>
+              <select class="form-group" name="ratedPower">
+					<option value="" selected disabled hidden>ratedPower</option>
+					<option value="1000">1000</option>
+					<option value="850">850</option>
+					<option value="750">750</option>
+					<option value="700">700</option>
+					<option value="650">650</option>
+					<option value="600">600</option>
+					<option value="550">550</option>
+					<option value="500">500</option>
 				</select>
             </div>
             <div class="form-group">
-              <select class="form-group" name="bay89mm">
-					<option value="bay89mm">bay89mm</option>
-					<option value="6">6</option>
-					<option value="4">4</option>
-					<option value="3">3</option>
-					<option value="2">2</option>
-					<option value="1">1</option>
-					<option value="0">0</option>
-				</select>
-            </div>
-            <div class="form-group">
-              <select class="form-group" name="bay64mm">
-					<option value="bay64mm">bay64mm</option>
-					<option value="6">6</option>
-					<option value="4">4</option>
-					<option value="2">2</option>
-					<option value="1">1</option>
-				</select>
-            </div>
-            <div class="form-group">
-              <input type="file" name="caseImage" class="form-control" placeholder="Img">
+              <input type="file" name="powerImage" class="form-control" placeholder="Img">
             </div>
             <div class="form-group">
               <input type="number" name="quantity" class="form-control" placeholder="Quantity">
@@ -115,7 +100,7 @@
               <input type="number" name="price" class="form-control" placeholder="Price">
             </div>
             <div class="form-group">
-              <input type="textarea" name="memo" class="form-control" placeholder="memo">
+              <input type="textarea" name="memo" class="form-control" placeholder="Memo">
             </div>
             <div class="form-group">
               <input type="submit" class="button" value="등록">

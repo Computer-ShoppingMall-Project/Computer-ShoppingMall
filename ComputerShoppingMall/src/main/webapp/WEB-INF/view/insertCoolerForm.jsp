@@ -75,23 +75,24 @@
                     </h4>
          <form id="insertCoolerform" method="post" name="insertCoolerform" action="<%=request.getContextPath()%>/InsertCoolerController">
              <div class="form-group">
-              <input type="text" name="powerName" class="form-control" placeholder="PowerName">
+              <input type="text" name="coolerName" class="form-control" placeholder="CoolerName">
             </div>
+             <div class="form-group">
+              <input type="text" name="companyName" class="form-control" placeholder="CompanyName">
+            </div>
+            
             <div class="form-group">
-              <select class="form-group" name="ratedPower">
+              <select class="form-group" name="coolerKind">
 					<option value="" selected disabled hidden>ratedPower</option>
-					<option value="1000">1000</option>
-					<option value="850">850</option>
-					<option value="750">750</option>
-					<option value="700">700</option>
-					<option value="650">650</option>
-					<option value="600">600</option>
-					<option value="550">550</option>
-					<option value="500">500</option>
+					<option value="CPU 쿨러 공랭">CPU 쿨러 공랭</option>
+					<option value="CPU 쿨러 수랭">CPU 쿨러 수랭</option>
+					<option value="M.2 SSD 쿨러 공랭">M.2 SSD 쿨러 공랭</option>
+					<option value="시스템 쿨러 공랭">시스템 쿨러 공랭</option>
+					<option value="RAM 쿨러">RAM 쿨러</option>
 				</select>
             </div>
             <div class="form-group">
-              <input type="file" name="powerImage" class="form-control" placeholder="Img">
+              <input type="file" name="coolerImage" class="form-control" placeholder="Img">
             </div>
             <div class="form-group">
               <input type="number" name="quantity" class="form-control" placeholder="Quantity">

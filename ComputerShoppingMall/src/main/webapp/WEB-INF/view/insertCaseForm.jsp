@@ -87,6 +87,9 @@
 				</select>
             </div>
             <div class="form-group">
+              <input type="text" name="gpuSize" class="form-control" placeholder="gpuSize">
+            </div>
+            <div class="form-group">
               <select class="form-group" name="bay89mm">
 					<option value="" selected disabled hidden>bay89mm</option>
 					<option value="6">6</option>
