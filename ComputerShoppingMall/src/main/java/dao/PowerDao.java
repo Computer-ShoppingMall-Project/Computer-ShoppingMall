@@ -8,6 +8,28 @@ import util.DButil;
 import vo.Power;
 
 public class PowerDao {
+	// power 상품삭제
+	public void deletePower(int powerNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM power WHERE power_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, powerNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// power 상품상세보기
+	// power 상품수정
 	// power 상품등록
 	public int insertPower(Power p) {
 		Connection conn = null;

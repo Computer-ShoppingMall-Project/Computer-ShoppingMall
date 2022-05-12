@@ -7,6 +7,28 @@ import util.DButil;
 import vo.Mainboard;
 
 public class MainboardDao {
+	// mainboard 상품삭제
+	public void deleteMainboard(int mainboardNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM mainboard WHERE mainboard_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, mainboardNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// mainboard 상품상세보기
+	// mainboard 상품수정
 	// mainboard 상품등록
 	public int insertMainboard(Mainboard m) {
 		Connection conn = null;

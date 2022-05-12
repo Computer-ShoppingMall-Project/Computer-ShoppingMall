@@ -8,6 +8,28 @@ import util.DButil;
 import vo.Cpu;
 
 public class CpuDao {
+	// cpu 상품삭제
+	public void deleteCpu(int cpuNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM cpu WHERE cpu_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cpuNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// cpu 상품상세보기
+	// cpu 상품수정
 	// cpu 상품등록
 	public int insertCpu(Cpu c) {
 		Connection conn = null;

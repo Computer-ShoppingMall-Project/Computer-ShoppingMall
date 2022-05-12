@@ -8,6 +8,29 @@ import util.DButil;
 import vo.Gpu;
 
 public class GpuDao {
+	// gpu 상품삭제
+	public void deleteGpu(int gpuNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM gpu WHERE gpu_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, gpuNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	// gpu 상품상세보기
+	// gpu 상품수정
+	// gpu 상품등록
 	public int insertGpu(Gpu g) {
 		Connection conn = null;
 		PreparedStatement stmt = null;

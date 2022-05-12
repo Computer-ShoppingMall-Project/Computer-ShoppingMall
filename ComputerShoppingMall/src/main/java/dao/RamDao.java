@@ -8,6 +8,28 @@ import util.DButil;
 import vo.Ram;
 
 public class RamDao {
+	// ram 상품삭제
+	public void deleteRam(int ramNo ) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM ram WHERE ram_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, ramNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// ram 상품상세보기
+	// ram 상품수정
 	// ram 상품등록
 	public int insertRam(Ram r) {
 		Connection conn = null;

@@ -8,6 +8,28 @@ import util.DButil;
 import vo.Case;
 
 public class CaseDao {
+	// case 상품삭제
+	public void deleteCase(int caseNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM caseWHERE case_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, caseNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// case 상품상세보기
+	// case 상품수정
 	// case 상품등록
 	public int insertCase(Case c) {
 		Connection conn = null;

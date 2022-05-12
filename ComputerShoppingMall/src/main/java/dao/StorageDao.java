@@ -10,6 +10,29 @@ import util.DButil;
 import vo.Storage;
 
 public class StorageDao {
+	// storage 상품삭제
+	public void deleteStorage(int storageNo) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="DELETE FROM storage WHERE storage_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, storageNo);
+			stmt.executeUpdate();
+			} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// storage 상품상세보기
+	// storage 상품수정
+	// storage 상품등록
 	public int insertStorage(Storage s) {
 		Connection conn = null;
 		PreparedStatement stmt =  null;
