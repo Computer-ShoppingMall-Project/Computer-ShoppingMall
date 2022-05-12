@@ -127,6 +127,7 @@ public class MemberDao {
 			stmt.setString(6, member.getPhone());
 			stmt.setInt(7, member.getAddressId());
 			stmt.setString(8, member.getDetailAddress());
+			stmt.setString(9, member.getUpdateDate());
 			row = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,13 +152,7 @@ public class MemberDao {
 		// DButil
 		conn = DButil.getConnection();
 		// 1) customer 테이블 데이터 삭제
-		String sql1 = "DELETE FROM customer WHERE cusotmer_id=? AND customer_pw=PASSWORD(?)";
-		
-		/*
-		// 2) 연관 테이블 데이터 삭제 -> 추가작업 필요
-		String sql2 = "DELETE FROM cashbook WHERE member_id=?"; 
-		*/
-		
+		String sql1 = "DELETE FROM customer WHERE customer_id=? AND customer_pw=PASSWORD(?)";
 		try {
 			// auto commit 해제
 			conn.setAutoCommit(false); 
@@ -166,35 +161,20 @@ public class MemberDao {
 			stmt.setString(1, member.getCustomerId());
 			stmt.setString(2, member.getCustomerPw());
 			row = stmt.executeUpdate();
-			
-			/*
-			// 2) cashbook 테이블 데이터 삭제 -> 추가작업 필요
-			stmt = conn.prepareStatement(sql1);
-			stmt.setString(1, member.getMemberId());
-			stmt.executeUpdate();
-			stmt.close();
-			*/
-			
 			// 삭제 성공(row값이 1) -> commit / 이외 상황 rollback
 			if (row == 1) { 
 				conn.commit();
 			} else { 
 				conn.rollback();
 			}
-		} catch (Exception e1) {
-			try {
-				conn.rollback();
-
-			} catch(SQLException e2) {
-				e2.printStackTrace();
-			}
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
 				conn.close();
-			} catch(SQLException e1) {
-				e1.printStackTrace();
+			} catch(SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return row;
@@ -216,7 +196,7 @@ public class MemberDao {
 				+ "						,nickname=? "
 				+ "						,email=? "
 				+ "						,phone=? "
-				+ "						,address_id "
+				+ "						,address_id=? "
 				+ "						,detail_address=? "
 				+ "	WHERE customer_id=?";
 		try {
@@ -227,6 +207,7 @@ public class MemberDao {
 			stmt.setString(4, member.getPhone());
 			stmt.setInt(5, member.getAddressId());
 			stmt.setString(6, member.getDetailAddress());
+			stmt.setString(7, member.getCustomerId());
 			row = stmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -243,22 +224,39 @@ public class MemberDao {
 	}
 	
 	//  6) 회원 비밀번호 수정
-	public int updateMemberPasswordByIdPw(Customer member) {
+	public int updateMemberPasswordByIdPw(Customer member, String newCustomerPw) {
 		// 회원 정보 수정 성공 여부 리턴할 정수형 변수 선언
 		int row = -1; 
 		// 로그인 실패시, 처리 코드 -> customerId = null
 		String customerId = null;
+		if(newCustomerPw.equals("")) {
+			newCustomerPw = member.getCustomerPw();
+		}
 		// DB 초기화
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
-		String sql = "UPDATE customer SET customer_pw=? "
+		String sql = "UPDATE customer SET name = ? "
+				+ "						,nickname = ? "
+				+ "						,email = ? "
+				+ "						,phone = ? "
+				+ "						,address_id = ? "
+				+ "						,detail_address = ? "
+				+ "						,customer_pw = PASSWORD(?) "					
 				+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, member.getCustomerPw());
+			stmt.setString(1, member.getName());
+			stmt.setString(2, member.getNickName());
+			stmt.setString(3, member.getEmail());
+			stmt.setString(4, member.getPhone());
+			stmt.setInt(5, member.getAddressId());
+			stmt.setString(6, member.getDetailAddress());
+			stmt.setString(7, newCustomerPw);
+			stmt.setString(8, member.getCustomerId());
+			stmt.setString(9, member.getCustomerPw());
 			row = stmt.executeUpdate();
 
 		} catch (Exception e) {

@@ -26,15 +26,18 @@
 	<h2><%=msg%></h2>
 	<form method="post" action="<%=request.getContextPath()%>/UpdateMemberPwController">
 		<div>
+			<!-- 값넘기기 -->
+			<input type="hidden" name="customerId" readonly="readonly" value="<%=customer.getCustomerId()%>">
+			<input type="hidden" name="name" value="<%=customer.getName()%>" required>
+			<input type="hidden" name="nickName" value="<%=customer.getNickName()%>" required>
+			<input type="hidden" name="email" value="<%=customer.getEmail()%>" required>
+			<input type="hidden" name="phone" value="<%=customer.getPhone()%>" required>
+			<input type="hidden" name="addressId" value="<%=customer.getAddressId()%>" required>
+			<input type="hidden" name="detailAddress" value="<%=customer.getDetailAddress()%>" required>
+		</div>
+		<div>
 			<table border="1">
-				<tr>
-					<td>ID</td>
-					<td>
-						<input type="text" name="customerId" readonly="readonly" value="<%=customer.getCustomerId() %>">
-					</td>
-				</tr>
-				<tr>
-					<td>현재 비밀번호 입력</td>
+				<td>현재 비밀번호 입력</td>
 					<td>
 						<input type="password" name="customerPw" required>
 					</td>

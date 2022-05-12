@@ -53,10 +53,16 @@ public class UpdateMemberPwController extends HttpServlet {
 			   return;
 		   }
 		   
-		   // UpdateMemberForm.jsp 요청 값 처리
+		   // UpdateMemberPw.jsp 요청 값 처리
 		   Customer customer = new Customer();
 		   customer.setCustomerId(request.getParameter("customerId"));
 		   customer.setCustomerPw(request.getParameter("customerPw"));
+		   customer.setName(request.getParameter("name"));
+		   customer.setNickName(request.getParameter("nickName"));
+		   customer.setEmail(request.getParameter("email"));
+		   customer.setPhone(request.getParameter("phone"));
+		   customer.setAddressId(Integer.parseInt(request.getParameter("addressId")));
+		   customer.setDetailAddress(request.getParameter("detailAddress"));
 		   // 디버깅
 		   System.out.println(customer.toString() + " <-- UpdateMemberPwController.dopost");
 		   
@@ -74,7 +80,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		   // dao.updateMemberPasswordByIdPw
 		   MemberDao dao = new MemberDao();
 		   // 회원정보 수정됐는지... 확인코드
-		   int row = dao.updateMemberPasswordByIdPw(customer);
+		   int row = dao.updateMemberPasswordByIdPw(customer, newCustomerPw);
 		   System.out.print(row + " <-- row UpdateMemberPwController.dopost");
 		   // 1) row값이 1이면 회원정보 수정 성공 -> SelectMemberOneController 호출
 		   if(row == 1) {

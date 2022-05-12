@@ -47,7 +47,7 @@ public class UpdateMemberController extends HttpServlet {
 			   return;
 		   }
 		   // null 확인코드
-		   if(request.getParameter("name") == null || request.getParameter("nickName") == null || request.getParameter("email") == null || request.getParameter("phone") == null || request.getParameter("addressId") == null || request.getParameter("detailAddress") == null || request.getParameter("customerId") == null || request.getParameter("name") == null ) {
+		   if(request.getParameter("name") == null || request.getParameter("nickName") == null || request.getParameter("email") == null || request.getParameter("phone") == null || request.getParameter("addressId") == null || request.getParameter("detailAddress") == null) {
 			   System.out.println("null UpdateMembercontroller.dopost");
 			   response.sendRedirect(request.getContextPath() + "/UpdateMemberController");
 			   return;
@@ -62,6 +62,7 @@ public class UpdateMemberController extends HttpServlet {
 		   customer.setPhone(request.getParameter("phone"));
 		   customer.setAddressId(Integer.parseInt(request.getParameter("addressId")));
 		   customer.setDetailAddress(request.getParameter("detailAddress"));
+		   
 		   // 디버깅
 		   System.out.println(customer.toString() + " <-- UpdateMemberController.dopost");
 		   
@@ -79,14 +80,14 @@ public class UpdateMemberController extends HttpServlet {
 		   // 2) row값이 0이면 회원정보 수정 오류 -> UpdateMemberController 호출
 		   else if(row == 0) {
 		    	System.out.println("수정실패! UpdateMemberController.dopost");
-		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberController?msg=failrenewpassword");
+		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberController?msg=fail");
 		   } 
 		   // 3) row값이 -1이면 SQL 오류
 		   else if (row == -1) {
 		    	System.out.println("예외 발생 UpdateMemberController.dopost");
 		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberController?msg=exception");
 		   }
-	   }
+	  }
 }
 
 
