@@ -18,7 +18,7 @@
   <header class="header">
     <div class="container">
       <div class="site-header clearfix">
-        <div class="col-lg-3 col-md-3 col-sm-12 title-area">
+        <div class="col-lg-3 col-md-3 col-sm-14 title-area">
           <div class="site-title" id="title">
             <a href="index.jsp" title="">
               <h4>MAXI<span>BIZ</span></h4>
@@ -59,7 +59,20 @@
                 <li><a href="#">Blog</a>
                   <ul class="dropdown">
                     <li><a href="single-with-sidebarController">Single with Sidebar</a></li>
+                </li>
                   </ul>
+                  <li><a href="#">ProductInsert</a>
+                  <ul class="dropdown">
+                    <li><a href="InsertCaseController">InsertCase</a></li>
+                    <li><a href="InsertCoolerController">InsertCooler Product</a></li>
+                    <li><a href="InsertCpuController">InsertCpu</a></li>
+                    <li><a href="InsertGpuController">InsertGpu</a></li>
+                    <li><a href="InsertMainBoardController">InsertMainBoard</a></li>
+                    <li><a href="InsertPowerController">InsertPower</a></li>
+                    <li><a href="InsertRamController">InsertRam</a></li>
+                    <li><a href="InsertStorageController">InsertStorage</a></li>
+                  </ul>
+                  </li>
                 </li>
               </ul>
             </div>
