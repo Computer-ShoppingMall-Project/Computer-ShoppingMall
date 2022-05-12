@@ -74,7 +74,7 @@
           <h4 class="title">
                        <span>Login Form</span>
                     </h4>
-          <form id="loginform" method="post" name="loginform" action="">
+          <form id="loginform" method="post" name="loginform" action="<%=request.getContextPath()%>/LoginController">
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>

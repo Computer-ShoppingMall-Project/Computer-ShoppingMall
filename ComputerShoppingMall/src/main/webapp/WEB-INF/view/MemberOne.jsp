@@ -22,7 +22,7 @@
 	</tr>
 	<tr>
 		<td>닉네임</td>
-		<td><%=customer.getNickname()%></td>
+		<td><%=customer.getNickName()%></td>
 	</tr>
 	<tr>
 		<td>Email</td>
@@ -46,6 +46,7 @@
 	</tr>
 	</table>
 		<a  href="<%=request.getContextPath()%>/UpdateMemberController" type="button">정보수정</a>
+		<a  href="<%=request.getContextPath()%>/UpdateMemberPwController" type="button">비밀번호수정</a>
 		<a  href="<%=request.getContextPath()%>/DeleteMemberController" type="button">탈퇴</a>
 		<a  href="<%=request.getContextPath()%>/IndexController" type="button">index</a>
 </body>

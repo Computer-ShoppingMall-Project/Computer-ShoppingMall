@@ -218,7 +218,7 @@ public class MemberDao {
 				+ "						,phone=? "
 				+ "						,address_id "
 				+ "						,detail_address=? "
-				+ "	WHERE customer_id=? AND customer_pw=PASSWORD(?)";
+				+ "	WHERE customer_id=?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getName());
@@ -243,15 +243,11 @@ public class MemberDao {
 	}
 	
 	//  6) 회원 비밀번호 수정
-	public int updateMemberPasswordByIdPW(Customer member,String newMemberPw) {
+	public int updateMemberPasswordByIdPw(Customer member) {
 		// 회원 정보 수정 성공 여부 리턴할 정수형 변수 선언
 		int row = -1; 
 		// 로그인 실패시, 처리 코드 -> customerId = null
 		String customerId = null;
-		// newMemberPw(새 비밀번호)가 공백 값이면, memberPw(현 비밀번호)로 값을 채움
-		if(newMemberPw.equals("")) {
-			newMemberPw = member.getCustomerPw();
-		}
 		// DB 초기화
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -259,7 +255,7 @@ public class MemberDao {
 		conn = DButil.getConnection();
 		// SQL 쿼리
 		String sql = "UPDATE customer SET customer_pw=? "
-				+ "	WHERE customer_id=? AND customer_pw=PASSWORD(?)";
+				+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getCustomerPw());
