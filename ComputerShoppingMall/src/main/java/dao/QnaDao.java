@@ -39,7 +39,7 @@ public class QnaDao {
 		return row;
 	}
 	// 고객 QNA 상세보기
-	public ArrayList<Qna> selectQnaOne(String customerId) {
+	public ArrayList<Qna> selectQnaOne(String customerId, int qnaNo) {
 		ArrayList<Qna> list = new ArrayList<Qna>();
 		Qna qna = null;
 		Connection conn = null;
@@ -55,10 +55,11 @@ public class QnaDao {
 				+ ", create_date createDate"
 				+ ", update_date updateDate"
 				+ " FROM qna"
-				+ " WHERE customer_id=?";
+				+ " WHERE customer_id=? AND qna_no=?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
+			stmt.setInt(2, qnaNo);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				qna = new Qna();
@@ -84,6 +85,48 @@ public class QnaDao {
 		}
 		return list;
 	}
+	// 고객별 QNA 리스트
+	public ArrayList<Qna> selectQnaList(String customerId) {
+		ArrayList<Qna> list = new ArrayList<Qna>();
+		Qna qna = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		String sql = "SELECT"
+				+ " qna_no qnaNo"
+				+ ", qna_title qnaTitle"
+				+ ", qna_answer qnaAnswer"
+				+ ", create_date createDate"
+				+ " FROM qna"
+				+ " WHERE customer_id=?"
+				+ " ORDER BY create_date DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				qna = new Qna();
+				qna.setQnaNo(rs.getInt("qnaNo"));
+				qna.setQnaTitle(rs.getString("qnaTitle"));
+				qna.setQnaAnswer(rs.getString("qnaAnswer"));
+				qna.setCreateDate(rs.getString("createDate"));
+				list.add(qna);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	// 고객 QNA 수정
 	/*
 	 * public int updateQna(Qna qna) {

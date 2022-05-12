@@ -38,7 +38,7 @@
                     <li><a href="leftSidebarController">Left Sidebar</a></li>
                     <li><a href="LoginController">Login</a></li>
                     <li><a href="RegisterController">Register</a></li>
-                    <li><a href="ContactController">Contact</a></li>
+                    <li><a href="QnaListController">QNA</a></li>
                   </ul>
                 </li>
                 <li><a href="#">Shop</a>

@@ -1,5 +1,6 @@
 <%@page import="vo.Qna"%>
 <%@page import="java.util.ArrayList"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,67 +43,78 @@
   <!-- header적용 -->
   <jsp:include page="header.jsp"></jsp:include>
 
+  <section class="post-wrapper-top">
+    <div class="container">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <ul class="breadcrumb">
+          <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+          <li>QNA</li>
+        </ul>
+        <h2>QNA</h2>
+      </div>
+    </div>
+  </section>
+  <!-- end post-wrapper-top -->
   <section class="section1">
     <div class="container clearfix">
-      <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-        <!-- QNA 리스트로 돌아가기 -->
-       	<a href="${pageContext.request.contextPath}/QnaListController">back</a>
-        <!-- 고객문의 상세보기 -->
-          <h4 class="title">DETAIL QNA</h4>
-			<table class="table">
+      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+        <div class="clearfix"></div>
+        <a href="${pageContext.request.contextPath}/InsertQnaController">write</a>
+        <hr>
+        <table class="table table-striped" data-effect="fade">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>TITLE</th>
+              <th>DATE</th>
+              <th>ANSWER</th>
+            </tr>
+          </thead>
+          <tbody>
 			<%
-				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaOneList");
+				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
+				// 답변이 없을 경우, 답변 미등록으로 표시, 등록되어 있을 경우 7자+...까지 보여주기
 				for(Qna qna : list) {
+					if(qna.getQnaAnswer() == null) {
+						qna.setQnaAnswer("답변 미등록");
+					} else {
+						qna.setQnaAnswer(qna.getQnaAnswer().substring(0, 7)+"...");
+					}
 			%>
 					<tr>
-						<th>NO</th>
 						<td><%=qna.getQnaNo()%></td>
-					</tr>
-					<tr>
-						<th>ID</th>
-						<td>${customerId}</td>
-					</tr>
-					<tr>
-						<th>TITLE</th>
-						<td><%=qna.getQnaTitle()%></td>
-					</tr>
-					<tr>
-						<th>CONTENT</th>
-						<td><%=qna.getQnaContent()%></td>
-					</tr>
-					<tr>
-						<th>CREATE DATE</th>
+						<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>"><%=qna.getQnaTitle()%></a></td>
 						<td><%=qna.getCreateDate()%></td>
-					</tr>
-					<tr>
-						<th>UPDATE DATE</th>
-						<td><%=qna.getUpdateDate()%></td>
-					</tr>
+						<td><%=qna.getQnaAnswer()%></td>
+					</tr>	
 			<%
 				}
 			%>
-			</table>
-			<a href="${pageContext.request.contextPath}/UpdateQnaController" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
-			<a href="${pageContext.request.contextPath}/DeleteQnaController" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
-        </div>
+          </tbody>
+        </table>
 
-        <div class="col-lg-6 col-md-6 col-sm-6">
-        <br>
-          <h4 class="title">Answer</h4>
-          <div class="form-group">
-              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly">Your answer is not registered</textarea>
-              <div class="validate"></div>
-          </div>
-          <ul class="contact_details">
-            <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-            <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-            <li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-          </ul>
-          <!-- contact_details -->
-        </div>
       </div>
       <!-- end content -->
+
+      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+
+
+        <div class="widget">
+          <h4 class="title">
+                        <span>Pages</span>
+                    </h4>
+          <ul class="pages">
+            <li><a href="#">Homepage</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Shopping</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- end sidebar -->
     </div>
     <!-- end container -->
   </section>

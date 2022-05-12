@@ -1,5 +1,3 @@
-<%@page import="vo.Qna"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,61 +43,29 @@
   <section class="section1">
     <div class="container clearfix">
       <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 center-block" style="float: none; margin:100 auto;">
         <!-- QNA 리스트로 돌아가기 -->
-       	<a href="${pageContext.request.contextPath}/QnaListController">back</a>
-        <!-- 고객문의 상세보기 -->
-          <h4 class="title">DETAIL QNA</h4>
-			<table class="table">
-			<%
-				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaOneList");
-				for(Qna qna : list) {
-			%>
-					<tr>
-						<th>NO</th>
-						<td><%=qna.getQnaNo()%></td>
-					</tr>
-					<tr>
-						<th>ID</th>
-						<td>${customerId}</td>
-					</tr>
-					<tr>
-						<th>TITLE</th>
-						<td><%=qna.getQnaTitle()%></td>
-					</tr>
-					<tr>
-						<th>CONTENT</th>
-						<td><%=qna.getQnaContent()%></td>
-					</tr>
-					<tr>
-						<th>CREATE DATE</th>
-						<td><%=qna.getCreateDate()%></td>
-					</tr>
-					<tr>
-						<th>UPDATE DATE</th>
-						<td><%=qna.getUpdateDate()%></td>
-					</tr>
-			<%
-				}
-			%>
-			</table>
-			<a href="${pageContext.request.contextPath}/UpdateQnaController" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
-			<a href="${pageContext.request.contextPath}/DeleteQnaController" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
-        </div>
+        <a href="${pageContext.request.contextPath}/QnaListController">back</a>
+        <!-- 고객문의 폼 -->
+          <h4 class="title">QNA</h4>
+          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
 
-        <div class="col-lg-6 col-md-6 col-sm-6">
-        <br>
-          <h4 class="title">Answer</h4>
-          <div class="form-group">
-              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly">Your answer is not registered</textarea>
+            <div class="form-group">
+              <input type="text" name="customerId" class="form-control" id="customerId" value="${customerId}" readonly="readonly">
               <div class="validate"></div>
-          </div>
-          <ul class="contact_details">
-            <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-            <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-            <li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-          </ul>
-          <!-- contact_details -->
+            </div>
+            <div class="form-group">
+              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+              <div class="validate"></div>
+            </div>
+            <div class="form-send">
+              <button type="submit" class="btn btn-large btn-primary">Send</button>
+            </div>
+          </form>
         </div>
       </div>
       <!-- end content -->
