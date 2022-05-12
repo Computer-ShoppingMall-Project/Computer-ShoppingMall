@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertStorageform" method="post" name="insertStorageform" action="<%=request.getContextPath()%>/InsertStorageController">
-            <div class="form-group">
-              <input type="text" name="storageNo" class="form-control" placeholder="StorageNo">
-            </div>
              <div class="form-group">
               <input type="text" name="storageName" class="form-control" placeholder="StorageName">
             </div>

@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertGpuform" method="post" name="insertGpuform" action="<%=request.getContextPath()%>/InsertGpuController">
-            <div class="form-group">
-              <input type="text" name="gpuNo" class="form-control" placeholder="GpuNo">
-            </div>
              <div class="form-group">
               <input type="text" name="gpuName" class="form-control" placeholder="CpuName">
             </div>

@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertRamform" method="post" name="insertRamform" action="<%=request.getContextPath()%>/IsertRamController">
-            <div class="form-group">
-              <input type="text" name="ramNo" class="form-control" placeholder="RamNo">
-            </div>
              <div class="form-group">
               <input type="text" name="ramName" class="form-control" placeholder="RamName">
             </div>

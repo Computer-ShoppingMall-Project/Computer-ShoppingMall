@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertCaseform" method="post" name="insertCaseform" action="<%=request.getContextPath()%>/IsertCaseController">
-            <div class="form-group">
-              <input type="text" name="caseNo" class="form-control" placeholder="CaseNo">
-            </div>
              <div class="form-group">
               <input type="text" name="caseName" class="form-control" placeholder="CaseName">
             </div>

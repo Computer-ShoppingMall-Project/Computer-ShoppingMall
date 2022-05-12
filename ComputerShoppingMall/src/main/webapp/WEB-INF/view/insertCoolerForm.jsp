@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertCoolerform" method="post" name="insertCoolerform" action="<%=request.getContextPath()%>/InsertCoolerController">
-            <div class="form-group">
-              <input type="text" name="powerNo" class="form-control" placeholder="PowerNo">
-            </div>
              <div class="form-group">
               <input type="text" name="powerName" class="form-control" placeholder="PowerName">
             </div>

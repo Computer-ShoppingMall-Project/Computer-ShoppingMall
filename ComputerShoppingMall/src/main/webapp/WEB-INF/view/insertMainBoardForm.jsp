@@ -74,9 +74,6 @@
                        <span>상품등록</span>
                     </h4>
          <form id="insertMainBoardform" method="post" name="insertMainBoardform" action="<%=request.getContextPath()%>/InsertMainBoardController">
-            <div class="form-group">
-              <input type="text" name="mainBoardNo" class="form-control" placeholder="mainBoardNo">
-            </div>
              <div class="form-group">
               <input type="text" name="mainBoardName" class="form-control" placeholder="MainBoardName">
             </div>
