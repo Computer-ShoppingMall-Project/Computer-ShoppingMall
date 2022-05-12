@@ -73,7 +73,7 @@ public class MemberDao {
 			if(rs.next()) {
 				c.setCustomerId(rs.getString("customerId"));
 				c.setName(rs.getString("name"));
-				c.setNickname(rs.getString("nickname"));
+				c.setNickName(rs.getString("nickName"));
 				c.setEmail(rs.getString("email"));
 				c.setPhone(rs.getString("phone"));
 				c.setAddressId(rs.getInt("addressId"));
@@ -122,7 +122,7 @@ public class MemberDao {
 			stmt.setString(1, member.getCustomerId());
 			stmt.setString(2, member.getCustomerPw());
 			stmt.setString(3, member.getName());
-			stmt.setString(4, member.getNickname());
+			stmt.setString(4, member.getNickName());
 			stmt.setString(5, member.getEmail());
 			stmt.setString(6, member.getPhone());
 			stmt.setInt(7, member.getAddressId());
@@ -222,7 +222,7 @@ public class MemberDao {
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getName());
-			stmt.setString(2, member.getNickname());
+			stmt.setString(2, member.getNickName());
 			stmt.setString(3, member.getEmail());
 			stmt.setString(4, member.getPhone());
 			stmt.setInt(5, member.getAddressId());

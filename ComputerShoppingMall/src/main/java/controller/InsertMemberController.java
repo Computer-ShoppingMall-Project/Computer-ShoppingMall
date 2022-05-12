@@ -64,7 +64,7 @@ public class InsertMemberController extends HttpServlet {
 	    c.setCustomerId(request.getParameter("customerId"));
 	    c.setCustomerPw(customerPw);
 	    c.setName(request.getParameter("name"));
-	    c.setNickname(request.getParameter("nickname"));
+	    c.setNickName(request.getParameter("nickname"));
 	    c.setEmail(request.getParameter("email"));
 	    c.setPhone(request.getParameter("phone"));
 	    c.setAddressId(Integer.parseInt(request.getParameter("addressId")));
