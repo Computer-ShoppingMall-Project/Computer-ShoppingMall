@@ -1,44 +1,35 @@
 package vo;
 
-public class MainBoard {
-	private int mainBoardNo;
-	private String mainBoardName;
-	private String kind;
+public class Mainboard {
+	private int mainboardNo;
+	private String mainboardName;
+	private String mainboardKind;
 	private String socketSize;
 	private String chipset;
 	private String ramVersion;
 	private int price;
 	private int quantity;
 	private String companyName;
-	private int mainBoardImageNo;
+	private int mainboardImageNo;
 	private String memo;
 	private String updateDate;
-	
-	@Override
-	public String toString() {
-		return "MainBoard [mainBoardNo=" + mainBoardNo + ", mainBoardName=" + mainBoardName + ", kind=" + kind
-				+ ", socketSize=" + socketSize + ", chipset=" + chipset + ", ramVersion=" + ramVersion + ", price="
-				+ price + ", quantity=" + quantity + ", companyName=" + companyName + ", mainBoardImageNo="
-				+ mainBoardImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+	public int getMainboardNo() {
+		return mainboardNo;
 	}
-	
-	public int getMainBoardNo() {
-		return mainBoardNo;
+	public void setMainboardNo(int mainboardNo) {
+		this.mainboardNo = mainboardNo;
 	}
-	public void setMainBoardNo(int mainBoardNo) {
-		this.mainBoardNo = mainBoardNo;
+	public String getMainboardName() {
+		return mainboardName;
 	}
-	public String getMainBoardName() {
-		return mainBoardName;
+	public void setMainboardName(String mainboardName) {
+		this.mainboardName = mainboardName;
 	}
-	public void setMainBoardName(String mainBoardName) {
-		this.mainBoardName = mainBoardName;
+	public String getMainboardKind() {
+		return mainboardKind;
 	}
-	public String getKind() {
-		return kind;
-	}
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setMainboardKind(String mainboardKind) {
+		this.mainboardKind = mainboardKind;
 	}
 	public String getSocketSize() {
 		return socketSize;
@@ -76,11 +67,11 @@ public class MainBoard {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public int getMainBoardImageNo() {
-		return mainBoardImageNo;
+	public int getMainboardImageNo() {
+		return mainboardImageNo;
 	}
-	public void setMainBoardImageNo(int mainBoardImageNo) {
-		this.mainBoardImageNo = mainBoardImageNo;
+	public void setMainboardImageNo(int mainboardImageNo) {
+		this.mainboardImageNo = mainboardImageNo;
 	}
 	public String getMemo() {
 		return memo;
@@ -94,4 +85,12 @@ public class MainBoard {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	@Override
+	public String toString() {
+		return "Mainboard [mainboardNo=" + mainboardNo + ", mainboardName=" + mainboardName + ", mainboardKind="
+				+ mainboardKind + ", socketSize=" + socketSize + ", chipset=" + chipset + ", ramVersion=" + ramVersion
+				+ ", price=" + price + ", quantity=" + quantity + ", companyName=" + companyName + ", mainboardImageNo="
+				+ mainboardImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+	}
+	
 }

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +45,9 @@ public class InsertProductRam extends HttpServlet {
 		if(!"".equals(request.getParameter("memo")) && request.getParameter("memo") != null) {
 			memo = request.getParameter("memo");
 		}
+		
+		
+		
 		Ram ram = new Ram();
 		ram.setRamName(ramName);
 		ram.setCompanyName(companyName);
