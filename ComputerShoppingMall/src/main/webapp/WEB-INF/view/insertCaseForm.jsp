@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>상품등록</span>
                     </h4>
-         <form id="insertCaseform" method="post" name="insertCaseform" action="<%=request.getContextPath()%>/IsertCaseController">
+         <form id="insertCaseform" method="post" name="insertCaseform" action="<%=request.getContextPath()%>/InsertCaseController">
              <div class="form-group">
               <input type="text" name="caseName" class="form-control" placeholder="CaseName">
             </div>
@@ -119,7 +119,7 @@
               <input type="number" name="price" class="form-control" placeholder="Price">
             </div>
             <div class="form-group">
-              <input type="textarea" name="memo" class="form-control" placeholder="Memo">
+              <input type="text" name="memo" class="form-control" placeholder="Memo">
             </div>
             <div class="form-group">
               <input type="submit" class="button" value="등록">

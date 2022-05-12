@@ -100,7 +100,7 @@
               <input type="number" name="price" class="form-control" placeholder="Price">
             </div>
             <div class="form-group">
-              <input type="textarea" name="memo" class="form-control" placeholder="Memo">
+              <input type="text" name="memo" class="form-control" placeholder="Memo">
             </div>
             <div class="form-group">
               <input type="submit" class="button" value="등록">

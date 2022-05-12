@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
-import dao.InsertMainboardDao;
+import dao.MainboardDao;
 import vo.Mainboard;
 
 @WebServlet("/InsertMainboardController")
 public class InsertMainboardController extends HttpServlet {
+	private MainboardDao mainboardDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
@@ -29,7 +30,7 @@ public class InsertMainboardController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
 		System.out.println(sessionCustomerId+"<-1111111111111111");
-		// 로그인 상태가 아니거나 관리자아이디가 아니면 로그인창으로 이동
+		// 로그인 상태가 아니면 로그인창으로 이동
 		if(sessionCustomerId == null) {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
@@ -97,8 +98,8 @@ public class InsertMainboardController extends HttpServlet {
 		m.setCompanyName(companyName);
 		m.setMemo(memo);
 		
-		InsertMainboardDao insertMainboardDao = new InsertMainboardDao();
-		insertMainboardDao.insertMainboard(m);
+		mainboardDao = new MainboardDao();
+		mainboardDao.insertMainboard(m);
 		
 		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
 	}

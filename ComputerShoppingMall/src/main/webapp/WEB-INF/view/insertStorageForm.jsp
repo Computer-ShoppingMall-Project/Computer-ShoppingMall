@@ -78,7 +78,7 @@
               <input type="text" name="storageName" class="form-control" placeholder="StorageName">
             </div>
             <div class="form-group">
-              <select class="form-group" name="companyname">
+              <select class="form-group" name="companyName">
 					<option value="" selected disabled hidden>companyname</option>
 					<option value="삼성전자">삼성전자</option>
 					<option value="SK하이닉스">SK하이닉스</option>

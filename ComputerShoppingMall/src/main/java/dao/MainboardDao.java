@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import util.DButil;
 import vo.Mainboard;
 
-public class InsertMainboardDao {
+public class MainboardDao {
+	// mainboard 상품등록
 	public int insertMainboard(Mainboard m) {
 		Connection conn = null;
 		PreparedStatement stmt = null;

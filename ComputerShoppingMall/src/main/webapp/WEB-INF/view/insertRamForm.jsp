@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>상품등록</span>
                     </h4>
-         <form id="insertRamform" method="post" name="insertRamform" action="<%=request.getContextPath()%>/IsertRamController">
+         <form id="insertRamform" method="post" name="insertRamform" action="<%=request.getContextPath()%>/InsertRamController">
              <div class="form-group">
               <input type="text" name="ramName" class="form-control" placeholder="RamName">
             </div>
@@ -82,7 +82,7 @@
             </div>
              <div class="ramkind">
               <input type='radio' name='ramKind' value='DDR5'onclick="clickCheck(this)"/>DDR5
-			  <input type='radio' name='ramKind' value='DDR4'onclick="clickCheck(this)"/>DDR5
+			  <input type='radio' name='ramKind' value='DDR4'onclick="clickCheck(this)"/>DDR4
             </div>
             <div class="form-group">
               <input type="file" name="ramImage" class="form-control" placeholder="Img">
