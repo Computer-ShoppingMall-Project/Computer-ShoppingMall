@@ -10,7 +10,7 @@ public class DButil {
 		Connection conn = null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/computer","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3307/computer","root","java1234");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

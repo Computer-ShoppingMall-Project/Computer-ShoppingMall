@@ -1,12 +1,17 @@
 package vo;
 
-
 public class GpuImage {
 	private int gpuImageNo;
 	private String extension;
 	private String name;
 	private int size;
 	private String kind;
+	
+	@Override
+	public String toString() {
+		return "GpuImage [gpuImageNo=" + gpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
+				+ ", kind=" + kind + "]";
+	}
 	
 	// getter + setter
 	public int getGpuImageNo() {
@@ -38,10 +43,5 @@ public class GpuImage {
 	}
 	public void setKind(String kind) {
 		this.kind = kind;
-	}
-	@Override
-	public String toString() {
-		return "GpuImage [gpuImageNo=" + gpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
-				+ ", kind=" + kind + "]";
 	}
 }

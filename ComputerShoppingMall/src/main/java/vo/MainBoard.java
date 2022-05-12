@@ -1,8 +1,8 @@
 package vo;
 
-public class Mainboard {
-	private int mainboardNo;
-	private String mainboardName;
+public class MainBoard {
+	private int mainBoardNo;
+	private String mainBoardName;
 	private String kind;
 	private String socketSize;
 	private String chipset;
@@ -10,28 +10,29 @@ public class Mainboard {
 	private int price;
 	private int quantity;
 	private String companyName;
-	private int mainboardImageNo;
+	private int mainBoardImageNo;
 	private String memo;
 	private String updateDate;
 	
 	@Override
 	public String toString() {
-		return "Mainboard [mainboardNo=" + mainboardNo + ", mainboardName=" + mainboardName + ", kind=" + kind
+		return "MainBoard [mainBoardNo=" + mainBoardNo + ", mainBoardName=" + mainBoardName + ", kind=" + kind
 				+ ", socketSize=" + socketSize + ", chipset=" + chipset + ", ramVersion=" + ramVersion + ", price="
-				+ price + ", quantity=" + quantity + ", companyName=" + companyName + ", mainboardImageNo="
-				+ mainboardImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+				+ price + ", quantity=" + quantity + ", companyName=" + companyName + ", mainBoardImageNo="
+				+ mainBoardImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
 	}
-	public int getMainboardNo() {
-		return mainboardNo;
+	
+	public int getMainBoardNo() {
+		return mainBoardNo;
 	}
-	public void setMainboardNo(int mainboardNo) {
-		this.mainboardNo = mainboardNo;
+	public void setMainBoardNo(int mainBoardNo) {
+		this.mainBoardNo = mainBoardNo;
 	}
-	public String getMainboardName() {
-		return mainboardName;
+	public String getMainBoardName() {
+		return mainBoardName;
 	}
-	public void setMainboardName(String mainboardName) {
-		this.mainboardName = mainboardName;
+	public void setMainBoardName(String mainBoardName) {
+		this.mainBoardName = mainBoardName;
 	}
 	public String getKind() {
 		return kind;
@@ -75,11 +76,11 @@ public class Mainboard {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public int getMainboardImageNo() {
-		return mainboardImageNo;
+	public int getMainBoardImageNo() {
+		return mainBoardImageNo;
 	}
-	public void setMainboardImageNo(int mainboardImageNo) {
-		this.mainboardImageNo = mainboardImageNo;
+	public void setMainBoardImageNo(int mainBoardImageNo) {
+		this.mainBoardImageNo = mainBoardImageNo;
 	}
 	public String getMemo() {
 		return memo;

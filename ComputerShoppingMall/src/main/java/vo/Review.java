@@ -8,12 +8,14 @@ public class Review {
 	private int starScore;
 	private String createDate;
 	private String updateDate;
+	
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", orderNo=" + orderNo + ", reviewTitle=" + reviewTitle + ", review="
 				+ review + ", starScore=" + starScore + ", createDate=" + createDate + ", updateDate=" + updateDate
 				+ "]";
 	}
+	
 	public int getReviewNo() {
 		return reviewNo;
 	}

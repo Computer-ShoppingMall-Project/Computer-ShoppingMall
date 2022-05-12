@@ -9,6 +9,14 @@ public class Power {
 	private int powerImageNo;
 	private String memo;
 	private String updateDate;
+	
+	@Override
+	public String toString() {
+		return "Power [powerNo=" + powerNo + ", powerName=" + powerName + ", ratedPower=" + ratedPower + ", price="
+				+ price + ", quantity=" + quantity + ", powerImageNo=" + powerImageNo + ", memo=" + memo
+				+ ", updateDate=" + updateDate + "]";
+	}
+	
 	public int getPowerNo() {
 		return powerNo;
 	}
@@ -57,12 +65,4 @@ public class Power {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	@Override
-	public String toString() {
-		return "Power [powerNo=" + powerNo + ", powerName=" + powerName + ", ratedPower=" + ratedPower + ", price="
-				+ price + ", quantity=" + quantity + ", powerImageNo=" + powerImageNo + ", memo=" + memo
-				+ ", updateDate=" + updateDate + "]";
-	}
-	
-	
 }

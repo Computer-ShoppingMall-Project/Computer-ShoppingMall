@@ -12,6 +12,13 @@ public class Gpu {
 	private String memo;
 	private String updateDate;
 	
+	@Override
+	public String toString() {
+		return "Gpu [gpuNo=" + gpuNo + ", gpuName=" + gpuName + ", companyName=" + companyName + ", chipsetCompany="
+				+ chipsetCompany + ", gpuSize=" + gpuSize + ", price=" + price + ", quantity=" + quantity
+				+ ", gpuImageNo=" + gpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+	}
+	
 	public int getGpuNo() {
 		return gpuNo;
 	}
@@ -72,13 +79,4 @@ public class Gpu {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	@Override
-	public String toString() {
-		return "Gpu [gpuNo=" + gpuNo + ", gpuName=" + gpuName + ", companyName=" + companyName + ", chipsetCompany="
-				+ chipsetCompany + ", gpuSize=" + gpuSize + ", price=" + price + ", quantity=" + quantity
-				+ ", gpuImageNo=" + gpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
-	}
-	
-	
 }

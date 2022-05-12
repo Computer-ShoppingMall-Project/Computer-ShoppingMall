@@ -2,10 +2,16 @@ package vo;
 
 public class CpuImage {
 	private int cpuImageNo; // FK -> cpu
-	private String extension;
 	private String name;
-	private int size;
 	private String kind;
+	private int size;
+	private String extension;
+	
+	@Override
+	public String toString() {
+		return "CpuImage [cpuImageNo=" + cpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
+				+ ", kind=" + kind + "]";
+	}
 	
 	// getter + setter
 	public int getCpuImageNo() {
@@ -37,11 +43,5 @@ public class CpuImage {
 	}
 	public void setKind(String kind) {
 		this.kind = kind;
-	}
-	
-	@Override
-	public String toString() {
-		return "CpuImage [cpuImageNo=" + cpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
-				+ ", kind=" + kind + "]";
 	}
 }

@@ -1,7 +1,7 @@
 package vo;
 
-public class MainboardImage {
-	private int mainboardImageNo;
+public class MainBoardImage {
+	private int mainBoardImageNo;
 	private String extension;
 	private String name;
 	private int size;
@@ -9,15 +9,15 @@ public class MainboardImage {
 	
 	@Override
 	public String toString() {
-		return "MainboardImage [mainboardImageNo=" + mainboardImageNo + ", extension=" + extension + ", name=" + name
+		return "MainBoardImage [mainBoardImageNo=" + mainBoardImageNo + ", extension=" + extension + ", name=" + name
 				+ ", size=" + size + ", kind=" + kind + "]";
 	}
-	
-	public int getMainboardImageNo() {
-		return mainboardImageNo;
+
+	public int getMainBoardImageNo() {
+		return mainBoardImageNo;
 	}
-	public void setMainboardImageNo(int mainboardImageNo) {
-		this.mainboardImageNo = mainboardImageNo;
+	public void setMainBoardImageNo(int mainBoardImageNo) {
+		this.mainBoardImageNo = mainBoardImageNo;
 	}
 	public String getExtension() {
 		return extension;

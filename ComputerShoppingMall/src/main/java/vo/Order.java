@@ -16,6 +16,7 @@ public class Order {
 				+ totalPrice + ", orderDate=" + orderDate + ", purpose=" + purpose + ", createDate=" + createDate
 				+ ", updateDate=" + updateDate + "]";
 	}
+	
 	public int getOrderNo() {
 		return orderNo;
 	}

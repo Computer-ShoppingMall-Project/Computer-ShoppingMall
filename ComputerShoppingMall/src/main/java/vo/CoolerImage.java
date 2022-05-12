@@ -7,6 +7,12 @@ public class CoolerImage {
 	private int size;
 	private String kind;
 	
+	@Override
+	public String toString() {
+		return "CoolerImage [coolerNo=" + coolerNo + ", extension=" + extension + ", name=" + name + ", size=" + size
+				+ ", kind=" + kind + "]";
+	}
+	
 	// getter + setter 
 	public int getCoolerNo() {
 		return coolerNo;
@@ -37,11 +43,5 @@ public class CoolerImage {
 	}
 	public void setKind(String kind) {
 		this.kind = kind;
-	}
-	
-	@Override
-	public String toString() {
-		return "CoolerImage [coolerNo=" + coolerNo + ", extension=" + extension + ", name=" + name + ", size=" + size
-				+ ", kind=" + kind + "]";
 	}
 }

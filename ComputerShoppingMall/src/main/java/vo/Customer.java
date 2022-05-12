@@ -7,10 +7,17 @@ public class Customer {
 	private String detailAddress;
 	private String customerPw;
 	private String email;
-	private String nickname;
+	private String nickName;
 	private String phone;
 	private String createDate;
 	private String updateDate;
+	
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", addressId=" + addressId + ", name=" + name + ", detailAddress="
+				+ detailAddress + ", customerPw=" + customerPw + ", email=" + email + ", nickName=" + nickName
+				+ ", phone=" + phone + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+	}
 	
 	public String getCustomerId() {
 		return customerId;
@@ -48,11 +55,11 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getPhone() {
 		return phone;
@@ -71,12 +78,5 @@ public class Customer {
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
-	}
-	
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", addressId=" + addressId + ", name=" + name + ", detailAddress="
-				+ detailAddress + ", customerPw=" + customerPw + ", email=" + email + ", nickname=" + nickname
-				+ ", phone=" + phone + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
 }

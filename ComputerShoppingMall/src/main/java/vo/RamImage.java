@@ -6,6 +6,13 @@ public class RamImage {
 	private String name;
 	private int size;
 	private String kind;
+	
+	@Override
+	public String toString() {
+		return "RamImage [ramImageNo=" + ramImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
+				+ ", kind=" + kind + "]";
+	}
+	
 	public int getRamImageNo() {
 		return ramImageNo;
 	}
@@ -36,11 +43,4 @@ public class RamImage {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	@Override
-	public String toString() {
-		return "RamImage [ramImageNo=" + ramImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
-				+ ", kind=" + kind + "]";
-	}
-	
-	
 }

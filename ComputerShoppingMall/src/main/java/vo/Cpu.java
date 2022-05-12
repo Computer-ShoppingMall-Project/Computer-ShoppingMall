@@ -6,14 +6,20 @@ public class Cpu {
 	private String cpuKind;
 	private String socketSize;
 	private String core;
-	private String thead;
+	private String thread;
 	private int price;
 	private int quantity;
 	private int cpuImageNo; // FK -> cpu_image
 	private String memo;
 	private String updateDate;
 	
-	// getter + setter 
+	@Override
+	public String toString() {
+		return "Cpu [cpuNo=" + cpuNo + ", cpuName=" + cpuName + ", cpuKind=" + cpuKind + ", socketSize=" + socketSize
+				+ ", core=" + core + ", thread=" + thread + ", price=" + price + ", quantity=" + quantity
+				+ ", cpuImageNo=" + cpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+	}
+	
 	public int getCpuNo() {
 		return cpuNo;
 	}
@@ -44,11 +50,11 @@ public class Cpu {
 	public void setCore(String core) {
 		this.core = core;
 	}
-	public String getThead() {
-		return thead;
+	public String getThread() {
+		return thread;
 	}
-	public void setThead(String thead) {
-		this.thead = thead;
+	public void setThread(String thread) {
+		this.thread = thread;
 	}
 	public int getPrice() {
 		return price;
@@ -80,11 +86,4 @@ public class Cpu {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	@Override
-	public String toString() {
-		return "Cpu [cpuNo=" + cpuNo + ", cpuName=" + cpuName + ", cpuKind=" + cpuKind + ", socketSize=" + socketSize
-				+ ", core=" + core + ", thead=" + thead + ", price=" + price + ", quantity=" + quantity
-				+ ", cpuImageNo=" + cpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
-	}
-} 
+}
