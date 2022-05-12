@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.QnaDao;
-import vo.Qna;
 
-@WebServlet(description = "QnaOneController", urlPatterns = { "/QnaOneController" })
-public class QnaOneController extends HttpServlet {
+@WebServlet("/DeleteQnaController")
+public class DeleteQnaController extends HttpServlet {
 	private QnaDao qnaDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
+		// 세션 확인
 		HttpSession session = request.getSession();
 		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if((String)session.getAttribute("sessionCustomerId") == null) {
@@ -25,13 +22,18 @@ public class QnaOneController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		request.setAttribute("qnaNo", qnaNo);
 		
 		qnaDao = new QnaDao();
-		ArrayList<Qna> list = qnaDao.selectQnaOne(customerId, qnaNo);
-		request.setAttribute("customerId", customerId);
-		request.setAttribute("qnaOneList", list);
-		request.getRequestDispatcher("WEB-INF/view/qnaOne.jsp").forward(request, response);
+		int row = qnaDao.deleteQna(qnaNo, customerId);
+		
+		if(row == 1) {
+			System.out.println("[DeleteQnaController] : qna 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/QnaListController?customerId="+customerId);
+		} else {
+			System.out.println("[DeleteQnaController] : qna 삭제 실패");
+			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo="+qnaNo);
+		}
 	}
 }

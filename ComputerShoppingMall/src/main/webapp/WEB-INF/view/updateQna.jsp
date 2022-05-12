@@ -56,7 +56,7 @@
         <a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>">back</a>
         <!-- 고객문의 폼 -->
           <h4 class="title">update QNA</h4>
-          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
+          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=<%=qna.getQnaNo()%>" method="POST">
 
             <div class="form-group">
               <input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
@@ -70,7 +70,6 @@
               <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"><%=qna.getQnaContent()%></textarea>
               <div class="validate"></div>
             </div>
-            
             <%
             	}
             %>

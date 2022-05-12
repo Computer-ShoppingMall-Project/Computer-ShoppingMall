@@ -81,7 +81,7 @@
 					</tr>
 			</table>
 			<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=<%=qna.getQnaNo()%>" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
-			<a href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=<%=qna.getQnaNo()%>" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
+			<a href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=<%=qna.getQnaNo()%>" id="deleteQna" class="btn btn-large btn-danger" onclick="del();">delete</a> <!-- 삭제 -->
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
         <br>

@@ -39,7 +39,30 @@ public class UpdateQnaController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 입력값 받아오기
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		String customerId = request.getParameter("customerId");
+		String qnaTitle = request.getParameter("qnaTitle");
+		String qnaContent = request.getParameter("qnaContent");
 		
+		Qna qna = new Qna();
+		qna.setQnaNo(qnaNo);
+		qna.setCustomerId(customerId);
+		qna.setQnaTitle(qnaTitle);
+		qna.setQnaContent(qnaContent);
+		
+		System.out.println(qna);
+		
+		qnaDao = new QnaDao();
+		int row = qnaDao.updateQna(qna);
+		
+		if(row == 1) {
+			System.out.println("[UpdateQnaController : qna 수정 성공]");
+			response.sendRedirect(request.getContextPath() + "/QnaListController?qnaNo=" + qnaNo);
+		} else {
+			System.out.println("[UpdateQnaController : qna 수정 실패]");
+			response.sendRedirect(request.getContextPath() + "/UpdateQnaContoller?qnaNo=" + qnaNo);
+		}
 	}
 
 }

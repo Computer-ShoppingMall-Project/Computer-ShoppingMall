@@ -137,10 +137,34 @@ public class QnaDao {
 				+ " WHERE customer_id=? AND qna_no=?";
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, qna.getCustomerId());
-			stmt.setString(2, qna.getQnaTitle());
-			stmt.setString(3, qna.getQnaContent());
+			stmt.setString(1, qna.getQnaTitle());
+			stmt.setString(2, qna.getQnaContent());
+			stmt.setString(3, qna.getCustomerId());
 			stmt.setInt(4, qna.getQnaNo());
+			row = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	// QNA 삭제
+	public int deleteQna(int qnaNo, String customerId) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql = "DELETE FROM qna WHERE qna_no=? AND customer_id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, qnaNo);
+			stmt.setString(2, customerId);
 			row = stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
