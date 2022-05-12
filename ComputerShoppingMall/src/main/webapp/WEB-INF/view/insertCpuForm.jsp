@@ -73,43 +73,42 @@
           <h4 class="title">
                        <span>상품등록</span>
                     </h4>
-         <form id="cpuwriteform" method="post" name="cpuwriteform" action="<%=request.getContextPath()%>/CpuWriteController">
+         <form id="insertCpuform" method="post" name="insertCpuform" action="<%=request.getContextPath()%>/InsertCpuController">
             <div class="form-group">
-              <input type="text" name="mainBoardNo" class="form-control" placeholder="mainBoardNo">
+              <input type="text" name="cpuNo" class="form-control" placeholder="CpuNo">
             </div>
              <div class="form-group">
-              <input type="text" name="mainBoardName" class="form-control" placeholder="MainBoardName">
+              <input type="text" name="cpuName" class="form-control" placeholder="CpuName">
             </div>
             <div class="form-group">
-              <select class="form-group" name="companyName">
-				<option value="ASUS">ASUS</option>
-				<option value="MSI">MSI</option>
-				<option value="GIGABYTE">GIGABYTE</option>
-				<option value="ASRock">ASRock</option>
-				<option value="BIOSTAR">BIOSTAR</option>
+             <input type='radio' name='cpuKind' value='인텔'onclick="clickCheck(this)"/>인텔
+			 <input type='radio' name='cpuKind' value='AMD'onclick="clickCheck(this)"/>AMD 
+             </div>
+             <div class="form-group">
+              <input type='radio' name='socketSize' value='1700'onclick="clickCheck(this)"/>1700
+			  <input type='radio' name='socketSize' value='AMD4'onclick="clickCheck(this)"/>AMD4
+            </div>
+            <div class="form-group">
+              <select class="form-group" name="core">
+              		<option value="" selected disabled hidden>core/option>
+					<option value="16">16(core)</option>
+					<option value="12">12(core)</option>
+					<option value="8">8(core)</option>
+					<option value="6">6(core)</option>
 				</select>
             </div>
             <div class="form-group">
-              <select class="form-group" name="mainboardkind">
-				<option value="Z690">Z690</option>
-				<option value="Z590">Z590</option>
-				<option value="Z460">Z460</option>
-				<option value="B660">B660</option>
-				<option value="B550">B550</option>
-				<option value="B450">B450</option>
-				<option value="H610">H610</option>
-				<option value="X399">X399</option>
+               <select class="form-group" name="thread">
+               		<option value="" selected disabled hidden>thread</option>
+					<option value="32">32(thread)</option>
+					<option value="24">24(thread)</option>
+					<option value="20">20(thread)</option>
+					<option value="16">16(thread)</option>
+					<option value="12">12(thread)</option>
 				</select>
             </div>
-             <div class="form-group">
-              <input type='checkbox' name='ramversion' value='DDR4'onclick="clickCheck(this)"/>DDR4
-			  <input type='checkbox' name='ramVersion' value='DDR5'onclick="clickCheck(this)"/>DDR5
-            </div>
-             <div class="form-group">
-              <input type="text" name="chipSet" class="form-control" placeholder="Chipset">
-            </div>
             <div class="form-group">
-              <input type="file" name="mainBoardImage" class="form-control" placeholder="Img">
+              <input type="file" name="cpuImage" class="form-control" placeholder="Img">
             </div>
             <div class="form-group">
               <input type="number" name="quantity" class="form-control" placeholder="Quantity">
