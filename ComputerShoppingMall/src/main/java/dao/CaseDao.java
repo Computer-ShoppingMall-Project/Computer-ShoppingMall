@@ -30,6 +30,34 @@ public class CaseDao {
 	}
 	// case 상품상세보기
 	// case 상품수정
+	public int updateCase(Case c) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		int row=0;
+		String sql = "UPDATE `case` SET price=?, quantity=?, update_date=NOW() WHERE case_no=?";
+		try {
+			stmt= conn.prepareStatement(sql);
+			stmt.setInt(1, c.getPrice());
+			stmt.setInt(2, c.getQuantity());
+			stmt.setInt(3, c.getCaseNo());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return row;
+	}
 	// case 상품등록
 	public int insertCase(Case c) {
 		Connection conn = null;

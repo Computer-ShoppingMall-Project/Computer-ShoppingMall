@@ -30,6 +30,34 @@ public class CpuDao {
 	}
 	// cpu 상품상세보기
 	// cpu 상품수정
+	public int updateCpu(Cpu c) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		int row=0;
+		String sql = "UPDATE cpu SET price=?, quantity=?, update_date=NOW() WHERE cpu_no=?";
+		try {
+			stmt= conn.prepareStatement(sql);
+			stmt.setInt(1, c.getPrice());
+			stmt.setInt(2, c.getQuantity());
+			stmt.setInt(3, c.getCpuNo());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return row;
+	}
 	// cpu 상품등록
 	public int insertCpu(Cpu c) {
 		Connection conn = null;

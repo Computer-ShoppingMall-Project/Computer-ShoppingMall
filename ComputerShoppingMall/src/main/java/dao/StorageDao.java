@@ -32,6 +32,35 @@ public class StorageDao {
 	}
 	// storage 상품상세보기
 	// storage 상품수정
+	public int updateStorage(Storage s) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		int row=0;
+		String sql = "UPDATE storage SET price=?, quantity=?, update_date=NOW() WHERE storage_no=?";
+		try {
+			stmt= conn.prepareStatement(sql);
+			stmt.setInt(1, s.getPrice());
+			stmt.setInt(2, s.getQuantity());
+			stmt.setInt(3, s.getStorageNo());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return row;
+	}
 	// storage 상품등록
 	public int insertStorage(Storage s) {
 		Connection conn = null;

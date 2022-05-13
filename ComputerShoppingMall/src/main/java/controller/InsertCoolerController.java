@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
-import dao.InsertCoolerDao;
+import dao.CoolerDao;
 import vo.Cooler;
 import vo.Mainboard;
 
 @WebServlet("/InsertCoolerController")
 public class InsertCoolerController extends HttpServlet {
-	private InsertCoolerDao insertcoolerDao; 
+	private CoolerDao insertcoolerDao; 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
@@ -49,13 +49,17 @@ public class InsertCoolerController extends HttpServlet {
 		if(request.getParameter("coolerName") != null || request.getParameter("coolerName") !="") {
 			coolerName = request.getParameter("coolerName");
 		}
+		if(request.getParameter("companyName") != null || request.getParameter("companyName") !="") {
+			companyName =request.getParameter("companyName");
+		}
 		if(request.getParameter("coolerKind") != null ||request.getParameter("coolerKind") !="") {
 			coolerKind = request.getParameter("coolerKind");
-			if(request.getParameter("coolerSize") != null ||request.getParameter("coolerSize") !="") {
-				coolerSize = Integer.parseInt("coolerSize");
 		}
-		if(request.getParameter("companyName") != null || request.getParameter("companyName") !="") {
-			companyName = request.getParameter("companyName");
+		if(request.getParameter("coolerSize") != null || request.getParameter("coolerSize") !="") {
+			coolerSize = Integer.parseInt(request.getParameter("coolerSize"));
+		}
+		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+			price = Integer.parseInt(request.getParameter("price"));
 		}
 		if(request.getParameter("quantity") != null || request.getParameter("coolerName") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -84,10 +88,9 @@ public class InsertCoolerController extends HttpServlet {
 		c.setMemo(memo);
 		
 		// DAO
-		insertcoolerDao = new InsertCoolerDao();
-		insertcoolerDao.insertCoolerDao(c);
+		insertcoolerDao = new CoolerDao();
+		insertcoolerDao.insertCooler(c);
 		
 		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
 		}
 	}
-}

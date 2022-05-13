@@ -40,7 +40,7 @@
 </head>
 <body>
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="adminHeader.jsp"></jsp:include>
 
   <section id="intro">
     <div class="container">

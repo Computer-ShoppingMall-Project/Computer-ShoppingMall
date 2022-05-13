@@ -30,6 +30,34 @@ public class RamDao {
 	}
 	// ram 상품상세보기
 	// ram 상품수정
+	public int updateRam(Ram r) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		int row=0;
+		String sql = "UPDATE ram SET price=?, quantity=?, update_date=NOW() WHERE ram_no=?";
+		try {
+			stmt= conn.prepareStatement(sql);
+			stmt.setInt(1, r.getPrice());
+			stmt.setInt(2, r.getQuantity());
+			stmt.setInt(3, r.getRamNo());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return row;
+	}
 	// ram 상품등록
 	public int insertRam(Ram r) {
 		Connection conn = null;

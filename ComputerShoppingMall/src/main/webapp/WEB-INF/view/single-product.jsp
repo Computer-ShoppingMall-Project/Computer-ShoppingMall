@@ -45,9 +45,9 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
           <li><a href="index.jsp">Home</a></li>
-          <li>Single Product</li>
+          <li>Main Product</li>
         </ul>
-        <h2>SINGLE PRODUCT</h2>
+        <h2>MAINBOARD</h2>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <!-- search -->
@@ -114,14 +114,14 @@
 
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="theme_details">
-                        	<div class="item_price">
-                            	<h3><span><small>$</small>450.00</span></h3>
+                           <div class="item_price">
+                               <h3><span><small>$</small>450.00</span></h3>
               </div>
               <!-- item_price -->
               <hr>
               <div class="buttons">
-                <a class="button btn-block large" href="#">SEE GALLERY</a>
-                <a class="button btn-block large" href="#"><i class="fa fa-download"></i> BUY NOW</a>
+                <a class="button btn-block large" href="#">UPDATE</a>
+                <a class="button btn-block large" href="#">DELETE</a>
               </div>
               <!-- buttons -->
               <hr>

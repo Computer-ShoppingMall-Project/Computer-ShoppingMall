@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import util.DButil;
 import vo.Mainboard;
+import vo.Ram;
 
 public class MainboardDao {
 	// mainboard 상품삭제
@@ -29,6 +30,34 @@ public class MainboardDao {
 	}
 	// mainboard 상품상세보기
 	// mainboard 상품수정
+	public int updateMainboard(Mainboard m) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		int row=0;
+		String sql = "UPDATE mainboard SET price=?, quantity=?, update_date=NOW() WHERE mainboard_no=?";
+		try {
+			stmt= conn.prepareStatement(sql);
+			stmt.setInt(1, m.getPrice());
+			stmt.setInt(2, m.getQuantity());
+			stmt.setInt(3, m.getMainboardNo());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}return row;
+	}
 	// mainboard 상품등록
 	public int insertMainboard(Mainboard m) {
 		Connection conn = null;

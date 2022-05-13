@@ -59,7 +59,21 @@
                 <li><a href="#">Blog</a>
                   <ul class="dropdown">
                     <li><a href="single-with-sidebarController">Single with Sidebar</a></li>
-              	</ul>
+                </li>
+                  </ul>
+                  <li><a href="#">ProductInsert</a>
+                  <ul class="dropdown">
+                    <li><a href="InsertCaseController">InsertCase</a></li>
+                    <li><a href="InsertCoolerController">InsertCooler Product</a></li>
+                    <li><a href="InsertCpuController">InsertCpu</a></li>
+                    <li><a href="InsertGpuController">InsertGpu</a></li>
+                    <li><a href="InsertMainboardController">InsertMainBoard</a></li>
+                    <li><a href="InsertPowerController">InsertPower</a></li>
+                    <li><a href="InsertRamController">InsertRam</a></li>
+                    <li><a href="InsertStorageController">InsertStorage</a></li>
+                  </ul>
+                  </li>
+                </li>
               </ul>
             </div>
           </div>
