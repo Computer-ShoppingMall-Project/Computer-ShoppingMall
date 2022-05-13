@@ -178,4 +178,41 @@ public class QnaDao {
 		}
 		return row;
 	}
+	
+	// 관리자 QNA 목록(고객 전채 문의 리스트)
+	public ArrayList<Qna> selectAllQnaList() {
+		ArrayList<Qna> list = new ArrayList<Qna>();
+		Qna qna = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		String sql = "SELECT qna_no qnaNo, customer_id customerId, qna_title qnaTitle, create_date createDate, update_date updateDate"
+				+ " FROM qna"
+				+ " ORDER BY create_date DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				qna = new Qna();
+				qna.setQnaNo(rs.getInt("qnaNo"));
+				qna.setCustomerId("customerId");
+				qna.setQnaTitle(rs.getString("qnaTitle"));
+				qna.setCreateDate(rs.getString("createDate"));
+				qna.setUpdateDate(rs.getString("updateDate"));
+				list.add(qna);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

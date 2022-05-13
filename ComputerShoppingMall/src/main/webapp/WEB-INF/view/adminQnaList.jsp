@@ -48,25 +48,26 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
           <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-          <li>QNA</li>
+          <li>Customer QNA</li>
         </ul>
-        <h2>QNA</h2>
+        <h2>Customer QNA</h2>
       </div>
     </div>
   </section>
   <!-- end post-wrapper-top -->
   <section class="section1">
     <div class="container clearfix">
-      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+    <!-- div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix" -->
         <div class="clearfix"></div>
-        <a href="${pageContext.request.contextPath}/InsertQnaController">write</a>
         <hr>
         <table class="table table-striped" data-effect="fade">
           <thead>
             <tr>
               <th>NO</th>
+              <th>ID</th>
               <th>TITLE</th>
-              <th>DATE</th>
+              <th>CREATE DATE</th>
+              <th>UPDATE DATE</th>
               <th>ANSWER</th>
             </tr>
           </thead>
@@ -75,37 +76,34 @@
 				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
 				// 답변이 없을 경우, 답변 미등록으로 표시, 등록되어 있을 경우 7자+...까지 보여주기
 				for(Qna qna : list) {
-					if(qna.getQnaAnswer() == null) {
-						qna.setQnaAnswer("NO ANSWER");
-					} else {
-						qna.setQnaAnswer(qna.getQnaAnswer().substring(0, 7)+"...");
-					}
 			%>
 					<tr>
 						<td><%=qna.getQnaNo()%></td>
+						<td><%=qna.getCustomerId()%></td>
 						<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>"><%=qna.getQnaTitle()%></a></td>
 						<td><%=qna.getCreateDate()%></td>
-						<td><%=qna.getQnaAnswer()%></td>
+						<td><%=qna.getUpdateDate()%></td>
+						<td>
+						<%
+							if(qna.getQnaAnswer() == null) {
+						%>
+								<a href="${pageContext.request.contextPath}/InsertQnaAminController">ANSWER</a>
+						<%
+							} else {
+						%>
+								<a href="${pageContext.request.contextPath}/UpdateQnaAdminController">UPDATE</a>
+						<%
+							}
+						%>
+						</td>
 					</tr>	
 			<%
 				}
 			%>
           </tbody>
         </table>
-
-      </div>
       <!-- end content -->
 
-      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        </div>
-        	<br><br><br><br><hr>
-        	<h4>contact information</h4>
-          <ul class="contact_details">
-            <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-            <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-            <li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-          </ul>
-         	 <hr>
           <!-- contact_details -->
         </div>
 
