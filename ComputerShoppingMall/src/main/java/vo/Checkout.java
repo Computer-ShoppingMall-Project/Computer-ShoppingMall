@@ -1,6 +1,7 @@
 package vo;
 
-public class Basket {
+public class Checkout {
+	private int orderNo;
 	private int basketNo;
 	private String customerId;
 	private String categoryName;
@@ -8,13 +9,20 @@ public class Basket {
 	private int categoryPrice;
 	private int categoryQuantity;
 	private String createDate;
-	private String updateDate;
 
 	@Override
 	public String toString() {
-		return "Basket [basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName=" + categoryName
-				+ ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice + ", categoryQuantity="
-				+ categoryQuantity + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+		return "Order [orderNo=" + orderNo + ", basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName="
+				+ categoryName + ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice
+				+ ", categoryQuantity=" + categoryQuantity + ", createDate=" + createDate + "]";
+	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public int getBasketNo() {
@@ -71,14 +79,6 @@ public class Basket {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
 	}
 
 }
