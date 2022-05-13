@@ -21,7 +21,7 @@ public class DeleteGpuController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 변수 등록
