@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>GPU</span>
                     </h4>
          <form id="insertGpuform" method="post" name="insertGpuform" action="<%=request.getContextPath()%>/InsertGpuController">
              <div class="form-group">

@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>CPU</span>
                     </h4>
          <form id="insertCpuform" method="post" name="insertCpuform" action="<%=request.getContextPath()%>/InsertCpuController">
             <div class="form-group">

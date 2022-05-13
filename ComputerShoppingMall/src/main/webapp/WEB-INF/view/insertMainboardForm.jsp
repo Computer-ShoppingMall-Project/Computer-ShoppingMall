@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>MAINBOARD</span>
                     </h4>
          <form id="insertMainBoardform" method="post" action="<%=request.getContextPath()%>/InsertMainboardController">
              <div class="form-group">

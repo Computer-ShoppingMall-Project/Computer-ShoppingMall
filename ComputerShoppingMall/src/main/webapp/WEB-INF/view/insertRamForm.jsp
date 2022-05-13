@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>RAM</span>
                     </h4>
          <form id="insertRamform" method="post" name="insertRamform" action="<%=request.getContextPath()%>/InsertRamController">
              <div class="form-group">

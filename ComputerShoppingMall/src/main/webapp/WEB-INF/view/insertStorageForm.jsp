@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>STORAGE</span>
                     </h4>
          <form id="insertStorageform" method="post" name="insertStorageform" action="<%=request.getContextPath()%>/InsertStorageController">
              <div class="form-group">

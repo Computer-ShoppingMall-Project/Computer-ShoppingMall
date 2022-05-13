@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>COOLER</span>
                     </h4>
          <form id="insertCoolerform" method="post" name="insertCoolerform" action="<%=request.getContextPath()%>/InsertCoolerController">
              <div class="form-group">
@@ -90,6 +90,9 @@
 					<option value="시스템 쿨러 공랭">시스템 쿨러 공랭</option>
 					<option value="RAM 쿨러">RAM 쿨러</option>
 				</select>
+            </div>
+            <div class="form-group">
+              <input type="number" name="coolerSize" class="form-control" placeholder="CoolerSize">
             </div>
             <div class="form-group">
               <input type="file" name="coolerImage" class="form-control" placeholder="Img">

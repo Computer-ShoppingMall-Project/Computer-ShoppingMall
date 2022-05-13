@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>CASE</span>
                     </h4>
          <form id="insertCaseform" method="post" name="insertCaseform" action="<%=request.getContextPath()%>/InsertCaseController">
              <div class="form-group">

@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
           <h4 class="title">
-                       <span>상품등록</span>
+                       <span>POWER</span>
                     </h4>
          <form id="insertPowerform" method="post" name="insertPowerform" action="<%=request.getContextPath()%>/InsertPowerController">
              <div class="form-group">
