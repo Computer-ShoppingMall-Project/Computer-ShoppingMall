@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,51 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript">
+  $( document ).ready(function() { 				// 이벤트 바인딩 시작
+      $('#SendBtn').on('click', function() { 		// 전송 버튼 클릭시 이벤트 바인딩
+          let params ={};
+      	// params에 제목, 내용 값 세팅
+          params.qnaTitle = $('#qnaTitle').val();
+          params.qnaContent = $('#qnaContent').val();
+          // 유효성 검사 boolean 변환 
+          let vali = validate( params );
+          
+          
+          vali ? inserQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
+      });
+  });
+  // 이벤트 바인딩 끝
+
+  // 유효성 체크 function
+  function validate(params) {
+  	
+  	if(NullVal(params.qnaTitle)){
+  	    alert('제목을 입력해주세요.');
+  	    return false;
+  	    
+  	} if(NullVal(params.qnaContent)){
+  	    alert('내용을 입력해주세요.');
+  	    return false;
+  	    
+  	} if(params.qnaTitle.length > 50 ){
+  	    alert('제목은 최대 50자 까지 가능합니다.');
+  	    return false;
+  	} 
+  	
+  return true;
+  };
+  // 공백, null, 빈값 검사 function
+  function NullVal( param ){
+  if (( null == param ) || ( '' == param ) || ( param === undefined ) || ( param === "undefined" ) ) {
+      return true;
+  }
+  return false;
+  }
+
+  
+  
   /*
   function validate(){
 	  //alert('비어있네요');
@@ -53,8 +98,8 @@
 </head>
 <body>
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
-
+  <c:import url="header.jsp"></c:import>
+  
   <section class="section1">
     <div class="container clearfix">
       <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
@@ -78,7 +123,7 @@
 
             </div>
             <div class="form-send">
-              <button type="submit" class="btn btn-large btn-primary">Send</button> 
+              <button id="SendBtn" type="button" class="btn btn-large btn-primary">Send</button> 
               <!--<button type="button" class="btn btn-large btn-primary" onclick="validate();">Send</button>-->
             </div>
           </form>
@@ -91,8 +136,8 @@
   <!-- end section -->
 
   <!-- footer적용 -->
-  <jsp:include page="footer.jsp"></jsp:include>
-  
+
+  <c:import url="footer.jsp"></c:import>
   <div class="dmtop">Scroll to Top</div>
 
   <!-- JavaScript Libraries -->
