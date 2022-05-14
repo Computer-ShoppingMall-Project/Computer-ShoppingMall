@@ -45,10 +45,10 @@
     <div class="container">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
-          <li><a href="index.jsp">Home</a></li>
-          <li>My Basket</li>
+          <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+          <li>Order</li>
         </ul>
-        <h2>My Basket</h2>
+        <h2>Order</h2>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <!-- search -->
@@ -68,33 +68,36 @@
 
   <section class="section1">
     <div class="container clearfix">
-    <a href="${pageContext.request.contextPath}/InsertMyBasketController" type="button" class="btn btn-outline-primary">추가구매</a>
-      <div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
-			<table class="table table-striped checkout" data-effect="fade">
-				<thead>
-			<tr>
-				<th>부품 이름</th>
-				<th>부품 번호</th>
-				<th>가격</th>
-				<th>수량</th>
-				<th>저장 날짜</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-		<c:forEach var="basket" items="${BasketList}">
-				<tr>
-					<td>${basket.categoryName}</td>
-					<td>${basket.categoryNumber}</td>
-					<td>${basket.categoryPrice}</td>
-					<td>${basket.categoryQuantity}</td>
-					<td>${basket.createDate}</td>	
-					<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?=basketNo=${basket.basketNo}">삭제</a></td>	
-				</tr>
-		</c:forEach>	
-		</tbody>
-	</table>
-		<a href="${pageContext.request.contextPath}/InsertCheckoutController" type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
+      <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+			<h5 class="title">PERSONAL INFORMATION</h5>
+
+        <form id="personalinfo" action="" name="personalinfo" method="post">
+          <label for="email">Name <span class="required">*</span></label>
+          <input type="text" name="name" id="email" class="form-control" placeholder="NAME">
+          <label for="fname">ID <span class="required">*</span></label>
+          <input type="text" name="fname" id="fname" class="form-control" placeholder="ID">
+          <label for="lname">PHONE </label>
+          <input type="text" name="lname" id="lname" class="form-control" placeholder="PHONE">
+        </form>
+
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+      
+        <h5 class="title">ADDRESS INFORMATION</h5>
+
+          <label for="baddress">Address Id</label>
+          <input type="text" name="addressId" id="addressId" class="form-control" placeholder="Address Id">
+          <label for="baddress1">Detail Address</label>
+          <input type="text" name="detailAddress" id="detailAddress" class="form-control" placeholder="Detail Address">
+        
+          <div class="clearfix"></div>
+          <br>
+          <div class="clearfix"></div>
+          
+        
+      
+           <a href="${pageContext.request.contextPath}/CheckoutListController" class="button large btn-block">결제 하기</a>
+
       </div>
       <!-- end content -->
     </div>

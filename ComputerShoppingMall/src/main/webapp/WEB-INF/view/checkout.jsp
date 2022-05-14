@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="vo.Checkout"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,10 +38,6 @@
   ======================================================= -->
 </head>
 <body>
-<%
-	// request controller
-	ArrayList<Checkout> list = (ArrayList<Checkout>)request.getAttribute("list");
-%>
   <!-- header적용 -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -50,7 +45,7 @@
     <div class="container">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
-          <li><a href="index.jsp">Home</a></li>
+          <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
           <li>Checkout</li>
         </ul>
         <h2>CHECK OUT</h2>
@@ -73,190 +68,64 @@
 
   <section class="section1">
     <div class="container clearfix">
-      <div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
-
-        <table class="table table-striped checkout" data-effect="fade">
-					<thead>
-						<tr>
-							<th>주문 번호</th>
-							<th>부품 이름</th>
-							<th>부품 번호</th>
-							<th>가격</th>
-							<th>수량</th>
-							<th>저장날짜</th>
-						</tr>
-					</thead>
-					<%
-						for (Checkout checkout : list) {
-					%>
-					<tbody>
-						<tr>
-							<td><%=checkout.getOrderNo()%></td>
-							<td><%=checkout.getCategoryName()%></td>
-							<td><%=checkout.getCategoryNumber()%></td>
-							<td><%=checkout.getCategoryPrice()%></td>
-							<td><%=checkout.getCategoryQuantity()%></td>
-							<td><%=checkout.getCreateDate()%></td>
-						<%
-							}
-						%>
-
-					</tbody>
-				</table>
-        <div class="clearfix"></div>
-
-        <div class="pull-right">
-          <a class="button" href="#">UPDATE CART</a> <a class="button" href="#">SAVE CART</a>
-        </div>
-
-        <div class="clearfix"></div>
-
+      <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+			<table class="table table-striped checkout" data-effect="fade">
+				<thead>
+            <tr>
+              <th>주문 번호</th>
+              <th>부품 이름</th>
+              <th>부품 번호</th>
+              <th>가격</th>
+              <th>수량</th>
+              <th>주문날짜</th>
+            </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="checkout" items="${CheckoutList}">
+          	<tr>
+				<td>${checkout.orderNo}</td>
+				<td>${checkout.categoryName}</td>
+				<td>${checkout.categoryNumber}</td>
+				<td>${checkout.categoryPrice}</td>
+				<td>${checkout.categoryQuantity}</td>	
+				<td>${checkout.createDate}</td>		
+			</tr>	
+          </c:forEach>
+          </tbody>
+			</table>
+   
         <div class="well text-right"><strong>TOTAL: $18.00</strong></div>
 
         <div class="clearfix"></div>
 
-        <div class="payments">
-          <p><img alt="" src="img/payments.png"></p>
-
-          <label class="checkbox-inline">
-                <input id="inlineCheckbox1" type="checkbox" value="option1">
-                <strong>PAYPAL</strong>
-                </label>
-          <label class="checkbox-inline">
-                <input id="inlineCheckbox2" type="checkbox" value="option2">
-                <strong>CREDIT CARD</strong>
-                </label>
-        </div>
-
         <div class="clearfix"></div>
         <div class="divider"></div>
-
-        <h5 class="title">PERSONAL INFORMATION</h5>
-
-        <form id="personalinfo" action="" name="personalinfo" method="post">
-          <label for="email">Email Address <span class="required">*</span></label>
-          <input type="text" name="name" id="email" class="form-control" placeholder="example@yoursite.com">
-          <label for="fname">First Name <span class="required">*</span></label>
-          <input type="text" name="fname" id="fname" class="form-control" placeholder="John">
-          <label for="lname">Last Name </label>
-          <input type="text" name="lname" id="lname" class="form-control" placeholder="DOE">
-        </form>
-
+          
+          	<h5 class="title">무통장입금</h5>
+		
+		<label for="">다음 질문 중 하나라도 해당하는 경우 입금하지 말고 즉시 경찰서에 신고하시기 바랍니다.</label>
+		  <div>1. 다른 사람으로부터 상품권 구매로 일부 또는 전체 금액을 입금받기로 했습니까?</div>
+		  <div>2. 상품권 일부 또는 전체를 대리구매하여 카카오톡 등 메신저로 다른 사람에게 주기로 했습니까?</div>
+		  <div>3. 네이트온/카카오톡 등 메신저에서 지인이 급한 돈이 필요하다고 상품권을 요구했습니까?</div>
+		  <div>4. 중고나라 또는 번개장터에서 물품대금을 현금 대신 상품권으로 요구 받았습니까?</div>
+		  <div>5. 본인이 직접 게임 또는 쇼핑에 사용하기 위한 목적이 아닙니까?</div>
+		<div class="clearfix"></div>
+        <div class="divider"></div>
+     	<label for="">예금주 : 박범진</label>
+     	  <div>신한은행: 140-009-854865</div>
+		  <div>농협은행: 302-0634-2216-71</div>
+		  <div>국민은행: 037601-04-015155</div>
+		  <div>기업은행: 596-036185-04-014</div>
+		<div class="divider"></div>
+			<div class="my-2">입금계좌는 장애상황에 따라 변경될 수 있으니 항상 확인 부탁드립니다.</div>
+			<div class="my-2 text-danger">오픈뱅킹 입금 건은 수동처리되므로 오전9시부터 밤11시 사이에 결제 후 다음 날 오전에 처리됩니다.</div>
         <div class="clearfix"></div>
         <div class="divider"></div>
-
-        <h5 class="title">CART DETAILS</h5>
-
-        <form id="cartinfo" action="" name="cartinfo" method="post">
-          <label for="cardnumber">Card Number <span class="required">*</span></label>
-          <input type="text" name="cardnumber" id="cardnumber" class="form-control" placeholder="Your card number">
-          <label for="cvc">CVC <span class="required">*</span></label>
-          <input type="text" name="cvc" id="cvc" class="form-control" placeholder="Security code">
-          <label for="ncard">Name on the Card <span class="required">*</span></label>
-          <input type="text" name="ncard" id="ncard" class="form-control" placeholder="Name on the card">
-          <label for="ncard">Expiration (MM/YY) <span class="required">*</span></label>
-
-          <div class="clearfix"></div>
-
-          <select class="form-control" style="width:75px; float:left; margin-right:10px;">
-					<option>01</option>
-					<option>02</option>
-					<option>03</option>
-					<option>04</option>
-					<option>05</option>
-					<option>06</option>
-					<option>07</option>
-					<option>08</option>
-					<option>09</option>
-					<option>10</option>
-					<option>11</option>
-					<option>12</option>
-				</select>
-          <select class="form-control" style="width:75px;float:left">
-					<option>14</option>
-					<option>15</option>
-					<option>16</option>
-					<option>17</option>
-					<option>18</option>
-					<option>19</option>
-				</select>
-        </form>
-
-        <div class="clearfix"></div>
-        <div class="divider"></div>
-
-        <h5 class="title">BILLING INFORMATION</h5>
-
-        <form id="billinginfo" action="" name="billinginfo" method="post">
-          <label for="baddress">Billing Address 1</label>
-          <input type="text" name="baddress" id="baddress" class="form-control" placeholder="Address line 1">
-          <label for="baddress1">Billing Address 2 (Optional)</label>
-          <input type="text" name="baddress1" id="baddress1" class="form-control" placeholder="Address line 2">
-          <label for="bcity">Billing City</label>
-          <input type="text" name="bcity" id="bcity" class="form-control" placeholder="Your city">
-          <label for="bzip">Zip / Postal Code </label>
-          <input type="text" name="bzip" id="bzip" class="form-control" placeholder="Your ZIP or postal code">
-
-          <div class="clearfix"></div>
-
-          <select class="form-control">
-					<option>United States</option>
-					<option>Spain</option>
-					<option>United Kingdom</option>
-					<option>France</option>
-					<option>Japan</option>
-					<option>Brazil</option>
-					<option>Other Country</option>
-				</select>
-          <select class="form-control">
-					<option>Alabama</option>
-					<option>Other City</option>
-					<option>Other City</option>
-					<option>Other City</option>
-					<option>Other City</option>
-					<option>Other City</option>
-					<option>Other City</option>
-					<option>Other City</option>
-				</select>
-          <br>
-          <div class="clearfix"></div>
-          <button class="button">SHOW TERMS</button>
-          <div class="clearfix"></div>
-
-          <label class="checkbox-inline">
-                    <input id="inlineCheckbox3" type="checkbox" value="option1">
-                    <strong>AGREE TO TERMS</strong>
-                </label>
-
-          <br><br>
-          <div class="well"><strong>PURCHASE TOTAL:</strong> $18.00</div>
-          <br>
-          <button class="button large btn-block">PURCHASE THIS ITEM</button>
-        </form>
+      
+           <a href="${pageContext.request.contextPath}/WEB-INF/view/order.jsp" class="button large btn-block">입금 완료</a>
 
       </div>
       <!-- end content -->
-
-      <div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-        <div class="widget">
-          <h4 class="title">
-                        <span>Subscribe</span>
-                    </h4>
-          <form id="subscribe" action="mc.php" name="subscribe" method="post">
-            <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-            <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-            <div class="pull-right">
-              <input type="submit" value="Subscribe" id="submit" class="button">
-            </div>
-          </form>
-        </div>
-
-
-
-
-      </div>
-      <!-- end sidebar -->
     </div>
     <!-- end container -->
   </section>
