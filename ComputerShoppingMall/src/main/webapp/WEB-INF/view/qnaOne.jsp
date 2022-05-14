@@ -1,6 +1,5 @@
-<%@page import="vo.Qna"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +36,13 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+<script type="text/javascript">
+	function del() {
+		if(confirm('Are you sure you want to delete the QNA?')){
+			document.getElementById('deleteQna').click();
+		}
+	}
+</script>
 </head>
 <body>
   <!-- header적용 -->
@@ -51,13 +57,10 @@
         <!-- 고객문의 상세보기 -->
           <h4 class="title">DETAIL QNA</h4>
 			<table class="table">
-			<%
-				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaOneList");
-				for(Qna qna : list) {
-			%>
+			<c:forEach var="qna" items="${qnaOneList}">
 					<tr>
 						<th>NO</th>
-						<td><%=qna.getQnaNo()%></td>
+						<td>${qna.qnaNo}</td>
 					</tr>
 					<tr>
 						<th>ID</th>
@@ -65,36 +68,30 @@
 					</tr>
 					<tr>
 						<th>TITLE</th>
-						<td><%=qna.getQnaTitle()%></td>
+						<td>${qna.qnaTitle}</td>
 					</tr>
 					<tr height="100">
 						<th style="vertical-align : middle;">CONTENT</th>
-						<td><%=qna.getQnaContent()%></td>
+						<td>${qna.qnaContent}</td>
 					</tr>
 					<tr>
 						<th>CREATE DATE</th>
-						<td><%=qna.getCreateDate()%></td>
+						<td>${qna.createDate}</td>
 					</tr>
 					<tr>
 						<th>UPDATE DATE</th>
-						<td><%=qna.getUpdateDate()%></td>
+						<td>${qna.updateDate}</td>
 					</tr>
 			</table>
-			<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=<%=qna.getQnaNo()%>" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
-			<a href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=<%=qna.getQnaNo()%>" id="deleteQna" class="btn btn-large btn-danger" onclick="del();">delete</a> <!-- 삭제 -->
+			<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
+			<a style="display:none;" hidden="hidden" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${qna.qnaNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
+			<a href="#" class="btn btn-large btn-danger" onclick="del();">delete</a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
         <br>
           <h4 class="title">Answer</h4>
           <div class="form-group">
-          <%
-          	// 관리자 답변이 있다면 답변 보이도록 대입
-          	String adminAnswer = "";
-          	if(qna.getQnaAnswer() != null) {
-          		adminAnswer = qna.getQnaAnswer();
-          	}
-          %>
-              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly" placeholder="Your answer is not registered"><%=adminAnswer%></textarea>
+              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly" placeholder="Your answer is not registered">${adminAnswer}</textarea>
               <div class="validate"></div>
           </div>
           <ul class="contact_details">
@@ -104,10 +101,8 @@
           </ul>
           <!-- contact_details -->
         </div>
-        	<%
-				}
-			%>
       </div>
+      </c:forEach>
       <!-- end content -->
     </div>
     <!-- end container -->

@@ -16,7 +16,8 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/login/*")
 public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-	    // 세션에서 customerId 받아오기 
+		System.out.println("로그인 세션 확인");
+		// 세션에서 customerId 받아오기 
 		if(request instanceof HttpServletRequest) { // HttpServletRequest 변경가능하면 적용
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpSession session = req.getSession();

@@ -58,7 +58,7 @@ public class UpdateQnaController extends HttpServlet {
 		
 		if(row == 1) {
 			System.out.println("[UpdateQnaController : qna 수정 성공]");
-			response.sendRedirect(request.getContextPath() + "/QnaListController?qnaNo=" + qnaNo);
+			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo=" + qnaNo);
 		} else {
 			System.out.println("[UpdateQnaController : qna 수정 실패]");
 			response.sendRedirect(request.getContextPath() + "/UpdateQnaContoller?qnaNo=" + qnaNo);

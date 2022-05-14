@@ -35,6 +35,21 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+  <script type="text/javascript">
+  /*
+  function validate(){
+	  //alert('비어있네요');
+	  //document.getElementById('inserQnaForm').submit();
+	  
+	  var customerId = document.getElementById('customerId').value;
+	  var qnaTitle = document.getElementById('qnaTitle').value;
+	  var qnaContent = document.getElementById('qnaContent').value;
+	  
+	  alert(customerId + "/" + qnaTitle + "/" + qnaContent);
+	  
+  }
+  */
+  </script>
 </head>
 <body>
   <!-- header적용 -->
@@ -48,22 +63,23 @@
         <a href="${pageContext.request.contextPath}/QnaListController">back</a>
         <!-- 고객문의 폼 -->
           <h4 class="title">QNA</h4>
-          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
+          <form id="inserQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
 
             <div class="form-group">
               <input type="text" name="customerId" class="form-control" id="customerId" value="${customerId}" readonly="readonly">
-              <div class="validate"></div>
+			
             </div>
             <div class="form-group">
               <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
-              <div class="validate"></div>
+
             </div>
             <div class="form-group">
               <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
-              <div class="validate"></div>
+
             </div>
             <div class="form-send">
-              <button type="submit" class="btn btn-large btn-primary">Send</button>
+              <button type="submit" class="btn btn-large btn-primary">Send</button> 
+              <!--<button type="button" class="btn btn-large btn-primary" onclick="validate();">Send</button>-->
             </div>
           </form>
         </div>

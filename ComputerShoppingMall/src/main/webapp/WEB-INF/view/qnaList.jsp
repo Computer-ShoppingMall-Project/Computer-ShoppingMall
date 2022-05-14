@@ -1,7 +1,5 @@
-<%@page import="vo.Qna"%>
-<%@page import="java.util.ArrayList"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,25 +69,14 @@
             </tr>
           </thead>
           <tbody>
-			<%
-				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
-				// 답변이 없을 경우, 답변 미등록으로 표시, 등록되어 있을 경우 7자+...까지 보여주기
-				for(Qna qna : list) {
-					if(qna.getQnaAnswer() == null) {
-						qna.setQnaAnswer("NO ANSWER");
-					} else {
-						qna.setQnaAnswer(qna.getQnaAnswer().substring(0, 7)+"...");
-					}
-			%>
-					<tr>
-						<td><%=qna.getQnaNo()%></td>
-						<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>"><%=qna.getQnaTitle()%></a></td>
-						<td><%=qna.getCreateDate()%></td>
-						<td><%=qna.getQnaAnswer()%></td>
-					</tr>	
-			<%
-				}
-			%>
+          <c:forEach var="qna" items="${qnaList}">
+          	<tr>
+				<td>${qna.qnaNo}</td>
+				<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></td>
+				<td>${qna.createDate}</td>
+				<td>${qna.qnaAnswer}</td>	
+			</tr>	
+          </c:forEach>
           </tbody>
         </table>
 

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.QnaDao;
 import vo.Qna;
 
-@WebServlet(description = "QnaOneController", urlPatterns = { "/QnaOneController" })
+@WebServlet("/QnaOneController")
 public class QnaOneController extends HttpServlet {
 	private QnaDao qnaDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,8 +30,15 @@ public class QnaOneController extends HttpServlet {
 		
 		qnaDao = new QnaDao();
 		ArrayList<Qna> list = qnaDao.selectQnaOne(customerId, qnaNo);
+		String adminAnswer = ""; // 사용자에게 답변이 null로 보이지 않도록 "" 처리(관리자 답변 미등록시)
+		Qna qna = new Qna();
+		if(qna.getQnaAnswer() != null) { // 답변 등록이 되어있다면 답변 넣어주기
+			adminAnswer = qna.getQnaAnswer();
+		}
+		
 		request.setAttribute("customerId", customerId);
 		request.setAttribute("qnaOneList", list);
+		request.setAttribute("adminAnswer", adminAnswer);
 		request.getRequestDispatcher("WEB-INF/view/qnaOne.jsp").forward(request, response);
 	}
 }

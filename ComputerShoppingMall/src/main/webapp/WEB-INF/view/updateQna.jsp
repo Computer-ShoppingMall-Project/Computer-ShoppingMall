@@ -1,6 +1,5 @@
-<%@page import="vo.Qna"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,9 +38,6 @@
   ======================================================= -->
 </head>
 <body>
-<%
-	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
-%>
   <!-- header적용 -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -49,34 +45,31 @@
     <div class="container clearfix">
       <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
         <div class="col-lg-6 col-md-6 col-sm-6 center-block" style="float: none; margin:100 auto;">
-            <%
-            	for(Qna qna : list) {
-            %>
+        <c:forEach var="qna" items="${qnaList}">
         <!-- QNA 리스트로 돌아가기 -->
-        <a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>">back</a>
+        <a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}">back</a>
+
         <!-- 고객문의 폼 -->
           <h4 class="title">update QNA</h4>
-          <form class="contact-form php-mail-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=<%=qna.getQnaNo()%>" method="POST">
+          <form class="contact-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" method="POST">
 
             <div class="form-group">
               <input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" value="<%=qna.getQnaTitle()%>" data-rule="required" data-msg="Please enter a valid title">
+              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" value="${qna.qnaTitle}" data-rule="required" data-msg="Please enter a valid title">
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"><%=qna.getQnaContent()%></textarea>
+              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us">${qna.qnaContent}</textarea>
               <div class="validate"></div>
             </div>
-            <%
-            	}
-            %>
             <div class="form-send">
               <button type="submit" class="btn btn-large btn-primary">Send</button>
             </div>
           </form>
+          </c:forEach>
         </div>
       </div>
       <!-- end content -->

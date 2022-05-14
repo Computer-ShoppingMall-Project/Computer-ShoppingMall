@@ -94,12 +94,15 @@ public class QnaDao {
 		ResultSet rs = null;
 		conn = DButil.getConnection();
 		String sql = "SELECT"
-				+ " qna_no qnaNo"
-				+ ", qna_title qnaTitle"
-				+ ", qna_answer qnaAnswer"
-				+ ", create_date createDate"
+				+ "	qna_no qnaNo"
+				+ "	, qna_title qnaTitle"
+				+ "	, (CASE"
+				+ "		WHEN qna_answer IS NULL THEN 'X'"
+				+ "		ELSE 'O'"
+				+ "	  END) qnaAnswer"
+				+ "	, create_date createDate"
 				+ " FROM qna"
-				+ " WHERE customer_id=?"
+				+ " WHERE customer_id='guest'"
 				+ " ORDER BY create_date DESC";
 		try {
 			stmt = conn.prepareStatement(sql);
