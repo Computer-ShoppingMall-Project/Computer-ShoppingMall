@@ -46,25 +46,25 @@ public class InsertCoolerController extends HttpServlet {
 		String memo = null;
 		
 		// request값 받아오기
-		if(request.getParameter("coolerName") != null || request.getParameter("coolerName") !="") {
+		if(request.getParameter("coolerName") != null && request.getParameter("coolerName") !="") {
 			coolerName = request.getParameter("coolerName");
 		}
-		if(request.getParameter("companyName") != null || request.getParameter("companyName") !="") {
+		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName =request.getParameter("companyName");
 		}
-		if(request.getParameter("coolerKind") != null ||request.getParameter("coolerKind") !="") {
+		if(request.getParameter("coolerKind") != null &&request.getParameter("coolerKind") !="") {
 			coolerKind = request.getParameter("coolerKind");
 		}
-		if(request.getParameter("coolerSize") != null || request.getParameter("coolerSize") !="") {
+		if(request.getParameter("coolerSize") != null && request.getParameter("coolerSize") !="") {
 			coolerSize = Integer.parseInt(request.getParameter("coolerSize"));
 		}
-		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity") != null || request.getParameter("coolerName") !="") {
+		if(request.getParameter("quantity") != null && request.getParameter("coolerName") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
-		if(request.getParameter("memo") != null || request.getParameter("coolerName") !="") {
+		if(request.getParameter("memo") != null && request.getParameter("coolerName") !="") {
 			memo = request.getParameter("memo");
 		}
 		

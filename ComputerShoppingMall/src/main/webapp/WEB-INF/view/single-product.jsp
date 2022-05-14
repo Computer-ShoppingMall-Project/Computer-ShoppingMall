@@ -120,8 +120,8 @@
               <!-- item_price -->
               <hr>
               <div class="buttons">
-                <a class="button btn-block large" href="#">UPDATE</a>
-                <a class="button btn-block large" href="#">DELETE</a>
+                <a class="button btn-block large" href="${pageContext.request.contextPath}/SingleProductUpdateController">UPDATE</a>
+                <a class="button btn-block large" href="${pageContext.request.contextPath}/SingleProductDeleteController">DELETE</a>
               </div>
               <!-- buttons -->
               <hr>

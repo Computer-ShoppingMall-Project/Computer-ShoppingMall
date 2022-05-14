@@ -43,19 +43,19 @@ public class InsertPowerController extends HttpServlet {
 		String memo = null;
 		
 		// request값 받아오기
-		if(request.getParameter("powerName") != null || request.getParameter("powerName") !="") {
+		if(request.getParameter("powerName") != null && request.getParameter("powerName") !="") {
 			powerName = request.getParameter("powerName");
 		}
-		if(request.getParameter("ratedPower") != null ||request.getParameter("ratedPower") !="") {
+		if(request.getParameter("ratedPower") != null && request.getParameter("ratedPower") !="") {
 			ratedPower = request.getParameter("ratedPower");
 		}
-		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity") != null || request.getParameter("quantity") !="") {
+		if(request.getParameter("quantity") != null && request.getParameter("quantity") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
-		if(request.getParameter("memo") != null || request.getParameter("memo") !="") {
+		if(request.getParameter("memo") != null && request.getParameter("memo") !="") {
 			memo = request.getParameter("memo");
 		}
 		

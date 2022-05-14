@@ -28,7 +28,7 @@ public class DeleteMainboardController extends HttpServlet {
 		// 변수 등록
 		int mainboardNo = 0;
 		// request값 받아오기
-		if(request.getParameter("mainboardNo")!= null || request.getParameter("mainboardNo") != "") {
+		if(request.getParameter("mainboardNo")!= null && request.getParameter("mainboardNo") != "") {
 			mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
 		}
 		// 디버깅

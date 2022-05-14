@@ -27,7 +27,7 @@ public class DeletePowerController extends HttpServlet {
 		// 변수 등록
 		int powerNo = 0;
 		// request값 받아오기
-		if(request.getParameter("powerNo")!= null || request.getParameter("powerNo") != "") {
+		if(request.getParameter("powerNo")!= null && request.getParameter("powerNo") != "") {
 			powerNo = Integer.parseInt(request.getParameter("powerNo"));
 		}
 		// 디버깅

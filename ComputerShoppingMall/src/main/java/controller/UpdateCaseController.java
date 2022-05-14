@@ -31,13 +31,13 @@ public class UpdateCaseController extends HttpServlet {
 		int quantity = 0;
 		
 		// request값 받기
-		if(request.getParameter("caseNo")!= null || request.getParameter("caseNo") != "") {
+		if(request.getParameter("caseNo")!= null && request.getParameter("caseNo") != "") {
 			caseNo = Integer.parseInt(request.getParameter("caseNo"));
 		}
-		if(request.getParameter("price")!= null || request.getParameter("price") != "") {
+		if(request.getParameter("price")!= null && request.getParameter("price") != "") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity")!= null || request.getParameter("quantity") != "") {
+		if(request.getParameter("quantity")!= null && request.getParameter("quantity") != "") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
 		

@@ -23,13 +23,13 @@ public class UpdateGpuController extends HttpServlet {
 		int quantity = 0;
 		
 		// request값 받기
-		if(request.getParameter("GpuNo")!= null || request.getParameter("GpuNo") != "") {
+		if(request.getParameter("GpuNo")!= null && request.getParameter("GpuNo") != "") {
 			GpuNo = Integer.parseInt(request.getParameter("GpuNo"));
 		}
-		if(request.getParameter("price")!= null || request.getParameter("price") != "") {
+		if(request.getParameter("price")!= null && request.getParameter("price") != "") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity")!= null || request.getParameter("quantity") != "") {
+		if(request.getParameter("quantity")!= null && request.getParameter("quantity") != "") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
 		

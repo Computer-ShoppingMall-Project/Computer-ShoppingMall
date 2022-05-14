@@ -43,25 +43,25 @@ public class InsertStorageController extends HttpServlet {
 		String memo = null;
 		
 		// request값 받아오기
-		if(request.getParameter("storageName") != null || request.getParameter("storageName") !="") {
+		if(request.getParameter("storageName") != null && request.getParameter("storageName") !="") {
 			storageName = request.getParameter("storageName");
 		}
-		if(request.getParameter("companyName") != null ||request.getParameter("companyName") !="") {
+		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName = request.getParameter("companyName");
 		}
-		if(request.getParameter("storageInterface") != null ||request.getParameter("storageInterface") !="") {
+		if(request.getParameter("storageInterface") != null && request.getParameter("storageInterface") !="") {
 			storageInterface = request.getParameter("storageInterface");
 		}
-		if(request.getParameter("capacity") != null ||request.getParameter("capacity") !="") {
+		if(request.getParameter("capacity") != null && request.getParameter("capacity") !="") {
 			capacity = request.getParameter("capacity");
 		}
-		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity") != null || request.getParameter("quantity") !="") {
+		if(request.getParameter("quantity") != null && request.getParameter("quantity") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
-		if(request.getParameter("memo") != null || request.getParameter("memo") !="") {
+		if(request.getParameter("memo") != null && request.getParameter("memo") !="") {
 			memo = request.getParameter("memo");
 		}
 		

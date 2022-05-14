@@ -41,7 +41,7 @@ public class DeleteMemberController extends HttpServlet {
 	      }
 		// null check
 	    // if) null이면, request DeleteMemberController
-	    if(request.getParameter("customerPw") == null || request.getParameter("customerId") == null) {
+	    if(request.getParameter("customerPw") == null && request.getParameter("customerId") == null) {
 	    	response.sendRedirect(request.getContextPath()+"/DeleteMemberController?msg=null");
 	    	return;
 	    }

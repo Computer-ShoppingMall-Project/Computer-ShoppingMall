@@ -28,7 +28,7 @@ public class DeleteStorageController extends HttpServlet {
 		// 변수 등록
 		int storageNo = 0;
 		// request값 받아오기
-		if(request.getParameter("storageNo")!= null || request.getParameter("storageNo") != "") {
+		if(request.getParameter("storageNo")!= null && request.getParameter("storageNo") != "") {
 			storageNo = Integer.parseInt(request.getParameter("storageNo"));
 		}
 		// 디버깅

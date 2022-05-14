@@ -26,10 +26,10 @@ public class DeleteCoolerController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 변수 등록
+	// 변수 등록
 	int coolerNo = 0;
 	// request값 받아오기
-	if(request.getParameter("coolerNo")!= null || request.getParameter("coolerNo") != "") {
+	if(request.getParameter("coolerNo")!= null && request.getParameter("coolerNo") != "") {
 			coolerNo = Integer.parseInt(request.getParameter("coolerNo"));
 		}
 	// 디버깅	System.out.println(coolerNo+"<-coolerNo");

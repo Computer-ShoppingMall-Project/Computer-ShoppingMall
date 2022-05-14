@@ -44,25 +44,25 @@ public class InsertGpuController extends HttpServlet {
 		String memo = null;
 		
 		// request값 받아오기
-		if(request.getParameter("gpuName") != null || request.getParameter("gpuName") !="") {
+		if(request.getParameter("gpuName") != null && request.getParameter("gpuName") !="") {
 			gpuName = request.getParameter("gpuName");
 		}
-		if(request.getParameter("companyName") != null ||request.getParameter("companyName") !="") {
+		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName = request.getParameter("companyName");
 		}
-		if(request.getParameter("chipsetCompany") != null ||request.getParameter("chipsetCompany") !="") {
+		if(request.getParameter("chipsetCompany") != null && request.getParameter("chipsetCompany") !="") {
 			chipsetCompany = request.getParameter("chipsetCompany");
 		}
-		if(request.getParameter("gpuSize") != null || request.getParameter("gpuSize") !="") {
+		if(request.getParameter("gpuSize") != null && request.getParameter("gpuSize") !="") {
 			gpuSize = Integer.parseInt(request.getParameter("gpuSize"));
 		}
-		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity") != null || request.getParameter("quantity") !="") {
+		if(request.getParameter("quantity") != null && request.getParameter("quantity") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
-		if(request.getParameter("memo") != null || request.getParameter("memo") !="") {
+		if(request.getParameter("memo") != null && request.getParameter("memo") !="") {
 			memo = request.getParameter("memo");
 		}
 		

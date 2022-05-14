@@ -28,7 +28,7 @@ public class DeleteCpuController extends HttpServlet {
 		// 변수 등록
 		int cpuNo = 0;
 		// request값 받아오기
-		if(request.getParameter("cpuNo")!= null || request.getParameter("cpuNo") != "") {
+		if(request.getParameter("cpuNo")!= null && request.getParameter("cpuNo") != "") {
 			cpuNo = Integer.parseInt(request.getParameter("cpuNo"));
 		}
 		// 디버깅

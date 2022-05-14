@@ -28,7 +28,7 @@ public class DeleteRamController extends HttpServlet {
 		// 변수 등록
 		int ramNo = 0;
 		// request값 받아오기
-		if(request.getParameter("ramNo")!= null || request.getParameter("ramNo") != "") {
+		if(request.getParameter("ramNo")!= null && request.getParameter("ramNo") != "") {
 			ramNo = Integer.parseInt(request.getParameter("ramNo"));
 		}
 		// 디버깅

@@ -47,28 +47,28 @@ public class InsertCpuController extends HttpServlet {
 		String memo = null;
 		
 		// request값 받아오기
-		if(request.getParameter("cpuName") != null || request.getParameter("cpuName") !="") {
+		if(request.getParameter("cpuName") != null && request.getParameter("cpuName") !="") {
 			cpuName = request.getParameter("cpuName");
 		}
-		if(request.getParameter("cpuKind") != null ||request.getParameter("cpuKind") !="") {
+		if(request.getParameter("cpuKind") != null && request.getParameter("cpuKind") !="") {
 			cpuKind = request.getParameter("cpuKind");
 		}
-		if(request.getParameter("socketSize") != null ||request.getParameter("socketSize") !="") {
+		if(request.getParameter("socketSize") != null && request.getParameter("socketSize") !="") {
 			socketSize = request.getParameter("socketSize");
 		}
-		if(request.getParameter("core") != null ||request.getParameter("core") !="") {
+		if(request.getParameter("core") != null  && request.getParameter("core") !="") {
 			core = request.getParameter("core");
 		}
-		if(request.getParameter("thread") != null ||request.getParameter("thread") !="") {
+		if(request.getParameter("thread") != null && request.getParameter("thread") !="") {
 			thread = request.getParameter("thread");
 		}
-		if(request.getParameter("price") != null || request.getParameter("price") !="") {
+		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
 		}
-		if(request.getParameter("quantity") != null || request.getParameter("quantity") !="") {
+		if(request.getParameter("quantity") != null && request.getParameter("quantity") !="") {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
-		if(request.getParameter("memo") != null || request.getParameter("memo") !="") {
+		if(request.getParameter("memo") != null && request.getParameter("memo") !="") {
 			memo = request.getParameter("memo");
 		}
 		
