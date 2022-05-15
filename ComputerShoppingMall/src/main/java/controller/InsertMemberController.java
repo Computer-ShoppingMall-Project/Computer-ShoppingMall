@@ -44,6 +44,13 @@ public class InsertMemberController extends HttpServlet {
 	    */
 	    
 	    // 요청값 처리
+		if (request.getParameter("customerId") == null || request.getParameter("name") == null
+				|| request.getParameter("nickname") == null || request.getParameterValues("email") == null
+				|| request.getParameter("phone") == null || request.getParameter("addressId") == null
+				|| request.getParameter("detailAddress") == null) {
+			response.sendRedirect(request.getContextPath() + "/InsertMemberController");
+			return;
+		}
 	    // customerPw = 비밀번호 선언후 초기화
 	    String customerPw = null; 
 	    if(request.getParameter("customerPw1") != null && request.getParameter("customerPw2") != null &&!request.getParameter("customerPw1").equals("") && request.getParameter("customerPw1").equals(request.getParameter("customerPw2"))) {

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import ="vo.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +37,6 @@
   ======================================================= -->
 </head>
 <body>
-<%
-	Customer customer = (Customer)request.getAttribute("customer");
-%>
   <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -76,20 +72,21 @@
           <h4 class="title">
                        <span>Update Member Pw</span>
           </h4>
-          	<form method="post" action="<%=request.getContextPath()%>/UpdateMemberPwController">
+          	<form method="post" action="${pageContext.request.contextPath}%>/UpdateMemberPwController">
 		<div>
 			<!-- 값넘기기 -->
-			<input type="hidden" name="customerId" readonly="readonly" value="<%=customer.getCustomerId()%>">
-			<input type="hidden" name="name" value="<%=customer.getName()%>" required>
-			<input type="hidden" name="nickName" value="<%=customer.getNickName()%>" required>
-			<input type="hidden" name="email" value="<%=customer.getEmail()%>" required>
-			<input type="hidden" name="phone" value="<%=customer.getPhone()%>" required>
-			<input type="hidden" name="addressId" value="<%=customer.getAddressId()%>" required>
-			<input type="hidden" name="detailAddress" value="<%=customer.getDetailAddress()%>" required>
+			<input type="hidden" name="customerId" readonly="readonly" value="${requestScope.customer.customerId}">
+			<input type="hidden" name="name" value="${requestScope.customer.name}" required>
+			<input type="hidden" name="nickName" value="${requestScope.customer.nickName}" required>
+			<input type="hidden" name="email" value="${requestScope.customer.email}" required>
+			<input type="hidden" name="phone" value="${requestScope.customer.phone}" required>
+			<input type="hidden" name="addressId" value="${requestScope.customer.addressId}" required>
+			<input type="hidden" name="detailAddress" value="${requestScope.customer.detailAddress}" required>
 		</div>
 		<div>
 			<table class="table">
-				<td>현재 비밀번호 입력</td>
+				<tr>
+					<td>현재 비밀번호 입력</td>
 					<td>
 						<input type="password" name="customerPw" required>
 					</td>
@@ -114,8 +111,8 @@
 			</table>
 		</div>
 	</form>
-		<a  href="<%=request.getContextPath()%>/SelectMemberOneController" type ="button" class="btn btn-outline-info btn-sm">이전</a>
-		<a  href="<%=request.getContextPath()%>/IndexController" type="button" class="btn btn-outline-info btn-sm">index</a>
+		<a  href="${pageContext.request.contextPath}/SelectMemberOneController" type ="button" class="btn btn-outline-info btn-sm">이전</a>
+		<a  href="${pageContext.request.contextPath}/IndexController" type="button" class="btn btn-outline-info btn-sm">index</a>
         </div>
       </div>
       <!-- end content -->

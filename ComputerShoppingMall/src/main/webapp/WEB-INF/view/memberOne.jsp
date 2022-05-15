@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import ="vo.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,9 +38,6 @@
   ======================================================= -->
 </head>
 <body>
-	<%
-		Customer customer = (Customer)request.getAttribute("customer");
-	%>
   <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -80,41 +76,41 @@
          	<table class="table">
 				<tr>
 					<td>ID</td>
-					<td><%=customer.getCustomerId()%></td>
+					<td>${requestScope.customer.customerId}</td>
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><%=customer.getName()%></td>
+					<td>${requestScope.customer.name}</td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><%=customer.getNickName()%></td>
+					<td>${requestScope.customer.nickName}</td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><%=customer.getEmail()%></td>
+					<td>${requestScope.customer.email}</td>
 				</tr>
 				<tr>
 					<td>전화번호</td>
-					<td><%=customer.getPhone()%></td>
+					<td>${requestScope.customer.phone}</td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><%=customer.getAddressId()%></td>
+					<td>${requestScope.customer.addressId}</td>
 				</tr>
 				<tr>
-					<td>상세번호</td>
-					<td><%=customer.getDetailAddress()%></td>
+					<td>상세주소</td>
+					<td>${requestScope.customer.detailAddress}</td>
 				</tr>
 				<tr>
 					<td>가입일</td>
-					<td><%=customer.getCreateDate() %></td>
+					<td>${requestScope.customer.createDate}</td>
 				</tr>
 			</table>
-		<a href="<%=request.getContextPath()%>/UpdateMemberController" type="button" class="btn btn-outline-primary">정보수정</a>
-		<a href="<%=request.getContextPath()%>/UpdateMemberPwController" type="button" class="btn btn-outline-primary">비밀번호 수정</a>
-		<a href="<%=request.getContextPath()%>/DeleteMemberController" type="button" class="btn btn-outline-danger">탈퇴</a>
-		<a href="<%=request.getContextPath()%>/IndexController" type="button" class="btn btn-outline-info">index</a>
+		<a href="${pageContext.request.contextPath}/UpdateMemberController" type="button" class="btn btn-outline-primary">정보수정</a>
+		<a href="${pageContext.request.contextPath}/UpdateMemberPwController" type="button" class="btn btn-outline-primary">비밀번호 수정</a>
+		<a href="${pageContext.request.contextPath}/DeleteMemberController" type="button" class="btn btn-outline-danger">탈퇴</a>
+		<a href="${pageContext.request.contextPath}/IndexController" type="button" class="btn btn-outline-info">index</a>
         </div>
       </div>
       <!-- end content -->
