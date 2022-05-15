@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import ="vo.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +37,6 @@
   ======================================================= -->
 </head>
 <body>
-<%
-	Customer customer = (Customer)request.getAttribute("customer");
-%>
   <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -76,47 +72,47 @@
           <h4 class="title">
                        <span>Update Member</span>
           </h4>
-          	<form method="post" action="<%=request.getContextPath()%>/UpdateMemberController">
+          	<form method="post" action="${pageContext.request.contextPath}/UpdateMemberController">
          		<div>
 					<!-- 값넘기기 -->
-					<input type="hidden" name="customerId" readonly="readonly" value="<%=customer.getCustomerId()%>">
+					<input type="hidden" name="customerId" readonly="readonly" value="${requestScope.customer.customerId}">
 				</div>
 		<div>
 			<table class="table">
 				<tr>
 					<td>이름 수정</td>
 					<td>
-						<input type="text" name="name" value="<%=customer.getName()%>" required>
+						<input type="text" name="name" value="${requestScope.customer.name}" required>
 					</td>
 				</tr>
 				<tr>
 					<td>닉네임 수정</td>
 					<td>
-						<input type="text" name="nickName" value="<%=customer.getNickName()%>" required>
+						<input type="text" name="nickName" value="${requestScope.customer.nickName}" required>
 					</td>
 				</tr>
 				<tr>
 					<td>이메일 수정</td>
 					<td>
-						<input type="text" style="width:300px;"	"name="email" value="<%=customer.getEmail()%>" required>
+						<input type="text" style="width:300px;"	name="email" value="${requestScope.customer.email}" required>
 					</td>
 				</tr>
 				<tr>
 					<td>번호 수정</td>
 					<td>
-						<input type="text" name="phone" value="<%=customer.getPhone()%>" required>
+						<input type="text" name="phone" value="${requestScope.customer.phone}" required>
 					</td>
 				</tr>
 				<tr>
 					<td>주소 수정</td>
 					<td>
-						<input type="number" name="addressId" value="<%=customer.getAddressId()%>" required>
+						<input type="number" name="addressId" value="${requestScope.customer.addressId}" required>
 					</td>
 				</tr>
 				<tr>
 					<td>상세 주소 수정</td>
 					<td>
-						<input type="text" name="detailAddress" value="<%=customer.getDetailAddress()%>" required>
+						<input type="text" name="detailAddress" value="${requestScope.customer.detailAddress}" required>
 					</td>
 				</tr>
 				<tr>
@@ -127,8 +123,8 @@
 			</table>
 		</div>
 	</form>
-		<a href="<%=request.getContextPath()%>/SelectMemberOneController" type="button" class="btn btn-outline-info btn-sm">이전</a>
-		<a href="<%=request.getContextPath()%>/UpdateMemberPwController" type="button" class="btn btn-outline-info btn-sm">비밀번호 수정</a>
+		<a href="${pageContext.request.contextPath}/SelectMemberOneController" type="button" class="btn btn-outline-info btn-sm">이전</a>
+		<a href="${pageContext.request.contextPath}/UpdateMemberPwController" type="button" class="btn btn-outline-info btn-sm">비밀번호 수정</a>
         </div>
       </div>
       <!-- end content -->

@@ -30,6 +30,7 @@
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/colors/blue.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- =======================================================
     Template Name: MaxiBiz
     Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
@@ -100,34 +101,43 @@
           </h4>
           <form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
             <div class="form-group">
-              <input type="text" name="customerId" class="form-control" placeholder="ID">
+            <!-- 4자이상 : blur이벤트 발생시 체크 -->
+              <input type="text" id="id" name="customerId" class="form-control" placeholder="ID">
+              <span id="idHelper" class="helper"></span>
             </div>
              <div class="form-group">
-              <input type="password" name="customerPw1" class="form-control" placeholder="Password">
+              <input type="password" id="pw" name="customerPw1" class="form-control" placeholder="Password">
+              <span id="pwHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="password" name="customerPw2" class="form-control" placeholder="Re-enter password">
+              <input type="password" id="pwConfirm" name="customerPw2" class="form-control" placeholder="Re-enter password">
             </div>
             <div class="form-group">
-              <input type="text" name="name" class="form-control" placeholder="Name">
+              <input type="text" id="name" name="name" class="form-control" placeholder="Name">
+              <span id="nameHelper" class="helper"></span>
             </div>
              <div class="form-group">
-              <input type="text" name="nickname" class="form-control" placeholder="Nickname">
+              <input type="text" id="nickname" name="nickname" class="form-control" placeholder="Nickname">
+               <span id="nicknameHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="email" name="email" class="form-control" placeholder="Email">
+              <input type="email"id="email" name="email" class="form-control" placeholder="Email">
+              <span id="emailHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="number" name="phone" class="form-control" placeholder="Phone number">
+              <input type="number" id="phone" name="phone" class="form-control" placeholder="Phone number">
+              <span id="phoneHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="number" name="addressId" class="form-control" placeholder="Address">
+              <input type="number" id="address" name="addressId" class="form-control" placeholder="Address">
+               <span id="addressHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="text" name="detailAddress" class="form-control" placeholder="Detail address">
+              <input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="Detail address">
+               <span id="detailHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="submit" class="button" value="Register an account">
+              <input type="submit" id="signup" class="button" value="Register an account">
             </div>
           </form>
         </div>
@@ -162,6 +172,129 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
-
+	<script>
+	$('#id').focus();
+	
+	$('#id').blur(function(){
+		if($('#id').val().length < 4) {
+			$('#idHelper').text('id는 4자이상');
+			$('#id').focus();
+		} else {
+			$('#idHelper').text('');
+		}
+	});
+	
+	$('#pwConfirm').blur(function(){
+		if($('#pw').val().length < 4) {
+			$('#pwHelper').text('pw는 4자이상');
+			$('#pw').focus();
+		} else if($('#pw').val() != $('#pwConfirm').val()) {
+			$('#pwHelper').text('pw가 일치하지 않습니다');
+			$('#pw').focus();
+		} else {
+			$('#pwHelper').text('');
+		}
+	});
+	
+	$('#name').blur(function(){
+		if($('#name').val().length == 0) {
+			$('#nameHelper').text('이름을 입력하세요');
+			$('#name').focus();
+		} else {
+			$('#nameHelper').text('');
+		}
+	});
+	
+	$('#nickname').blur(function(){
+		if($('#nickname').val().length == 0) {
+			$('#nicknameHelper').text('닉네임을 입력하세요');
+			$('#nickname').focus();
+		} else {
+			$('#nicknameHelper').text('');
+		}
+	});
+	
+	$('#email').blur(function(){
+		if($('#email').val().length == 0) {
+			$('#emailHelper').text('이메일을 입력하세요');
+			$('#email').focus();
+		} else {
+			$('#email').text('');
+		}
+	});
+	
+	$('#phone').blur(function(){
+		if($('#phone').val().length == 0) {
+			$('#phoneHelper').text('번호를 입력하세요');
+			$('#phone').focus();
+		} else {
+			$('#phone').text('');
+		}
+	});
+	
+	$('#address').blur(function(){
+		if($('#address').val().length == 0) {
+			$('#addressHelper').text('주소를 입력하세요');
+			$('#address').focus();
+		} else {
+			$('#address').text('');
+		}
+	});
+	
+	$('#detailAddress').blur(function(){
+		if($('#detailAddress').val().length == 0) {
+			$('detailHelper').text('상세 주소를 입력하세요');
+			$('#detailAddress').focus();
+		} else {
+			$('#detailAddress').text('');
+		}
+	});
+	
+	$('#signup').click(function(){
+		if($('#id').val() == '') {
+			$('#idHelper').text('id는 4자이상');
+			
+			$('#id').focus();
+		} else if($('#pw').val() == '') {
+			$('#idHelper').text('');
+			
+			$('#pwHelper').text('pw는 4자이상');
+			$('#pw').focus();
+		} else if($('#name').val() == '') {
+			$('#pwHelper').text('');
+			
+			$('#nameHelper').text('이름을 입력하세요');
+			$('#name').focus();
+		} else if($('#nickname').val() == '') {
+			$('#nameHelper').text('');
+			
+			$('#nicknameHelper').text('닉네임을 입력하세요');
+			$('#nickname').focus();
+		} else if($('#email').val() == '') {
+			$('#nicknameHelper').text('');
+			
+			$('#emailHelper').text('이메일을 입력하세요');
+			$('#email').focus();
+		} else if($('#phone').val() == '') {
+			$('#emailHelper').text('');
+			
+			$('#phoneHelper').text('번호을 입력하세요');
+			$('#phone').focus();
+		} else if($('#address').val() == '') {
+			$('#phoneHelper').text('');
+			
+			$('#addressHelper').text('주소를 입력하세요');
+			$('#address').focus();
+		} else if($('#detailAddress').val() == '') {
+			$('#addressHelper').text('');
+			
+			$('#detailAddresssHelper').text('상세주소을 입력하세요');
+			$('#detailAddress').focus();
+		} else {
+			$('#registerform').submit();
+		}
+	});
+</script>
+	
 </body>
 </html>

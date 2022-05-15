@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import ="vo.Customer"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,10 +37,6 @@
   ======================================================= -->
 </head>
 <body>
-<%	
-	//
-	Customer customer = (Customer)request.getAttribute("customer");
-%>
   <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
@@ -77,13 +72,13 @@
           <h4 class="title">
                        <span>Delete Member</span>
           </h4>
-        	<form method="post" action="<%=request.getContextPath()%>/DeleteMemberController">
+        	<form method="post" action="${pageContext.request.contextPath}/DeleteMemberController">
 		<div>
 			<table class="table">
 				<tr>
 					<td>ID</td>
 					<td>
-						<input type="text" name="customerId" readonly="readonly" value="<%=request.getAttribute("customerId")%>">
+						<input type="text" name="customerId" readonly="readonly" value="${customerId}">
 					</td>
 				</tr>
 				<tr>
@@ -100,8 +95,8 @@
 			</table>
 		</div>
 	</form>
-		<a  href="<%=request.getContextPath()%>/SelectMemberOneController" type ="button" class="btn btn-outline-info btn-sm">이전</a>
-		<a  href="<%=request.getContextPath()%>/IndexController" type ="button" class="btn btn-outline-info btn-sm">index</a>
+		<a  href="${pageContext.request.contextPath}/SelectMemberOneController" type ="button" class="btn btn-outline-info btn-sm">이전</a>
+		<a  href="${pageContext.request.contextPath}/IndexController" type ="button" class="btn btn-outline-info btn-sm">index</a>
         </div>
       </div>
       <!-- end content -->
