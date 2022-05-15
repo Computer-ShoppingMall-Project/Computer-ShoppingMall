@@ -67,6 +67,7 @@
 									<li><a href="CheckoutController">Checkout</a></li>
 									<li><a href="AccountController">Account Page</a></li>
 									<li><a href="SupportController">Support Center</a></li>
+									<li><a href="${pageContext.request.contextPath}/MyBasketController">MyBasket</a></li>
 								</ul>
 							</li>
 							<li><a href="#">Portfolio</a>
