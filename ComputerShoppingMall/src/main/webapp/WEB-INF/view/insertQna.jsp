@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -48,7 +48,7 @@ $(document).ready(function() { // 이벤트 바인딩 시작
 		// 유효성 검사 boolean 변환 
 		let vali = validate(params);
 
-		vali ? updateQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
+		vali ? inserQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
 	});
 });
 // 이벤트 바인딩 끝
@@ -58,14 +58,14 @@ function validate(params) {
 	if (NullVal(params.qnaTitle)) {
 		Swal.fire({
 			icon : 'error',
-			text : 'Enter your Title'
+			text : 'Enter your Answer'
 		});
 		return false;
 	}
 	if (NullVal(params.qnaContent)) {
 		Swal.fire({
 			icon : 'error',
-			text : 'Enter your Content'
+			text : 'Enter your Answer'
 		});
 		return false;
 	}
@@ -81,7 +81,8 @@ function validate(params) {
 
 // 공백, null, 빈값 검사 function
 function NullVal(param) {
-	if ((null == param) || ('' == param) || (param === undefined) || (param === "undefined")) {
+	if ((null == param) || ('' == param) || (param === undefined)
+			|| (param === "undefined")) {
 		return true;
 	}
 	return false;
@@ -100,18 +101,19 @@ function NullVal(param) {
 					<a href="${pageContext.request.contextPath}/QnaListController">back</a>
 					<!-- 고객문의 폼 -->
 					<h4 class="title">QNA</h4>
-					<form id="insertQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
+					<form id="inserQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
 						<div class="form-group">
-							<input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
+							<input type="text" name="customerId" class="form-control" id="customerId" value="${customerId}" readonly="readonly">
 						</div>
 						<div class="form-group">
-							<input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required">
+							<input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required"></textarea>
+							<textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
 						</div>
 						<div class="form-send">
 							<button id="SendBtn" type="button" class="btn btn-large btn-primary">Send</button>
+							<!--<button type="button" class="btn btn-large btn-primary" onclick="validate();">Send</button>-->
 						</div>
 					</form>
 				</div>
