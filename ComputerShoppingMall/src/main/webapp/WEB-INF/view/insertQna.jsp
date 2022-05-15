@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +48,7 @@
           // 유효성 검사 boolean 변환 
           let vali = validate( params );
           
-          vali ? inserQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
+          vali ? updateQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
       });
   });
   // 이벤트 바인딩 끝
@@ -58,13 +58,13 @@
 		if(NullVal(params.qnaTitle)){
 			Swal.fire({
 				  icon: 'error',
-				  text: 'Enter your Answer'
+				  text: 'Enter your Title'
 				});
 	  		return false;   
 	  	} if(NullVal(params.qnaContent)){
 	  		Swal.fire({
 				  icon: 'error',
-				  text: 'Enter your Answer'
+				  text: 'Enter your Content'
 				});
 	  	    return false;
 	  	} if(params.qnaTitle.length > 50 ){
@@ -98,23 +98,20 @@
         <a href="${pageContext.request.contextPath}/QnaListController">back</a>
         <!-- 고객문의 폼 -->
           <h4 class="title">QNA</h4>
-          <form id="inserQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
-
+          <form id="insertQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
             <div class="form-group">
-              <input type="text" name="customerId" class="form-control" id="customerId" value="${customerId}" readonly="readonly">
+              <input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
 			
             </div>
             <div class="form-group">
-              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
+              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required">
 
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
-
+              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required"></textarea>
             </div>
             <div class="form-send">
               <button id="SendBtn" type="button" class="btn btn-large btn-primary">Send</button> 
-              <!--<button type="button" class="btn btn-large btn-primary" onclick="validate();">Send</button>-->
             </div>
           </form>
         </div>

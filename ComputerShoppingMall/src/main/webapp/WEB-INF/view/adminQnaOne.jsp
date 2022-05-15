@@ -36,6 +36,7 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript">
 	//이벤트 바인딩 시작
@@ -55,7 +56,10 @@
   // 유효성 체크 function
 	function validate(params) {  	
 		if(NullVal(params.qnaAnswer)){
-	  		alert('Enter your Answer');
+	  		Swal.fire({
+				  icon: 'error',
+				  text: 'Enter your Answer'
+				});
 	  		return false;   
 	  	}	
 	  return true;
@@ -83,44 +87,42 @@
         <!-- 고객문의 상세보기 -->
           <h4 class="title">QNA ANSWER</h4>
 			<table class="table">
-			<c:forEach var="qna" items="${adminQnaOneList}">
-					<tr>
-						<th>NO</th>
-						<td>${qna.qnaNo}</td>
-					</tr>
-					<tr>
-						<th>ID</th>
-						<td>${qna.customerId}</td>
-					</tr>
-					<tr>
-						<th>TITLE</th>
-						<td>${qna.qnaTitle}</td>
-					</tr>
-					<tr height="100">
-						<th style="vertical-align : middle;">CONTENT</th>
-						<td>${qna.qnaContent}</td>
-					</tr>
-					<tr>
-						<th>CREATE DATE</th>
-						<td>${qna.createDate}</td>
-					</tr>
-					<tr>
-						<th>UPDATE DATE</th>
-						<td>${qna.updateDate}</td>
-					</tr>
+				<tr>
+					<th>NO</th>
+					<td>${requestScope.qna.qnaNo}</td>
+				</tr>
+				<tr>
+					<th>ID</th>
+					<td>${requestScope.qna.customerId}</td>
+				</tr>
+				<tr>
+					<th>TITLE</th>
+					<td>${requestScope.qna.qnaTitle}</td>
+				</tr>
+				<tr height="100">
+					<th style="vertical-align : middle;">CONTENT</th>
+					<td>${requestScope.qna.qnaContent}</td>
+				</tr>
+				<tr>
+					<th>CREATE DATE</th>
+					<td>${requestScope.qna.createDate}</td>
+				</tr>
+				<tr>
+					<th>UPDATE DATE</th>
+					<td>${requestScope.qna.updateDate}</td>
+				</tr>
 			</table>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
         <br>
           <h4 class="title">Answer</h4>
-          <form method="post" action="UpdateQnaAdminController?qnaNo=${qna.qnaNo}" id="insertAnswerForm" class="form-group">
-              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" placeholder="Your answer is not registered">${qna.qnaAnswer}</textarea>
+          <form method="post" action="UpdateQnaAdminController?qnaNo=${requestScope.qna.qnaNo}" id="insertAnswerForm" class="form-group">
+              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" placeholder="Your answer is not registered">${requestScope.qna.qnaAnswer}</textarea>
 	           <!-- 등록/수정 버튼 -->
 	          <div class="form-send">
 	          	<button id="SendBtn" type="button" class="btn btn-large btn-primary">UPDATE</button>
 	          </div>
           </form>
-          </c:forEach>
           <ul class="contact_details">
             <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
             <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>

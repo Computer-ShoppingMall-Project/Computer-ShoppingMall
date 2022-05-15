@@ -21,9 +21,9 @@ public class QnaOneAdminController extends HttpServlet {
 		// 상세보기 할 번호 받아오기
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		qnaDao = new QnaDao();
-		ArrayList<Qna> list = qnaDao.selectQnaOneAdmin(qnaNo);
+		Qna qna = qnaDao.selectQnaOneAdmin(qnaNo);
 		
-		request.setAttribute("adminQnaOneList", list);
+		request.setAttribute("qna", qna);
 		// selectAllQnaOne
 		request.getRequestDispatcher("/WEB-INF/view/adminQnaOne.jsp").forward(request, response);
 	}

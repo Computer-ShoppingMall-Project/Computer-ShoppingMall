@@ -32,9 +32,9 @@ public class UpdateQnaController extends HttpServlet {
 		
 		// 기존 QNA 내용 불러오기
 		qnaDao = new QnaDao();
-		ArrayList<Qna> list = qnaDao.selectQnaOne(customerId, qnaNo);
+		Qna qna = qnaDao.selectQnaOne(customerId, qnaNo);
 		
-		request.setAttribute("qnaList", list);
+		request.setAttribute("qna", qna);
 		request.getRequestDispatcher("/WEB-INF/view/updateQna.jsp").forward(request, response);
 	}
 	

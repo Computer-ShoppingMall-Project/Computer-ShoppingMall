@@ -57,37 +57,36 @@
         <!-- 고객문의 상세보기 -->
           <h4 class="title">DETAIL QNA</h4>
 			<table class="table">
-			<c:forEach var="qna" items="${qnaOneList}">
-					<tr>
-						<th>NO</th>
-						<td>${qna.qnaNo}</td>
-					</tr>
-					<tr>
-						<th>ID</th>
-						<td>${sessionCustomerId}</td>
-					</tr>
-					<tr>
-						<th>TITLE</th>
-						<td>${qna.qnaTitle}</td>
-					</tr>
-					<tr height="100">
-						<th style="vertical-align : middle;">CONTENT</th>
-						<td>${qna.qnaContent}</td>
-					</tr>
-					<tr>
-						<th>CREATE DATE</th>
-						<td>${qna.createDate}</td>
-					</tr>
-					<tr>
-						<th>UPDATE DATE</th>
-						<td>${qna.updateDate}</td>
-					</tr>
+				<tr>
+					<th>NO</th>
+					<td>${requestScope.qna.qnaNo}</td>
+				</tr>
+				<tr>
+					<th>ID</th>
+					<td>${sessionCustomerId}</td>
+				</tr>
+				<tr>
+					<th>TITLE</th>
+					<td>${requestScope.qna.qnaTitle}</td>
+				</tr>
+				<tr height="100">
+					<th style="vertical-align : middle;">CONTENT</th>
+					<td>${requestScope.qna.qnaContent}</td>
+				</tr>
+				<tr>
+					<th>CREATE DATE</th>
+					<td>${requestScope.qna.createDate}</td>
+				</tr>
+				<tr>
+					<th>UPDATE DATE</th>
+					<td>${requestScope.qna.updateDate}</td>
+				</tr>
 			</table>
 			<!-- 관리자 답변이 등록된 이후 고객은 QNA 수정 불가 -->
-			<c:if test="${adminAnswer != ''}">
-				<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
+			<c:if test="${adminAnswer == ''}">
+				<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${requestScope.qna.qnaNo}" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
 			</c:if>
-			<a style="display:none;" hidden="hidden" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${qna.qnaNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
+			<a style="display:none;" hidden="hidden" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${requestScope.qna.qnaNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
 			<a href="#" class="btn btn-large btn-danger" onclick="del();">delete</a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -95,7 +94,6 @@
           <h4 class="title">Answer</h4>
           <div class="form-group">
               <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" readonly="readonly" placeholder="Your answer is not registered">${adminAnswer}</textarea>
-              <div class="validate"></div>
           </div>
           <ul class="contact_details">
             <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
@@ -105,7 +103,6 @@
           <!-- contact_details -->
         </div>
       </div>
-      </c:forEach>
       <!-- end content -->
     </div>
     <!-- end container -->

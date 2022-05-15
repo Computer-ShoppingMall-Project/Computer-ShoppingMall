@@ -9,11 +9,12 @@ import java.util.*;
 public class QnaDao {
 	// 고객 QNA 등록
 	public int insertQna(Qna qna) {
-		int row = 0;
+		int row = 0; // 등록 성공시 1, 등록 실패시 0 반환 -> 디버깅, 등록확인 변수
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		conn = DButil.getConnection();
-		String sql = "INSERT INTO qna"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "INSERT INTO qna" // 고객 QNA 등록 SQL 쿼리문 String sql 변수에 대입
 				+ "(customer_id"
 				+ ", qna_title"
 				+ ", qna_content"
@@ -21,15 +22,16 @@ public class QnaDao {
 				+ ", update_date)"
 				+ " VALUES(?, ?, ?, NOW(), NOW())";
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, qna.getCustomerId());
-			stmt.setString(2, qna.getQnaTitle());
-			stmt.setString(3, qna.getQnaContent());
-			row = stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, qna.getCustomerId()); // customer_id = ?
+			stmt.setString(2, qna.getQnaTitle()); // qna_title = ?
+			stmt.setString(3, qna.getQnaContent()); // qna_content = ?
+			row = stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
@@ -39,14 +41,14 @@ public class QnaDao {
 		return row;
 	}
 	// 고객 QNA 상세보기
-	public ArrayList<Qna> selectQnaOne(String customerId, int qnaNo) {
-		ArrayList<Qna> list = new ArrayList<Qna>();
-		Qna qna = null;
+	public Qna selectQnaOne(String customerId, int qnaNo) {
+		Qna qna = null; // 상세정보 담는 Qna vo
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		conn = DButil.getConnection();
-		String sql = "SELECT"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "SELECT" // 고객 QNA 상세보기 SQL 쿼리문 String sql 변수에 대입
 				+ " qna_no qnaNo"
 				+ ", customer_id customerId"
 				+ ", qna_title qnaTitle"
@@ -57,11 +59,13 @@ public class QnaDao {
 				+ " FROM qna"
 				+ " WHERE customer_id=? AND qna_no=?";
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, customerId);
-			stmt.setInt(2, qnaNo);
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, customerId); // customer_id=?
+			stmt.setInt(2, qnaNo); // qna_no=?
 			rs = stmt.executeQuery();
-			while(rs.next()) {
+			// 데이터 변환(가공)
+			if(rs.next()) {
+				// qna vo에 값 셋팅
 				qna = new Qna();
 				qna.setQnaNo(rs.getInt("qnaNo"));
 				qna.setCustomerId(rs.getString("customerId"));
@@ -70,12 +74,12 @@ public class QnaDao {
 				qna.setQnaAnswer(rs.getString("qnaAnswer"));
 				qna.setCreateDate(rs.getString("createDate"));
 				qna.setUpdateDate(rs.getString("updateDate"));
-				list.add(qna);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				rs.close();
 				stmt.close();
 				conn.close();
@@ -83,17 +87,18 @@ public class QnaDao {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return qna;
 	}
 	// 고객별 QNA 리스트
 	public ArrayList<Qna> selectQnaList(String customerId) {
-		ArrayList<Qna> list = new ArrayList<Qna>();
-		Qna qna = null;
-		Connection conn = null;
+		ArrayList<Qna> list = new ArrayList<Qna>(); // QNA 리스트 정보를 담는 ArrayList
+		Qna qna = null; // qna vo
+		// DB변수 기본값(null)으로 선언
+		Connection conn = null; 
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		conn = DButil.getConnection();
-		String sql = "SELECT"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "SELECT" // 고객 QNA 리스트 SQL 쿼리문 String sql 변수에 대입
 				+ "	qna_no qnaNo"
 				+ "	, qna_title qnaTitle"
 				+ "	, (CASE"
@@ -105,21 +110,24 @@ public class QnaDao {
 				+ " WHERE customer_id=?"
 				+ " ORDER BY create_date DESC";
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, customerId);
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, customerId); // customer_id=?
 			rs = stmt.executeQuery();
+			// 데이터 변환(가공)
 			while(rs.next()) {
-				qna = new Qna();
+				qna = new Qna(); // qna vo 선언
+				// vo 값 셋팅
 				qna.setQnaNo(rs.getInt("qnaNo"));
 				qna.setQnaTitle(rs.getString("qnaTitle"));
 				qna.setQnaAnswer(rs.getString("qnaAnswer"));
 				qna.setCreateDate(rs.getString("createDate"));
-				list.add(qna);
+				list.add(qna); // qna vo list에 추가
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB자원 반납
 				rs.close();
 				stmt.close();
 				conn.close();
@@ -132,23 +140,28 @@ public class QnaDao {
 	
 	// 고객 QNA 수정
 	public int updateQna(Qna qna) {
-		int row = 0;
+		int row = 0;  // 등록 성공시 1, 등록 실패시 0 반환 -> 디버깅, 등록확인 변수
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		conn = DButil.getConnection();
-		String sql = "UPDATE qna SET qna_title=?, qna_content=?, update_date=NOW()"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "UPDATE qna SET " // 고객 QNA 수정 SQL 쿼리문 String sql 변수에 대입
+				+ " qna_title=?"
+				+ ", qna_content=?"
+				+ ", update_date=NOW()"
 				+ " WHERE customer_id=? AND qna_no=?";
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, qna.getQnaTitle());
-			stmt.setString(2, qna.getQnaContent());
-			stmt.setString(3, qna.getCustomerId());
-			stmt.setInt(4, qna.getQnaNo());
-			row = stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, qna.getQnaTitle()); // qna_title=?
+			stmt.setString(2, qna.getQnaContent()); // qna_content=?
+			stmt.setString(3, qna.getCustomerId()); // customer_id=?
+			stmt.setInt(4, qna.getQnaNo()); // qna_no=?
+			row = stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
@@ -159,20 +172,22 @@ public class QnaDao {
 	}
 	// QNA 삭제
 	public int deleteQna(int qnaNo, String customerId) {
-		int row = 0;
+		int row = 0; // 등록 성공시 1, 등록 실패시 0 반환 -> 디버깅, 등록확인 변수
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		conn = DButil.getConnection();
-		String sql = "DELETE FROM qna WHERE qna_no=? AND customer_id=?";
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "DELETE FROM qna WHERE qna_no=? AND customer_id=?"; // 고객 QNA 삭제 SQL 쿼리문 String sql 변수에 대입
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, qnaNo);
-			stmt.setString(2, customerId);
-			row = stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setInt(1, qnaNo); // qna_no=?
+			stmt.setString(2, customerId); // customer_id=?
+			row = stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
@@ -186,11 +201,12 @@ public class QnaDao {
 	public ArrayList<Qna> selectQnaListAdmin() {
 		ArrayList<Qna> list = new ArrayList<Qna>();
 		Qna qna = null;
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		conn = DButil.getConnection();
-		String sql = "SELECT"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "SELECT" // 관리자 QNA 목록 SQL 쿼리문 String sql 변수에 대입
 				+ " qna_no qnaNo"
 				+ ", customer_id customerId"
 				+ ", qna_title qnaTitle"
@@ -200,22 +216,25 @@ public class QnaDao {
 				+ " FROM qna"
 				+ " ORDER BY create_date DESC";
 		try {
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			rs = stmt.executeQuery();
+			// 데이터 변환(가공)
 			while(rs.next()) {
-				qna = new Qna();
+				qna = new Qna();  // qna vo 선언
+				// vo 값 셋팅
 				qna.setQnaNo(rs.getInt("qnaNo"));
 				qna.setCustomerId(rs.getString("customerId"));
 				qna.setQnaTitle(rs.getString("qnaTitle"));
 				qna.setQnaAnswer(rs.getString("qnaAnswer"));
 				qna.setCreateDate(rs.getString("createDate"));
 				qna.setUpdateDate(rs.getString("updateDate"));
-				list.add(qna);
+				list.add(qna); // list에 qna vo 추가
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				rs.close();
 				stmt.close();
 				conn.close();
@@ -226,14 +245,14 @@ public class QnaDao {
 		return list;
 	}
 	// 관리자 - QNA 상세보기
-	public ArrayList<Qna> selectQnaOneAdmin(int qnaNo) {
-		ArrayList<Qna> list = new ArrayList<Qna>();
+	public Qna selectQnaOneAdmin(int qnaNo) {
 		Qna qna = null;
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		conn = DButil.getConnection();
-		String sql = "SELECT"
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "SELECT" // 관리자 QNA 상세보기 SQL 쿼리문 String sql 변수에 대입
 				+ " qna_no qnaNo"
 				+ ", customer_id customerId"
 				+ ", qna_title qnaTitle"
@@ -244,11 +263,13 @@ public class QnaDao {
 				+ " FROM qna"
 				+ " WHERE qna_no=?";
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, qnaNo);
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setInt(1, qnaNo); // qna_no=?
 			rs = stmt.executeQuery();
-			while(rs.next()) {
-				qna = new Qna();
+			// 데이터 변환(가공)
+			if(rs.next()) {
+				qna = new Qna();  // qna vo 선언
+				// vo 값 셋팅
 				qna.setQnaNo(rs.getInt("qnaNo"));
 				qna.setCustomerId(rs.getString("customerId"));
 				qna.setQnaTitle(rs.getString("qnaTitle"));
@@ -256,12 +277,12 @@ public class QnaDao {
 				qna.setQnaAnswer(rs.getString("qnaAnswer"));
 				qna.setCreateDate(rs.getString("createDate"));
 				qna.setUpdateDate(rs.getString("updateDate"));
-				list.add(qna);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				rs.close();
 				stmt.close();
 				conn.close();
@@ -269,24 +290,26 @@ public class QnaDao {
 				e.printStackTrace();
 			}
 		}
-		return list;
+		return qna;
 	}
 	// 관리자 QNA 답변 등록 / 수정
 	public int updateQnaAdmin(String qnaAnswer, int qnaNo) {
-		int row = 0;
+		int row = 0; // 등록 성공시 1, 등록 실패시 0 반환 -> 디버깅, 등록확인 변수
+		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		conn = DButil.getConnection();
-		String sql = "UPDATE qna SET qna_answer=? WHERE qna_no=?";
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "UPDATE qna SET qna_answer=? WHERE qna_no=?"; // 관리자 QNA 답변 수정/등록 SQL 쿼리문 String sql 변수에 대입
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, qnaAnswer);
-			stmt.setInt(2, qnaNo);
-			row = stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, qnaAnswer); // qna_answer=?
+			stmt.setInt(2, qnaNo); // qna_no=?
+			row = stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				// DB 자원반납
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
