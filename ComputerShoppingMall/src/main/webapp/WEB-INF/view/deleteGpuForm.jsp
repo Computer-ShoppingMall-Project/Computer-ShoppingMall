@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>GPU</span>
                     </h4>
-         <form id="deleteGpuform" method="post" name="deleteGpuform" action="<%=request.getContextPath()%>/DeleteGpuController">
+         <form id="deleteGpuform" method="post" name="deleteGpuform" action="${pageContextrequest.contextPath}/DeleteGpuController">
              <div class="form-group">
               <input type="number" readonly name="gpuNo" class="form-control" placeholder="GpuNo">
             </div>

@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>MAINBOARD</span>
                     </h4>
-         <form id="insertMainBoardform" method="post" action="<%=request.getContextPath()%>/InsertMainboardController">
+         <form id="insertMainBoardform" method="post" action="${pageContextrequest.contextPath}/InsertMainboardController">
              <div class="form-group">
               <input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
             </div>

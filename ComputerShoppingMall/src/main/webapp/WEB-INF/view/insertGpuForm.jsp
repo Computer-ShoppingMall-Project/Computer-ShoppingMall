@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>GPU</span>
                     </h4>
-         <form id="insertGpuform" method="post" name="insertGpuform" action="<%=request.getContextPath()%>/InsertGpuController">
+         <form id="insertGpuform" method="post" name="insertGpuform" action="${pageContextrequest.contextPath}/InsertGpuController">
              <div class="form-group">
               <input type="text" name="gpuName" class="form-control" placeholder="CpuName">
             </div>

@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>CASE</span>
                     </h4>
-         <form id="UpdateCaseform" method="post" name="updatetCaseform" action="<%=request.getContextPath()%>/UpdeteCaseController">
+         <form id="UpdateCaseform" method="post" name="updatetCaseform" action="${pageContextrequest.contextPath}/UpdeteCaseController">
              <div class="form-group">
               <input type="number" readonly name="caseNo" class="form-control" placeholder="CaseNo">
             </div>

@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>POWER</span>
                     </h4>
-         <form id="insertPowerform" method="post" name="insertPowerform" action="<%=request.getContextPath()%>/InsertPowerController">
+         <form id="insertPowerform" method="post" name="insertPowerform" action="${pageContextrequest.contextPath}/InsertPowerController">
              <div class="form-group">
               <input type="text" name="powerName" class="form-control" placeholder="PowerName">
             </div>

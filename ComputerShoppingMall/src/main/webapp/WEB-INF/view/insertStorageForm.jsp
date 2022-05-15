@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>STORAGE</span>
                     </h4>
-         <form id="insertStorageform" method="post" name="insertStorageform" action="<%=request.getContextPath()%>/InsertStorageController">
+         <form id="insertStorageform" method="post" name="insertStorageform" action="${pageContextrequest.contextPath}/InsertStorageController">
              <div class="form-group">
               <input type="text" name="storageName" class="form-control" placeholder="StorageName">
             </div>

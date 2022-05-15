@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>CPU</span>
                     </h4>
-         <form id="insertCpuform" method="post" name="insertCpuform" action="<%=request.getContextPath()%>/InsertCpuController">
+         <form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
             <div class="form-group">
               <input type="text" name="cpuName" class="form-control" placeholder="CpuName">
             </div>
