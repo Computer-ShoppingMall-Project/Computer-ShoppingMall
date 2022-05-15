@@ -64,7 +64,7 @@
 					</tr>
 					<tr>
 						<th>ID</th>
-						<td>${customerId}</td>
+						<td>${sessionCustomerId}</td>
 					</tr>
 					<tr>
 						<th>TITLE</th>
@@ -83,7 +83,10 @@
 						<td>${qna.updateDate}</td>
 					</tr>
 			</table>
-			<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
+			<!-- 관리자 답변이 등록된 이후 고객은 QNA 수정 불가 -->
+			<c:if test="${adminAnswer != ''}">
+				<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" class="btn btn-large btn-primary">update</a> <!-- 수정 -->
+			</c:if>
 			<a style="display:none;" hidden="hidden" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${qna.qnaNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a> <!-- 삭제 -->
 			<a href="#" class="btn btn-large btn-danger" onclick="del();">delete</a>
         </div>

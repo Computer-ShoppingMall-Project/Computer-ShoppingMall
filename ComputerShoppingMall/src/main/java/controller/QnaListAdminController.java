@@ -33,7 +33,7 @@ public class QnaListAdminController extends HttpServlet {
 		*/
 		
 		qnaDao = new QnaDao();
-		ArrayList<Qna> list = qnaDao.selectAllQnaList();
+		ArrayList<Qna> list = qnaDao.selectQnaListAdmin();
 		request.setAttribute("qnaList", list);
 		// 관리자 QNA (모든 고객의 문의 모아보기)
 		request.getRequestDispatcher("/WEB-INF/view/adminQnaList.jsp").forward(request, response);

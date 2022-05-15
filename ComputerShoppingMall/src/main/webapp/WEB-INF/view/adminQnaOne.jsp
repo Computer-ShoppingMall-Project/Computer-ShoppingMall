@@ -36,82 +36,97 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript">
-  $( document ).ready(function() { 				// 이벤트 바인딩 시작
-      $('#SendBtn').on('click', function() { 		// 전송 버튼 클릭시 이벤트 바인딩
-          let params ={};
-      	// params에 제목, 내용 값 세팅
-          params.qnaTitle = $('#qnaTitle').val();
-          params.qnaContent = $('#qnaContent').val();
-          // 유효성 검사 boolean 변환 
-          let vali = validate( params );
-          
-          
-          vali ? inserQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
+	//이벤트 바인딩 시작
+	$( document ).ready(function() { 
+    $('#SendBtn').on('click', function() { // 버튼 클릭시 이벤트 바인딩
+    	let params ={};
+      	// params에 답변 값 세팅
+        params.qnaAnswer = $('#qnaAnswer').val();
+        // 유효성 검사 boolean 변환 
+        let vali = validate( params );
+        
+        vali ? insertAnswerForm.submit() : $('#qnaAnswer').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
       });
   });
   // 이벤트 바인딩 끝
 
   // 유효성 체크 function
-  function validate(params) {
-  	
-  	if(NullVal(params.qnaTitle)){
-  	    alert('Enter your title');
-  	    return false;
-  	    
-  	} if(NullVal(params.qnaContent)){
-  	    alert('Enter your content');
-  	    return false;
-  	    
-  	} if(params.qnaTitle.length > 50 ){
-  	    alert('Title can be up to 50 characters long');
-  	    return false;
-  	} 
-  	
-  return true;
-  };
+	function validate(params) {  	
+		if(NullVal(params.qnaAnswer)){
+	  		alert('Enter your Answer');
+	  		return false;   
+	  	}	
+	  return true;
+	  };
+	  
   // 공백, null, 빈값 검사 function
-  function NullVal( param ){
-  if (( null == param ) || ( '' == param ) || ( param === undefined ) || ( param === "undefined" ) ) {
-      return true;
-  }
-  return false;
-  }
+	function NullVal( param ){
+		if (( null == param ) || ( '' == param ) || ( param === undefined ) || ( param === "undefined" ) ) {
+	    	return true;
+	}
+	return false;
+	}
+</script>
 </head>
 <body>
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <c:import url="adminHeader.jsp"></c:import>
 
   <section class="section1">
     <div class="container clearfix">
       <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6 center-block" style="float: none; margin:100 auto;">
-        <c:forEach var="qna" items="${qnaList}">
+        <div class="col-lg-6 col-md-6 col-sm-6">
         <!-- QNA 리스트로 돌아가기 -->
-        <a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}">back</a>
-
-        <!-- 고객문의 폼 -->
-          <h4 class="title">update QNA</h4>
-          <form class="contact-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${qna.qnaNo}" method="POST">
-
-            <div class="form-group">
-              <input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" value="${qna.qnaTitle}" data-rule="required" data-msg="Please enter a valid title">
-              <div class="validate"></div>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="qnaContent" id="qnaContent" placeholder="Contact Message" rows="5" data-rule="required" data-msg="Please write something for us">${qna.qnaContent}</textarea>
-              <div class="validate"></div>
-            </div>
-            <div class="form-send">
-              <button type="submit" class="btn btn-large btn-primary">Send</button>
-            </div>
+       	<a href="${pageContext.request.contextPath}/QnaListAdminController">back</a>
+        <!-- 고객문의 상세보기 -->
+          <h4 class="title">QNA ANSWER</h4>
+			<table class="table">
+			<c:forEach var="qna" items="${adminQnaOneList}">
+					<tr>
+						<th>NO</th>
+						<td>${qna.qnaNo}</td>
+					</tr>
+					<tr>
+						<th>ID</th>
+						<td>${qna.customerId}</td>
+					</tr>
+					<tr>
+						<th>TITLE</th>
+						<td>${qna.qnaTitle}</td>
+					</tr>
+					<tr height="100">
+						<th style="vertical-align : middle;">CONTENT</th>
+						<td>${qna.qnaContent}</td>
+					</tr>
+					<tr>
+						<th>CREATE DATE</th>
+						<td>${qna.createDate}</td>
+					</tr>
+					<tr>
+						<th>UPDATE DATE</th>
+						<td>${qna.updateDate}</td>
+					</tr>
+			</table>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+        <br>
+          <h4 class="title">Answer</h4>
+          <form method="post" action="UpdateQnaAdminController?qnaNo=${qna.qnaNo}" id="insertAnswerForm" class="form-group">
+              <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" placeholder="Your answer is not registered">${qna.qnaAnswer}</textarea>
+	           <!-- 등록/수정 버튼 -->
+	          <div class="form-send">
+	          	<button id="SendBtn" type="button" class="btn btn-large btn-primary">UPDATE</button>
+	          </div>
           </form>
           </c:forEach>
+          <ul class="contact_details">
+            <li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
+            <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
+            <li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
+          </ul>
+          <!-- contact_details -->
         </div>
       </div>
       <!-- end content -->
@@ -121,7 +136,7 @@
   <!-- end section -->
 
   <!-- footer적용 -->
-  <jsp:include page="footer.jsp"></jsp:include>
+  <c:import url="footer.jsp"></c:import>
   
   <div class="dmtop">Scroll to Top</div>
 

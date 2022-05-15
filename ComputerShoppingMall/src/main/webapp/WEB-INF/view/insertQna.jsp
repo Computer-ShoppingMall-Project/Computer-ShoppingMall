@@ -47,53 +47,33 @@
           // 유효성 검사 boolean 변환 
           let vali = validate( params );
           
-          
           vali ? inserQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
       });
   });
   // 이벤트 바인딩 끝
 
   // 유효성 체크 function
-  function validate(params) {
-  	
-  	if(NullVal(params.qnaTitle)){
-  	    alert('제목을 입력해주세요.');
-  	    return false;
-  	    
-  	} if(NullVal(params.qnaContent)){
-  	    alert('내용을 입력해주세요.');
-  	    return false;
-  	    
-  	} if(params.qnaTitle.length > 50 ){
-  	    alert('제목은 최대 50자 까지 가능합니다.');
-  	    return false;
-  	} 
-  	
-  return true;
-  };
+	function validate(params) {  	
+		if(NullVal(params.qnaTitle)){
+	  		alert('Enter your Answer');
+	  		return false;   
+	  	} if(NullVal(params.qnaContent)){
+	  	  	alert('Enter your Answer');
+	  	    return false;
+	  	} if(params.qnaTitle.length > 50 ){
+	  	    alert('Title can be up to 50 characters long');
+	  	    return false;
+	  	}   	
+	  return true;
+	  };
+	  
   // 공백, null, 빈값 검사 function
-  function NullVal( param ){
-  if (( null == param ) || ( '' == param ) || ( param === undefined ) || ( param === "undefined" ) ) {
-      return true;
-  }
-  return false;
-  }
-
-  
-  
-  /*
-  function validate(){
-	  //alert('비어있네요');
-	  //document.getElementById('inserQnaForm').submit();
-	  
-	  var customerId = document.getElementById('customerId').value;
-	  var qnaTitle = document.getElementById('qnaTitle').value;
-	  var qnaContent = document.getElementById('qnaContent').value;
-	  
-	  alert(customerId + "/" + qnaTitle + "/" + qnaContent);
-	  
-  }
-  */
+	function NullVal( param ){
+		if (( null == param ) || ( '' == param ) || ( param === undefined ) || ( param === "undefined" ) ) {
+	    	return true;
+	}
+	return false;
+	}
   </script>
 </head>
 <body>
@@ -136,7 +116,6 @@
   <!-- end section -->
 
   <!-- footer적용 -->
-
   <c:import url="footer.jsp"></c:import>
   <div class="dmtop">Scroll to Top</div>
 

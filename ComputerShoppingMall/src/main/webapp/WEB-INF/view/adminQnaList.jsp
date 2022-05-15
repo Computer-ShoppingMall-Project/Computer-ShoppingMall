@@ -1,12 +1,10 @@
-<%@page import="vo.Qna"%>
-<%@page import="java.util.ArrayList"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MaxiBiz Bootstrap Business Template</title>
+  <title>상세보기/답변/수정</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -40,8 +38,9 @@
   ======================================================= -->
 </head>
 <body>
+<!-- 관리자 답변/답변수정/고객 질문 상세보기 페이지 -->
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="adminHeader.jsp"></jsp:include>
 
   <section class="post-wrapper-top">
     <div class="container">
@@ -72,46 +71,30 @@
             </tr>
           </thead>
           <tbody>
-			<%
-				ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("qnaList");
-				// 답변이 없을 경우, 답변 미등록으로 표시, 등록되어 있을 경우 7자+...까지 보여주기
-				for(Qna qna : list) {
-			%>
-					<tr>
-						<td><%=qna.getQnaNo()%></td>
-						<td><%=qna.getCustomerId()%></td>
-						<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=<%=qna.getQnaNo()%>"><%=qna.getQnaTitle()%></a></td>
-						<td><%=qna.getCreateDate()%></td>
-						<td><%=qna.getUpdateDate()%></td>
-						<td>
-						<%
-							if(qna.getQnaAnswer() == null) {
-						%>
-								<a href="${pageContext.request.contextPath}/InsertQnaAminController">ANSWER</a>
-						<%
-							} else {
-						%>
-								<a href="${pageContext.request.contextPath}/UpdateQnaAdminController">UPDATE</a>
-						<%
-							}
-						%>
-						</td>
-					</tr>	
-			<%
-				}
-			%>
+			<c:forEach var="qna" items="${qnaList}">
+				<tr>
+					<td>${qna.qnaNo}</td>
+					<td>${qna.customerId}</td>
+					<td><a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></td>
+					<td>${qna.createDate}</td>
+					<td>${qna.updateDate}</td>
+					<td>
+					<!-- 미등록 답변은 INSERT로 표시, 등록된 답변은 UPDATE로 표시 -->
+						<c:choose>
+							<c:when test="${qna.qnaAnswer == null}">
+								<a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}" class="text-danger">INSERT</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}" >UPDATE</a>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					</tr>
+			</c:forEach>
           </tbody>
         </table>
       <!-- end content -->
-
-          <!-- contact_details -->
-        </div>
-
-
       </div>
-      <!-- end sidebar -->
-    </div>
-    <!-- end container -->
   </section>
   <!-- end section -->
 
