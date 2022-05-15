@@ -44,7 +44,7 @@
     <div class="container">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
-          <li><a href="index.jsp">Home</a></li>
+          <li><a href="${pageContext.request.contextPath}index.jsp">Home</a></li>
           <li>Login</li>
         </ul>
         <h2>LOGIN</h2>
@@ -74,7 +74,7 @@
           <h4 class="title">
                        <span>Login Form</span>
                     </h4>
-          <form id="loginform" method="post" name="loginform" action="<%=request.getContextPath()%>/LoginController">
+          <form id="loginform" method="post" name="loginform" action="${pageContext.request.contextPath}/LoginController">
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -96,7 +96,7 @@
             </div>
             <div class="form-group">
               <button type="submit" class="button">로그인</button>
-              <a href="<%=request.getContextPath()%>/InsertMemberController" class="button" style="background-color: rgb(11, 201, 4);">회원가입</a>
+              <a href="${pageContext.request.contextPath}/InsertMemberController" class="button" style="background-color: rgb(11, 201, 4);">회원가입</a>
             </div>
           </form>
         </div>

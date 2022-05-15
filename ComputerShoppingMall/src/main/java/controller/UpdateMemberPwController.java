@@ -14,6 +14,8 @@ import vo.Customer;
 
 @WebServlet("/UpdateMemberPwController")
 public class UpdateMemberPwController extends HttpServlet {	
+		// 전역변수 선언
+		private MemberDao dao;
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// 접속허가체크
 			HttpSession session = request.getSession();
@@ -31,7 +33,7 @@ public class UpdateMemberPwController extends HttpServlet {
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
 			// updateMemberForm.jsp 생성 작업 필요
-			request.getRequestDispatcher("/WEB-INF/view/UpdateMemberPw.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/updateMemberPw.jsp").forward(request, response);
 		}
 		
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -78,7 +80,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		   }
 		   
 		   // dao.updateMemberPasswordByIdPw
-		   MemberDao dao = new MemberDao();
+		   dao = new MemberDao();
 		   // 회원정보 수정됐는지... 확인코드
 		   int row = dao.updateMemberPasswordByIdPw(customer, newCustomerPw);
 		   System.out.print(row + " <-- row UpdateMemberPwController.dopost");

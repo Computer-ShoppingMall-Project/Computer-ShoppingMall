@@ -38,7 +38,7 @@
   ======================================================= -->
 </head>
 <body>
-  <!-- header적용 -->
+  <!-- header적용. -->
   <jsp:include page="header.jsp"></jsp:include>
 
   <section class="post-wrapper-top">
@@ -46,9 +46,9 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcrumb">
           <li><a href="index.jsp">Home</a></li>
-          <li>My Basket</li>
+          <li>Register</li>
         </ul>
-        <h2>My Basket</h2>
+        <h2>REGISTER</h2>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <!-- search -->
@@ -68,39 +68,77 @@
 
   <section class="section1">
     <div class="container clearfix">
-    <a href="${pageContext.request.contextPath}/InsertMyBasketController" type="button" class="btn btn-outline-primary">추가구매</a>
-      <div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
-			<table class="table table-striped checkout" data-effect="fade">
-				<thead>
-			<tr>
-				<th>부품 이름</th>
-				<th>부품 번호</th>
-				<th>가격</th>
-				<th>수량</th>
-				<th>저장 날짜</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-		<c:forEach var="basket" items="${BasketList}">
-				<tr>
-					<td>${basket.categoryName}</td>
-					<td>${basket.categoryNumber}</td>
-					<td>${basket.categoryPrice}</td>
-					<td>${basket.categoryQuantity}</td>
-					<td>${basket.createDate}</td>	
-					<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?=basketNo=${basket.basketNo}">삭제</a></td>	
-				</tr>
-		</c:forEach>	
-		</tbody>
-	</table>
-		<a href="${pageContext.request.contextPath}/InsertCheckoutController" type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
+      <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <h4 class="title">
+                       <span>Why Join Us?</span>
+                    </h4>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since the 1500s..</p>
+          <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <h4 class="title">
+                       <span>Benefits</span>
+                    </h4>
+          <ul class="check">
+            <li><a href="#">5+ homepage style (check features menu)</a></li>
+            <li><a href="#">Compatible any eCommerce solutions</a></li>
+            <li><a href="#">Limitless color combinations</a></li>
+            <li><a href="#">Limitless page templates (15+ custom pages)</a></li>
+            <li><a href="#">100% responsive layout design</a></li>
+            <li><a href="#">Awesome slideshows for your contents</a></li>
+            <li><a href="#">Super awesome portfolio sections</a></li>
+            <li><a href="#">700+ custom font icons included</a></li>
+          </ul>
+        </div>
+        <!-- end login -->
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <h4 class="title">
+                       <span>Register Form</span>
+          </h4>
+          <form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
+            <div class="form-group">
+              <input type="text" name="customerId" class="form-control" placeholder="ID">
+            </div>
+             <div class="form-group">
+              <input type="password" name="customerPw1" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <input type="password" name="customerPw2" class="form-control" placeholder="Re-enter password">
+            </div>
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" placeholder="Name">
+            </div>
+             <div class="form-group">
+              <input type="text" name="nickname" class="form-control" placeholder="Nickname">
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="number" name="phone" class="form-control" placeholder="Phone number">
+            </div>
+            <div class="form-group">
+              <input type="number" name="addressId" class="form-control" placeholder="Address">
+            </div>
+            <div class="form-group">
+              <input type="text" name="detailAddress" class="form-control" placeholder="Detail address">
+            </div>
+            <div class="form-group">
+              <input type="submit" class="button" value="Register an account">
+            </div>
+          </form>
+        </div>
+        <!-- end register -->
       </div>
       <!-- end content -->
     </div>
     <!-- end container -->
   </section>
   <!-- end section -->
+
 
   <!-- footer적용 -->
   <jsp:include page="footer.jsp"></jsp:include>
@@ -124,5 +162,6 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+
 </body>
 </html>

@@ -14,6 +14,8 @@ import vo.Customer;
 //
 @WebServlet("/InsertMemberController")
 public class InsertMemberController extends HttpServlet {
+	// 전역변수 선언
+	private MemberDao dao;
 	// doGet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 이미 로그인 상태면 IndexController 호출
@@ -23,7 +25,7 @@ public class InsertMemberController extends HttpServlet {
 			return;
 		}
 		// 로그인 상태가 아니면 insertMemberForm.jsp 호출
-		request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/insertMember.jsp").forward(request, response);
 	}
 	
 	// doPost
@@ -73,7 +75,7 @@ public class InsertMemberController extends HttpServlet {
 	    System.out.println(c.toString() + "<-- insertMemberController.dopost");
 	    
 	    // dao.insertMember 호출
-	    MemberDao dao = new MemberDao();
+	    dao = new MemberDao();
 	    int row = dao.insertMember(c);
 	    
 	    // 회원 가입 성공 check코드

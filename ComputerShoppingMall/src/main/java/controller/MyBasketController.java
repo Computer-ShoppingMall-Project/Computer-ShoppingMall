@@ -27,13 +27,13 @@ public class MyBasketController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-
+		//
 		request.setCharacterEncoding("utf-8");
 		// dao.selectMyBasket
 		dao = new MyBasketDao();
 		ArrayList<Basket> list = dao.selectMyBasket(customerId);
 		
 		request.setAttribute("BasketList", list);
-		request.getRequestDispatcher("/WEB-INF/view/MyBasket.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/myBasket.jsp").forward(request, response);
 	}
 }

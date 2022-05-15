@@ -14,6 +14,8 @@ import vo.Customer;
 
 @WebServlet("/DeleteMemberController")
 public class DeleteMemberController extends HttpServlet {
+	// 전역변수 선언
+	private MemberDao dao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// session 값 요청
 		HttpSession session = request.getSession();
@@ -26,7 +28,7 @@ public class DeleteMemberController extends HttpServlet {
 	      }
 	    // 회원탈퇴 Form 호출 -> CustomerId 이용
 	    request.setAttribute("customerId", sessionCustomerId);
-	    request.getRequestDispatcher("/WEB-INF/view/DeleteMember.jsp").forward(request, response);
+	    request.getRequestDispatcher("/WEB-INF/view/deleteMember.jsp").forward(request, response);
 	}	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +54,7 @@ public class DeleteMemberController extends HttpServlet {
 	    // 디버깅
 	    System.out.println(customer.toString() + "DeleteMemberController.dopost");
 	    // dao.deleteMember request
-	    MemberDao dao = new MemberDao();
+	    dao = new MemberDao();
 	    int row = dao.deleteMember(customer);
 	    
 	    // 회원 탈퇴 성공 check 코드
