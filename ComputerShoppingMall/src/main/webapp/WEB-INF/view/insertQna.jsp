@@ -36,6 +36,7 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript">
   $( document ).ready(function() { 				// 이벤트 바인딩 시작
@@ -55,13 +56,22 @@
   // 유효성 체크 function
 	function validate(params) {  	
 		if(NullVal(params.qnaTitle)){
-	  		alert('Enter your Answer');
+			Swal.fire({
+				  icon: 'error',
+				  text: 'Enter your Answer'
+				});
 	  		return false;   
 	  	} if(NullVal(params.qnaContent)){
-	  	  	alert('Enter your Answer');
+	  		Swal.fire({
+				  icon: 'error',
+				  text: 'Enter your Answer'
+				});
 	  	    return false;
 	  	} if(params.qnaTitle.length > 50 ){
-	  	    alert('Title can be up to 50 characters long');
+	  		Swal.fire({
+				  icon: 'error',
+				  text: 'Title can be up to 50 characters long'
+				});
 	  	    return false;
 	  	}   	
 	  return true;
