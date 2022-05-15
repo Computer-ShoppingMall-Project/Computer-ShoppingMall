@@ -14,22 +14,25 @@ import dao.GpuDao;
 public class DeleteGpuController extends HttpServlet {
     private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 변수 등록
 		int gpuNo = 0;
+		
 		// request값 받아오기
 		if(request.getParameter("gpuNo")!= null && request.getParameter("gpuNo") != "") {
 			gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
 		}
+		
 		// 디버깅
 		System.out.println(gpuNo+"<-gpuNo");
 		

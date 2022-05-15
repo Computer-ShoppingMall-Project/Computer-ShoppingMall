@@ -13,6 +13,7 @@ import vo.Gpu;
 public class UpdateGpuController extends HttpServlet {
 	private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.getRequestDispatcher("/WEB-INF/view/deleteGpuForm.jsp").forward(request, response);
 	}
 

@@ -16,6 +16,7 @@ import vo.Cooler;
 public class UpdateCoolerController extends HttpServlet {
 	private CoolerDao coolerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.getRequestDispatcher("/WEB-INF/view/deleteCoolerForm.jsp").forward(request, response);
 	}
 

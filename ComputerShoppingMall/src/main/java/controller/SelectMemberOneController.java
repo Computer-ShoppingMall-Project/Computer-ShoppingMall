@@ -14,23 +14,22 @@ import vo.Customer;
 
 @WebServlet("/SelectMemberOneController")
 public class SelectMemberOneController extends HttpServlet {
-	// 전역변수 선언
 	private MemberDao dao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			// 접속허가체크 -> 새션값 요청
-			HttpSession session = request.getSession();
-			String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-			// 로그인 확인
-			if(sessionCustomerId == null) {
-				response.sendRedirect(request.getContextPath() + "/LoginController");
-				System.out.println("로그아웃 상태");
-				return;
-			}
-			
-			dao = new MemberDao();
-			Customer customer = dao.selectMemberOne(sessionCustomerId);
-			
-			request.setAttribute("customer", customer);
-			request.getRequestDispatcher("/WEB-INF/view/memberOne.jsp").forward(request, response);
+		// 접속허가체크 -> 새션값 요청
+		HttpSession session = request.getSession();
+		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
+		// 로그인 확인
+		if(sessionCustomerId == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			System.out.println("로그아웃 상태");
+			return;
+		}
+		
+		dao = new MemberDao();
+		Customer customer = dao.selectMemberOne(sessionCustomerId);
+		
+		request.setAttribute("customer", customer);
+		request.getRequestDispatcher("/WEB-INF/view/memberOne.jsp").forward(request, response);
 	}
 }

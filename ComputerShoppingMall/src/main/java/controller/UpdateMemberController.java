@@ -14,7 +14,6 @@ import vo.Customer;
 
 @WebServlet("/UpdateMemberController")
 public class UpdateMemberController extends HttpServlet {	
-		// 전역변수 선언
 		private MemberDao dao;
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// 접속허가체크
@@ -28,17 +27,15 @@ public class UpdateMemberController extends HttpServlet {
 			
 			// vo
 			Customer customer = new Customer();
+			
 			// dao.selectMemberOne
 			MemberDao dao = new MemberDao();
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
-			// updateMemberForm.jsp 생성 작업 필요
 			request.getRequestDispatcher("/WEB-INF/view/updateMember.jsp").forward(request, response);
 		}
 		
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   // 한글 깨짐 방지 인코딩
-		   request.setCharacterEncoding("UTF-8");
 		   // 접속허가체크
 		   HttpSession session = request.getSession();
 		   String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
@@ -73,17 +70,20 @@ public class UpdateMemberController extends HttpServlet {
 		   // 회원정보 수정됐는지... 확인코드
 		   int row = dao.updateMember(customer);
 		   System.out.print(row + " <-- row UpdateMemberController.dopost");
+		   
 		   // 1) row값이 1이면 회원정보 수정 성공 -> SelectMemberOneController 호출
 		   if(row == 1) {
 			   System.out.print("수정성공! UpdateMemberController.doposdt");
 			   response.sendRedirect(request.getContextPath() + "/SelectMemberOneController");
 			   return;
 		   }
+		   
 		   // 2) row값이 0이면 회원정보 수정 오류 -> UpdateMemberController 호출
 		   else if(row == 0) {
 		    	System.out.println("수정실패! UpdateMemberController.dopost");
 		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberController?msg=fail");
 		   } 
+		   
 		   // 3) row값이 -1이면 SQL 오류
 		   else if (row == -1) {
 		    	System.out.println("예외 발생 UpdateMemberController.dopost");

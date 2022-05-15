@@ -17,25 +17,26 @@ import vo.Mainboard;
 public class InsertCoolerController extends HttpServlet {
 	private CoolerDao insertcoolerDao; 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/insertCoolerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-1111111111111111");
+		
 		// 로그인 상태가 아니거나 관리자아이디가 아니면 로그인창으로 이동
 		if(sessionCustomerId == null) {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
+		
 		// 변수등록
 		String coolerName = null;
 		String companyName = null;
@@ -87,7 +88,7 @@ public class InsertCoolerController extends HttpServlet {
 		c.setCompanyName(companyName);
 		c.setMemo(memo);
 		
-		// DAO
+		// dao
 		insertcoolerDao = new CoolerDao();
 		insertcoolerDao.insertCooler(c);
 		

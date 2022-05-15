@@ -28,17 +28,17 @@ public class UpdateMemberPwController extends HttpServlet {
 			
 			// vo
 			Customer customer = new Customer();
+			
 			// dao.selectMemberOne
 			MemberDao dao = new MemberDao();
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
+			
 			// updateMemberForm.jsp 생성 작업 필요
 			request.getRequestDispatcher("/WEB-INF/view/updateMemberPw.jsp").forward(request, response);
 		}
 		
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   // 한글 깨짐 방지 인코딩
-		   request.setCharacterEncoding("UTF-8");
 		   // 접속허가체크
 		   HttpSession session = request.getSession();
 		   String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
@@ -65,6 +65,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		   customer.setPhone(request.getParameter("phone"));
 		   customer.setAddressId(Integer.parseInt(request.getParameter("addressId")));
 		   customer.setDetailAddress(request.getParameter("detailAddress"));
+		 
 		   // 디버깅
 		   System.out.println(customer.toString() + " <-- UpdateMemberPwController.dopost");
 		   
@@ -81,20 +82,24 @@ public class UpdateMemberPwController extends HttpServlet {
 		   
 		   // dao.updateMemberPasswordByIdPw
 		   dao = new MemberDao();
+		  
 		   // 회원정보 수정됐는지... 확인코드
 		   int row = dao.updateMemberPasswordByIdPw(customer, newCustomerPw);
 		   System.out.print(row + " <-- row UpdateMemberPwController.dopost");
+		  
 		   // 1) row값이 1이면 회원정보 수정 성공 -> SelectMemberOneController 호출
 		   if(row == 1) {
 			   System.out.print("수정성공! UpdateMemberPwController.doposdt");
 			   response.sendRedirect(request.getContextPath() + "/SelectMemberOneController");
 			   return;
 		   }
+		  
 		   // 2) row값이 0이면 회원정보 수정 오류 -> UpdateMemberController 호출
 		   else if(row == 0) {
 		    	System.out.println("수정실패! UpdateMemberPwController.dopost");
 		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberPwController?msg=failrenewpassword");
 		   } 
+		  
 		   // 3) row값이 -1이면 SQL 오류
 		   else if (row == -1) {
 		    	System.out.println("예외 발생 UpdateMemberPwController.dopost");

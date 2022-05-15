@@ -11,17 +11,15 @@ import javax.servlet.http.HttpSession;
 public class AdminSingleProductController extends HttpServlet {
       	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션 확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/adminSingleProduct.jsp").forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.getRequestDispatcher("/WEB-INF/view/adminSingleProduct.jsp").forward(request, response);
 	}
 
 }

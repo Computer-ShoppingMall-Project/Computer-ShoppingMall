@@ -16,7 +16,6 @@ import vo.Checkout;
 @WebServlet("/CheckoutController")
 public class CheckoutController extends HttpServlet {
 	private CheckoutDao dao;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -27,7 +26,6 @@ public class CheckoutController extends HttpServlet {
 			return;
 		}
 
-		request.setCharacterEncoding("utf-8");
 	
 		request.setAttribute("customerId", customerId);
 		request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);

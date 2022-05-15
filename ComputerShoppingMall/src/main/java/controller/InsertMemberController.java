@@ -14,9 +14,7 @@ import vo.Customer;
 //
 @WebServlet("/InsertMemberController")
 public class InsertMemberController extends HttpServlet {
-	// 전역변수 선언
 	private MemberDao dao;
-	// doGet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 이미 로그인 상태면 IndexController 호출
 		HttpSession session = request.getSession();
@@ -28,10 +26,7 @@ public class InsertMemberController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/insertMember.jsp").forward(request, response);
 	}
 	
-	// doPost
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 인코딩
-		request.setCharacterEncoding("UTF-8");
 		// 이미 로그인 상태면 IndexController 호출
 		HttpSession session = request.getSession();
 		if(session.getAttribute("sessionCustomerId") != null) {
@@ -71,6 +66,7 @@ public class InsertMemberController extends HttpServlet {
 	    c.setPhone(request.getParameter("phone"));
 	    c.setAddressId(Integer.parseInt(request.getParameter("addressId")));
 	    c.setDetailAddress(request.getParameter("detailAddress"));
+	    
 	    // 디버깅
 	    System.out.println(c.toString() + "<-- insertMemberController.dopost");
 	    
@@ -85,12 +81,13 @@ public class InsertMemberController extends HttpServlet {
 	    	response.sendRedirect(request.getContextPath() + "/LoginController");
 	    	return;
 	    }
+	    
 	    // 2) 회원가입 실패시(row값이 0이면...), 가입실패 + InsertMemberController 호출
 	    else if(row == 0) {
 	    	System.out.println("가입실패 insertMemberController.dopost");
 	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=insertmemberfail");
-
 	    }
+	    
 	    // 3) row값이 -1이면(default 값) SQL오류
 	    else if (row == -1) {
 	    	System.out.println("예외 발생 insertMemberController.dopost");

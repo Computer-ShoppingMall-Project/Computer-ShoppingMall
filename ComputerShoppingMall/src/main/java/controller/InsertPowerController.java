@@ -17,17 +17,17 @@ import vo.Power;
 public class InsertPowerController extends HttpServlet {
 	private PowerDao powerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
 		// 로그인 상태가 아니면 로그인창으로 이동
@@ -35,6 +35,7 @@ public class InsertPowerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
+		
 		// 변수등록
 		String powerName = null;
 		String ratedPower = null;
@@ -66,7 +67,7 @@ public class InsertPowerController extends HttpServlet {
 		System.out.println(quantity+"<--quantity");
 		System.out.println(memo+"<--memo");
 		
-		// 
+		// vo
 		Power p = new Power();
 		p.setPowerName(powerName);
 		p.setRatedPower(ratedPower);
@@ -74,6 +75,8 @@ public class InsertPowerController extends HttpServlet {
 		p.setQuantity(quantity);
 		p.setMemo(memo);
 		
+		
+		// dao
 		powerDao = new PowerDao();
 		powerDao.insertPower(p);
 		

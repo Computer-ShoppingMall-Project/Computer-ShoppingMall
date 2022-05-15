@@ -15,22 +15,25 @@ import dao.RamDao;
 public class DeleteRamController extends HttpServlet {
 	private RamDao ramDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 변수 등록
 		int ramNo = 0;
+		
 		// request값 받아오기
 		if(request.getParameter("ramNo")!= null && request.getParameter("ramNo") != "") {
 			ramNo = Integer.parseInt(request.getParameter("ramNo"));
 		}
+		
 		// 디버깅
 		System.out.println(ramNo+"<-ramNo");
 		
