@@ -30,9 +30,9 @@
 		<div class="site-header clearfix">
 			<div class="col-lg-3 col-md-3 col-sm-14 title-area">
 				<div class="site-title" id="title">
-					<a href="index.jsp" title="">
+					<a href="IndexController" title="">
 						<h4>
-							MAXI<span>BIZ</span>
+							Red<span>Velvet</span>
 						</h4>
 					</a>
 				</div>
@@ -43,7 +43,7 @@
 					<div class="container clearfix">
 						<ul id="jetmenu" class="jetmenu blue">
 							<li><a href="IndexController">Home</a></li>
-							<li class="active"><a href="#">Pages</a>
+							<li><a href="#">Pages</a>
 								<ul class="dropdown">
 									<li><a href="Controller404">404 Error</a></li>
 									<li><a href="leftSidebarController">Left Sidebar</a></li>
