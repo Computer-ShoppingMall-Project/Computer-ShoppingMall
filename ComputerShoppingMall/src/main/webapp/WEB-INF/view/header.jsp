@@ -47,7 +47,15 @@
 								<ul class="dropdown">
 									<li><a href="Controller404">404 Error</a></li>
 									<li><a href="leftSidebarController">Left Sidebar</a></li>
-									<li><a href="LoginController">Login</a></li>
+									<li>
+									<c:choose>
+										<c:when test="${sessionCustomerId == null}">
+											<a href="${pageContext.request.contextPath}/LoginController">Login</a>
+										</c:when>
+										<c:otherwise>
+											<a href="${pageContext.request.contextPath}/LogoutController">Logout</a>
+										</c:otherwise>
+									</c:choose>
 									<li><a href="RegisterController">Register</a></li>
 									<li><a href="QnaListController">QNA</a></li>
 								</ul>
