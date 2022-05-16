@@ -33,36 +33,28 @@ public class InsertMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/IndexController");
 			return;
 		}
-		/* 나중에 추가 작업 예정 **
-	    // null check
-		// 요청값에 null있으면 UpdateMemberController 호출
-	    if(request.getParameter("name") == null || request.getParameter("age") == null || request.getParameter("memberId") == null || request.getParameter("gender") == null) {
-	    	System.out.println("null insertMembercontroller.dopost");
-	    	response.sendRedirect(request.getContextPath() + "/UpdateMemberController?msg=null");
-	    	return;
-	    }
-	    */
-	    
 	    // 요청값 처리
 		if (request.getParameter("customerId") == null || request.getParameter("name") == null
 				|| request.getParameter("nickname") == null || request.getParameterValues("email") == null
 				|| request.getParameter("phone") == null || request.getParameter("addressId") == null
-				|| request.getParameter("detailAddress") == null) {
-			response.sendRedirect(request.getContextPath() + "/InsertMemberController");
+				|| request.getParameter("detailAddress") == null || request.getParameter("customerPw1") == null || request.getParameter("customerPw2") == null) {
+			response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=null");
 			return;
 		}
+		
 	    // customerPw = 비밀번호 선언후 초기화
 	    String customerPw = null; 
 	    if(request.getParameter("customerPw1") != null && request.getParameter("customerPw2") != null &&!request.getParameter("customerPw1").equals("") && request.getParameter("customerPw1").equals(request.getParameter("customerPw2"))) {
 	    // null, 빈칸이 아닌 비밀번호가 둘이 일치한다면 customerPw에 저장
 	     customerPw = request.getParameter("customerPw1");
 	    } 
+	    /*
 	    // null, 빈칸은 아니지만 customerPw1, customerPw2가 일치하지 않으면, InsertMemberController 호출 
 	    else if(request.getParameter("customerPw1") != null && request.getParameter("customerPw2") != null&&!request.getParameter("customerPw1").equals("") &&!request.getParameter("customerPw1").equals(request.getParameter("memberPw2"))) {
 	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=passwordisnotMatch");
 	    	return;
 	    }
-	    
+	    */
 	    // vo
 	    Customer c = new Customer();
 	    c.setCustomerId(request.getParameter("customerId"));

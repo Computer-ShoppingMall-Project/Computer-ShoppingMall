@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.QnaDao;
 import vo.Qna;
 
-@WebServlet("/QnaOneAdminController")
-public class QnaOneAdminController extends HttpServlet {
+@WebServlet("/AdminQnaOneController")
+public class AdminQnaOneController extends HttpServlet {
 	private QnaDao qnaDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 관리자 session 확인 추가 -> 관리자 로그인방식 회의 이후 추가

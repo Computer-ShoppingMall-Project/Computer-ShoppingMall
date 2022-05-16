@@ -75,17 +75,17 @@
 				<tr>
 					<td>${qna.qnaNo}</td>
 					<td>${qna.customerId}</td>
-					<td><a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></td>
+					<td><a href="${pageContext.request.contextPath}/AdminQnaOneController?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></td>
 					<td>${qna.createDate}</td>
 					<td>${qna.updateDate}</td>
 					<td>
 					<!-- 미등록 답변은 INSERT로 표시, 등록된 답변은 UPDATE로 표시 -->
 						<c:choose>
 							<c:when test="${qna.qnaAnswer == null}">
-								<a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}" class="text-danger">INSERT</a>
+								<a href="${pageContext.request.contextPath}/AdminQnaOneController?qnaNo=${qna.qnaNo}" class="text-danger">INSERT</a>
 							</c:when>
 							<c:otherwise>
-								<a href="${pageContext.request.contextPath}/QnaOneAdminController?qnaNo=${qna.qnaNo}" >UPDATE</a>
+								<a href="${pageContext.request.contextPath}/AdminQnaOneController?qnaNo=${qna.qnaNo}" >UPDATE</a>
 							</c:otherwise>
 						</c:choose>
 					</td>

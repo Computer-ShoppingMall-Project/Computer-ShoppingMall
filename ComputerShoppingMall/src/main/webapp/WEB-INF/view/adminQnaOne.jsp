@@ -83,7 +83,7 @@
       <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
         <div class="col-lg-6 col-md-6 col-sm-6">
         <!-- QNA 리스트로 돌아가기 -->
-       	<a href="${pageContext.request.contextPath}/QnaListAdminController">back</a>
+       	<a href="${pageContext.request.contextPath}/AdminQnaListController">back</a>
         <!-- 고객문의 상세보기 -->
           <h4 class="title">QNA ANSWER</h4>
 			<table class="table">
@@ -116,7 +116,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
         <br>
           <h4 class="title">Answer</h4>
-          <form method="post" action="UpdateQnaAdminController?qnaNo=${requestScope.qna.qnaNo}" id="insertAnswerForm" class="form-group">
+          <form method="post" action="AdminUpdateQnaController?qnaNo=${requestScope.qna.qnaNo}" id="insertAnswerForm" class="form-group">
               <textarea class="form-control" name="qnaAnswer" id="qnaAnswer" rows="5" data-rule="required" data-msg="Please write something message" placeholder="Your answer is not registered">${requestScope.qna.qnaAnswer}</textarea>
 	           <!-- 등록/수정 버튼 -->
 	          <div class="form-send">

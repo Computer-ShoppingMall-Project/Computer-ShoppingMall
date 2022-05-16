@@ -15,8 +15,8 @@ import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import dao.QnaDao;
 import vo.Qna;
 
-@WebServlet("/QnaListAdminController")
-public class QnaListAdminController extends HttpServlet {
+@WebServlet("/AdminQnaListController")
+public class AdminQnaListController extends HttpServlet {
 	private QnaDao qnaDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인 -> 후에 관리자 방식 선택 후 수정 예정

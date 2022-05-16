@@ -30,7 +30,7 @@ public class UpdateMemberPwController extends HttpServlet {
 			Customer customer = new Customer();
 			
 			// dao.selectMemberOne
-			MemberDao dao = new MemberDao();
+			dao = new MemberDao();
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
 			

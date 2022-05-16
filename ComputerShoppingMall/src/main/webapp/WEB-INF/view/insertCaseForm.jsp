@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>CASE</span>
                     </h4>
-         <form id="insertCaseform" method="post" name="insertCaseform" action="<%=request.getContextPath()%>/InsertCaseController">
+         <form id="insertCaseform" method="post" name="insertCaseform" action="${pageContextrequest.contextPath}/InsertCaseController">
              <div class="form-group">
               <input type="text" name="caseName" class="form-control" placeholder="CaseName">
             </div>

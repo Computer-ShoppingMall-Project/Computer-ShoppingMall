@@ -73,7 +73,7 @@
           <h4 class="title">
                        <span>RAM</span>
                     </h4>
-         <form id="insertRamform" method="post" name="insertRamform" action="<%=request.getContextPath()%>/InsertRamController">
+         <form id="insertRamform" method="post" name="insertRamform" action="${pageContextrequest.contextPath}/InsertRamController">
              <div class="form-group">
               <input type="text" name="ramName" class="form-control" placeholder="RamName">
             </div>

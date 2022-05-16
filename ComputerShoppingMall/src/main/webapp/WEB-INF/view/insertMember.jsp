@@ -137,7 +137,7 @@
                <span id="detailHelper" class="helper"></span>
             </div>
             <div class="form-group">
-              <input type="submit" id="signup" class="button" value="Register an account">
+              <button type="button" id="signup">Register</button>
             </div>
           </form>
         </div>
@@ -172,7 +172,7 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
-	<script>
+  <script type="text/javascript">
 	$('#id').focus();
 	
 	$('#id').blur(function(){
@@ -295,6 +295,5 @@
 		}
 	});
 </script>
-	
 </body>
 </html>
