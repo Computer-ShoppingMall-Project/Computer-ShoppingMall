@@ -26,8 +26,6 @@ public class DeleteMemberController extends HttpServlet {
 	        System.out.println("로그아웃 상태");
 	        return;
 	      }
-	    // 회원탈퇴 Form 호출 -> CustomerId 이용
-	    request.setAttribute("customerId", sessionCustomerId);
 	    request.getRequestDispatcher("/WEB-INF/view/deleteMember.jsp").forward(request, response);
 	}	
 	

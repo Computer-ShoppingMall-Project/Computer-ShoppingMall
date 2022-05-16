@@ -63,7 +63,8 @@ public class UpdateMemberPwController extends HttpServlet {
 		   customer.setNickName(request.getParameter("nickName"));
 		   customer.setEmail(request.getParameter("email"));
 		   customer.setPhone(request.getParameter("phone"));
-		   customer.setAddressId(Integer.parseInt(request.getParameter("addressId")));
+		   customer.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+		   customer.setRoadAddress(request.getParameter("roadAddress"));
 		   customer.setDetailAddress(request.getParameter("detailAddress"));
 		 
 		   // 디버깅

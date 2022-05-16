@@ -46,7 +46,7 @@ public class UpdateMemberController extends HttpServlet {
 			   return;
 		   }
 		   // null 확인코드
-		   if(request.getParameter("name") == null || request.getParameter("nickName") == null || request.getParameter("email") == null || request.getParameter("phone") == null || request.getParameter("addressId") == null || request.getParameter("detailAddress") == null) {
+		   if(request.getParameter("name") == null || request.getParameter("nickName") == null || request.getParameter("email") == null || request.getParameter("phone") == null || request.getParameter("zipCode") == null || request.getParameter("roadAddress") == null  || request.getParameter("detailAddress") == null) {
 			   System.out.println("null UpdateMembercontroller.dopost");
 			   response.sendRedirect(request.getContextPath() + "/UpdateMemberController");
 			   return;
@@ -59,7 +59,8 @@ public class UpdateMemberController extends HttpServlet {
 		   customer.setNickName(request.getParameter("nickName"));
 		   customer.setEmail(request.getParameter("email"));
 		   customer.setPhone(request.getParameter("phone"));
-		   customer.setAddressId(Integer.parseInt(request.getParameter("addressId")));
+		   customer.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+		   customer.setRoadAddress(request.getParameter("roadAddress"));
 		   customer.setDetailAddress(request.getParameter("detailAddress"));
 		   
 		   // 디버깅

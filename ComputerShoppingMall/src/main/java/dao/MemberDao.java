@@ -56,14 +56,15 @@ public class MemberDao {
 			conn = DButil.getConnection();
 			String sql = "SELECT customer_id customerId"
 					+ "					,name"
-					+ "					,nickname"
+					+ "					,nickname nickName"
 					+ "					,email"
 					+ "					,phone"
-					+ "					,address_id addressId"
+					+ "					,zip_code zipCode"
+					+ "					,road_address roadAddress"
 					+ "					,detail_address detailAddress"
 					+ "					,create_date createDate"
 					+ "					,update_date updateDate"
-					+ "		 FROM customer "
+					+ "		 FROM customer"
 					+ "		 WHERE customer_id=? ";
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -75,7 +76,8 @@ public class MemberDao {
 					c.setNickName(rs.getString("nickName"));
 					c.setEmail(rs.getString("email"));
 					c.setPhone(rs.getString("phone"));
-					c.setAddressId(rs.getInt("addressId"));
+					c.setZipCode(rs.getInt("zipCode"));
+					c.setRoadAddress(rs.getString("roadAddress"));
 					c.setDetailAddress(rs.getString("detailAddress"));
 					c.setCreateDate(rs.getString("createDate"));
 					c.setUpdateDate(rs.getString("updateDate"));
@@ -111,11 +113,12 @@ public class MemberDao {
 					+ "						   ,nickname"
 					+ "						   ,email"
 					+ "						   ,phone"
-					+ "						   ,address_id"
+					+ "						   ,zip_code"
+					+ "						   ,road_address"
 					+ "						   ,detail_address"
 					+ "						   ,create_date"
 					+ "						   ,update_date)"
-					+ "	VALUES(?, PASSWORD(?), ?, ?, ?, ?, ?, ?, NOW(), NOW()) ";
+					+ "	VALUES(?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, NOW(), NOW()) ";
 			try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, member.getCustomerId());
@@ -124,9 +127,11 @@ public class MemberDao {
 				stmt.setString(4, member.getNickName());
 				stmt.setString(5, member.getEmail());
 				stmt.setString(6, member.getPhone());
-				stmt.setInt(7, member.getAddressId());
-				stmt.setString(8, member.getDetailAddress());
-				stmt.setString(9, member.getUpdateDate());
+				stmt.setInt(7, member.getZipCode());
+				stmt.setString(8, member.getRoadAddress());
+				stmt.setString(9, member.getDetailAddress());
+				stmt.setString(10, member.getCreateDate());
+				stmt.setString(11, member.getUpdateDate());
 				row = stmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -195,7 +200,8 @@ public class MemberDao {
 					+ "						,nickname=? "
 					+ "						,email=? "
 					+ "						,phone=? "
-					+ "						,address_id=? "
+					+ "						,zip_code=? "
+					+ "						,road_address=? "
 					+ "						,detail_address=? "
 					+ "	WHERE customer_id=?";
 			try {
@@ -204,11 +210,11 @@ public class MemberDao {
 				stmt.setString(2, member.getNickName());
 				stmt.setString(3, member.getEmail());
 				stmt.setString(4, member.getPhone());
-				stmt.setInt(5, member.getAddressId());
-				stmt.setString(6, member.getDetailAddress());
-				stmt.setString(7, member.getCustomerId());
+				stmt.setInt(5, member.getZipCode());
+				stmt.setString(6, member.getRoadAddress());
+				stmt.setString(7, member.getDetailAddress());
+				stmt.setString(8, member.getCustomerId());
 				row = stmt.executeUpdate();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -241,7 +247,8 @@ public class MemberDao {
 					+ "						,nickname = ? "
 					+ "						,email = ? "
 					+ "						,phone = ? "
-					+ "						,address_id = ? "
+					+ "						,zip_code = ? "
+					+ "						,road_address = ? "
 					+ "						,detail_address = ? "
 					+ "						,customer_pw = PASSWORD(?) "					
 					+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
@@ -251,11 +258,12 @@ public class MemberDao {
 				stmt.setString(2, member.getNickName());
 				stmt.setString(3, member.getEmail());
 				stmt.setString(4, member.getPhone());
-				stmt.setInt(5, member.getAddressId());
-				stmt.setString(6, member.getDetailAddress());
-				stmt.setString(7, newCustomerPw);
-				stmt.setString(8, member.getCustomerId());
-				stmt.setString(9, member.getCustomerPw());
+				stmt.setInt(5, member.getZipCode());
+				stmt.setString(6, member.getRoadAddress());
+				stmt.setString(7, member.getDetailAddress());
+				stmt.setString(8, newCustomerPw);
+				stmt.setString(9, member.getCustomerId());
+				stmt.setString(10, member.getCustomerPw());
 				row = stmt.executeUpdate();
 
 			} catch (Exception e) {

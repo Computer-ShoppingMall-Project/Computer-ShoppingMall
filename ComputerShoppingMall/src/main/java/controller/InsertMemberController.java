@@ -36,7 +36,8 @@ public class InsertMemberController extends HttpServlet {
 	    // 요청값 처리
 		if (request.getParameter("customerId") == null || request.getParameter("name") == null
 				|| request.getParameter("nickname") == null || request.getParameterValues("email") == null
-				|| request.getParameter("phone") == null || request.getParameter("addressId") == null
+				|| request.getParameter("phone") == null || request.getParameter("zipCode") == null
+				|| request.getParameter("roadAddress") == null
 				|| request.getParameter("detailAddress") == null || request.getParameter("customerPw1") == null || request.getParameter("customerPw2") == null) {
 			response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=null");
 			return;
@@ -60,14 +61,15 @@ public class InsertMemberController extends HttpServlet {
 	    c.setCustomerId(request.getParameter("customerId"));
 	    c.setCustomerPw(customerPw);
 	    c.setName(request.getParameter("name"));
-	    c.setNickName(request.getParameter("nickname"));
+	    c.setNickName(request.getParameter("nickName"));
 	    c.setEmail(request.getParameter("email"));
 	    c.setPhone(request.getParameter("phone"));
-	    c.setAddressId(Integer.parseInt(request.getParameter("addressId")));
+	    c.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+	    c.setRoadAddress(request.getParameter("roadAddress"));
 	    c.setDetailAddress(request.getParameter("detailAddress"));
 	    
 	    // 디버깅
-	    System.out.println(c.toString() + "<-- insertMemberController.dopost");
+	    System.out.println(c.toString() + "<-- InsertMemberController.dopost");
 	    
 	    // dao.insertMember 호출
 	    dao = new MemberDao();
@@ -83,13 +85,13 @@ public class InsertMemberController extends HttpServlet {
 	    
 	    // 2) 회원가입 실패시(row값이 0이면...), 가입실패 + InsertMemberController 호출
 	    else if(row == 0) {
-	    	System.out.println("가입실패 insertMemberController.dopost");
+	    	System.out.println("가입실패 InsertMemberController.dopost");
 	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=insertmemberfail");
 	    }
 	    
 	    // 3) row값이 -1이면(default 값) SQL오류
 	    else if (row == -1) {
-	    	System.out.println("예외 발생 insertMemberController.dopost");
+	    	System.out.println("예외 발생 InsertMemberController.dopost");
 	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=exception");
 	    }
 	}

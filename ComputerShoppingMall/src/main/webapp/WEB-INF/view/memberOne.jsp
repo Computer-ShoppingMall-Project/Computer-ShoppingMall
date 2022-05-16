@@ -95,11 +95,15 @@
 					<td>${requestScope.customer.phone}</td>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td>${requestScope.customer.addressId}</td>
+					<td>우편 번호</td>
+					<td>${requestScope.customer.zipCode}</td>
+				</tr>
+					<tr>
+					<td>도로명 주소</td>
+					<td>${requestScope.customer.roadAddress}</td>
 				</tr>
 				<tr>
-					<td>상세주소</td>
+					<td>상세 주소</td>
 					<td>${requestScope.customer.detailAddress}</td>
 				</tr>
 				<tr>

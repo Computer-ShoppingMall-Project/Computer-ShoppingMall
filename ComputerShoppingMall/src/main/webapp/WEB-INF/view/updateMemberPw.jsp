@@ -72,15 +72,16 @@
           <h4 class="title">
                        <span>Update Member Pw</span>
           </h4>
-          	<form method="post" action="${pageContext.request.contextPath}%>/UpdateMemberPwController">
+          	<form method="post" action="${pageContext.request.contextPath}/UpdateMemberPwController">
 		<div>
 			<!-- 값넘기기 -->
-			<input type="hidden" name="customerId" readonly="readonly" value="${requestScope.customer.customerId}">
+			<input type="hidden" name="customerId" value="${requestScope.customer.customerId}" required>
 			<input type="hidden" name="name" value="${requestScope.customer.name}" required>
 			<input type="hidden" name="nickName" value="${requestScope.customer.nickName}" required>
 			<input type="hidden" name="email" value="${requestScope.customer.email}" required>
 			<input type="hidden" name="phone" value="${requestScope.customer.phone}" required>
-			<input type="hidden" name="addressId" value="${requestScope.customer.addressId}" required>
+			<input type="hidden" name="zipCode" value="${requestScope.customer.zipCode}" required>
+			<input type="hidden" name="roadAddress" value="${requestScope.customer.roadAddress}" required>
 			<input type="hidden" name="detailAddress" value="${requestScope.customer.detailAddress}" required>
 		</div>
 		<div>
