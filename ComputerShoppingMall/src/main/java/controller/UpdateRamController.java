@@ -15,17 +15,16 @@ import vo.Ram;
 public class UpdateRamController extends HttpServlet {
 	private RamDao ramDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("sessionAdminId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		request.getRequestDispatcher("/WEB-INF/view/deleteRamForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
+				HttpSession session = request.getSession();
+				if((String)session.getAttribute("sessionAdminId") == null) {
+					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+					response.sendRedirect(request.getContextPath() + "/LoginController");
+					return;
+				}
 		// 변수등록
 		int ramNo = 0;
 		int price = 0;
@@ -42,16 +41,14 @@ public class UpdateRamController extends HttpServlet {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
 		
-		// 디버깅
-		System.out.println(ramNo+"<-ramNo");
-		System.out.println(price+"<-price");
-		System.out.println(quantity+"<-quantity");
-		
 		// vo
 		Ram r = new Ram();
 		r.getRamNo();
 		r.getPrice();
 		r.getQuantity();
+		
+		// 디버깅
+		System.out.println("[updateRamController] : " + r.toString());
 		
 		// dao
 		ramDao = new RamDao();

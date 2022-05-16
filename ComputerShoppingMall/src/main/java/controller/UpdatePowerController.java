@@ -16,18 +16,17 @@ import vo.Ram;
 public class UpdatePowerController extends HttpServlet {
     private PowerDao powerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("sessionAdminId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		request.getRequestDispatcher("/WEB-INF/view/deletePowerForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
+				HttpSession session = request.getSession();
+				if((String)session.getAttribute("sessionAdminId") == null) {
+					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+					response.sendRedirect(request.getContextPath() + "/LoginController");
+					return;
+				}
 		// 변수등록
 		int powerNo = 0;
 		int price = 0;
@@ -44,16 +43,14 @@ public class UpdatePowerController extends HttpServlet {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
 		
-		// 디버깅
-		System.out.println(powerNo+"<-powerNo");
-		System.out.println(price+"<-price");
-		System.out.println(quantity+"<-quantity");
-		
 		// vo
 		Power p = new Power();
 		p.getPowerNo();
 		p.getPrice();
 		p.getQuantity();
+		
+		// 디버깅
+		System.out.println("[updatePowerController] : " + p.toString());
 		
 		// dao
 		powerDao = new PowerDao();

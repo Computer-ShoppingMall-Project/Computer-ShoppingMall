@@ -14,18 +14,17 @@ import vo.Cpu;
 public class UpdateCpuController extends HttpServlet {
 	private CpuDao cpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("sessionAdminId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		request.getRequestDispatcher("/WEB-INF/view/deleteCpuForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
+				HttpSession session = request.getSession();
+				if((String)session.getAttribute("sessionAdminId") == null) {
+					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+					response.sendRedirect(request.getContextPath() + "/LoginController");
+					return;
+				}
 		// 변수등록
 		int CpuNo = 0;
 		int price = 0;
@@ -52,6 +51,8 @@ public class UpdateCpuController extends HttpServlet {
 		c.getCpuNo();
 		c.getPrice();
 		c.getQuantity();
+		
+		System.out.println("[updateCpuController] : " + c.toString());
 		
 		// dao
 		cpuDao = new CpuDao();

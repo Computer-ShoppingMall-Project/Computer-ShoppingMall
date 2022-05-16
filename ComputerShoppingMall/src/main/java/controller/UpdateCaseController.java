@@ -15,6 +15,9 @@ import vo.Case;
 public class UpdateCaseController extends HttpServlet {
 	private CaseDao caseDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/deleteCaseForm.jsp").forward(request, response);
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
 		if((String)session.getAttribute("sessionAdminId") == null) {
@@ -22,10 +25,6 @@ public class UpdateCaseController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
-		request.getRequestDispatcher("/WEB-INF/view/deleteCaseForm.jsp").forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 변수등록
 		int caseNo = 0;
 		int price = 0;
@@ -42,16 +41,14 @@ public class UpdateCaseController extends HttpServlet {
 			quantity = Integer.parseInt(request.getParameter("quantity"));
 		}
 		
-		// 디버깅
-		System.out.println(caseNo+"<-caseNo");
-		System.out.println(price+"<-price");
-		System.out.println(quantity+"<-quantity");
-		
 		// vo
 		Case c = new Case();
 		c.getCaseNo();
 		c.getPrice();
 		c.getQuantity();
+		
+		// 디버깅
+		System.out.println("[updateCaseController] : " + c.toString());
 		
 		// dao
 		caseDao = new CaseDao();
