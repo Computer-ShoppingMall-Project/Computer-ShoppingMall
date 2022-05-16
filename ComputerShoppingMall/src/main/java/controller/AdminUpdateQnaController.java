@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.QnaDao;
 
-@WebServlet("/UpdateQnaAdminController")
-public class UpdateQnaAdminController extends HttpServlet {
+@WebServlet("/AdminUpdateQnaController")
+public class AdminUpdateQnaController extends HttpServlet {
 	private QnaDao qnaDao;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("접속테스트");
@@ -22,11 +22,11 @@ public class UpdateQnaAdminController extends HttpServlet {
 		int row = qnaDao.updateQnaAdmin(qnaAnswer, qnaNo);
 		
 		if(row == 1) {
-			System.out.println("[UpdateQnaAdminController] : 답변 등록/수정 성공");
-			response.sendRedirect(request.getContextPath()+"/QnaListAdminController"); // 답변 등록/수정 성공시 list로 돌아가기
+			System.out.println("[AdminUpdateQnaController] : 답변 등록/수정 성공");
+			response.sendRedirect(request.getContextPath()+"/AdminQnaListController"); // 답변 등록/수정 성공시 list로 돌아가기
 		} else {
-			System.out.println("[UpdateQnaAdminController] : 답변 등록/수정 실패");
-			response.sendRedirect(request.getContextPath()+"/QnaOneAdminController?qnaNo=" + qnaNo); // 답변 등록/수정 실패시 다시 작성 페이지로 돌아가기
+			System.out.println("[AdminUpdateQnaController] : 답변 등록/수정 실패");
+			response.sendRedirect(request.getContextPath()+"/AdminQnaOneController?qnaNo=" + qnaNo); // 답변 등록/수정 실패시 다시 작성 페이지로 돌아가기
 		}
 	}
 }

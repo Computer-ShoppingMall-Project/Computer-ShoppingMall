@@ -110,7 +110,7 @@
 							</li>
 							<li><a href="#">Qna</a>
 								<ul class="dropdown">
-									<li><a href="QnaListAdminController">QnaListAdminController</a></li>
+									<li><a href="AdminQnaListController">AdminQnaListController</a></li>
 								</ul>
 							</li>
 						</ul>
