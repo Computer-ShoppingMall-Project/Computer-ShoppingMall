@@ -76,15 +76,15 @@
 		<div>
 			<table class="table">
 				<tr>
-					<td>ID</td>
+					<td>ID 확인</td>
 					<td>
-						<input type="text" name="customerId" readonly="readonly" value="${customerId}">
+						<input type="text" name="customerId" required>
 					</td>
 				</tr>
 				<tr>
 					<td>비밀번호 확인</td>
 					<td>
-						<input type="password" name="customerPw" required>
+						<input type="password" name="customerPw" required> ID와 비밀번호가 일치하면 탈퇴됩니다!
 					</td>
 				</tr>
 				<tr>
