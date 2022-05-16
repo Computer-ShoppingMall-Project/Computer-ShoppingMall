@@ -27,14 +27,14 @@ public class InsertRamController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		// 로그인 상태가 아니면 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		// 변수등록
 		String ramName = null;
 		String companyName = null;
@@ -63,15 +63,7 @@ public class InsertRamController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(ramName+"<--ramName");
-		System.out.println(companyName+"<--companyName");
-		System.out.println(ramKind+"<--ramKind");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(memo+"<--memo");
-		
-		// 
+		// vo
 		Ram r = new Ram();
 		r.setRamName(ramName);
 		r.setCompanyName(companyName);
@@ -79,6 +71,9 @@ public class InsertRamController extends HttpServlet {
 		r.setPrice(price);
 		r.setQuantity(quantity);
 		r.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCoolerController] : " + r.toString());
 		
 		ramDao = new RamDao();
 		ramDao.insertRam(r);

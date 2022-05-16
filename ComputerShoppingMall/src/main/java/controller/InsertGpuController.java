@@ -27,12 +27,11 @@ public class InsertGpuController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		
-		// 로그인이 안되어있을시 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
 		
@@ -68,15 +67,6 @@ public class InsertGpuController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(gpuName+"<--gpuName");
-		System.out.println(companyName+"<--companyName");
-		System.out.println(chipsetCompany+"<--companyName");
-		System.out.println(gpuSize+"gpuSize");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(memo+"<--memo");
-		
 		// vo
 		Gpu g = new Gpu();
 		g.setGpuName(gpuName);
@@ -86,6 +76,9 @@ public class InsertGpuController extends HttpServlet {
 		g.setPrice(price);
 		g.setQuantity(quantity);
 		g.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCoolerController] : " + g.toString());
 		
 		// dao insert
 		gpuDao = new GpuDao();

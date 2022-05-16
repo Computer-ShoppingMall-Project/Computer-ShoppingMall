@@ -15,7 +15,6 @@ public class EncodingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// utf-8 인코딩 추가
 		request.setCharacterEncoding("utf-8"); 
-		System.out.println("utf-8 인코딩");
 		chain.doFilter(request, response); 
 	}
 }

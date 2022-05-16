@@ -28,12 +28,11 @@ public class InsertCoolerController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/insertCoolerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		
-		// 로그인 상태가 아니거나 관리자아이디가 아니면 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
 		
@@ -69,15 +68,6 @@ public class InsertCoolerController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(coolerName+"<--coolerName");
-		System.out.println(coolerKind+"<--coolerKind");
-		System.out.println(coolerSize+"<--coolerSize");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(companyName+"<--companyName");
-		System.out.println(memo+"<--memo");
-		
 		// vo
 		Cooler c = new Cooler();
 		c.setCoolerName(coolerName);
@@ -87,6 +77,9 @@ public class InsertCoolerController extends HttpServlet {
 		c.setQuantity(quantity);
 		c.setCompanyName(companyName);
 		c.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCoolerController] : " + c.toString());
 		
 		// dao
 		insertcoolerDao = new CoolerDao();

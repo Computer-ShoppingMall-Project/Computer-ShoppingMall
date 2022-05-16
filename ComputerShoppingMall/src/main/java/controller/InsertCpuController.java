@@ -29,12 +29,11 @@ public class InsertCpuController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		
-		// 로그인이 안되어있을시 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
 		
@@ -74,16 +73,6 @@ public class InsertCpuController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(cpuName+"<--cpuName");
-		System.out.println(cpuKind+"<--cpuKind");
-		System.out.println(socketSize+"<--socketSize");
-		System.out.println(core+"<--core");
-		System.out.println(thread+"<--thread");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(memo+"<--memo");
-		
 		// vo
 		Cpu c = new Cpu();
 		c.setCpuName(cpuName);
@@ -94,6 +83,9 @@ public class InsertCpuController extends HttpServlet {
 		c.setPrice(price);
 		c.setQuantity(quantity);
 		c.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCoolerController] : " + c.toString());
 		
 		// dao insert
 		cpuDao = new CpuDao();

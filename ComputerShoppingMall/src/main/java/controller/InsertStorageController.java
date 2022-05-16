@@ -25,14 +25,14 @@ public class InsertStorageController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/insertStorageForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		// 로그인 상태가 아니면 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		// 변수등록
 		String storageName = null;
 		String companyName = null;
@@ -65,14 +65,6 @@ public class InsertStorageController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(storageName+"<--storageName");
-		System.out.println(companyName+"<--companyName");
-		System.out.println(storageInterface+"<--storageInterface");
-		System.out.println(capacity+"<--capacity");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(memo+"<--memo");
 		
 		// 
 		Storage s = new Storage();
@@ -83,6 +75,9 @@ public class InsertStorageController extends HttpServlet {
 		s.setPrice(price);
 		s.setQuantity(quantity);
 		s.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCoolerController] : " + s.toString());
 		
 		storageDao = new StorageDao();
 		storageDao.insertStorage(s);

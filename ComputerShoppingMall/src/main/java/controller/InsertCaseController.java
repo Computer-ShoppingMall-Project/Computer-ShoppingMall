@@ -29,14 +29,14 @@ public class InsertCaseController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// 세션확인
 		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		// 로그인이 안되어있을시 로그인창으로 이동
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		// 변수등록
 		String caseName = null;
 		String caseSize = null;
@@ -73,16 +73,6 @@ public class InsertCaseController extends HttpServlet {
 			memo = request.getParameter("memo");
 		}
 		
-		// 디버깅
-		System.out.println(caseName+"<--caseName");
-		System.out.println(caseSize+"<--caseSize");
-		System.out.println(gpuSize+"<--gpuSize");
-		System.out.println(bay89mm+"<--bay89mm");
-		System.out.println(bay64mm+"<--bay64mm");
-		System.out.println(price+"<--price");
-		System.out.println(quantity+"<--quantity");
-		System.out.println(memo+"<--memo");
-		
 		// vo
 		Case c = new Case();
 		c.setCaseName(caseName);
@@ -93,6 +83,9 @@ public class InsertCaseController extends HttpServlet {
 		c.setPrice(price);
 		c.setQuantity(quantity);
 		c.setMemo(memo);
+		
+		// 디버깅
+		System.out.println("[insertCaseController] : " + c.toString());
 		
 		// dao insert
 		caseDao = new CaseDao();
