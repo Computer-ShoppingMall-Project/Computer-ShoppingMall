@@ -63,3 +63,4 @@ public class UpdateCoolerController extends HttpServlet {
 	}
 
 }
+
