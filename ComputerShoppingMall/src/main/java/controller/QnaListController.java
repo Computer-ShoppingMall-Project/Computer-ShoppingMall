@@ -15,7 +15,9 @@ import vo.Qna;
 
 @WebServlet("/QnaListController")
 public class QnaListController extends HttpServlet {
+	
 	private QnaDao qnaDao;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -28,6 +30,7 @@ public class QnaListController extends HttpServlet {
 
 		qnaDao = new QnaDao();
 		ArrayList<Qna> list = qnaDao.selectQnaList(customerId);
+		
 		request.setAttribute("qnaList", list);
 		request.getRequestDispatcher("/WEB-INF/view/qnaList.jsp").forward(request, response);
 	}

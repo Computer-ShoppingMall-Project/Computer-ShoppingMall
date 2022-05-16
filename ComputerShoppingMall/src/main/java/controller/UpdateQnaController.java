@@ -39,30 +39,40 @@ public class UpdateQnaController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션 확인
+		HttpSession session = request.getSession();
+		String customerId = (String)session.getAttribute("sessionCustomerId");
+		if((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
 		// 입력값 받아오기
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		String customerId = request.getParameter("customerId");
 		String qnaTitle = request.getParameter("qnaTitle");
 		String qnaContent = request.getParameter("qnaContent");
 		
+		// Qna vo로 묶기
 		Qna qna = new Qna();
 		qna.setQnaNo(qnaNo);
 		qna.setCustomerId(customerId);
 		qna.setQnaTitle(qnaTitle);
 		qna.setQnaContent(qnaContent);
 		
-		System.out.println(qna);
+		System.out.println("[UpdateQnaController.doPost] : "+qna.toString());
 		
 		qnaDao = new QnaDao();
 		int row = qnaDao.updateQna(qna);
 		
-		if(row == 1) {
-			System.out.println("[UpdateQnaController : qna 수정 성공]");
+		if(row == 1) { // QNA 수정 성공 시, 수정성공된 상세보기 페이지로 이동
+			System.out.println("[UpdateQnaController.doPost] : qna 수정 성공");
 			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo=" + qnaNo);
-		} else {
-			System.out.println("[UpdateQnaController : qna 수정 실패]");
+			return;
+		} else { // QNA 수정 실패 시, 다시 UpdateQna 페이지로 이동 
+			System.out.println("[UpdateQnaController.doPost] : qna 수정 실패");
 			response.sendRedirect(request.getContextPath() + "/UpdateQnaContoller?qnaNo=" + qnaNo);
+			return;
 		}
 	}
-
 }

@@ -12,7 +12,9 @@ import dao.QnaDao;
 
 @WebServlet("/DeleteQnaController")
 public class DeleteQnaController extends HttpServlet {
+	
 	private QnaDao qnaDao;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션 확인
 		HttpSession session = request.getSession();
@@ -22,18 +24,21 @@ public class DeleteQnaController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		request.setAttribute("qnaNo", qnaNo);
 		
 		qnaDao = new QnaDao();
 		int row = qnaDao.deleteQna(qnaNo, customerId);
 		
-		if(row == 1) {
-			System.out.println("[DeleteQnaController] : qna 삭제 성공");
+		if(row == 1) { // QNA 삭제 성공 시, List로 돌아가기
+			System.out.println("[DeleteQnaController.doGet] : qna 삭제 성공");
 			response.sendRedirect(request.getContextPath() + "/QnaListController?customerId="+customerId);
-		} else {
-			System.out.println("[DeleteQnaController] : qna 삭제 실패");
+			return;
+		} else { // QNA 삭제 실패 시, QNA상세보기로(QNA 상세보기에 삭제버튼 존재) 돌아가기
+			System.out.println("[DeleteQnaController.doGet] : qna 삭제 실패");
 			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo="+qnaNo);
+			return;
 		}
 	}
 }

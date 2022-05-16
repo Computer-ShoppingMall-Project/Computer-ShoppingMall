@@ -17,11 +17,12 @@ import vo.Qna;
 
 @WebServlet("/AdminQnaListController")
 public class AdminQnaListController extends HttpServlet {
+	
 	private QnaDao qnaDao;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인 -> 후에 관리자 방식 선택 후 수정 예정
 		/*
-
 		HttpSession session = request.getSession();
 		String adminId = (String)session.getAttribute("sessionAdminId"); 
 		if((String)session.getAttribute("sessionAdminId") == null) {
@@ -29,12 +30,12 @@ public class AdminQnaListController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
 		*/
 		
 		qnaDao = new QnaDao();
 		ArrayList<Qna> list = qnaDao.selectQnaListAdmin();
 		request.setAttribute("qnaList", list);
+		
 		// 관리자 QNA (모든 고객의 문의 모아보기)
 		request.getRequestDispatcher("/WEB-INF/view/adminQnaList.jsp").forward(request, response);
 	}
