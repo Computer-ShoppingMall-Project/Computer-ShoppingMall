@@ -307,10 +307,8 @@
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-
             var roadAddr = data.roadAddress; // 도로명 주소 
             var extraRoadAddr = ''; // 참고 항목
-
             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
             if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -324,7 +322,6 @@ function execDaumPostcode() {
             if(extraRoadAddr !== ''){
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('zipcode').value = data.zonecode;
             document.getElementById('roadAddress').value = roadAddr;

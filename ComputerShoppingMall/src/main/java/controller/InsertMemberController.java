@@ -35,7 +35,7 @@ public class InsertMemberController extends HttpServlet {
 		}
 	    // 요청값 처리
 		if (request.getParameter("customerId") == null || request.getParameter("name") == null
-				|| request.getParameter("nickname") == null || request.getParameterValues("email") == null
+				|| request.getParameter("nickName") == null || request.getParameterValues("email") == null
 				|| request.getParameter("phone") == null || request.getParameter("zipCode") == null
 				|| request.getParameter("roadAddress") == null
 				|| request.getParameter("detailAddress") == null || request.getParameter("customerPw1") == null || request.getParameter("customerPw2") == null) {

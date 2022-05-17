@@ -98,7 +98,7 @@ public class UpdateMemberPwController extends HttpServlet {
 		   // 2) row값이 0이면 회원정보 수정 오류 -> UpdateMemberController 호출
 		   else if(row == 0) {
 		    	System.out.println("수정실패! UpdateMemberPwController.dopost");
-		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberPwController?msg=failrenewpassword");
+		    	response.sendRedirect(request.getContextPath() + "/UpdateMemberPwController?msg=1");
 		   } 
 		  
 		   // 3) row값이 -1이면 SQL 오류
