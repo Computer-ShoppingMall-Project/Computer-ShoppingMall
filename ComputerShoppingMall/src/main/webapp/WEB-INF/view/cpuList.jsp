@@ -70,7 +70,7 @@
     <div class="container clearfix">
       <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
         <div class="divider"></div>
-
+	
         <nav class="portfolio-filter clearfix">
           <ul>
             <li><a href="${pageContext.request.contextPath}/CpuListController" class="dmbutton2" data-filter="*">CPU</a></li>
@@ -81,6 +81,7 @@
             <li><a href="${pageContext.request.contextPath}/HhdListController" class="dmbutton2" data-filter=".mockups">HHD</a></li>
             <li><a href="${pageContext.request.contextPath}/CaseListController" class="dmbutton2" data-filter=".graphic-design">CASE</a></li>
             <li><a href="${pageContext.request.contextPath}/PowerListController" class="dmbutton2" data-filter=".web-design">POWER</a></li>
+            <li><a href="${pageContext.request.contextPath}/CoolerListController" class="dmbutton2" data-filter=".web-design">COOLER</a></li>
           </ul>
         </nav>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
