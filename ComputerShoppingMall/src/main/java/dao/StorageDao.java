@@ -10,6 +10,39 @@ import util.DButil;
 import vo.Storage;
 
 public class StorageDao {
+	// 장바구니에 담기
+	public int insertCartStorage(String customerId, Storage storage) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt =  null;
+		conn = DButil.getConnection();
+		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW()";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, storage.getStorageName());
+			stmt.setString(3, storage.getCategoryName());
+			stmt.setInt(4, storage.getStorageNo());
+			stmt.setInt(5, storage.getPrice());
+			stmt.setInt(6, storage.getQuantity());
+			stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {			
+		   } try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return row;
+	}
 	// storage 상품삭제
 	public void deleteStorage(int storageNo) {
 		Connection conn = null;

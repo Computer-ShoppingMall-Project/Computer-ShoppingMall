@@ -3,18 +3,19 @@ package vo;
 public class Basket {
 	private int basketNo;
 	private String customerId;
+	private String productName;
 	private String categoryName;
-	private int categoryNumber;
-	private int categoryPrice;
-	private int categoryQuantity;
+	private int productNumber;
+	private int price;
+	private int quantity;
 	private String createDate;
 	private String updateDate;
-
+	
 	@Override
 	public String toString() {
-		return "Basket [basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName=" + categoryName
-				+ ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice + ", categoryQuantity="
-				+ categoryQuantity + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+		return "Basket [basketNo=" + basketNo + ", customerId=" + customerId + ", productName=" + productName
+				+ ", categoryName=" + categoryName + ", productNumber=" + productNumber + ", price=" + price
+				+ ", quantity=" + quantity + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
 
 	public int getBasketNo() {
@@ -33,6 +34,14 @@ public class Basket {
 		this.customerId = customerId;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -41,28 +50,28 @@ public class Basket {
 		this.categoryName = categoryName;
 	}
 
-	public int getCategoryNumber() {
-		return categoryNumber;
+	public int getProductNumber() {
+		return productNumber;
 	}
 
-	public void setCategoryNumber(int categoryNumber) {
-		this.categoryNumber = categoryNumber;
+	public void setProductNumber(int productNumber) {
+		this.productNumber = productNumber;
 	}
 
-	public int getCategoryPrice() {
-		return categoryPrice;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setCategoryPrice(int categoryPrice) {
-		this.categoryPrice = categoryPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
-	public int getCategoryQuantity() {
-		return categoryQuantity;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setCategoryQuantity(int categoryQuantity) {
-		this.categoryQuantity = categoryQuantity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getCreateDate() {
@@ -80,5 +89,4 @@ public class Basket {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-
 }
