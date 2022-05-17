@@ -62,7 +62,7 @@
 							</li>
 							<li><a href="#">Shop</a>
 								<ul class="dropdown">
-									<li><a href="DigitalDownloadController">Products Page</a></li>
+									<li><a href="CpuListController">Products</a></li>
 									<li><a href="SingleProductController">Single Product</a></li>
 									<li><a href="CheckoutController">Checkout</a></li>
 									<li><a href="AccountController">Account Page</a></li>

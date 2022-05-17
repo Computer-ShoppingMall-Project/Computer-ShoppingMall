@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.DButil;
 import vo.Cpu;
@@ -20,12 +22,14 @@ public class CpuDao {
 			stmt.executeUpdate();
 			} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	// cpu 상품상세보기
@@ -49,14 +53,16 @@ public class CpuDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}return row;
+		} finally {
+			try {
+				// DB 자원반납
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 	// cpu 상품등록
 	public int insertCpu(Cpu c) {
@@ -84,12 +90,190 @@ public class CpuDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				// DB 자원반납
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
+	}
+	// cpu 정보 상세보기
+	public ArrayList<Cpu> selectCpuList() {
+		ArrayList<Cpu> list = new ArrayList<Cpu>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT cpu_no cpuNo"
+				+ ", cpu_name cpuName"
+				+ ", cpu_kind cpuKind"
+				+ ", socket_size socketSize"
+				+ ", core"
+				+ ", thread"
+				+ ", price"
+				+ ", quantity"
+				+ ", cpu_image_no cpuImageNo"
+				+ ", memo"
+				+ ", update_date updateDate"
+				+ " FROM cpu";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Cpu c = new Cpu();
+				c.setCpuNo(rs.getInt("cpuNo"));
+				c.setCpuName(rs.getString("cpuName"));
+				c.setCpuKind(rs.getString("cpuKind"));
+				c.setSocketSize(rs.getString("socketSize"));
+				c.setCore(rs.getString("core"));
+				c.setThread(rs.getString("thread"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCpuImageNo(rs.getInt("cpuImageNo"));
+				c.setMemo(rs.getString("memo"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// cpu 검색 체크박스 -> 중복제거 데이터(cpu_kind)
+	public ArrayList<String> duplicationCpuKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(cpu_kind) cpuKind FROM cpu";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String cpuKind = rs.getString("cpuKind");
+				list.add(cpuKind);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// cpu 검색 체크박스 -> 중복제거 데이터(socket_size)
+	public ArrayList<String> duplicationSocketSize() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(socket_size) socketSize FROM cpu";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String socketSize = rs.getString("socketSize");
+				list.add(socketSize);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// cpu 검색 체크박스 -> 중복제거 데이터(core)
+	public ArrayList<String> duplicationCore() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(core) core FROM cpu";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String core = rs.getString("core");
+				list.add(core);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// cpu 검색 체크박스 -> 중복제거 데이터(thread)
+	public ArrayList<String> duplicationThread() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(thread) thread FROM cpu";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String thread = rs.getString("thread");
+				list.add(thread);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }
