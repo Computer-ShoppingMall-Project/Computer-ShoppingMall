@@ -34,7 +34,6 @@ public class CpuListController extends HttpServlet {
 		
 		// 게시글 이름, 가격 받아오기
 		List<Cpu> list = cpuDao.selectCpuList();		
-		System.out.println("[CpuListController.doGet] : " + list.get(0).toString());
 		
 		// 값 셋팅 후 보내주기
 		request.setAttribute("cpuKindList", cpuKindList);

@@ -123,13 +123,14 @@
 			</table>
 			<button type="submit"  style="float: right;">Search</button>
 		</form>
-		
+		<br>
+		<h4 class="title">CPU</h4>
 		<!-- 상품 리스트 -->
         <div class="portfolio-centered">
           <div class="recentitems portfolio">
           <div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
 			<c:forEach var="c" items="${cpuList}">
-            <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 mockups isotope-item">
+            <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
               <div class="he-wrap tpl6 market-item">
                 <img src="img/portfolio_01.jpg" alt="">   <!-- 이미지 후에 셋팅 -->
                 <div class="he-view">
