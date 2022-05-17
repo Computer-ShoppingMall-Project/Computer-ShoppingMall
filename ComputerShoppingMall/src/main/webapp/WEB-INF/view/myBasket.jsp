@@ -89,7 +89,7 @@
 					<td>${basket.categoryPrice}</td>
 					<td>${basket.categoryQuantity}</td>
 					<td>${basket.createDate}</td>
-					<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?=basketNo=${basket.basketNo}">삭제</a></td>	
+					<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?basketNo=${basket.basketNo}">삭제</a></td>	
 				</tr>
 		</c:forEach>	
 		</tbody>
