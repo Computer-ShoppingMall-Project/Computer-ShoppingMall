@@ -147,7 +147,7 @@
               </div>
               <!-- he wrap -->
               <h3 class="title">${c.cpuName}</h3>
-              <h4><span class="text-info">price</span>  ${c.price}</h4>
+              <p><span class="text-info">price</span>&nbsp; ${c.price}</p>
             </div>
             </c:forEach>
             <!-- end col-4 -->
