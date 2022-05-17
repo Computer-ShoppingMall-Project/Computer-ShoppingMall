@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import dao.MemberDao;
 import vo.Customer;
 
+// 05.17 유효성 검사 추가
 @WebServlet("/UpdateMemberPwController")
 public class UpdateMemberPwController extends HttpServlet {	
 		// 전역변수 선언

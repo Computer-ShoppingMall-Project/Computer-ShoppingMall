@@ -47,6 +47,7 @@
       code = "현재 비밀번호가 올바르지 않습니다.";
    }
 %>
+	<!-- 05.17 유효성 검사 추가 -->
 	<!-- header적용. -->
 	<jsp:include page="header.jsp"></jsp:include>
 

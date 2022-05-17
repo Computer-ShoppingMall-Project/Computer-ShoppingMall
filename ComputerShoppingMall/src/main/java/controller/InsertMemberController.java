@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
 import vo.Customer;
-//
+
+// 05.17 오류수정
 @WebServlet("/InsertMemberController")
 public class InsertMemberController extends HttpServlet {
 	private MemberDao dao;
