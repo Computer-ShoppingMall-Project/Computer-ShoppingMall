@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CheckoutDao;
+import dao.OrderDao;
 import vo.Checkout;
 
-@WebServlet("/CheckoutListController")
-public class CheckoutListController extends HttpServlet {
-	private CheckoutDao dao;
+@WebServlet("/MyPaymentController")
+public class MyPaymentController extends HttpServlet {
+	private OrderDao dao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -26,9 +26,15 @@ public class CheckoutListController extends HttpServlet {
 			return;
 		}
 
-		dao = new CheckoutDao();
-		ArrayList<Checkout> list = dao.selectCheckoutList(customerId);
+		dao = new OrderDao();
+		ArrayList<Checkout> list = dao.selectOrderList(customerId);
 		request.setAttribute("CheckoutList", list);
 		request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LeftSidebalController")
 public class LeftSidebalController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/reft-sidebar.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/left-sidebar.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

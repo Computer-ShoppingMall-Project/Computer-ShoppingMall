@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CheckoutDao;
+import dao.OrderDao;
 import dao.MemberDao;
 import dao.MyBasketDao;
 import vo.Basket;
@@ -18,7 +19,7 @@ import vo.Customer;
 
 @WebServlet("/OrderController")
 public class OrderController extends HttpServlet {
-	private CheckoutDao dao;
+	private OrderDao dao;
 	private MyBasketDao bDao;
 	private MemberDao memberDao;
 	private MyBasketDao myBasketDao;
@@ -57,15 +58,15 @@ public class OrderController extends HttpServlet {
 		}
 		
 		// CheckoutDao insert
-		dao = new CheckoutDao();
-		int row = dao.insertCheckout(request.getParameter(customerId));
+		dao = new OrderDao();
+		int row = dao.insertOrder(customerId);
 		
 		// MybasketDao delete
 		myBasketDao = new MyBasketDao();
+		myBasketDao.paymentDeleteMyBasket(customerId);
 		
 		if(row > 0) {
 			System.out.println("결제 정보 저장 성공 InsertCheckoutController.dopost");
-			myBasketDao.deleteMyBasket(customerId);
 			response.sendRedirect(request.getContextPath() + "/MypaymentController");
 			return;
 		} else {

@@ -10,8 +10,8 @@ import util.DButil;
 import vo.Checkout;
 import vo.Qna;
 
-public class CheckoutDao {
-   public int insertCheckout(String customerId) {
+public class OrderDao {
+   public int insertOrder(String customerId) {
 	      int row = 0;
 	      // DB 초기화
 	      Connection conn = null;
@@ -19,14 +19,14 @@ public class CheckoutDao {
 	      // DButil
 	      conn = DButil.getConnection();
 	      // SQL 쿼리
-	      String sql = "INSERT INTO checkout (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
+	      String sql = "INSERT INTO order (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
 	            + "   SELECT basket_no, customer_id, category_name, category_number, category_price, category_quantity, NOW()"
 	            + "   FROM basket WHERE customer_id = ?";
 	      try {
 	         stmt = conn.prepareStatement(sql);
 	         stmt.setString(1, customerId);
 	         row = stmt.executeUpdate();
-	         if(row == 1) {
+	         if(row > 0) {
 					System.out.println("입력성공");
 				} else {
 					System.out.println("입력실패");
@@ -44,7 +44,7 @@ public class CheckoutDao {
 	      return row;
 	   }
 	
-	public ArrayList<Checkout> selectCheckoutList(String customerId) {
+	public ArrayList<Checkout> selectOrderList(String customerId) {
 		ArrayList<Checkout> list = new ArrayList<Checkout>();
 		Checkout checkout = null;
 		// DB 초기화
@@ -60,7 +60,7 @@ public class CheckoutDao {
 				+ "		,category_price categoryPrice"
 				+ "	 	,category_quantity categoryQuantity"
 				+ "		,create_date createDate"
-				+ " FROM checkout"
+				+ " FROM order"
 				+ " WHERE customer_id=?"
 				+ " ORDER BY create_date";
 		try {
