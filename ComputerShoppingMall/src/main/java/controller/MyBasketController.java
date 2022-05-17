@@ -33,7 +33,7 @@ public class MyBasketController extends HttpServlet {
 		dao = new MyBasketDao();
 		ArrayList<Basket> list = dao.selectMyBasket(customerId);
 		
-		request.setAttribute("BasketList", list);
+		request.setAttribute("basketList", list);
 		request.getRequestDispatcher("/WEB-INF/view/myBasket.jsp").forward(request, response);
 	}
 }

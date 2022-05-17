@@ -65,40 +65,66 @@
     </div>
   </section>
   <!-- end post-wrapper-top -->
-
+	<!-- customerId -->
   <section class="section1">
     <div class="container clearfix">
-      <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 			<h5 class="title">PERSONAL INFORMATION</h5>
 
-        <form id="personalinfo" action="" name="personalinfo" method="post">
+        <form id="personalinfo" action="${pageContext.request.contextPath}/OrderController" name="personalinfo" method="post">
+   		 <div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
           <label for="email">Name <span class="required">*</span></label>
-          <input type="text" name="name" id="email" class="form-control" placeholder="NAME">
-          <label for="fname">ID <span class="required">*</span></label>
-          <input type="text" name="fname" id="fname" class="form-control" placeholder="ID">
+          	<input type="text" name="name" id="name" class="form-control" value="${sessionCustomerId}">
+          <label for="fname">Email <span class="required">*</span></label>
+          	<input type="text" name="email" id="email" class="form-control" value="${requestScope.customer.email}">
           <label for="lname">PHONE </label>
-          <input type="text" name="lname" id="lname" class="form-control" placeholder="PHONE">
-        </form>
-
+        	  <input type="text" name="lname" id="lname" class="form-control"value="${requestScope.customer.phone}">
+		</div>     
+    	<div class="col-lg-1 col-md-4 col-sm-12">
+          <label for="lname">Zip_Code </label>
+        	  <input type="text" name="ZipCode" id="Zip_Code" class="form-control" value="${requestScope.customer.zipCode}" >
+		</div>      
+		<div class="col-lg-4 col-md-4 col-sm-12">
+          <label for="lname">Road_Address </label>
+         	 <input type="text" name="roadAddress" id="roadAddress" class="form-control" value="${requestScope.customer.roadAddress}">
+    	</div>
+   		<div class="col-lg-4 col-md-4 col-sm-12">
+          <label for="lname">Detail_Address </label>
+        	  <input type="text" name="detailAddress" id="detailAddress" class="form-control" value="${requestScope.customer.detailAddress}">
+		</div>
+	<!-- customerId end -->
         <div class="clearfix"></div>
         <div class="divider"></div>
-      
-        <h5 class="title">ADDRESS INFORMATION</h5>
+  
+        <hr>
+		<!-- 결제품목 -->
+        <table class="table table-striped" data-effect="fade">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>price</th>
+              <th>quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+          <c:forEach var="basket" items="${basketList}">
+          	<tr>
+          		<td>${basket.basketNo}</td>
+          		<td>${basket.customerId}</td>
+          		<td>${basket.categoryName}</td>
+          		<td>${basket.categoryPrice}</td>
+          		<td>${basket.categoryQuantity}</td>
+          	</tr>
+          </c:forEach>
+          </tbody>
+        </table>
+		<!-- 결제품목 end-->
+          <div class="form-group">
+              <input type="submit" class="button" value="결제">
+            </div>
+        </form>
 
-          <label for="baddress">Address Id</label>
-          <input type="text" name="addressId" id="addressId" class="form-control" placeholder="Address Id">
-          <label for="baddress1">Detail Address</label>
-          <input type="text" name="detailAddress" id="detailAddress" class="form-control" placeholder="Detail Address">
-        
-          <div class="clearfix"></div>
-          <br>
-          <div class="clearfix"></div>
-          
-        
-      
-           <a href="${pageContext.request.contextPath}/CheckoutListController" class="button large btn-block">결제 하기</a>
-
-      </div>
       <!-- end content -->
     </div>
     <!-- end container -->

@@ -10,6 +10,39 @@ import util.DButil;
 import vo.Basket;
 
 public class MyBasketDao {
+	public int deleteMyBasket(String customerId) {
+		// DB변수 기본값(null)으로 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int row = 0;
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "DELETE "
+				+ "FROM basket b INNER JOIN checkout "
+				+ "	ON b.customer_id = c.customer_id "
+				+ "WHERE c.customer_id=?";
+		try {
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setString(1, customerId); // customer_id = ?
+			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+		
+	}
 	public ArrayList<Basket> selectMyBasket(String customerId) {
 		ArrayList<Basket> list = new ArrayList<Basket>();
 		Basket basket = null;

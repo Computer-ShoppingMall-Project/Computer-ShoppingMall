@@ -82,19 +82,19 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="basket" items="${BasketList}">
+		<c:forEach var="basket" items="${basketList}">
 				<tr>
 					<td>${basket.categoryName}</td>
 					<td>${basket.categoryNumber}</td>
 					<td>${basket.categoryPrice}</td>
 					<td>${basket.categoryQuantity}</td>
-					<td>${basket.createDate}</td>	
+					<td>${basket.createDate}</td>
 					<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?=basketNo=${basket.basketNo}">삭제</a></td>	
 				</tr>
 		</c:forEach>	
 		</tbody>
 	</table>
-		<a href="${pageContext.request.contextPath}/InsertCheckoutController" type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
+		<a href="${pageContext.request.contextPath}/OrderController" type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
       </div>
       <!-- end content! -->
     </div>

@@ -103,7 +103,7 @@ function NullVal(param) {
 					<h4 class="title">QNA</h4>
 					<form id="inserQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/InsertQnaController" method="POST">
 						<div class="form-group">
-							<input type="text" name="customerId" class="form-control" id="customerId" value="${customerId}" readonly="readonly">
+							<input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
 						</div>
 						<div class="form-group">
 							<input type="text" name="qnaTitle" class="form-control" id="qnaTitle" placeholder="QNA title" data-rule="required" data-msg="Please enter a valid title">
