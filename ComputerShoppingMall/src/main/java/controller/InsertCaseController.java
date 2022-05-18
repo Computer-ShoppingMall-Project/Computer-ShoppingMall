@@ -39,6 +39,7 @@ public class InsertCaseController extends HttpServlet {
 		
 		// 변수등록
 		String caseName = null;
+		String categoryName = null;
 		String caseSize = null;
 		int gpuSize = 0;
 		int bay89mm = 0;
@@ -50,6 +51,9 @@ public class InsertCaseController extends HttpServlet {
 		// request값 받아오기
 		if(request.getParameter("caseName") != null && request.getParameter("caseName") !="") {
 			caseName = request.getParameter("caseName");
+		}
+		if(request.getParameter("categoryName") != null && request.getParameter("categoryName") !="") {
+			caseName = request.getParameter("categoryName");
 		}
 		if(request.getParameter("caseSize") != null &&request.getParameter("caseSize") !="") {
 			caseSize = request.getParameter("caseSize");
@@ -76,6 +80,7 @@ public class InsertCaseController extends HttpServlet {
 		// vo
 		Case c = new Case();
 		c.setCaseName(caseName);
+		c.setCategoryName(categoryName);
 		c.setCaseSize(caseSize);
 		c.setGpuSize(gpuSize);
 		c.setBay89mm(bay89mm);

@@ -39,6 +39,7 @@ public class InsertCoolerController extends HttpServlet {
 		// 변수등록
 		String coolerName = null;
 		String companyName = null;
+		String categoryName = null;
 		String kind = null;
 		int coolerSize = 0;
 		int price = 0;
@@ -51,6 +52,9 @@ public class InsertCoolerController extends HttpServlet {
 		}
 		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName =request.getParameter("companyName");
+		}
+		if(request.getParameter("categoryName") != null && request.getParameter("categoryName") !="") {
+			companyName =request.getParameter("categoryName");
 		}
 		if(request.getParameter("kind") != null &&request.getParameter("kind") !="") {
 			kind = request.getParameter("kind");
@@ -71,6 +75,8 @@ public class InsertCoolerController extends HttpServlet {
 		// vo
 		Cooler c = new Cooler();
 		c.setCoolerName(coolerName);
+		c.setCompanyName(companyName);
+		c.setCategoryName(categoryName);
 		c.setKind(kind);
 		c.setCoolerSize(coolerSize);
 		c.setPrice(price);

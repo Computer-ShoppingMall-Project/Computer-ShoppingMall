@@ -10,6 +10,40 @@ import util.DButil;
 import vo.Cooler;
 
 public class CoolerDao {
+	// 장바구니에 담기
+	public int insertCartCooler(String customerId, Cooler cooler) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt =  null;
+		conn = DButil.getConnection();
+		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, cooler.getCoolerName());
+			stmt.setString(3, cooler.getCategoryName());
+			stmt.setInt(4, cooler.getCoolerNo());
+			stmt.setInt(5, cooler.getPrice());
+			stmt.setInt(6, cooler.getQuantity());
+			stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// cooler 상품삭제
 	public void deleteCooler(int cooler) {
 		Connection conn = null;

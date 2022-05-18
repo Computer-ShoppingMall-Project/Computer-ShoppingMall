@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.mariadb.jdbc.export.ExceptionFactory.SqlExceptionFactory;
-
 import util.DButil;
 import vo.Storage;
 
@@ -19,7 +17,7 @@ public class StorageDao {
 		PreparedStatement stmt =  null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW()";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -103,17 +101,18 @@ public class StorageDao {
 		Connection conn = null;
 		PreparedStatement stmt =  null;
 		int row = 0;
-		String sql="INSERT INTO storage(storage_name, company_name, Storage_interface, capacity, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?, NOW())";
+		String sql="INSERT INTO storage(storage_name, company_name, category_name, storage_interface, capacity, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
 		conn = DButil.getConnection();
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,s.getStorageName());
 			stmt.setString(2,s.getCompanyName());
-			stmt.setString(3,s.getStorageInterface());
-			stmt.setString(4,s.getCapacity());
-			stmt.setInt(5,s.getPrice());
-			stmt.setInt(6,s.getQuantity());
-			stmt.setString(7,s.getMemo());
+			stmt.setString(3,s.getCategoryName());
+			stmt.setString(4,s.getStorageInterface());
+			stmt.setString(5,s.getCapacity());
+			stmt.setInt(6,s.getPrice());
+			stmt.setInt(7,s.getQuantity());
+			stmt.setString(8,s.getMemo());
 			stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");

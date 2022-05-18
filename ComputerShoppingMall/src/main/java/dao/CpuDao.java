@@ -10,6 +10,32 @@ import util.DButil;
 import vo.Cpu;
 
 public class CpuDao {
+	// 장바구니에 담기
+	public int insertCartCpu(String customerId, Cpu cpu) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ? NOW(), NOW())";
+		try {
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// cpu 상품삭제
 	public void deleteCpu(int cpuNo) {
 		Connection conn = null;
@@ -69,17 +95,18 @@ public class CpuDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql="INSERT INTO cpu (cpu_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
+		String sql="INSERT INTO cpu (cpu_name, category_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?,?, NOW())";
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());
-			stmt.setString(2, c.getCompnayName());
-			stmt.setString(3, c.getSocketSize());
-			stmt.setString(4, c.getCore());
-			stmt.setString(5, c.getThread());
-			stmt.setInt(6, c.getPrice());
-			stmt.setInt(7, c.getQuantity());
-			stmt.setString(8, c.getMemo());
+			stmt.setString(2, c.getCategoryName());
+			stmt.setString(3, c.getCompnayName());
+			stmt.setString(4, c.getSocketSize());
+			stmt.setString(5, c.getCore());
+			stmt.setString(6, c.getThread());
+			stmt.setInt(7, c.getPrice());
+			stmt.setInt(8, c.getQuantity());
+			stmt.setString(9, c.getMemo());
 			row=stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
@@ -110,6 +137,7 @@ public class CpuDao {
 		
 		String sql = "SELECT cpu_no cpuNo"
 				+ ", cpu_name cpuName"
+				+ ", category_name categoryName"
 				+ ", company_name companyName"
 				+ ", socket_size socketSize"
 				+ ", core"
@@ -127,6 +155,7 @@ public class CpuDao {
 				Cpu c = new Cpu();
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
+				c.setCpuName(rs.getString("categoryName"));
 				c.setCompnayName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
@@ -151,7 +180,7 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(company_name)
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(cpu_kind)
 	public ArrayList<String> companyKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅

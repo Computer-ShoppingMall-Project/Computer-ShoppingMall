@@ -36,6 +36,7 @@ public class InsertStorageController extends HttpServlet {
 		// 변수등록
 		String storageName = null;
 		String companyName = null;
+		String categoryName = null;
 		String storageInterface = null;
 		String capacity = null;
 		int price = 0;
@@ -48,6 +49,9 @@ public class InsertStorageController extends HttpServlet {
 		}
 		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName = request.getParameter("companyName");
+		}
+		if(request.getParameter("categoryName") != null && request.getParameter("categoryName") !="") {
+			companyName = request.getParameter("categoryName");
 		}
 		if(request.getParameter("storageInterface") != null && request.getParameter("storageInterface") !="") {
 			storageInterface = request.getParameter("storageInterface");
@@ -70,6 +74,7 @@ public class InsertStorageController extends HttpServlet {
 		Storage s = new Storage();
 		s.setStorageName(storageName);
 		s.setCompanyName(companyName);
+		s.setCompanyName(categoryName);
 		s.setStorageInterface(storageInterface);
 		s.setCapacity(capacity);
 		s.setPrice(price);
