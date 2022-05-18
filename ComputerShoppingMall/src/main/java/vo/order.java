@@ -1,6 +1,6 @@
 package vo;
 
-public class Checkout {
+public class order {
 	private int orderNo;
 	private int basketNo;
 	private String customerId;

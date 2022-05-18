@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
-import vo.Checkout;
-import vo.Qna;
+import vo.order;
+// import vo.Qna;
 
 public class OrderDao {
    public int insertOrder(String customerId) {
@@ -19,8 +19,8 @@ public class OrderDao {
 	      // DButil
 	      conn = DButil.getConnection();
 	      // SQL 쿼리
-	      String sql = "INSERT INTO order (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
-	            + "   SELECT basket_no, customer_id, category_name, category_number, category_price, category_quantity, NOW()"
+	      String sql = "INSERT INTO `order` (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
+	            + "   SELECT basket_no, customer_id, product_name, product_number, price, quantity, NOW()"
 	            + "   FROM basket WHERE customer_id = ?";
 	      try {
 	         stmt = conn.prepareStatement(sql);
@@ -44,9 +44,9 @@ public class OrderDao {
 	      return row;
 	   }
 	
-	public ArrayList<Checkout> selectOrderList(String customerId) {
-		ArrayList<Checkout> list = new ArrayList<Checkout>();
-		Checkout checkout = null;
+	public ArrayList<order> selectOrderList(String customerId) {
+		ArrayList<order> list = new ArrayList<order>();
+		order checkout = null;
 		// DB 초기화
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -68,7 +68,7 @@ public class OrderDao {
 			stmt.setString(1, customerId);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				checkout = new Checkout();
+				checkout = new order();
 				checkout.setOrderNo(rs.getInt("orderNo"));
 				checkout.setCustomerId(rs.getString("customerId"));
 				checkout.setBasketNo(rs.getInt("basketNo"));

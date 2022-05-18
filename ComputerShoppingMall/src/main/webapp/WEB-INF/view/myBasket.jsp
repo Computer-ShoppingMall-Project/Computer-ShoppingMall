@@ -77,6 +77,7 @@
 					<thead>
 						<tr>
 							<th>부품 이름</th>
+							<th>부품 종류</th>
 							<th>부품 번호</th>
 							<th>가격</th>
 							<th>수량</th>
@@ -87,13 +88,13 @@
 					<tbody>
 						<c:forEach var="basket" items="${basketList}">
 							<tr>
+								<td>${basket.productName}</td>
 								<td>${basket.categoryName}</td>
-								<td>${basket.categoryNumber}</td>
-								<td>${basket.categoryPrice}</td>
-								<td>${basket.categoryQuantity}</td>
+								<td>${basket.productNumber}</td>
+								<td>${basket.price}</td>
+								<td>${basket.quantity}</td>
 								<td>${basket.createDate}</td>
-								<td><a
-									href="${pageContext.request.contextPath}/DeleteMyBasketController?basketNo=${basket.basketNo}">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?basketNo=${basket.basketNo}">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

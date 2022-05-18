@@ -45,9 +45,9 @@ public class BasketDao {
 		int row = 0;
 		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
 		String sql = "DELETE b"
-				+ " FROM basket b INNER JOIN checkout c"
-				+ "	ON b.customer_id = c.customer_id "
-				+ " WHERE c.customer_id=? ";
+				+ " FROM basket b INNER JOIN `order` o"
+				+ "	ON b.customer_id = o.customer_id "
+				+ " WHERE o.customer_id=? ";
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setString(1, customerId); // customer_id = ?

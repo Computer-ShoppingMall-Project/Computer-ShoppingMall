@@ -148,9 +148,9 @@
 							<tr>
 								<td>${basket.basketNo}</td>
 								<td>${basket.customerId}</td>
-								<td>${basket.categoryName}</td>
-								<td>${basket.categoryPrice}</td>
-								<td>${basket.categoryQuantity}</td>
+								<td>${basket.productName}</td>
+								<td>${basket.price}</td>
+								<td>${basket.quantity}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

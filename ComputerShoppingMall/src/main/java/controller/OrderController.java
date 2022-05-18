@@ -20,7 +20,6 @@ import vo.Customer;
 @WebServlet("/OrderController")
 public class OrderController extends HttpServlet {
 	private OrderDao dao;
-	private BasketDao bDao;
 	private MemberDao memberDao;
 	private BasketDao myBasketDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,10 +32,10 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		// MyBasketDao
-		bDao = new BasketDao();
+		myBasketDao = new BasketDao();
 		memberDao = new MemberDao();
 		// MyBasketDao select
-		ArrayList<Basket> list = bDao.selectMyBasket(customerId);
+		ArrayList<Basket> list = myBasketDao.selectMyBasket(customerId);
 		// vo
 		Customer c = memberDao.selectMemberOne(customerId);
 		
@@ -57,7 +56,7 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		
-		// CheckoutDao insert
+		// orderDao insert
 		dao = new OrderDao();
 		int row = dao.insertOrder(customerId);
 		
