@@ -87,7 +87,7 @@
 						</div>
 
 						<div class="form-group">
-							<select class="form-group" name="coolerKind">
+							<select class="form-group" name="kind">
 								<option value="" selected disabled hidden>ratedPower</option>
 								<option value="CPU 쿨러 공랭">CPU 쿨러 공랭</option>
 								<option value="CPU 쿨러 수랭">CPU 쿨러 수랭</option>

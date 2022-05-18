@@ -91,7 +91,7 @@
 						</div>
 
 						<div class="form-group">
-							<select class="readonly" name="coolerKind"
+							<select class="readonly" name="kind"
 								onFocus="this.initialSelect = this.selectedIndex;"
 								onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>ratedPower</option>

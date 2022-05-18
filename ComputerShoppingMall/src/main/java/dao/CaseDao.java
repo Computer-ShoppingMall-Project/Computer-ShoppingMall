@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.DButil;
 import vo.Case;
@@ -20,15 +22,15 @@ public class CaseDao {
 			stmt.executeUpdate();
 			} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	// case 상품상세보기
 	// case 상품수정
 	public int updateCase(Case c) {
 		Connection conn = null;
@@ -49,14 +51,15 @@ public class CaseDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}return row;
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 	// case 상품등록
 	public int insertCase(Case c) {
@@ -84,12 +87,196 @@ public class CaseDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
+	}
+	// case 정보 상세보기
+	public ArrayList<Case> selectCaseList() {
+		ArrayList<Case> list = new ArrayList<Case>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	case_no caseNo"
+				+ "	, case_name caseName"
+				+ "	, category_name categoryName"
+				+ "	, case_size caseSize"
+				+ "	, gpu_size gpuSize"
+				+ "	, bay89mm"
+				+ "	, bay64mm"
+				+ "	, price"
+				+ "	, quantity"
+				+ "	, case_image_no caseImageNo"
+				+ "	, memo"
+				+ "	, update_date updateDate"
+				+ " FROM `case`";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Case c = new Case();
+				c.setCaseNo(rs.getInt("caseNo"));
+				c.setCaseName(rs.getString("caseName"));
+				c.setCategoryName(rs.getString("categoryName"));
+				c.setCaseSize(rs.getString("caseSize"));
+				c.setGpuSize(rs.getInt("gpuSize"));
+				c.setBay64mm(rs.getInt("bay64mm"));
+				c.setBay89mm(rs.getInt("bay89mm"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCaseImageNo(rs.getInt("caseImageNo"));
+				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// Case 검색 체크박스 / insertCase -> 중복제거 데이터(case_size)
+	public ArrayList<String> caseSizeList() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(case_size) caseSize FROM `case`";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String caseSize = rs.getString("caseSize");
+				list.add(caseSize);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// Case 검색 체크박스 / insertCase -> 중복제거 데이터(gpu_size)
+	public ArrayList<String> gpuSizeList() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(gpu_size) gpuSize FROM `case`"
+				+ "ORDER BY gpu_size";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String gpuSize = rs.getString("gpuSize");
+				list.add(gpuSize);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// Case 검색 체크박스 / insertCase -> 중복제거 데이터(6.4mmList)
+	public ArrayList<String> bay64mmList() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(bay64mm) bay64mm FROM `case`"
+				+ " ORDER BY bay64mm";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String bay64mm = rs.getString("bay64mm");
+				list.add(bay64mm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// Case 검색 체크박스 / insertCase -> 중복제거 데이터(bay89mm)
+	public ArrayList<String> bay89mmList() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(bay89mm) bay89mm FROM `case`"
+				+ " ORDER BY bay89mm";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String bay89mm = rs.getString("bay89mm");
+				list.add(bay89mm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }

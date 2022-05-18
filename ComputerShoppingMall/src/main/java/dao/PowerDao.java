@@ -2,11 +2,12 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.DButil;
 import vo.Power;
-import vo.Ram;
 
 public class PowerDao {
 	// 장바구니 담기
@@ -54,15 +55,15 @@ public class PowerDao {
 			stmt.executeUpdate();
 			} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	// power 상품상세보기
 	// power 상품수정
 	public int updatePower(Power p) {
 		Connection conn = null;
@@ -83,14 +84,15 @@ public class PowerDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}return row;
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 	// power 상품등록
 	public int insertPower(Power p) {
@@ -115,12 +117,94 @@ public class PowerDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
+	}
+	// Power 정보 상세보기
+	public ArrayList<Power> selectPowerList() {
+		ArrayList<Power> list = new ArrayList<Power>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ " power_no powerNo"
+				+ " ,power_name powerName"
+				+ " ,category_name categoryName"
+				+ " ,rated_power ratedPower"
+				+ " ,price"
+				+ " ,quantity"
+				+ " ,power_image_no powerImageNo"
+				+ " ,memo"
+				+ " ,update_date updateDate"
+				+ " FROM power";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Power p = new Power();
+				p.setPowerNo(rs.getInt("powerNo"));
+				p.setPowerName(rs.getString("powerName"));
+				p.setCategoryName(rs.getString("categoryName"));
+				p.setRatedPower(rs.getString("ratedPower"));
+				p.setPrice(rs.getInt("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setPowerImageNo(rs.getInt("powerImageNo"));
+				p.setMemo(rs.getString("memo"));
+				p.setUpdateDate(rs.getString("updateDate"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// Power 검색 체크박스 / insertPower -> 중복제거 데이터(rated_power)
+	public ArrayList<String> ratedPowerList() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(rated_power) ratedPower FROM power";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String ratedPower = rs.getString("ratedPower");
+				list.add(ratedPower);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }

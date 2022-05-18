@@ -71,6 +71,4 @@ public class Power {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
-	
 }
