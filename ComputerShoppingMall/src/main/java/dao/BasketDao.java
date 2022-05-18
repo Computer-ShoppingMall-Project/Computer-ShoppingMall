@@ -83,11 +83,11 @@ public class BasketDao {
 		// SQL 쿼리
 		String sql = "SELECT basket_no basketNo" 
 				+ "						,customer_id customerId"	
-				+ "						,category_name categoryName"
 				+ "						,product_name productName"
-				+ "						,category_number categoryNumber"
-				+ "						,category_price categoryPrice"
-				+ "						,category_quantity categoryQuantity"
+				+ "						,category_name categoryName"	
+				+ "						,product_number productNumber"
+				+ "						,price"
+				+ "						,quantity"
 				+ "						,create_date createDate"
 				+ "						,update_date updateDate"
 				+ "			FROM basket"
@@ -102,8 +102,9 @@ public class BasketDao {
 				basket.setCustomerId(rs.getString("customerId"));
 				basket.setProductName(rs.getString("productName"));
 				basket.setCategoryName(rs.getString("categoryName"));
-				basket.setPrice(rs.getInt("categoryPrice"));
-				basket.setQuantity(rs.getInt("categoryQuantity"));
+				basket.setProductNumber(rs.getInt("productNumber"));
+				basket.setPrice(rs.getInt("price"));
+				basket.setQuantity(rs.getInt("quantity"));
 				basket.setCreateDate(rs.getString("createDate"));
 				basket.setUpdateDate(rs.getString("updateDate"));
 				list.add(basket);
