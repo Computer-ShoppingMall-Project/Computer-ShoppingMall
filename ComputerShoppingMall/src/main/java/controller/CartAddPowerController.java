@@ -30,28 +30,37 @@ public class CartAddPowerController extends HttpServlet {
 		// request 값 받아오기
 		String productName = null;
 		String categoryName = null;
-		int cateogryNumber = 0;
-		int categoryPrice = 0;
-		int categoryQuantity = 0;
+		int productNumber = 0;
+		int price = 0;
+		int quantity = 0;
 		  
-		productName = request.getParameter("puductName");
+		productName = request.getParameter("powerName");
 		categoryName = request.getParameter("categoryName");
-		cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
-		categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
-		categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
+		productNumber = Integer.parseInt(request.getParameter("powerNo"));
+		price= Integer.parseInt(request.getParameter("price"));
+		quantity = Integer.parseInt(request.getParameter("quantity"));
 		  
 		  
 		// vo
 		Power power = new Power();
 		power.setCategoryName(categoryName);
 		power.setPowerName(productName);
-		power.setPowerNo(cateogryNumber);
-		power.setPrice(categoryPrice);
-		power.setQuantity(categoryQuantity);
+		power.setPowerNo(productNumber);
+		power.setPrice(price);
+		power.setQuantity(quantity);
 		  
 		// dao
 		powerDao = new PowerDao();
 		int row = powerDao.insertCartPower(customerId, power);
+		
+		// 상품 데이터 등록 성공 체크 코드
+		if (row == 1) { 
+	    	System.out.println("등록 성공! CartAddPowerController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/PowerListController");
+	    	return;
+	    } else {
+	    	System.out.println("등록 실패! CartAddStorageController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/PowerListController?error=error!");
+	    }	
 	}
-
 }

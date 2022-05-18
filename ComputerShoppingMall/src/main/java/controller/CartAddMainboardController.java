@@ -29,28 +29,39 @@ public class CartAddMainboardController extends HttpServlet {
 		// request 값 받아오기
 		String productName = null;
 		String categoryName = null;
-		int cateogryNumber = 0;
-		int categoryPrice = 0;
-		int categoryQuantity = 0;
+		int productNumber = 0;
+		int price = 0;
+		int quantity = 0;
 		  
-		productName = request.getParameter("puductName");
+		productName = request.getParameter("mainboardName");
 		categoryName = request.getParameter("categoryName");
-		cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
-		categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
-		categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
+		productNumber = Integer.parseInt(request.getParameter("mainboardNo"));
+		price = Integer.parseInt(request.getParameter("price"));
+		quantity = Integer.parseInt(request.getParameter("quantity"));
 		  
 		  
 		// vo
 		Mainboard mainboard = new Mainboard();
 		mainboard.setCategoryName(categoryName);
 		mainboard.setMainboardName(productName);
-		mainboard.setMainboardNo(cateogryNumber);
-		mainboard.setPrice(categoryPrice);
-		mainboard.setQuantity(categoryQuantity);
+		mainboard.setMainboardNo(productNumber);
+		mainboard.setPrice(price);
+		mainboard.setQuantity(quantity);
 		  
 		// dao
 		mainboardDao = new MainboardDao();
 		int row = mainboardDao.insertCartMainboard(customerId, mainboard);
+		
+		// 상품 데이터 등록 성공 체크 코드
+		if (row == 1) { 
+	    	System.out.println("등록 성공! CartAddMainboardController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/MainboardListController");
+	    	return;
+	    } else {
+	    	System.out.println("등록 실패! CartAddMainboardController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/MainboardListController?error=error!");
+	    }
+		
 	}
 
 }

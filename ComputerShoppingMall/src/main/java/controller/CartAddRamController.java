@@ -33,30 +33,38 @@ public class CartAddRamController extends HttpServlet {
 	      // request 값 받아오기
 	      String productName = null;
 	      String categoryName = null;
-	      int cateogryNumber = 0;
-	      int categoryPrice = 0;
-	      int categoryQuantity = 0;
+	      int productNumber = 0;
+	      int price = 0;
+	      int quantity = 0;
 	      
-	      productName = request.getParameter("puductName");
+	      productName = request.getParameter("ramName");
 	      categoryName = request.getParameter("categoryName");
-	      cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
-	      categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
-	      categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
+	      productNumber = Integer.parseInt(request.getParameter("ramNo"));
+	      price = Integer.parseInt(request.getParameter("price"));
+	      quantity = Integer.parseInt(request.getParameter("quantity"));
 	      
 	      
 	      // vo
 	      Ram ram = new Ram();
 	      ram.setCategoryName(categoryName);
 	      ram.setRamName(productName);
-	      ram.setRamNo(cateogryNumber);
-	      ram.setPrice(categoryPrice);
-	      ram.setQuantity(categoryQuantity);
+	      ram.setRamNo(productNumber);
+	      ram.setPrice(price);
+	      ram.setQuantity(quantity);
 	      
 	      // dao
 	      ramDao = new RamDao();
 	      int row = ramDao.insertCartRam(customerId, ram);
 	      
-	      
+	   // 상품 데이터 등록 성공 체크 코드
+			if (row == 1) { 
+		    	System.out.println("등록 성공! CartAddRamController.dopost");
+		    	response.sendRedirect(request.getContextPath() + "/RamListController");
+		    	return;
+		    } else {
+		    	System.out.println("등록 실패! CartAddRamController.dopost");
+		    	response.sendRedirect(request.getContextPath() + "/RamListController?error=error!");
+		    }
 	}
 
 }

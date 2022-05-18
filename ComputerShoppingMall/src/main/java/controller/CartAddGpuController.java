@@ -28,28 +28,38 @@ public class CartAddGpuController extends HttpServlet {
 		// request 값 받아오기
 		String productName = null;
 		String categoryName = null;
-		int cateogryNumber = 0;
-		int categoryPrice = 0;
-		int categoryQuantity = 0;
+		int productNumber = 0;
+		int price = 0;
+		int quantity = 0;
 		  
-		productName = request.getParameter("puductName");
+		productName = request.getParameter("gpuName");
 		categoryName = request.getParameter("categoryName");
-		cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
-		categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
-		categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
+		productNumber = Integer.parseInt(request.getParameter("gpuNo"));
+		price = Integer.parseInt(request.getParameter("price"));
+		quantity = Integer.parseInt(request.getParameter("quantity"));
 		  
 		  
 		// vo
 		Gpu gpu = new Gpu();
 		gpu.setCategoryName(categoryName);
 		gpu.setGpuName(productName);
-		gpu.setGpuNo(cateogryNumber);
-		gpu.setPrice(categoryPrice);
-		gpu.setQuantity(categoryQuantity);
+		gpu.setGpuNo(productNumber);
+		gpu.setPrice(price);
+		gpu.setQuantity(quantity);
 		  
 		// dao
 		gpuDao = new GpuDao();
 		int row = gpuDao.insertCartGpu(customerId, gpu);
+		
+		if (row == 1) { 
+	    	System.out.println("등록 성공! CartAddGpuController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/GpuListController");
+	    	return;
+	    } else {
+	    	System.out.println("등록 실패! CartAddGpuController.dopost");
+	    	response.sendRedirect(request.getContextPath() + "/GpuListController?error=error!");
+	    }
+		
 	}
 
 }
