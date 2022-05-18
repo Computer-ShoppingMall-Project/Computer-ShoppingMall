@@ -38,7 +38,7 @@ public class InsertRamController extends HttpServlet {
 		// 변수등록
 		String ramName = null;
 		String companyName = null;
-		String ramKind = null;
+		String kind = null;
 		int price = 0;
 		int quantity = 0;
 		String memo = null;
@@ -50,8 +50,8 @@ public class InsertRamController extends HttpServlet {
 		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName = request.getParameter("companyName");
 		}
-		if(request.getParameter("ramKind") != null && request.getParameter("ramKind") !="") {
-			ramKind = request.getParameter("ramKind");
+		if(request.getParameter("kind") != null && request.getParameter("kind") !="") {
+			kind = request.getParameter("kind");
 		}
 		if(request.getParameter("price") != null && request.getParameter("price") !="") {
 			price = Integer.parseInt(request.getParameter("price"));
@@ -67,7 +67,7 @@ public class InsertRamController extends HttpServlet {
 		Ram r = new Ram();
 		r.setRamName(ramName);
 		r.setCompanyName(companyName);
-		r.setKind(ramKind);
+		r.setKind(kind);
 		r.setPrice(price);
 		r.setQuantity(quantity);
 		r.setMemo(memo);

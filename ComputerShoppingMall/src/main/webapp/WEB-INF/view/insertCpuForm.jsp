@@ -78,8 +78,8 @@
               <input type="text" name="cpuName" class="form-control" placeholder="CpuName">
             </div>
             <div class="form-group">
-             <input type='radio' name='cpuKind' value='인텔'onclick="clickCheck(this)"/>인텔
-			 <input type='radio' name='cpuKind' value='AMD'onclick="clickCheck(this)"/>AMD 
+             <input type='radio' name='kind' value='인텔'onclick="clickCheck(this)"/>인텔
+			 <input type='radio' name='kind' value='AMD'onclick="clickCheck(this)"/>AMD 
              </div>
              <div class="form-group">
               <input type='radio' name='socketSize' value='1700'onclick="clickCheck(this)"/>1700

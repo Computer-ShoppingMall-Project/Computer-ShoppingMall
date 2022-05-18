@@ -69,7 +69,7 @@ public class CpuDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql="INSERT INTO cpu (cpu_name, cpu_kind, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
+		String sql="INSERT INTO cpu (cpu_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());
@@ -151,7 +151,7 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(cpu_kind)
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(company_name)
 	public ArrayList<String> companyKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅

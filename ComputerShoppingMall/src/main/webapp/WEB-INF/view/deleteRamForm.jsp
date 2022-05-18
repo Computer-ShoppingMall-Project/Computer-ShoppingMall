@@ -84,8 +84,8 @@
               <input type="text" readonly name="companyName" class="form-control" placeholder="CompanyName">
             </div>
              <div class="form-group">
-              <input type='radio' name='ramKind' value='DDR5'onclick="return(false);"/>DDR5
-			  <input type='radio' name='ramKind' value='DDR4'onclick="return(false);"/>DDR4
+              <input type='radio' name='kind' value='DDR5'onclick="return(false);"/>DDR5
+			  <input type='radio' name='kind' value='DDR4'onclick="return(false);"/>DDR4
             </div>
             <div class="form-group">
               <input type="file" name="ramImage" class="form-control" placeholder="Img">

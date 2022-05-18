@@ -80,9 +80,9 @@
             <div class="form-group">
               <input type="text" name="companyName" class="form-control" placeholder="CompanyName">
             </div>
-             <div class="ramkind">
-              <input type='radio' name='ramKind' value='DDR5'onclick="clickCheck(this)"/>DDR5
-			  <input type='radio' name='ramKind' value='DDR4'onclick="clickCheck(this)"/>DDR4
+             <div class="kind">
+              <input type='radio' name='kind' value='DDR5'onclick="clickCheck(this)"/>DDR5
+			  <input type='radio' name='kind' value='DDR4'onclick="clickCheck(this)"/>DDR4
             </div>
             <div class="form-group">
               <input type="file" name="ramImage" class="form-control" placeholder="Img">

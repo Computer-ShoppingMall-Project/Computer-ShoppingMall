@@ -101,7 +101,7 @@ public class RamDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql = "INSERT INTO ram(ram_name, company_name, ram_kind, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?, NOW())";
+		String sql = "INSERT INTO ram(ram_name, company_name, kind, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?, NOW())";
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, r.getRamName());
