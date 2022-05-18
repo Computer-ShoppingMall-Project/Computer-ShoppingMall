@@ -1,33 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>MaxiBiz Bootstrap Business Template</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+<meta charset="utf-8">
+  <title>RedVelvet</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="img/favicon.png" rel="icon">
+  	<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
-  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
-
-  <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/colors/blue.css">
+	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	  <!-- Libraries CSS Files -->
+	<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+	<link href="lib/hover/hoverex-all.css" rel="stylesheet">
+	<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+	<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+	
+	<!-- Main Stylesheet File -->
+	<link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/colors/blue.css">
 
   <!-- =======================================================
     Template Name: MaxiBiz
@@ -45,7 +46,7 @@
 </div>
  
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
 
   <section class="post-wrapper-top">
     <div class="container">
@@ -152,7 +153,7 @@
 
 
   <!-- footer적용 -->
-  <jsp:include page="footer.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
   
   <div class="dmtop">Scroll to Top</div>
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +39,7 @@
 </head>
 <body>
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
 
   <section id="intro">
     <div class="container">
@@ -400,7 +399,7 @@
   <!-- end section3 -->
 
   <!-- footer적용 -->
-  <jsp:include page="footer.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
   
   <!-- end footer -->
   <div class="dmtop">Scroll to Top</div>
@@ -421,6 +420,6 @@
   <script src="lib/easypiechart/easypiechart.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MaxiBiz Bootstrap Business Template</title>
+  <title>RedVelvet</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -38,7 +39,7 @@
 </head>
 <body>
   <!-- header적용 -->
-  <jsp:include page="header.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
 
   <section class="marketplace-top">
     <div id="market-wrapper">
@@ -327,7 +328,7 @@
   <!-- end section3 -->
 
   <!-- footer적용 -->
-  <jsp:include page="footer.jsp"></jsp:include>
+  <jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
   
   <div class="dmtop">Scroll to Top</div>
 

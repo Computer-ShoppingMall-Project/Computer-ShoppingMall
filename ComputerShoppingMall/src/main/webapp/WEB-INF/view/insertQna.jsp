@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>INSERT Q&A</title>
+<title>RedVelvet</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -91,7 +91,7 @@ function NullVal(param) {
 </head>
 <body>
 	<!-- header적용 -->
-	<c:import url="header.jsp"></c:import>
+	<jsp:include page="/WEB-INF/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="section1">
 		<div class="container clearfix">
@@ -125,7 +125,7 @@ function NullVal(param) {
 	<!-- end section -->
 
 	<!-- footer적용 -->
-	<c:import url="footer.jsp"></c:import>
+	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
