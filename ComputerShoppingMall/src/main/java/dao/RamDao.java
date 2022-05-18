@@ -16,7 +16,7 @@ public class RamDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		String sql="INSERT INTO basket (customer_id, product_name, category_name, category_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);

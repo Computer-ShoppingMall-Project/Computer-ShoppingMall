@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,39 @@ import util.DButil;
 import vo.Mainboard;
 
 public class MainboardDao {
+	// 장바구니 담기
+	public int insertCartMainboard(String customerId, Mainboard mainboard) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, mainboard.getMainboardName());
+			stmt.setString(3, mainboard.getCategoryName());
+			stmt.setInt(4, mainboard.getMainboardNo());
+			stmt.setInt(5, mainboard.getPrice());
+			stmt.setInt(5, mainboard.getQuantity());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// mainboard 상품삭제
 	public void deleteMainboard(int mainboardNo) {
 		Connection conn = null;

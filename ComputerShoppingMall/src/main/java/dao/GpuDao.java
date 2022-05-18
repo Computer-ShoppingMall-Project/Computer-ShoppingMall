@@ -8,8 +8,42 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Gpu;
+import vo.Ram;
 
 public class GpuDao {
+	// 장바구니 담기
+	public int insertCartGpu(String customerId, Gpu gpu) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, gpu.getGpuName());
+			stmt.setString(3, gpu.getCategoryName());
+			stmt.setInt(4, gpu.getGpuNo());
+			stmt.setInt(5, gpu.getPrice());
+			stmt.setInt(5, gpu.getQuantity());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// gpu 상품삭제
 	public void deleteGpu(int gpuNo) {
 		Connection conn = null;

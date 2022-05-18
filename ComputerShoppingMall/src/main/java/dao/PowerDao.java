@@ -9,6 +9,39 @@ import vo.Power;
 import vo.Ram;
 
 public class PowerDao {
+	// 장바구니 담기
+	public int insertCartPower(String customerId, Power power) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, power.getPowerName());
+			stmt.setString(3, power.getCategoryName());
+			stmt.setInt(4, power.getPowerNo());
+			stmt.setInt(5, power.getPrice());
+			stmt.setInt(5, power.getQuantity());
+			row = stmt.executeUpdate();
+			if(row == 1) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// power 상품삭제
 	public void deletePower(int powerNo) {
 		Connection conn = null;
