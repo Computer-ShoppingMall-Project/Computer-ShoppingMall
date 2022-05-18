@@ -4,6 +4,7 @@ public class Case {
 	private int caseNo;
 	private String caseName;
 	private String caseSize;
+	private String categoryName;
 	private int gpuSize;
 	private int bay89mm;
 	private int bay64mm;
@@ -15,9 +16,10 @@ public class Case {
 	
 	@Override
 	public String toString() {
-		return "Case [caseNo=" + caseNo + ", caseName=" + caseName + ", caseSize=" + caseSize + ", gpuSize=" + gpuSize
-				+ ", bay89mm=" + bay89mm + ", bay64mm=" + bay64mm + ", price=" + price + ", quantity=" + quantity
-				+ ", caseImageNo=" + caseImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
+		return "Case [caseNo=" + caseNo + ", caseName=" + caseName + ", caseSize=" + caseSize + ", categoryName="
+				+ categoryName + ", gpuSize=" + gpuSize + ", bay89mm=" + bay89mm + ", bay64mm=" + bay64mm + ", price="
+				+ price + ", quantity=" + quantity + ", caseImageNo=" + caseImageNo + ", memo=" + memo + ", updateDate="
+				+ updateDate + "]";
 	}
 
 	public int getCaseNo() {
@@ -42,6 +44,14 @@ public class Case {
 
 	public void setCaseSize(String caseSize) {
 		this.caseSize = caseSize;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public int getGpuSize() {
