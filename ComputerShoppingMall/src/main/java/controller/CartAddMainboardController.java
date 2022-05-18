@@ -14,8 +14,6 @@ import vo.Mainboard;
 @WebServlet("/CartAddMainboardController")
 public class CartAddMainboardController extends HttpServlet {
 	private MainboardDao mainboardDao;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -29,29 +27,28 @@ public class CartAddMainboardController extends HttpServlet {
 		// request 값 받아오기
 		String productName = null;
 		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
+		int cateogryNumber = 0;
+		int categoryPrice = 0;
+		int categoryQuantity = 0;
 		  
-		productName = request.getParameter("mainboardName");
+		productName = request.getParameter("puductName");
 		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("mainboardNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
+		categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
+		categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
 		  
 		  
 		// vo
 		Mainboard mainboard = new Mainboard();
 		mainboard.setCategoryName(categoryName);
 		mainboard.setMainboardName(productName);
-		mainboard.setMainboardNo(productNumber);
-		mainboard.setPrice(price);
-		mainboard.setQuantity(quantity);
+		mainboard.setMainboardNo(cateogryNumber);
+		mainboard.setPrice(categoryPrice);
+		mainboard.setQuantity(categoryQuantity);
 		  
 		// dao
 		mainboardDao = new MainboardDao();
 		int row = mainboardDao.insertCartMainboard(customerId, mainboard);
-		
 		// 상품 데이터 등록 성공 체크 코드
 		if (row == 1) { 
 	    	System.out.println("등록 성공! CartAddMainboardController.dopost");

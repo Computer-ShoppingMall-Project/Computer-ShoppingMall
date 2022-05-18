@@ -32,6 +32,6 @@ public class QnaListController extends HttpServlet {
 		ArrayList<Qna> list = qnaDao.selectQnaList(customerId);
 		
 		request.setAttribute("qnaList", list);
-		request.getRequestDispatcher("/WEB-INF/view/qnaList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/customer/qnaList.jsp").forward(request, response);
 	}
 }

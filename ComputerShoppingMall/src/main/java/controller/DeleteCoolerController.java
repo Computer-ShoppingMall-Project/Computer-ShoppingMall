@@ -23,7 +23,7 @@ public class DeleteCoolerController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/deleteCoolerForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/deleteCoolerForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

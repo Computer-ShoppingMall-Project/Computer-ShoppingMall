@@ -25,7 +25,7 @@ public class InsertCaseController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/insertCaseForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/insertCaseForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -22,7 +22,7 @@ public class InsertStorageController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/insertStorageForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/insertStorageForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

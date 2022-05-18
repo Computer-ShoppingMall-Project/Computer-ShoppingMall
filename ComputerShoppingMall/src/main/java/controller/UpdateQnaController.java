@@ -35,7 +35,7 @@ public class UpdateQnaController extends HttpServlet {
 		Qna qna = qnaDao.selectQnaOne(customerId, qnaNo);
 		
 		request.setAttribute("qna", qna);
-		request.getRequestDispatcher("/WEB-INF/view/updateQna.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/customer/updateQna.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

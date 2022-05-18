@@ -32,7 +32,7 @@ public class StorageListController extends HttpServlet {
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("interfaceList", interfaceList);
 		request.setAttribute("capacityList", capacityList);
-		request.getRequestDispatcher("/WEB-INF/view/storageList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nonCustomer/storageList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

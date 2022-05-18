@@ -33,7 +33,7 @@ public class CoolerListController extends HttpServlet {
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("kindList", kindList);
 		request.setAttribute("sizeList", sizeList);
-		request.getRequestDispatcher("/WEB-INF/view/coolerList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nonCustomer/coolerList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AccountController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/view/account.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/account.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}

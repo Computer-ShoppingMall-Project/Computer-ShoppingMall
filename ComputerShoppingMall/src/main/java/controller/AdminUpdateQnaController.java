@@ -15,6 +15,13 @@ public class AdminUpdateQnaController extends HttpServlet {
 	private QnaDao qnaDao;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String adminId = (String)session.getAttribute("sessionAdminId"); 
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
 		// 답변 / 수정할 내용 받아오기
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo")); // 수정 번호
 		String qnaAnswer = request.getParameter("qnaAnswer"); // 답변 내용

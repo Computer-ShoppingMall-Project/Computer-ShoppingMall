@@ -15,7 +15,7 @@ import vo.Ram;
 public class UpdateRamController extends HttpServlet {
 	private RamDao ramDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/deleteRamForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/deleteRamForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

@@ -29,7 +29,7 @@ public class MyPaymentController extends HttpServlet {
 		dao = new OrderDao();
 		ArrayList<Checkout> list = dao.selectOrderList(customerId);
 		request.setAttribute("CheckoutList", list);
-		request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/customer/checkout.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

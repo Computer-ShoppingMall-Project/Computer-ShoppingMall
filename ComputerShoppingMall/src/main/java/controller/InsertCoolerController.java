@@ -25,7 +25,7 @@ public class InsertCoolerController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/insertCoolerForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/insertCoolerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

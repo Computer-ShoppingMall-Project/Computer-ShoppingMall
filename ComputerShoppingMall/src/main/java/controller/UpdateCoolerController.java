@@ -18,7 +18,7 @@ public class UpdateCoolerController extends HttpServlet {
 	private CoolerDao coolerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/view/deleteCoolerForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/deleteCoolerForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

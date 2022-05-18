@@ -18,8 +18,7 @@
       </div>
       <div class="col-lg-1 text-right"></div>
       <div class="social_buttons">
-         <a href="${pageContext.request.contextPath}/SelectMemberOneController"
-            data-toggle="tooltip" data-placement="bottom">${sessionCustomerId}</a>
+         <a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom">${sessionCustomerId}</a>
       </div>
       <!-- end container -->
    </div>
@@ -32,7 +31,7 @@
             <div class="site-title" id="title">
                <a href="${pageContext.request.contextPath}/IndexController" title="">
                   <h4>
-                     Red<span>Velvet</span>
+                  Red<span>Velvet</span>
                   </h4>
                </a>
             </div>

@@ -25,7 +25,7 @@ public class InsertQnaController extends HttpServlet {
 		}
 		
 		request.setAttribute("customerId", customerId);
-		request.getRequestDispatcher("WEB-INF/view/insertQna.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/customer/insertQna.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

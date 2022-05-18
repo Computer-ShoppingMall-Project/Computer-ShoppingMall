@@ -30,7 +30,7 @@ public class RamListController extends HttpServlet {
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("kindList", kindList);
 	
-		request.getRequestDispatcher("/WEB-INF/view/ramList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nonCustomer/ramList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

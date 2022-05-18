@@ -19,7 +19,7 @@ public class AdminSingleProductController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/adminSingleProduct.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/adminSingleProduct.jsp").forward(request, response);
 	}
 
 }

@@ -15,6 +15,7 @@ import dao.StorageDao;
 public class DeleteStorageController extends HttpServlet {
 	private StorageDao storageDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
 		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
 		System.out.println(sessionCustomerId+"<-sessionCustomerId");
@@ -22,7 +23,7 @@ public class DeleteStorageController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

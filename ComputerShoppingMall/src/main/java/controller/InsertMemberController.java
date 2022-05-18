@@ -24,7 +24,7 @@ public class InsertMemberController extends HttpServlet {
 			return;
 		}
 		// 로그인 상태가 아니면 insertMemberForm.jsp 호출
-		request.getRequestDispatcher("/WEB-INF/view/insertMember.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/insertMember.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,7 +15,7 @@ public class UpdateGpuController extends HttpServlet {
 	private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/view/deleteGpuForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/deleteGpuForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

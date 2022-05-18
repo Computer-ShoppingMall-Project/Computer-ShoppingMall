@@ -14,7 +14,7 @@ import vo.Cpu;
 public class UpdateCpuController extends HttpServlet {
 	private CpuDao cpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/deleteCpuForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/deleteCpuForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

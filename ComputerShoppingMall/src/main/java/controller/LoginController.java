@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
          return;
       }
       
-      request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+      request.getRequestDispatcher("/WEB-INF/nonCustomer/login.jsp").forward(request, response);
    }
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       // if) 이미 로그인 상태면, IndexController 호출

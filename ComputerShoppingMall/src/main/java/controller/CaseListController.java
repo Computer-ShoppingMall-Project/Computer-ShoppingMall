@@ -35,7 +35,7 @@ public class CaseListController extends HttpServlet {
 		request.setAttribute("gpuSizeList", gpuSizeList);
 		request.setAttribute("bay64mmList", bay64mmList);
 		request.setAttribute("bay89mmList", bay89mmList);
-		request.getRequestDispatcher("/WEB-INF/view/caseList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nonCustomer/caseList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -14,9 +14,8 @@ import vo.Gpu;
 @WebServlet("/CartAddGpuController")
 public class CartAddGpuController extends HttpServlet {
 	private GpuDao gpuDao;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 세션확인
 		HttpSession session = request.getSession();
 		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if(customerId != null) {
@@ -28,29 +27,29 @@ public class CartAddGpuController extends HttpServlet {
 		// request 값 받아오기
 		String productName = null;
 		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
+		int cateogryNumber = 0;
+		int categoryPrice = 0;
+		int categoryQuantity = 0;
 		  
-		productName = request.getParameter("gpuName");
+		productName = request.getParameter("puductName");
 		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("gpuNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		cateogryNumber = Integer.parseInt(request.getParameter("cateogryNumber"));
+		categoryPrice= Integer.parseInt(request.getParameter("categoryPrice"));
+		categoryQuantity = Integer.parseInt(request.getParameter("categoryQuantity"));
 		  
 		  
 		// vo
 		Gpu gpu = new Gpu();
 		gpu.setCategoryName(categoryName);
 		gpu.setGpuName(productName);
-		gpu.setGpuNo(productNumber);
-		gpu.setPrice(price);
-		gpu.setQuantity(quantity);
+		gpu.setGpuNo(cateogryNumber);
+		gpu.setPrice(categoryPrice);
+		gpu.setQuantity(categoryQuantity);
 		  
 		// dao
 		gpuDao = new GpuDao();
 		int row = gpuDao.insertCartGpu(customerId, gpu);
-		
+		// 상품 데이터 등록 성공 체크 코드
 		if (row == 1) { 
 	    	System.out.println("등록 성공! CartAddGpuController.dopost");
 	    	response.sendRedirect(request.getContextPath() + "/GpuListController");
