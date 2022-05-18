@@ -56,7 +56,9 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit"
+								alt="" /> <input type="text" class="search_text showtextback"
+								name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -73,7 +75,8 @@
 					<h4 class="title">
 						<span>Delete Member</span>
 					</h4>
-					<form method="post" action="${pageContext.request.contextPath}/DeleteMemberController">
+					<form method="post"
+						action="${pageContext.request.contextPath}/DeleteMemberController">
 						<div>
 							<table class="table">
 								<tr>
@@ -83,7 +86,8 @@
 								</tr>
 								<tr>
 									<td>비밀번호 확인</td>
-									<td><input type="password" name="customerPw" required> ID와 비밀번호가 일치하면 탈퇴됩니다!</td>
+									<td><input type="password" name="customerPw" required>
+										ID와 비밀번호가 일치하면 탈퇴됩니다!</td>
 								</tr>
 								<tr>
 									<td colspan="2">
@@ -93,8 +97,11 @@
 							</table>
 						</div>
 					</form>
-					<a href="${pageContext.request.contextPath}/SelectMemberOneController" type="button" class="btn btn-outline-info btn-sm">이전</a>
-					<a href="${pageContext.request.contextPath}/IndexController" type="button" class="btn btn-outline-info btn-sm">index</a>
+					<a
+						href="${pageContext.request.contextPath}/SelectMemberOneController"
+						type="button" class="btn btn-outline-info btn-sm">이전</a> <a
+						href="${pageContext.request.contextPath}/IndexController"
+						type="button" class="btn btn-outline-info btn-sm">index</a>
 				</div>
 			</div>
 			<!-- end content -->

@@ -74,31 +74,33 @@
 			<h5 class="title">PERSONAL INFORMATION</h5>
 
 			<form id="personalinfo" action="" name="personalinfo" method="post">
-				<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
-					<label for="email">Name 
+				<div
+					class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+					<label for="email">Name <span class="required">*</span>
+					</label> <input type="text" name="name" id="name" class="form-control"
+						value="${sessionCustomerId}"> <label for="fname">Email
 						<span class="required">*</span>
-					</label> 
-						<input type="text" name="name" id="name" class="form-control" value="${sessionCustomerId}"> 
-					<label for="fname">Email
-						<span class="required">*</span>
-					</label> 
-						<input type="text" name="email" id="email" class="form-control" value="${requestScope.customer.email}"> 
-					<label for="lname">PHONE
-						<input type="text" name="lname" id="lname" class="form-control" value="${requestScope.customer.phone}">
-					</label> 
+					</label> <input type="text" name="email" id="email" class="form-control"
+						value="${requestScope.customer.email}"> <label for="lname">PHONE
+						<input type="text" name="lname" id="lname" class="form-control"
+						value="${requestScope.customer.phone}">
+					</label>
 				</div>
-				
+
 				<div class="col-lg-1 col-md-4 col-sm-12">
-					<label for="lname">Zip_Code </label> 
-						<input type="text" name="ZipCode" id="Zip_Code" class="form-control" value="${requestScope.customer.zipCode}">
+					<label for="lname">Zip_Code </label> <input type="text"
+						name="ZipCode" id="Zip_Code" class="form-control"
+						value="${requestScope.customer.zipCode}">
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12">
-					<label for="lname">Road_Address </label> 
-						<input type="text" name="roadAddress" id="roadAddress" class="form-control" value="${requestScope.customer.roadAddress}">
+					<label for="lname">Road_Address </label> <input type="text"
+						name="roadAddress" id="roadAddress" class="form-control"
+						value="${requestScope.customer.roadAddress}">
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12">
-					<label for="lname">Detail_Address </label> 
-						<input type="text"name="detailAddress" id="detailAddress" class="form-control" value="${requestScope.customer.detailAddress}">
+					<label for="lname">Detail_Address </label> <input type="text"
+						name="detailAddress" id="detailAddress" class="form-control"
+						value="${requestScope.customer.detailAddress}">
 				</div>
 				<!-- customerId end -->
 				<div class="clearfix"></div>
@@ -108,7 +110,8 @@
 
 				<h5 class="title">무통장입금</h5>
 
-				<label for="">다음 질문 중 하나라도 해당하는 경우 입금하지 말고 즉시 경찰서에 신고하시기 바랍니다.</label>
+				<label for="">다음 질문 중 하나라도 해당하는 경우 입금하지 말고 즉시 경찰서에 신고하시기
+					바랍니다.</label>
 				<div>1. 다른 사람으로부터 상품권 구매로 일부 또는 전체 금액을 입금받기로 했습니까?</div>
 				<div>2. 상품권 일부 또는 전체를 대리구매하여 카카오톡 등 메신저로 다른 사람에게 주기로 했습니까?</div>
 				<div>3. 네이트온/카카오톡 등 메신저에서 지인이 급한 돈이 필요하다고 상품권을 요구했습니까?</div>
@@ -116,7 +119,7 @@
 				<div>5. 본인이 직접 게임 또는 쇼핑에 사용하기 위한 목적이 아닙니까?</div>
 				<div class="clearfix"></div>
 				<div class="divider"></div>
-				
+
 				<label for="">예금주 : 박범진</label>
 				<div>신한은행: 140-009-854865</div>
 				<div>농협은행: 302-0634-2216-71</div>
@@ -124,7 +127,8 @@
 				<div>기업은행: 596-036185-04-014</div>
 				<div class="divider"></div>
 				<div class="my-2">입금계좌는 장애상황에 따라 변경될 수 있으니 항상 확인 부탁드립니다.</div>
-				<div class="my-2 text-danger">오픈뱅킹 입금 건은 수동처리되므로 오전9시부터 밤11시 사이에 결제 후 다음 날 오전에 처리됩니다.</div>
+				<div class="my-2 text-danger">오픈뱅킹 입금 건은 수동처리되므로 오전9시부터 밤11시
+					사이에 결제 후 다음 날 오전에 처리됩니다.</div>
 				<div class="clearfix"></div>
 				<div class="divider"></div>
 

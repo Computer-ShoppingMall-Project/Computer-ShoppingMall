@@ -31,7 +31,8 @@
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="css/colors/blue.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- =======================================================
     Template Name: MaxiBiz
     Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
@@ -40,14 +41,14 @@
   ======================================================= -->
 </head>
 <body>
-<%
-   // 유효성 검사
-   String msg = request.getParameter("msg");
-   String code = " ";
-   if("1".equals(msg)){
-      code = "현재 비밀번호가 올바르지 않습니다.";
-   }
-%>
+	<%
+	// 유효성 검사
+	String msg = request.getParameter("msg");
+	String code = " ";
+	if ("1".equals(msg)) {
+		code = "현재 비밀번호가 올바르지 않습니다.";
+	}
+	%>
 	<!-- 05.17 유효성 검사 추가 -->
 	<!-- header적용. -->
 	<jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
@@ -66,7 +67,9 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit"
+								alt="" /> <input type="text" class="search_text showtextback"
+								name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -83,39 +86,54 @@
 					<h4 class="title">
 						<span>Update Member Pw</span>
 					</h4>
-					<form id="updateform" method="post" name="updateform" action="${pageContext.request.contextPath}/UpdateMemberPwController">
+					<form id="updateform" method="post" name="updateform"
+						action="${pageContext.request.contextPath}/UpdateMemberPwController">
 						<div>
 							<!-- 값넘기기 -->
-							<input type="hidden" name="customerId" class="form-control" value="${requestScope.customer.customerId}" required> 
-							<input type="hidden" name="name" class="form-control" value="${requestScope.customer.name}" required> 
-							<input type="hidden" name="nickName" class="form-control" value="${requestScope.customer.nickName}" required> 
-							<input type="hidden" name="email" class="form-control" value="${requestScope.customer.email}" required> 
-							<input type="hidden" name="phone" class="form-control" value="${requestScope.customer.phone}" required>
-							<input type="hidden" name="zipCode" class="form-control" value="${requestScope.customer.zipCode}" required>
-							<input type="hidden" name="roadAddress" class="form-control" value="${requestScope.customer.roadAddress}" required> 
-							<input type="hidden" name="detailAddress" class="form-control" value="${requestScope.customer.detailAddress}" required>
+							<input type="hidden" name="customerId" class="form-control"
+								value="${requestScope.customer.customerId}" required> <input
+								type="hidden" name="name" class="form-control"
+								value="${requestScope.customer.name}" required> <input
+								type="hidden" name="nickName" class="form-control"
+								value="${requestScope.customer.nickName}" required> <input
+								type="hidden" name="email" class="form-control"
+								value="${requestScope.customer.email}" required> <input
+								type="hidden" name="phone" class="form-control"
+								value="${requestScope.customer.phone}" required> <input
+								type="hidden" name="zipCode" class="form-control"
+								value="${requestScope.customer.zipCode}" required> <input
+								type="hidden" name="roadAddress" class="form-control"
+								value="${requestScope.customer.roadAddress}" required> <input
+								type="hidden" name="detailAddress" class="form-control"
+								value="${requestScope.customer.detailAddress}" required>
 						</div>
 						<div class="form-group">
-							<input type="password" id="currentPw" name="customerPw" class="form-control" value="${requestScope.customer.customerPw}" placeholder="Current Pw">
-							<span id="currentHelper" class="helper"></span>
-							<span style="color: red;"><%=code%></span>
+							<input type="password" id="currentPw" name="customerPw"
+								class="form-control" value="${requestScope.customer.customerPw}"
+								placeholder="Current Pw"> <span id="currentHelper"
+								class="helper"></span> <span style="color: red;"><%=code%></span>
 						</div>
 						<div class="form-group">
-							<input type="password" id="pw" name="newCustomerPw1" class="form-control" placeholder="New Password">
-							<span id="pwHelper" class="helper"></span>
+							<input type="password" id="pw" name="newCustomerPw1"
+								class="form-control" placeholder="New Password"> <span
+								id="pwHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
-							<input type="password" id="pwConfirm" name="newCustomerPw2" class="form-control" placeholder="New Password check">
-							<span id="pwConfirmHelper" class="helper"></span>
+							<input type="password" id="pwConfirm" name="newCustomerPw2"
+								class="form-control" placeholder="New Password check"> <span
+								id="pwConfirmHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
-							  <button type="button" id="update">Update</button>
-						</div>	
+							<button type="button" id="update">Update</button>
+						</div>
 					</form>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/SelectMemberOneController" type="button" class="btn btn-outline-info btn-sm">이전</a>
-					<a href="${pageContext.request.contextPath}/IndexController" type="button" class="btn btn-outline-info btn-sm">index</a>
+					<a
+						href="${pageContext.request.contextPath}/SelectMemberOneController"
+						type="button" class="btn btn-outline-info btn-sm">이전</a> <a
+						href="${pageContext.request.contextPath}/IndexController"
+						type="button" class="btn btn-outline-info btn-sm">index</a>
 				</div>
 			</div>
 			<!-- end content -->
@@ -149,48 +167,48 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		$('#currentPw').focus();
-		
-		$('#currentPw').blur(function(){
-			if($('#currentPw').val().length == 0) {
+
+		$('#currentPw').blur(function() {
+			if ($('#currentPw').val().length == 0) {
 				$('#currentHelper').text('현재 비밀번호를 확인하세요');
 				$('#currentPw').focus();
 			} else {
 				$('#currentHelper').text('');
 			}
 		});
-		
-		$('#pwConfirm').blur(function(){
-			if($('#pw').val().length < 4) {
+
+		$('#pwConfirm').blur(function() {
+			if ($('#pw').val().length < 4) {
 				$('#pwHelper').text('바꿀 비밀번호를 확인하세요, 비밀번호는 4자이상으로 설정해야합니다.');
 				$('#pw').focus();
-			} else if($('#pw').val() != $('#pwConfirm').val()) {
+			} else if ($('#pw').val() != $('#pwConfirm').val()) {
 				$('#pwHelper').text('비밀번호 확인이 일치하지 않습니다');
 				$('#pw').focus();
 			} else {
 				$('#pwHelper').text('');
 			}
 		});
-		
-		$('#update').click(function(){
-			if($('#currentPw').val() == '') {
+
+		$('#update').click(function() {
+			if ($('#currentPw').val() == '') {
 				$('#currentHelper').text('현재 비밀번호를 확인하세요');
-				
-				$('#id').focus(); 
-			} else if($('#pw').val() == '') {
+
+				$('#id').focus();
+			} else if ($('#pw').val() == '') {
 				$('#currentHelper').text('');
-				
+
 				$('#pwHelper').text('바꿀 비밀번호를 입력하세요');
 				$('#pw').focus();
-			} else if($('#pwConfirm').val() == '') {
+			} else if ($('#pwConfirm').val() == '') {
 				$('#pwHelper').text('');
-				
+
 				$('#pwConfirmHelper').text('비밀번호 확인란을 입력하세요');
 				$('#pwConfirm').focus();
 			} else {
 				$('#updateform').submit();
 			}
 		});
-</script>
-	
+	</script>
+
 </body>
 </html>
