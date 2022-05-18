@@ -135,7 +135,8 @@ public class CpuDao {
 		ResultSet rs = null;
 		conn = DButil.getConnection();
 		
-		String sql = "SELECT cpu_no cpuNo"
+		String sql = "SELECT "
+				+ " cpu_no cpuNo"
 				+ ", cpu_name cpuName"
 				+ ", category_name categoryName"
 				+ ", company_name companyName"
@@ -155,7 +156,7 @@ public class CpuDao {
 				Cpu c = new Cpu();
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
-				c.setCpuName(rs.getString("categoryName"));
+				c.setCategoryName(rs.getString("categoryName"));
 				c.setCompnayName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));

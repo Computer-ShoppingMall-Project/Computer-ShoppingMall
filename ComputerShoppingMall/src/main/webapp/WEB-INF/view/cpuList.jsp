@@ -3,39 +3,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>RedVelvet</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+<meta charset="utf-8">
+<title>RedVelvet</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+<!-- Favicons -->
+<link href="img/favicon.png" rel="icon">
+<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
-  <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap CSS File -->
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-  <link href="lib/hover/hoverex-all.css" rel="stylesheet">
-  <link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-  <link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<!-- Libraries CSS Files -->
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
-  <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/colors/blue.css">
+<!-- Main Stylesheet File -->
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
-  <!-- =======================================================
-    Template Name: MaxiBiz
-    Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
+<!-- =======================================================
+  Template Name: MaxiBiz
+  Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
+  Author: TemplateMag.com
+  License: https://templatemag.com/license/
+======================================================= -->
   <style type="text/css">
 	#productMenu {margin:0; padding:0;}
 	
@@ -156,7 +156,7 @@
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown"></h3>
                     <a data-rel="prettyPhoto" href="img/portfolio_01.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
+                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="bi bi-cart-plus">hi</i></a>
                     <div class="portfolio_category text-center a2" data-animate="fadeIn">
                     </div>
                     <!-- portfolio_category -->
@@ -166,7 +166,7 @@
                 <!-- he view -->
               </div>
               <!-- he wrap -->
-              <h3 class="title">${c.cpuName}</h3>
+              <h3 class="title">${c.cpuName}<h3>
               <p><span class="text-info">price</span>&nbsp; ${c.price}</p>
             </div>
             </c:forEach>
