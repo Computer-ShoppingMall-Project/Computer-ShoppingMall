@@ -36,34 +36,17 @@
   Author: TemplateMag.com
   License: https://templatemag.com/license/
 ======================================================= -->
-  <style type="text/css">
-	#productMenu {
-		margin: 0;
-		padding: 0;
-	}
-	#productMenu li {
-		float: left;
-		list-style: none;
-		margin: 1px;
-	}
-	#productMenu li a {
-		display: block;
-		width: 135px;
-		height: 40px;
-		border: 1px #3498DB solid;
-		color: #3498DB;
-		text-align: center;
-		padding-top: 10px;
-		text-decoration: none;
-	}
-	#productMenu li a span {
-		display: block;
-	}
-	#productMenu li a:hover {
-		background: #3498DB;
-		color: #FFFFFF;
-		text-decoration: none;
-	}
+<style type="text/css">
+	#productMenu {margin:0; padding:0;}
+	
+	#productMenu li {float:left; list-style:none; margin:1px;}
+	
+	#productMenu li a {display:block; width:135px; height:40px; border: 1px #3498DB solid; color:#3498DB; 
+	 text-align:center; padding-top:10px; text-decoration:none;}
+	
+	#productMenu li a span {display:block;}
+	
+	#productMenu li a:hover {background:#3498DB; color:#FFFFFF; text-decoration:none;}
 </style>
 </head>
 <body>
