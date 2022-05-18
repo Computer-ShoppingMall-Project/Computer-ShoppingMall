@@ -24,19 +24,19 @@ public class CpuListController extends HttpServlet {
 		// CPU 체크박스 값(중복제거 데이터)
 		cpuDao = new CpuDao();
 		// compnay
-		List<String> cpuKindList = cpuDao.duplicationCpuKind();
+		List<String> companyList = cpuDao.companyKind();
 		// socketSize
-		List<String> socketSizeList = cpuDao.duplicationSocketSize();
+		List<String> socketSizeList = cpuDao.socketSizeKind();
 		// core
-		List<String> coreList = cpuDao.duplicationCore();
+		List<String> coreList = cpuDao.coreKind();
 		// thread
-		List<String> threadList = cpuDao.duplicationThread();
+		List<String> threadList = cpuDao.threadKind();
 		
 		// 게시글 이름, 가격 받아오기
 		List<Cpu> list = cpuDao.selectCpuList();		
 		
 		// 값 셋팅 후 보내주기
-		request.setAttribute("cpuKindList", cpuKindList);
+		request.setAttribute("companyList", companyList);
 		request.setAttribute("socketSizeList", socketSizeList);
 		request.setAttribute("coreList", coreList);
 		request.setAttribute("threadList", threadList);

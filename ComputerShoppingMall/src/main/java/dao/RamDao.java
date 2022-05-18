@@ -2,8 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import util.DButil;
 import vo.Ram;
@@ -54,15 +55,15 @@ public class RamDao {
 			stmt.executeUpdate();
 			} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	// ram 상품상세보기
 	// ram 상품수정
 	public int updateRam(Ram r) {
 		Connection conn = null;
@@ -83,14 +84,16 @@ public class RamDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}return row;
+		} finally {
+			try {
+
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 	// ram 상품등록
 	public int insertRam(Ram r) {
@@ -103,7 +106,7 @@ public class RamDao {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, r.getRamName());
 			stmt.setString(2, r.getCompanyName());
-			stmt.setString(3, r.getRamKind());
+			stmt.setString(3, r.getKind());
 			stmt.setInt(4, r.getPrice());
 			stmt.setInt(5, r.getQuantity());
 			stmt.setString(6, r.getMemo());
@@ -116,12 +119,127 @@ public class RamDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
+	}
+	// ram 정보 상세보기
+	public ArrayList<Ram> selectRamList() {
+		ArrayList<Ram> list = new ArrayList<Ram>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	ram_no ramNo"
+				+ "	,ram_name ramName"
+				+ "	,company_name companyName"
+				+ "	,category_name categoryName"
+				+ "	,kind"
+				+ "	,price"
+				+ "	,quantity"
+				+ "	,ram_image_no ramImageNo"
+				+ "	,memo"
+				+ "	,update_date updateDate"
+				+ " FROM ram";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Ram r = new Ram();
+				r.setRamNo(rs.getInt("ramNo"));
+				r.setRamName(rs.getString("ramName"));
+				r.setCompanyName(rs.getString("companyName"));
+				r.setCategoryName(rs.getString("categoryName"));
+				r.setKind(rs.getString("kind"));
+				r.setPrice(rs.getInt("price"));
+				r.setQuantity(rs.getInt("quantity"));
+				r.setRamImageNo(rs.getInt("ramImageNo"));
+				r.setMemo(rs.getString("memo"));
+				r.setUpdateDate(rs.getString("updateDate"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// ram 검색 체크박스 / insertRam -> 중복제거 데이터(company_name)
+	public ArrayList<String> companyKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(company_name) companyName FROM ram";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String companyName = rs.getString("companyName");
+				list.add(companyName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// ram 검색 체크박스 / insertRam -> 중복제거 데이터(kind)
+	public ArrayList<String> kindKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(kind) kind FROM ram";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String kind = rs.getString("kind");
+				list.add(kind);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }

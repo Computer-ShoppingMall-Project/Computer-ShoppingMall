@@ -4,7 +4,7 @@ public class Ram {
 	private int ramNo;
 	private String ramName;
 	private String companyName;
-	private String ramKind;
+	private String kind;
 	private int price;
 	private int quantity;
 	private int ramImageNo;
@@ -14,7 +14,7 @@ public class Ram {
 	
 	@Override
 	public String toString() {
-		return "Ram [ramNo=" + ramNo + ", ramName=" + ramName + ", companyName=" + companyName + ", ramKind=" + ramKind
+		return "Ram [ramNo=" + ramNo + ", ramName=" + ramName + ", companyName=" + companyName + ", kind=" + kind
 				+ ", price=" + price + ", quantity=" + quantity + ", ramImageNo=" + ramImageNo + ", categoryName="
 				+ categoryName + ", memo=" + memo + ", updateDate=" + updateDate + "]";
 	}
@@ -36,11 +36,11 @@ public class Ram {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public String getRamKind() {
-		return ramKind;
+	public String getKind() {
+		return kind;
 	}
-	public void setRamKind(String ramKind) {
-		this.ramKind = ramKind;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 	public int getPrice() {
 		return price;

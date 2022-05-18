@@ -3,7 +3,7 @@ package vo;
 public class Cpu {
 	private int cpuNo;
 	private String cpuName;
-	private String cpuKind;
+	private String compnayName;
 	private String socketSize;
 	private String core;
 	private String thread;
@@ -15,7 +15,7 @@ public class Cpu {
 	
 	@Override
 	public String toString() {
-		return "Cpu [cpuNo=" + cpuNo + ", cpuName=" + cpuName + ", cpuKind=" + cpuKind + ", socketSize=" + socketSize
+		return "Cpu [cpuNo=" + cpuNo + ", cpuName=" + cpuName + ", compnayName=" + compnayName + ", socketSize=" + socketSize
 				+ ", core=" + core + ", thread=" + thread + ", price=" + price + ", quantity=" + quantity
 				+ ", cpuImageNo=" + cpuImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
 	}
@@ -32,11 +32,11 @@ public class Cpu {
 	public void setCpuName(String cpuName) {
 		this.cpuName = cpuName;
 	}
-	public String getCpuKind() {
-		return cpuKind;
+	public String getCompnayName() {
+		return compnayName;
 	}
-	public void setCpuKind(String cpuKind) {
-		this.cpuKind = cpuKind;
+	public void setCompnayName(String compnayName) {
+		this.compnayName = compnayName;
 	}
 	public String getSocketSize() {
 		return socketSize;

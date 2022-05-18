@@ -67,7 +67,7 @@ public class InsertRamController extends HttpServlet {
 		Ram r = new Ram();
 		r.setRamName(ramName);
 		r.setCompanyName(companyName);
-		r.setRamKind(ramKind);
+		r.setKind(ramKind);
 		r.setPrice(price);
 		r.setQuantity(quantity);
 		r.setMemo(memo);

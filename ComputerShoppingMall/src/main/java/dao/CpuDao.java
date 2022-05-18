@@ -32,7 +32,6 @@ public class CpuDao {
 			}
 		}
 	}
-	// cpu 상품상세보기
 	// cpu 상품수정
 	public int updateCpu(Cpu c) {
 		Connection conn = null;
@@ -74,7 +73,7 @@ public class CpuDao {
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());
-			stmt.setString(2, c.getCpuKind());
+			stmt.setString(2, c.getCompnayName());
 			stmt.setString(3, c.getSocketSize());
 			stmt.setString(4, c.getCore());
 			stmt.setString(5, c.getThread());
@@ -111,7 +110,7 @@ public class CpuDao {
 		
 		String sql = "SELECT cpu_no cpuNo"
 				+ ", cpu_name cpuName"
-				+ ", cpu_kind cpuKind"
+				+ ", company_name companyName"
 				+ ", socket_size socketSize"
 				+ ", core"
 				+ ", thread"
@@ -128,7 +127,7 @@ public class CpuDao {
 				Cpu c = new Cpu();
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
-				c.setCpuKind(rs.getString("cpuKind"));
+				c.setCompnayName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
 				c.setThread(rs.getString("thread"));
@@ -152,8 +151,8 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 -> 중복제거 데이터(cpu_kind)
-	public ArrayList<String> duplicationCpuKind() {
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(cpu_kind)
+	public ArrayList<String> companyKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -161,13 +160,13 @@ public class CpuDao {
 		ResultSet rs = null;
 		conn = DButil.getConnection();
 		
-		String sql = "SELECT DISTINCT(cpu_kind) cpuKind FROM cpu";
+		String sql = "SELECT DISTINCT(company_name) companyName FROM cpu";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				String cpuKind = rs.getString("cpuKind");
-				list.add(cpuKind);
+				String companyName = rs.getString("companyName");
+				list.add(companyName);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -183,8 +182,8 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 -> 중복제거 데이터(socket_size)
-	public ArrayList<String> duplicationSocketSize() {
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(socket_size)
+	public ArrayList<String> socketSizeKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -214,8 +213,8 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 -> 중복제거 데이터(core)
-	public ArrayList<String> duplicationCore() {
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(core)
+	public ArrayList<String> coreKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -245,8 +244,8 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 검색 체크박스 -> 중복제거 데이터(thread)
-	public ArrayList<String> duplicationThread() {
+	// cpu 검색 체크박스 / insertCpu -> 중복제거 데이터(thread)
+	public ArrayList<String> threadKind() {
 		ArrayList<String> list = new ArrayList<String>();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -254,7 +253,8 @@ public class CpuDao {
 		ResultSet rs = null;
 		conn = DButil.getConnection();
 		
-		String sql = "SELECT DISTINCT(thread) thread FROM cpu";
+		String sql = "SELECT DISTINCT(thread) thread FROM cpu"
+				+ " ORDER BY thread";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();

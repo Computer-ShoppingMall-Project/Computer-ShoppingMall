@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.mariadb.jdbc.export.ExceptionFactory.SqlExceptionFactory;
 
@@ -34,12 +36,13 @@ public class StorageDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {			
-		   } try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
 	}
@@ -55,15 +58,16 @@ public class StorageDao {
 			stmt.executeUpdate();
 			} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	// storage 상품상세보기
+
 	// storage 상품수정
 	public int updateStorage(Storage s) {
 		Connection conn = null;
@@ -84,13 +88,13 @@ public class StorageDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return row;
 	}
@@ -119,14 +123,162 @@ public class StorageDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
-		} try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return row;
-	} 
+	}
+	// storage 정보 상세보기
+	public ArrayList<Storage> selectStorageList() {
+		ArrayList<Storage> list = new ArrayList<Storage>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	storage_no storageNo"
+				+ "	,storage_name storageName"
+				+ "	,company_name companyName"
+				+ "	,category_name categoryName"
+				+ "	,storage_interface storageInterface"
+				+ "	,capacity"
+				+ "	,price"
+				+ "	,quantity"
+				+ "	,storage_image_no storageImageNo"
+				+ "	,memo"
+				+ "	,update_date updateDate"
+				+ " FROM storage";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Storage s = new Storage();
+				s.setStorageNo(rs.getInt("storageNo"));
+				s.setStorageName(rs.getString("storageName"));
+				s.setCompanyName(rs.getString("companyName"));
+				s.setCategoryName(rs.getString("categoryName"));
+				s.setStorageInterface(rs.getString("storageInterface"));
+				s.setCapacity(rs.getString("capacity"));
+				s.setPrice(rs.getInt("price"));
+				s.setQuantity(rs.getInt("quantity"));
+				s.setStorageImageNo(rs.getInt("storageImageNo"));
+				s.setMemo(rs.getString("memo"));
+				s.setUpdateDate(rs.getString("updateDate"));
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// storage 검색 체크박스 / insertStorage -> 중복제거 데이터(company_name)
+	public ArrayList<String> companyKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(company_name) companyName FROM storage";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String companyName = rs.getString("companyName");
+				list.add(companyName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// storage 검색 체크박스 / insertStorage -> 중복제거 데이터(storage_interface)
+	public ArrayList<String> interfaceKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(storage_interface) storageInterface FROM storage";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String storageInterface = rs.getString("storageInterface");
+				list.add(storageInterface);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// storage 검색 체크박스 / insertStorage -> 중복제거 데이터(capacity)
+	public ArrayList<String> capacityKind() {
+		ArrayList<String> list = new ArrayList<String>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT DISTINCT(capacity) capacity FROM storage";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				String capacity = rs.getString("capacity");
+				list.add(capacity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 }

@@ -79,7 +79,7 @@ public class InsertMainboardController extends HttpServlet {
 		// vo
 		Mainboard m = new Mainboard();
 		m.setMainboardName(mainboardName);
-		m.setMainboardKind(mainboardKind);
+		m.setCompanyName(companyName);
 		m.setSocketSize(socketSize);
 		m.setChipset(chipSet);
 		m.setRamVersion(ramVersion);

@@ -39,7 +39,7 @@ public class InsertCpuController extends HttpServlet {
 		
 		// 변수등록
 		String cpuName = null;
-		String cpuKind = null;
+		String companyName = null;
 		String socketSize = null;
 		String core = null;
 		String thread = null;
@@ -51,8 +51,8 @@ public class InsertCpuController extends HttpServlet {
 		if(request.getParameter("cpuName") != null && request.getParameter("cpuName") !="") {
 			cpuName = request.getParameter("cpuName");
 		}
-		if(request.getParameter("cpuKind") != null && request.getParameter("cpuKind") !="") {
-			cpuKind = request.getParameter("cpuKind");
+		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
+			companyName = request.getParameter("companyName");
 		}
 		if(request.getParameter("socketSize") != null && request.getParameter("socketSize") !="") {
 			socketSize = request.getParameter("socketSize");
@@ -76,7 +76,7 @@ public class InsertCpuController extends HttpServlet {
 		// vo
 		Cpu c = new Cpu();
 		c.setCpuName(cpuName);
-		c.setCpuKind(cpuKind);
+		c.setCompnayName(companyName);
 		c.setSocketSize(socketSize);
 		c.setCore(core);
 		c.setThread(thread);
