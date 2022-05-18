@@ -4,11 +4,11 @@ public class Ram {
 	private int ramNo;
 	private String ramName;
 	private String companyName;
+	private String categoryName;
 	private String kind;
 	private int price;
 	private int quantity;
 	private int ramImageNo;
-	private String categoryName;
 	private String memo;
 	private String updateDate;
 	

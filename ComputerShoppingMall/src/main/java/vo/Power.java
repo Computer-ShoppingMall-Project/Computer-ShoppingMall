@@ -3,6 +3,7 @@ package vo;
 public class Power {
 	private int powerNo;
 	private String powerName;
+	private String categoryName;
 	private String ratedPower;
 	private int price;
 	private int quantity;
@@ -12,11 +13,10 @@ public class Power {
 	
 	@Override
 	public String toString() {
-		return "Power [powerNo=" + powerNo + ", powerName=" + powerName + ", ratedPower=" + ratedPower + ", price="
-				+ price + ", quantity=" + quantity + ", powerImageNo=" + powerImageNo + ", memo=" + memo
-				+ ", updateDate=" + updateDate + "]";
+		return "Power [powerNo=" + powerNo + ", powerName=" + powerName + ", categoryName=" + categoryName
+				+ ", ratedPower=" + ratedPower + ", price=" + price + ", quantity=" + quantity + ", powerImageNo="
+				+ powerImageNo + ", memo=" + memo + ", updateDate=" + updateDate + "]";
 	}
-	
 	public int getPowerNo() {
 		return powerNo;
 	}
@@ -28,6 +28,12 @@ public class Power {
 	}
 	public void setPowerName(String powerName) {
 		this.powerName = powerName;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	public String getRatedPower() {
 		return ratedPower;
@@ -65,4 +71,6 @@ public class Power {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	
 }

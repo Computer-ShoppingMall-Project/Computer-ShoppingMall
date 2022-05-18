@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MyBasketDao;
+import dao.BasketDao;
 import vo.Basket;
 
 @WebServlet("/DeleteBasketController")
 public class DeleteBasketController extends HttpServlet {
-	private MyBasketDao myBasketDao;
+	private BasketDao basketDao;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -33,8 +33,8 @@ public class DeleteBasketController extends HttpServlet {
 		Basket basket = new Basket();
 		
 		// dao
-		myBasketDao = new MyBasketDao();
-		int row = myBasketDao.deleteMyBasktet(basketNo);
+		basketDao = new BasketDao();
+		int row = basketDao.deleteMyBasktet(basketNo);
 		
 		
 		if(row == 1) { // 삭제 성공시, myBasket으로

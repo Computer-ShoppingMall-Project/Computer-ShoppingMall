@@ -4,6 +4,7 @@ public class Storage {
 	private int storageNo;
 	private String storageName;
 	private String companyName;
+	private String categoryName;
 	private String storageInterface;
 	private String capacity;
 	private int price;
@@ -11,7 +12,6 @@ public class Storage {
 	private int storageImageNo;
 	private String memo;
 	private String updateDate;
-	private String categoryName;
 
 	@Override
 	public String toString() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import util.DButil;
 import vo.Basket;
 
-public class MyBasketDao {
+public class BasketDao {
 	public int deleteMyBasktet(int basketNo) {
 		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
@@ -83,7 +83,8 @@ public class MyBasketDao {
 		// SQL 쿼리
 		String sql = "SELECT basket_no basketNo" 
 				+ "						,customer_id customerId"	
-				+ "						,category_name categoryName"	
+				+ "						,category_name categoryName"
+				+ "						,product_name productName"
 				+ "						,category_number categoryNumber"
 				+ "						,category_price categoryPrice"
 				+ "						,category_quantity categoryQuantity"
@@ -99,10 +100,10 @@ public class MyBasketDao {
 				basket = new Basket();
 				basket.setBasketNo(rs.getInt("basketNo"));
 				basket.setCustomerId(rs.getString("customerId"));
+				basket.setProductName(rs.getString("productName"));
 				basket.setCategoryName(rs.getString("categoryName"));
-				basket.setCategoryNumber(rs.getInt("categoryNumber"));
-				basket.setCategoryPrice(rs.getInt("categoryPrice"));
-				basket.setCategoryQuantity(rs.getInt("categoryQuantity"));
+				basket.setPrice(rs.getInt("categoryPrice"));
+				basket.setQuantity(rs.getInt("categoryQuantity"));
 				basket.setCreateDate(rs.getString("createDate"));
 				basket.setUpdateDate(rs.getString("updateDate"));
 				list.add(basket);

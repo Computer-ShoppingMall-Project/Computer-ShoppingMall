@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import java.util.ArrayList;
 
@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.OrderDao;
+import dao.BasketDao;
 import dao.MemberDao;
-import dao.MyBasketDao;
 import vo.Basket;
 import vo.Customer;
 
 @WebServlet("/OrderController")
 public class OrderController extends HttpServlet {
 	private OrderDao dao;
-	private MyBasketDao bDao;
+	private BasketDao bDao;
 	private MemberDao memberDao;
-	private MyBasketDao myBasketDao;
+	private BasketDao myBasketDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -33,7 +33,7 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		// MyBasketDao
-		bDao = new MyBasketDao();
+		bDao = new BasketDao();
 		memberDao = new MemberDao();
 		// MyBasketDao select
 		ArrayList<Basket> list = bDao.selectMyBasket(customerId);
@@ -62,7 +62,7 @@ public class OrderController extends HttpServlet {
 		int row = dao.insertOrder(customerId);
 		
 		// MybasketDao delete
-		myBasketDao = new MyBasketDao();
+		myBasketDao = new BasketDao();
 		myBasketDao.paymentDeleteMyBasket(customerId);
 		
 		if(row > 0) {

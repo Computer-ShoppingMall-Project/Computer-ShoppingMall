@@ -3,8 +3,8 @@ package vo;
 public class Mainboard {
 	private int mainboardNo;
 	private String mainboardName;
-	private String kind;
 	private String categoryName;
+	private String kind;
 	private String socketSize;
 	private String chipset;
 	private String ramVersion;
@@ -14,7 +14,6 @@ public class Mainboard {
 	private int mainboardImageNo;
 	private String memo;
 	private String updateDate;
-	
 	@Override
 	public String toString() {
 		return "Mainboard [mainboardNo=" + mainboardNo + ", mainboardName=" + mainboardName + ", kind="

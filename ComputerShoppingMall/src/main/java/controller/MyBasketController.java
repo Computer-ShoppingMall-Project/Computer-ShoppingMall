@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.BasketDao;
+
 import java.util.*;
 
-import dao.MyBasketDao;
 import vo.Basket;
-import vo.Qna;
 
 @WebServlet("/MyBasketController")
 public class MyBasketController extends HttpServlet {
-	private MyBasketDao dao;
+	private BasketDao basketDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -30,8 +30,8 @@ public class MyBasketController extends HttpServlet {
 		//
 		request.setCharacterEncoding("utf-8");
 		// dao.selectMyBasket
-		dao = new MyBasketDao();
-		ArrayList<Basket> list = dao.selectMyBasket(customerId);
+		basketDao = new BasketDao();
+		ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
 		
 		request.setAttribute("basketList", list);
 		request.getRequestDispatcher("/WEB-INF/view/myBasket.jsp").forward(request, response);
