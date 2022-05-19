@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException; 
+import java.io.IOException;  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +14,31 @@ import vo.Gpu;
 @WebServlet("/CartAddGpuController")
 public class CartAddGpuController extends HttpServlet {
 	private GpuDao gpuDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
+		
+		// vo
+		Gpu gpu = new Gpu();
+		
+		// dao
+		gpuDao = new GpuDao();
+		gpu = gpuDao.selectGpuOne(gpuNo);
+		
+		
+		
+		// 값 보내주기
+		request.setAttribute("gpuOne", gpu);
+		request.getRequestDispatcher("WEB-INF/view/customer/gpuOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -24,26 +49,22 @@ public class CartAddGpuController extends HttpServlet {
 			return;
 		}
 		
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
+		// 변수 등록 (basket)
+		int gpuNo =Integer.parseInt(request.getParameter("gpuNo"));
+		System.out.println(gpuNo+"<-gpuNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 		
-		// request 값 받아오기
-		productName = request.getParameter("gpuName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("gpuNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
-		  
 		// vo
+		Gpu gpuOne = new Gpu();
 		Gpu gpu = new Gpu();
-		gpu.setCategoryName(categoryName);
-		gpu.setGpuName(productName);
-		gpu.setGpuNo(productNumber);
-		gpu.setPrice(price);
+		// gpu정보 뽑기
+		gpuOne = gpuDao.selectGpuOne(gpuNo);
+		
+		gpu.setGpuName(gpuOne.getGpuName());
+		gpu.setCategoryName(gpuOne.getCategoryName());
+		gpu.setGpuNo(gpuOne.getGpuNo());
+		gpu.setPrice(gpuOne.getPrice());
 		gpu.setQuantity(quantity);
 		  
 		// dao

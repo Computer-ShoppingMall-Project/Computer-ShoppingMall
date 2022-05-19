@@ -15,6 +15,31 @@ import vo.Ram;
 @WebServlet("/CartAddRamController")
 public class CartAddRamController extends HttpServlet {
 	private RamDao ramDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int ramNo = Integer.parseInt(request.getParameter("ramNo"));
+		
+		// vo
+		Ram ram = new Ram();
+		
+		// dao
+		ramDao = new RamDao();
+		ram = ramDao.selectRamOne(ramNo);
+		
+		
+		
+		// 값 보내주기
+		request.setAttribute("ramOne", ram);
+		request.getRequestDispatcher("WEB-INF/view/customer/ramOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -25,26 +50,24 @@ public class CartAddRamController extends HttpServlet {
 			return;
 		}
 	      
-	     // 변수 등록
-	     String productName = null;
-	     String categoryName = null;
-	     int productNumber = 0;
-	     int price = 0;
-	     int quantity = 0;
-	      
-	     // request 값 받아오기
-	     productName = request.getParameter("ramName");
-	     categoryName = request.getParameter("categoryName");
-	     productNumber = Integer.parseInt(request.getParameter("ramNo"));
-	     price = Integer.parseInt(request.getParameter("price"));
-	     quantity = Integer.parseInt(request.getParameter("quantity"));
+		// 변수 등록 (basket)
+		int ramNo =Integer.parseInt(request.getParameter("ramNo"));
+		System.out.println(ramNo+"<-ramNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 	      
 	     // vo
 	     Ram ram = new Ram();
-	     ram.setCategoryName(categoryName);
-	     ram.setRamName(productName);
-	     ram.setRamNo(productNumber);
-	     ram.setPrice(price);
+	     Ram ramOne = new Ram();
+	     
+	     // ram정보 봅기
+	     ramOne = ramDao.selectRamOne(ramNo);
+	     
+	     // 뽑은 정보 담기
+	     ram.setRamName(ramOne.getRamName());
+	     ram.setCategoryName(ramOne.getCategoryName());
+	     ram.setRamNo(ramOne.getRamNo());
+	     ram.setPrice(ramOne.getPrice());
 	     ram.setQuantity(quantity);
 	      
 	     // dao

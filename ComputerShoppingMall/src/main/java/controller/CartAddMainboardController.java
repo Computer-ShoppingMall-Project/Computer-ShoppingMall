@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException; 
+import java.io.IOException;  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CpuDao;
 import dao.MainboardDao;
-import vo.Cpu;
 import vo.Mainboard;
 
 @WebServlet("/CartAddMainboardController")
@@ -19,7 +17,6 @@ public class CartAddMainboardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 새션 확인
 		HttpSession session = request.getSession();
-		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if ((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
@@ -34,12 +31,10 @@ public class CartAddMainboardController extends HttpServlet {
 		
 		// dao
 		mainboardDao = new MainboardDao();
-		mainboard = mainboardDao.selectMainboardList(mainboardNo);
-		
-		
+		mainboard = mainboardDao.selectMainboardOne(mainboardNo);
 		
 		// 값 보내주기
-		request.setAttribute("cpuOne", mainboard);
+		request.setAttribute("mainboardOne", mainboard);
 		request.getRequestDispatcher("WEB-INF/view/customer/mainboardOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,26 +47,24 @@ public class CartAddMainboardController extends HttpServlet {
 			return;
 		}
 		
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
-		 
 		// request 값 받아오기
-		productName = request.getParameter("mainboardName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("mainboardNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		int mainboardNo =Integer.parseInt(request.getParameter("mainboardNo"));
+		System.out.println(mainboardNo+"<-mainboardNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 		  
 		// vo
 		Mainboard mainboard = new Mainboard();
-		mainboard.setCategoryName(categoryName);
-		mainboard.setMainboardName(productName);
-		mainboard.setMainboardNo(productNumber);
-		mainboard.setPrice(price);
+		Mainboard mainboardOne = new Mainboard();
+		
+		// mainboard정보 뽑기
+		mainboardOne = mainboardDao.selectMainboardOne(mainboardNo);
+		
+		// 뽑은 정보 담기
+		mainboard.setMainboardName(mainboardOne.getMainboardName());
+		mainboard.setCategoryName(mainboardOne.getCategoryName());
+		mainboard.setMainboardNo(mainboardOne.getMainboardNo());
+		mainboard.setPrice(mainboardOne.getPrice());
 		mainboard.setQuantity(quantity);
 		  
 		// dao

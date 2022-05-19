@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,30 @@ import vo.Case;
 @WebServlet("/CartAddCaseController")
 public class CartAddCaseController extends HttpServlet {
 	private CaseDao caseDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		String customerId = (String)session.getAttribute("sessionCustomerId");
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int caseNo = Integer.parseInt(request.getParameter("caseNo"));
+		
+		// vo
+		Case case2 = new Case();
+		
+		// dao
+		caseDao = new CaseDao();
+		case2 = caseDao.selectCaseOne(caseNo);
+		
+		// 값 보내주기
+		request.setAttribute("caseOne", case2);
+		request.getRequestDispatcher("WEB-INF/view/customer/caseOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -24,26 +49,24 @@ public class CartAddCaseController extends HttpServlet {
 			return;
 		}
 		
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
-
 		// request 값 받아오기
-		productName = request.getParameter("caseName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("caseNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		int caseNo =Integer.parseInt(request.getParameter("caseNo"));
+		System.out.println(caseNo+"<-caseNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 		
 		// vo
-		Case c = new Case();
-		c.setCaseName(productName);
-		c.setCategoryName(categoryName);
-		c.setCaseNo(productNumber);
-		c.setPrice(price);
+		Case c = new Case(); // 장바구니 insert용
+		Case caseOne = new Case(); // caseOne selecrt용
+		
+		// caseOne정보 뽑기
+		caseOne = caseDao.selectCaseOne(caseNo);
+		
+		// 뽑은 정보 담기
+		c.setCaseName(caseOne.getCaseName());
+		c.setCategoryName(caseOne.getCategoryName());
+		c.setCaseNo(caseOne.getCaseNo());
+		c.setPrice(caseOne.getPrice());
 		c.setQuantity(quantity);
 		
 		// dao

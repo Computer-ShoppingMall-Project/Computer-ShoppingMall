@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException; 
+import java.io.IOException;  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +14,31 @@ import vo.Power;
 @WebServlet("/CartAddPowerController")
 public class CartAddPowerController extends HttpServlet {
 	private PowerDao powerDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int powerNo = Integer.parseInt(request.getParameter("powerNo"));
+		
+		// vo
+		Power power = new Power();
+		
+		// dao
+		powerDao = new PowerDao();
+		power = powerDao.selectPowerOne(powerNo);
+		
+		
+		
+		// 값 보내주기
+		request.setAttribute("powerOne", power);
+		request.getRequestDispatcher("WEB-INF/view/customer/powerOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -24,26 +49,24 @@ public class CartAddPowerController extends HttpServlet {
 			return;
 		}
 		  
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
-		  
 		// request 값 받아오기
-		productName = request.getParameter("powerName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("powerNo"));
-		price= Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		int powerNo = Integer.parseInt(request.getParameter("powerNo"));
+		System.out.println(powerNo+"<-powerNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 		  
 		// vo
 		Power power = new Power();
-		power.setCategoryName(categoryName);
-		power.setPowerName(productName);
-		power.setPowerNo(productNumber);
-		power.setPrice(price);
+		Power powerOne = new Power();
+		
+		// mainboard정보 뽑기
+		powerOne = powerDao.selectPowerOne(powerNo);
+		
+		// 뽑은 정보 넣기
+		power.setPowerName(powerOne.getPowerName());
+		power.setCategoryName(powerOne.getCategoryName());
+		power.setPowerNo(powerOne.getPowerNo());
+		power.setPrice(powerOne.getPrice());
 		power.setQuantity(quantity);
 		  
 		// dao

@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +15,31 @@ import vo.Storage;
 @WebServlet("/CartAddStorageController")
 public class CartAddStorageController extends HttpServlet {
 	private StorageDao storageDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int storageNo = Integer.parseInt(request.getParameter("storageNo"));
+		
+		// vo
+		Storage storage = new Storage();
+		
+		// dao
+		storageDao = new StorageDao();
+		storage = storageDao.selectStorageOne(storageNo);
+		
+		
+		
+		// 값 보내주기
+		request.setAttribute("storageOne", storage);
+		request.getRequestDispatcher("WEB-INF/view/customer/storageOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -25,26 +50,25 @@ public class CartAddStorageController extends HttpServlet {
 			return;
 		}
 		
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
-	
-		// request 값 받아오기 storage -> basket
-		productName = request.getParameter("storageName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("storageNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		// 변수 등록 (basket)
+		int storageNo =Integer.parseInt(request.getParameter("storageNo"));
+		System.out.println(storageNo+"<-storageNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
+				
 		
 		// vo
 		Storage storage = new Storage();
-		storage.setStorageName(productName);
-		storage.setCategoryName(categoryName);
-		storage.setStorageNo(productNumber);
-		storage.setPrice(price);
+		Storage storageOne = new Storage();
+		
+		// storage정보 뽑기
+		storageOne = storageDao.selectStorageOne(storageNo);
+		
+		// 뽑은 정보 담기
+		storage.setStorageName(storageOne.getStorageName());
+		storage.setCategoryName(storageOne.getCategoryName());
+		storage.setStorageNo(storageOne.getStorageNo());
+		storage.setPrice(storageOne.getPrice());
 		storage.setQuantity(quantity);
 		
 		// dao

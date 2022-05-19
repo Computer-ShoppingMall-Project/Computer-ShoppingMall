@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,6 @@ public class CartAddCpuController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 새션 확인
 		HttpSession session = request.getSession();
-		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if ((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
@@ -60,8 +59,6 @@ public class CartAddCpuController extends HttpServlet {
 		Cpu cpuOne = new Cpu(); // cpuOne select용
 		Cpu cpu = new Cpu(); // 장바구니 insert용
 		
-		// dao
-		cpuDao = new CpuDao();
 		// cpu정보 뽑기
 		cpuOne = cpuDao.selectCpuOne(cpuNo);
 		
@@ -71,6 +68,9 @@ public class CartAddCpuController extends HttpServlet {
 		cpu.setCpuNo(cpuOne.getCpuNo());
 		cpu.setPrice(cpuOne.getPrice());
 		cpu.setQuantity(quantity);
+		
+		// dao
+		cpuDao = new CpuDao();
 		int row = cpuDao.insertCartCpu(customerId, cpu);
 		
 		// 상품 데이터 등록 성공 체크 코드

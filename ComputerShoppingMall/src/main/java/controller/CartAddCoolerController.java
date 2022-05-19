@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +14,29 @@ import dao.CoolerDao;
 @WebServlet("/CartAddCoolerController")
 public class CartAddCoolerController extends HttpServlet {
 	private CoolerDao coolerDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int coolerNo = Integer.parseInt(request.getParameter("coolerNo"));
+		
+		// vo
+		Cooler cooler = new Cooler();
+		
+		// dao
+		coolerDao = new CoolerDao();
+		cooler = coolerDao.selectCoolerOne(coolerNo);
+		
+		// 값 보내주기
+		request.setAttribute("coolerOne", cooler);
+		request.getRequestDispatcher("WEB-INF/view/customer/coolerOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -24,26 +47,24 @@ public class CartAddCoolerController extends HttpServlet {
 			return;
 		}
 		
-		// 변수 등록
-		String productName = null;
-		String categoryName = null;
-		int productNumber = 0;
-		int price = 0;
-		int quantity = 0;
-		
 		// request 값 받아오기 cooler -> basket
-		productName = request.getParameter("coolerName");
-		categoryName = request.getParameter("categoryName");
-		productNumber = Integer.parseInt(request.getParameter("coolerNo"));
-		price = Integer.parseInt(request.getParameter("price"));
-		quantity = Integer.parseInt(request.getParameter("quantity"));
+		int coolerNo =Integer.parseInt(request.getParameter("coolerNo"));
+		System.out.println(coolerNo+"<-coolerNo");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(quantity+"<-quantity");
 		
 		// vo
-		Cooler cooler = new Cooler();
-		cooler.setCoolerName(productName);
-		cooler.setCategoryName(categoryName);
-		cooler.setCoolerNo(productNumber);
-		cooler.setPrice(price);
+		Cooler coolerOne = new Cooler(); // coolerOne select
+		Cooler cooler = new Cooler(); // 장바구니 isert
+		
+		// cooler 정보 뽑기
+		coolerOne = coolerDao.selectCoolerOne(coolerNo);
+		
+		// 정보 담기
+		cooler.setCoolerName(coolerOne.getCoolerName());
+		cooler.setCategoryName(coolerOne.getCategoryName());
+		cooler.setCoolerNo(coolerOne.getCoolerNo());
+		cooler.setPrice(coolerOne.getPrice());
 		cooler.setQuantity(quantity);
 		
 		// dao

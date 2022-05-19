@@ -314,7 +314,7 @@ public class CaseDao {
 		return list;
 	}
 	// caseOne 상세보기
-	public Case selectCaseOne() {
+	public Case selectCaseOne(int caseNo) {
 		Case c = new Case();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -338,6 +338,7 @@ public class CaseDao {
 				+ " FROM `case` WHERE case_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, caseNo);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				c.setCaseNo(rs.getInt("caseNo"));
