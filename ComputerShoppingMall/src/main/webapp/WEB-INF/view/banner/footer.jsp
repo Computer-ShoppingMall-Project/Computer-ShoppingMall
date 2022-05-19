@@ -13,12 +13,12 @@
         <ul class="recent_posts">
           <li>
             <a href="home1.jsp#">
-						<img src="img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
+						<img src="${pageContext.request.contextPath}/img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
             <a class="readmore" href="#">read more</a>
           </li>
           <li>
             <a href="home1.jsp#">
-						<img src="img/recent_post_02.png" alt="" />Design Is In The Air</a>
+						<img src="${pageContext.request.contextPath}/img/recent_post_02.png" alt="" />Design Is In The Air</a>
             <a class="readmore" href="#">read more</a>
           </li>
         </ul>
@@ -39,14 +39,14 @@
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Flickr Stream</h4>
         <ul class="flickr">
-          <li><a href="#"><img alt="" src="img/flickr_01.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_02.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_03.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_04.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_05.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_06.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_07.jpg"></a></li>
-          <li><a href="#"><img alt="" src="img/flickr_08.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_01.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_02.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_03.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_04.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_05.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_06.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_07.jpg"></a></li>
+          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_08.jpg"></a></li>
         </ul>
       </div>
       <!-- end widget -->
@@ -71,11 +71,11 @@
         <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
           <div class="footer-menu right">
             <ul class="menu">
-              <li><a href="index.jsp">Home</a></li>
-              <li><a href="about.jsp">About</a></li>
+              <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/about.jsp">About</a></li>
               <li><a href="#">Sitemap</a></li>
               <li><a href="#">Site Terms</a></li>
-              <li><a href="contact">Contact</a></li>
+              <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
             </ul>
           </div>
         </div>
