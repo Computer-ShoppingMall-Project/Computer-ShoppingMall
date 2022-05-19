@@ -132,10 +132,39 @@
       </form>
       <br>
       <h4 class="title">CPU</h4>
+      
       <!-- 상품 리스트 -->
         <div class="portfolio-centered">
           <div class="recentitems portfolio">
           <div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
+	<c:choose>
+       <c:when test="${check==true}">
+         	<c:forEach var="a" items="${cpuSearchResult}">
+         	  <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+              <div class="he-wrap tpl6 market-item">
+                <img src="img/portfolio_01.jpg" alt="">   <!-- 이미지 후에 셋팅 -->
+                <div class="he-view">
+                  <div class="bg a0" data-animate="fadeIn">
+                    <h3 class="big a1" data-animate="fadeInDown"></h3>
+                    <a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${a.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+                    <a href="${pageContext.request.contextPath}/CartAddCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
+                    </div>
+                    <!-- portfolio_category -->
+                  </div>
+                  <!-- he bg -->
+                </div>
+                <!-- he view -->
+              </div>
+              <!-- he wrap -->
+              <h3 class="title">${a.cpuName}</h3>
+              <p>
+              	<span class="text-info">price</span>&nbsp; ${a.price}
+              </p>
+            </div>
+            </c:forEach>
+       </c:when>
+      <c:otherwise>
          <c:forEach var="c" items="${cpuList}">
             <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
               <div class="he-wrap tpl6 market-item">
@@ -159,16 +188,18 @@
               	<span class="text-info">price</span>&nbsp; ${c.price}
               </p>
             </div>
-            </c:forEach>
-            <!-- end col-4 -->
-          </div>
+   		</c:forEach>
+   	</c:otherwise>
+  </c:choose>
+           <!-- end col-4 -->
         </div>
-        <!--  container -->
-        <div class="divider"></div>
       </div>
-      <!-- end container -->
-      </div>
-  </section>
+      <!--  container -->
+      <div class="divider"></div>
+    </div>
+    <!-- end container -->
+    </div>
+</section>
   <!-- end section -->
   <!-- footer적용 -->
   <jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
