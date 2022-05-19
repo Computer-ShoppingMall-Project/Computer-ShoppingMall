@@ -166,11 +166,11 @@
 				</table>
 				<div>
 					<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-					<button type="reset" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</button>
+					<a href="${pageContext.request.contextPath}/CpuListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 				</div>
 			</form> <br>
 			<!-- 상품 리스트 -->
-			<h4 class="title">CPU</h4>
+			<h4 class="title">CPU(<span class="text-primary">${count}</span>)</h4>
 			<!-- 조건에 해당하는 상품이 없을 경우 해당 상품이 존재하지 않다는 문구 안내 -->
 			<c:if test="${count==0}">
 				<h4 class="text-primary text-center">해당 조건의 상품의 존재하지 않습니다</h4>

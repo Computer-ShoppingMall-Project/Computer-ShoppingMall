@@ -35,12 +35,15 @@ public class CpuListController extends HttpServlet {
 		// thread
 		List<String> threadList = cpuDao.threadKind();
 		
+		int count = list.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
 		// 값 셋팅 후 보내주기
 		request.setAttribute("cpuList", list);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("socketSizeList", socketSizeList);
 		request.setAttribute("coreList", coreList);
 		request.setAttribute("threadList", threadList);
+		request.setAttribute("count", count);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
 	}
@@ -65,7 +68,7 @@ public class CpuListController extends HttpServlet {
 		// thread
 		List<String> threadList = cpuDao.threadKind();
 		
-		int count = list.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도)
+		int count = list.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
 		
 		
 		// 값 셋팅 후 보내주기
