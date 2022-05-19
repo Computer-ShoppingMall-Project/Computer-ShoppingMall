@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.OrderDao;
+import vo.order;
 
-@WebServlet("/MyPaymentController")
-public class MyPaymentController extends HttpServlet {
+@WebServlet("/DetailOrderController")
+public class DetailOrderController extends HttpServlet {
 	private OrderDao orderDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// 새션 확인
 		HttpSession session = request.getSession();
 		String customerId = (String) session.getAttribute("sessionCustomerId");
 		if ((String) session.getAttribute("sessionCustomerId") == null) {
@@ -25,19 +27,20 @@ public class MyPaymentController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
-		
+		// 변수 등록
+		String createDate = null;
+		// request create_date
+		createDate = request.getParameter("createDate");
 		// dao
 		orderDao = new OrderDao();
-		// OrderDao SELECT
-		List<Map<String,Object>> list = orderDao.selectOrderDateList(customerId);
+		ArrayList<order> list = orderDao.selectOrderList(customerId, createDate);
 		// request set
 		request.setAttribute("orderList", list);
-		request.getRequestDispatcher("/WEB-INF/view/customer/myPayment.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/customer/detailOrder.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//
 	}
 
 }

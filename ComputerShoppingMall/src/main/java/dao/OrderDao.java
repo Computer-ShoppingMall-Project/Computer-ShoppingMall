@@ -1,10 +1,7 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
+import java.util.*;
 
 import util.DButil;
 import vo.order;
@@ -43,8 +40,8 @@ public class OrderDao {
 	      }      
 	      return row;
 	   }
-	
-	public ArrayList<order> selectOrderList(String customerId) {
+	// 회원별 주문내역 상세보기
+	public ArrayList<order> selectOrderList(String customerId, String createDate) {
 		ArrayList<order> list = new ArrayList<order>();
 		order checkout = null;
 		// DB 초기화
@@ -56,22 +53,24 @@ public class OrderDao {
 		String sql = "SELECT order_no orderNo"
 				+ "		,customer_id customerId "
 				+ "		,basket_no basketNo"
+				+ "		,category_number categoryNumber"
 				+ "		,category_name categoryName"
 				+ "		,category_price categoryPrice"
 				+ "	 	,category_quantity categoryQuantity"
 				+ "		,create_date createDate"
-				+ " FROM order"
-				+ " WHERE customer_id=?"
-				+ " ORDER BY create_date";
+				+ " FROM `order`"
+				+ " WHERE customer_id = ? AND create_date = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
+			stmt.setString(2, createDate);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				checkout = new order();
 				checkout.setOrderNo(rs.getInt("orderNo"));
 				checkout.setCustomerId(rs.getString("customerId"));
 				checkout.setBasketNo(rs.getInt("basketNo"));
+				checkout.setCategoryNumber(rs.getInt("categoryNumber"));
 				checkout.setCategoryName(rs.getString("categoryName"));
 				checkout.setCategoryPrice(rs.getInt("categoryPrice"));
 				checkout.setCategoryQuantity(rs.getInt("categoryQuantity"));
@@ -86,6 +85,47 @@ public class OrderDao {
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 날짜별로 주문 총액 확인 (MyPaymentController)
+	public List<Map<String, Object>> selectOrderDateList(String customerId) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		//  DBUtil
+		conn = DButil.getConnection();
+		String sql = "SELECT customer_id customerId"
+				+ "		,create_date createDate"
+				+ "		,SUM(o.category_price) totalPrice"
+				+ " FROM `order` o"
+				+ " WHERE customer_id=?"
+				+ " GROUP BY o.create_date"
+				+ " ORDER BY o.create_date DESC";
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("customerId", rs.getString("customerId"));
+				map.put("createDate", rs.getString("createDate"));
+				map.put("totalPrice", rs.getString("totalPrice"));
+				list.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

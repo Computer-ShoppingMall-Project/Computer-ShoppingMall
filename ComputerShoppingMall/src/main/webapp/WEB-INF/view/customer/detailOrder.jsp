@@ -46,9 +46,9 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>My Payment</li>
+					<li>Detail Order</li>
 				</ul>
-				<h2>MY Payment</h2>
+				<h2>${order.createDate} Detail Order</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -74,18 +74,20 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>DATE</th>
-							<th>AMOUNT(won)</th>
-							<th>DETAILS</th>
+							<th>상품 이름</th>
+							<th>가격</th>
+							<th>구매 수량</th>
+							<th>주문일</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
 							<tr>
 								<td>${order.customerId}</td>
+								<td>${order.categoryName}</td>
+								<td>${order.categoryPrice}</td>
+								<td>${order.categoryQuantity}</td>
 								<td>${order.createDate}</td>
-								<td>${order.totalPrice}won</td>
-								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
