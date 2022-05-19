@@ -37,37 +37,37 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 <style type="text/css">
-#productMenu {
-	margin: 0;
-	padding: 0;
-}
-
-#productMenu li {
-	float: left;
-	list-style: none;
-	margin: 1px;
-}
-
-#productMenu li a {
-	display: block;
-	width: 135px;
-	height: 40px;
-	border: 1px #3498DB solid;
-	color: #3498DB;
-	text-align: center;
-	padding-top: 10px;
-	text-decoration: none;
-}
-
-#productMenu li a span {
-	display: block;
-}
-
-#productMenu li a:hover {
-	background: #3498DB;
-	color: #FFFFFF;
-	text-decoration: none;
-}
+	#productMenu {
+		margin: 0;
+		padding: 0;
+	}
+	
+	#productMenu li {
+		float: left;
+		list-style: none;
+		margin: 1px;
+	}
+	
+	#productMenu li a {
+		display: block;
+		width: 135px;
+		height: 40px;
+		border: 1px #3498DB solid;
+		color: #3498DB;
+		text-align: center;
+		padding-top: 10px;
+		text-decoration: none;
+	}
+	
+	#productMenu li a span {
+		display: block;
+	}
+	
+	#productMenu li a:hover {
+		background: #3498DB;
+		color: #FFFFFF;
+		text-decoration: none;
+	}
 </style>
 </head>
 <body>
@@ -89,7 +89,7 @@
 	<!-- end post-wrapper-top -->
 
 	<section class="section1">
-		<div class="container clearfix"></div>
+		<div class="container clearfix">
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="divider"></div>
 				<div id="productMenu" style="">
@@ -102,10 +102,7 @@
 						<li><a href="${pageContext.request.contextPath}/CaseListController" class="nav-link">CASE</a></li>
 						<li><a href="${pageContext.request.contextPath}/PowerListController" class="nav-link">POWER</a></li>
 						<li><a href="${pageContext.request.contextPath}/CoolerListController" class="nav-link">COOLER</a></li>
-					</ul>
-					<br>
-					<br>
-					<br>
+					</ul><br><br><br>
 				</div>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- MAINBOARD 상세검색 체크박스 테이블 -->
@@ -163,11 +160,9 @@
 				<!-- 상품 리스트 -->
 				<div class="portfolio-centered">
 					<div class="recentitems portfolio">
-						<div class="recentitems portfolio isotope"
-							style="position: relative; overflow: hidden; height: 764px;">
+						<div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
 							<c:forEach var="c" items="${mainboadList}">
-								<div
-									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="img/portfolio_01.jpg" alt="">
 										<!-- 이미지 후에 셋팅 -->
@@ -175,9 +170,9 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 												<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight">
-												<i class="fa fa-search">Detail</i></a>
+													<i class="fa fa-search">Detail</i></a>
 												<a href="${pageContext.request.contextPath}/CartAddMainboardController?" class="dmbutton a2" data-animate="bounceInRight">
-												<i class="fa fa-cart-plus">Add</i></a>
+													<i class="fa fa-cart-plus">Add</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->
 											</div>
@@ -200,6 +195,7 @@
 				</div>
 				<!-- end container -->
 			</div>
+		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

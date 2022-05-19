@@ -393,21 +393,20 @@ public class CpuDao {
 				+ ", memo"
 				+ ", update_date updateDate"
 				+ " FROM cpu"
-				+ " WHERE (1=2)"; // WHERE절 1=2 -> where절을 놔두기 위해 둔 쿼리
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
 		
 		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
-		
-		// companyName check값이 존재한다면 쿼리 추가 (OR조건문)
+		// companyName check값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
 		if(companyName != null) {
 			for(int i=0; i< companyName.length; i++) {
 				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					sql += " OR (company_name='" + companyName[i] + "'";
+					sql += " AND (company_name='" + companyName[i] + "'";
 					if(companyName.length == 1) { // i가 첫번째이자 마지막이라면 ")"
 						sql+=")";
 					}
 				} else if(i > 0) {
 					sql += " OR '" + companyName[i] + "'";
-					if(i == companyName.length) { // 마지막 값에는 구분을 위해 ")" 추가
+					if(i == companyName.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
 							sql += ")";
 					}
 				}
@@ -418,20 +417,13 @@ public class CpuDao {
 		if(socketSize != null) {
 			for(int i=0; i< socketSize.length; i++) {
 				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					if(companyName.length == 0) { // companyName이 존재하지 않는다면 0번째 값 OR로 비교 시작
-						sql += " OR (socket_size='" + socketSize[i] + "'";
-						if(socketSize.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+					sql += " AND (socket_size='" + socketSize[i] + "'";
+					if(socketSize.length == 1) { // i가 첫번째이자 마지막이라면 ")"
 							sql+=")";
-						}
-					} else { // companyName이 존재한다면 0번째 값 AND로 비교 시작
-						sql += " AND (socket_size='" + socketSize[i] + "'";
-						if(socketSize.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-						}
 					}
 				} else if(i > 0) {
 					sql += " OR '" + socketSize[i] + "'";
-					if(i == socketSize.length) { // 마지막 값에는 구분을 위해 ")" 추가
+					if(i == socketSize.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
 						sql += ")";
 					} 
 				}
@@ -443,20 +435,13 @@ public class CpuDao {
 		if(core != null) {
 			for(int i=0; i< core.length; i++) {
 				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					if(companyName.length != 0 || socketSize.length != 0) { // companyName와 socketSize 존재하지 않는다면 0번째 값 OR로 비교 시작
-						sql += " AND (core='" + core[i] + "'";
+					sql += " AND (core='" + core[i] + "'";
 						if(core.length == 1) { // i가 첫번째이자 마지막이라면 ")"
 							sql+=")";
 						}
-					} else {
-						sql += " OR (core='" + core[i] + "'";
-						if(core.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-						}
-					}
 				} else if(i > 0) {
 					sql += " OR '" + core[i] + "'";
-					if(i == core.length) { // 마지막 값에는 구분을 위해 ")" 추가
+					if(i == core.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
 							sql += ")";
 					} 
 				}
@@ -468,51 +453,43 @@ public class CpuDao {
 		if(thread != null) {
 			for(int i=0; i< thread.length; i++) {
 				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					if(companyName.length != 0 || socketSize.length != 0 || core.length != 0) { // companyName 또는 socketSize 또는 thread 존재하지 않는다면 OR로 비교 시작
-						sql += " AND (thread='" + thread[i] + "'";
-						if(thread.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-						}
-					} else {
-						sql += " OR (thread='" + thread[i] + "'";
-						if(thread.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-						}
+					sql += " AND (thread='" + thread[i] + "'";
+					if(thread.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+						sql+=")";
 					}
 				} else if(i > 0) {
 					sql += " OR '" + thread[i] + "'";
-					if(i == thread.length) { // 마지막 값에는 구분을 위해 ")" 추가
+					if(i == thread.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
 							sql += ")";
 					}
 				}
 			}
 		}
 		
-		System.out.println(sql);
+		System.out.println("[CPU search SQL] : " + sql);
 		
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				Cpu c = new Cpu();
-				c.setCpuNo(rs.getInt("cpuNo"));
-				c.setCpuName(rs.getString("cpuName"));
-				c.setCategoryName(rs.getString("categoryName"));
-				c.setCompnayName(rs.getString("companyName"));
-				c.setSocketSize(rs.getString("socketSize"));
-				c.setCore(rs.getString("core"));
-				c.setThread(rs.getString("thread"));
-				c.setPrice(rs.getInt("price"));
-				c.setQuantity(rs.getInt("quantity"));
-				c.setCpuImageNo(rs.getInt("cpuImageNo"));
-				c.setMemo(rs.getString("memo"));
-				c.setUpdateDate("updateDate");
-				list.add(c);
-			}
-			
+					Cpu c = new Cpu();
+					c.setCpuNo(rs.getInt("cpuNo"));
+					c.setCpuName(rs.getString("cpuName"));
+					c.setCategoryName(rs.getString("categoryName"));
+					c.setCompnayName(rs.getString("companyName"));
+					c.setSocketSize(rs.getString("socketSize"));
+					c.setCore(rs.getString("core"));
+					c.setThread(rs.getString("thread"));
+					c.setPrice(rs.getInt("price"));
+					c.setQuantity(rs.getInt("quantity"));
+					c.setCpuImageNo(rs.getInt("cpuImageNo"));
+					c.setMemo(rs.getString("memo"));
+					c.setUpdateDate("updateDate");
+					list.add(c);
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}  finally {
+		} finally {
 			try {
 				// DB 자원반납
 				rs.close();
@@ -524,5 +501,4 @@ public class CpuDao {
 		}
 		return list;
 	}
-	
 }

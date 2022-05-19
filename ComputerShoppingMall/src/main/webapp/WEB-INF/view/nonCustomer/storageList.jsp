@@ -76,7 +76,7 @@
 
 	<section class="post-wrapper-top">
 		<div class="container">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="container clear fix">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 					<li>Product</li>
@@ -89,7 +89,7 @@
 	<!-- end post-wrapper-top -->
 
 	<section class="section1">
-		<div class="container clearfix"></div>
+		<div class="container clearfix">
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="divider"></div>
 				<div id="productMenu" style="">
@@ -109,37 +109,39 @@
 				</div>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- STORAGE 상세검색 체크박스 테이블 -->
-				<h4>STORAGE DETAIL SEARCH</h4>
-				<form>
-					<table class="table table-bordered">
-						<tr>
-							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
-							<td><c:forEach var="c" items="${companyList}">
-									<input type="checkbox" name="companyName" value="${c}">
-									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
-						</tr>
-						<tr>
-							<th class="bg-info text-center">INTERFACE</th>
-							<td><c:forEach var="c" items="${interfaceList}">
-									<input type="checkbox" name="socketSize" value="${c}">
-									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
-						</tr>
-						<tr>
-							<th class="bg-info text-center">CAPACITY</th>
-							<td><c:forEach var="c" items="${capacityList}">
-									<input type="checkbox" name="core" value="${c}">
-									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
-						</tr>
-					</table>
-					<div>
-						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-						<button type="reset" class="btn btn-link"
-							style="float: right; margin-rigth: 20px">Reset</button>
-					</div>
-				</form>
+				<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
+					<h4>STORAGE DETAIL SEARCH</h4>
+					<form>
+						<table class="table table-bordered">
+							<tr>
+								<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
+								<td><c:forEach var="c" items="${companyList}">
+										<input type="checkbox" name="companyName" value="${c}">
+										<span>&nbsp;${c}&nbsp;</span>
+									</c:forEach></td>
+							</tr>
+							<tr>
+								<th class="bg-info text-center">INTERFACE</th>
+								<td><c:forEach var="c" items="${interfaceList}">
+										<input type="checkbox" name="socketSize" value="${c}">
+										<span>&nbsp;${c}&nbsp;</span>
+									</c:forEach></td>
+							</tr>
+							<tr>
+								<th class="bg-info text-center">CAPACITY</th>
+								<td><c:forEach var="c" items="${capacityList}">
+										<input type="checkbox" name="core" value="${c}">
+										<span>&nbsp;${c}&nbsp;</span>
+									</c:forEach></td>
+							</tr>
+						</table>
+						<div>
+							<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
+							<button type="reset" class="btn btn-link"
+								style="float: right; margin-rigth: 20px">Reset</button>
+						</div>
+					</form>
+				</div>
 				<br>
 				<h4 class="title">STORAGE</h4>
 				<!-- 상품 리스트 -->
@@ -181,6 +183,7 @@
 				</div>
 				<!-- end container -->
 			</div>
+		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

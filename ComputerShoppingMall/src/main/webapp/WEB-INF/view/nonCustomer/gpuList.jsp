@@ -89,7 +89,7 @@
 	<!-- end post-wrapper-top -->
 
 	<section class="section1">
-		<div class="container clearfix"></div>
+		<div class="container clearfix">
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="divider"></div>
 				<div id="productMenu" style="">
@@ -122,14 +122,14 @@
 						<tr>
 							<th class="bg-info text-center">CHIPSET COMPANY</th>
 							<td><c:forEach var="c" items="${chipsetCompanyList}">
-									<input type="checkbox" name="socketSize" value="${c}">
+									<input type="checkbox" name="chipsetCompany" value="${c}">
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">GPU SIZE</th>
 							<td><c:forEach var="c" items="${gpuSizeList}">
-									<input type="checkbox" name="core" value="${c}">
+									<input type="checkbox" name="gpuSize" value="${c}">
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
@@ -181,6 +181,7 @@
 				</div>
 				<!-- end container -->
 			</div>
+		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

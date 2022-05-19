@@ -89,7 +89,7 @@
 	<!-- end post-wrapper-top -->
 
 	<section class="section1">
-		<div class="container clearfix"></div>
+		<div class="container clearfix">
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="divider"></div>
 				<div id="productMenu" style="">
@@ -176,6 +176,7 @@
 				</div>
 				<!-- end container -->
 			</div>
+		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->
