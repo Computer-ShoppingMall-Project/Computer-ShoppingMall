@@ -56,9 +56,8 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit"
-								alt="" /> <input type="text" class="search_text showtextback"
-								name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -71,8 +70,7 @@
 	<section class="marketplace-top">
 		<div id="market-wrapper">
 			<div class="item_image">
-				<img data-effect="fade" class="aligncenter" width="1260"
-					height="400" src="img/market_single_01.png" alt="">
+				<img data-effect="fade" class="aligncenter" width="1260" height="400" src="img/market_single_01.png" alt="">
 			</div>
 			<!-- end item_image -->
 		</div>
@@ -96,14 +94,12 @@
 							<div class="details_section">
 								<h3>Item Details</h3>
 								<ul>
-									<li class="version">cpu_no : <span>${requestScope.cpuOne.cpuNo}</span>
-									</li>
-									<li class="designer">category_name : <span>${requestScope.cpuOne.categoryName}</span>
-									</li>
-									<li class="designer">socket_size : <span>${requestScope.cpuOne.socketSize}</span>
-									</li>
-									<li class="designer">core : <span>${requestScope.cpuOne.core}</span>
-									</li>
+									<li class="version">cpu_no : <span>${requestScope.cpuOne.cpuNo}</span></li>
+									<li class="designer">category_name : <span>${requestScope.cpuOne.categoryName}</span></li>
+									<li class="designer">company_name : <span>${requestScope.cpuOne.companyName}</span></li>
+									<li class="designer">socket_size : <span>${requestScope.cpuOne.socketSize}</span></li>
+									<li class="designer">core : <span>${requestScope.cpuOne.core}</span></li>
+									<li class="designer">thread : <span>${requestScope.cpuOne.thread}</span></li>
 								</ul>
 							</div>
 						</div>
@@ -123,14 +119,13 @@
 					<div class="col-lg-3 col-md-3 col-sm-12">
 							<div class="form-group">
 								<div> 개수 선택 
-						<form  class="contact-form" 
-							action="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${requestScope.cpuOne.cpuNo}" method="POST">
-								<input type="number" max="${requestScope.cpuOne.quantity}" name="quantity" value="1" class="text-center">개 
-								<input type="submit" class="btn btn-large btn-primary" value="담기">
-						</form>
-							</div>
-									<h4 class="text-danger">재고 : ${requestScope.cpuOne.quantity}</h4>
+									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${requestScope.cpuOne.cpuNo}" method="POST">
+										<input type="number" max="${requestScope.cpuOne.quantity}" name="quantity" value="1" class="text-center">개 
+										<input type="submit" class="btn btn-large btn-primary" value="담기">
+									</form>
 								</div>
+							</div>
+							<h4 class="text-danger">재고 : ${requestScope.cpuOne.quantity}</h4>
 							<div class="form-group">
 								<div class="item_price">
 									<h3>
@@ -141,9 +136,9 @@
 							<!-- buttons -->
 							<hr>
 							<div class="rating text-center">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star-o"></i>
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
+								<i class="fa fa-star-o"></i>
 								<p>Users Rating</p>
 							</div>
 							<!-- rating -->

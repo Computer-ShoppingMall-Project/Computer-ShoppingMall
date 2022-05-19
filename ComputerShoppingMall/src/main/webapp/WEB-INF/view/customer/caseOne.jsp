@@ -97,7 +97,7 @@
 								<h3>Item Details</h3>
 								<ul>
 									<li class="version">case_no : <span>${requestScope.caseOne.caseNo}</span></li>
-									<li class="designer">category_name : <span>${requestScope.caseOne.caseName}</span></li>
+									<li class="designer">category_name : <span>${requestScope.caseOne.categoryName}</span></li>
 									<li class="designer">case_size : <span>${requestScope.caseOne.caseSize}</span></li>
 									<li class="designer">gpu_size : <span>${requestScope.caseOne.gpuSize}</span></li>
 									<li class="designer">89cm_bay : <span>${requestScope.caseOne.bay89mm}</span></li>
@@ -121,8 +121,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12">
 							<div class="form-group">
 								<div> 개수 선택 
-						<form  class="contact-form" 
-							action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
+						<form  class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
 								<input type="number" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center">개 
 								<input type="submit" class="btn btn-large btn-primary" value="담기">
 						</form>
