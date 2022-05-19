@@ -72,7 +72,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -201,7 +201,7 @@
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<div class="dmtop">Scroll to Top</div>
 

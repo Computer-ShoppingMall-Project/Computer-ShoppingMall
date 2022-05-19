@@ -17,8 +17,16 @@ public class CpuDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ? NOW(), NOW())";
+				+ "VALUES ( ?, ?, ?, ?, ?, ? ,NOW(), NOW())";
 		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, cpu.getCpuName());
+			stmt.setString(3, cpu.getCategoryName());
+			stmt.setInt(4, cpu.getCpuNo());
+			stmt.setInt(5, cpu.getPrice());
+			stmt.setInt(6, cpu.getQuantity());
+			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
 			} else {
@@ -306,4 +314,59 @@ public class CpuDao {
 		}
 		return list;
 	}
+	// cpu 정보 상세보기
+	public Cpu selectCpuOne(int cpuNo) {
+		Cpu c = new Cpu();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT "
+				+ " cpu_no cpuNo"
+				+ ", cpu_name cpuName"
+				+ ", category_name categoryName"
+				+ ", company_name companyName"
+				+ ", socket_size socketSize"
+				+ ", core"
+				+ ", thread"
+				+ ", price"
+				+ ", quantity"
+				+ ", cpu_image_no cpuImageNo"
+				+ ", memo"
+				+ ", update_date updateDate"
+				+ " FROM cpu WHERE cpu_no = ?" ;
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1,cpuNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				c.setCpuNo(rs.getInt("cpuNo"));
+				c.setCpuName(rs.getString("cpuName"));
+				c.setCategoryName(rs.getString("categoryName"));
+				c.setCompnayName(rs.getString("companyName"));
+				c.setSocketSize(rs.getString("socketSize"));
+				c.setCore(rs.getString("core"));
+				c.setThread(rs.getString("thread"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCpuImageNo(rs.getInt("cpuImageNo"));
+				c.setMemo(rs.getString("memo"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return c;
+	}
+	
 }

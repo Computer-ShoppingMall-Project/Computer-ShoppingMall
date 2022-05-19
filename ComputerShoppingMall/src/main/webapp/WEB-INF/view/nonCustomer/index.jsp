@@ -39,7 +39,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/banner/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section id="intro">
 		<div class="container">
@@ -406,7 +406,7 @@
 	<!-- end section3 -->
 
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<!-- end footer -->
 	<div class="dmtop">Scroll to Top</div>
