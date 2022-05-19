@@ -42,8 +42,6 @@
                      <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
                      <li><a href="#">Pages</a>
                         <ul class="dropdown">
-                           <li><a href="${pageContext.request.contextPath}/Controller404">404 Error</a></li>
-                           <li><a href="${pageContext.request.contextPath}/leftSidebarController">Left Sidebar</a></li>
                            <li>
                            <c:choose>
                               <c:when test="${sessionCustomerId == null}">
@@ -67,27 +65,16 @@
                            <li><a href="${pageContext.request.contextPath}/MyBasketController">MyBasket</a></li>
                         </ul>
                      </li>
-                     <li><a href="#">Portfolio</a>
-                        <ul class="dropdown">
-                           <li><a href="${pageContext.request.contextPath}/PortfolioController">Portfolio (2Columns)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/PortfolioController">Portfolio (3Columns)</a></li>
-                        </ul>
-                     </li>
                      <li><a href="#">ProductList</a>
                         <ul class="dropdown">
                            <li><a href="${pageContext.request.contextPath}/CpuListController">Cpu List</a></li>
-                           <li><a href="${pageContext.request.contextPath}/GpuListController">Gpu List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/MainboardListController">Mainboard List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/CaseListController">Case List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/RamListController">Ram List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/CoolerListtroller">Cooler List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/PowerListController">Power List)</a></li>
-                           <li><a href="${pageContext.request.contextPath}/StorageListController">Storage List)</a></li>
-                        </ul>
-                     </li>
-                     <li><a href="#">Blog</a>
-                        <ul class="dropdown">
-                           <li><a href="${pageContext.request.contextPath}/single-with-sidebarController">Single with Sidebar</a></li>
+                           <li><a href="${pageContext.request.contextPath}/GpuListController">Gpu List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/MainboardListController">Mainboard List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/CaseListController">Case List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/RamListController">Ram List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/CoolerListController">Cooler List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/PowerListController">Power List</a></li>
+                           <li><a href="${pageContext.request.contextPath}/StorageListController">Storage List</a></li>
                         </ul>
                      </li>
                   </ul>

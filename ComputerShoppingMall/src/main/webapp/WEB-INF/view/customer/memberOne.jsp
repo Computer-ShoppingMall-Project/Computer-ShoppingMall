@@ -9,28 +9,26 @@
 <meta content="" name="keywords">
 <meta content="" name="description">
 <!-- Favicons -->
-<link href="${pageContext.request.contextPath}img/favicon.png" rel="icon">
-<link href="${pageContext.request.contextPath}img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+<link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="${pageContext.request.contextPath}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="${pageContext.request.contextPath}lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+		
 <!-- =======================================================
     Template Name: MaxiBiz
     Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
