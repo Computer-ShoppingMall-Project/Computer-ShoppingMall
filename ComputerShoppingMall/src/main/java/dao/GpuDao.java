@@ -126,7 +126,7 @@ public class GpuDao {
 		}
 		return row;
 	}
-	// GPU 정보 상세보기
+	// GPUList 보기
 	public ArrayList<Gpu> selectGpuList() {
 		ArrayList<Gpu> list = new ArrayList<Gpu>();
 		// DB 기본값 셋팅
@@ -274,4 +274,57 @@ public class GpuDao {
 		}
 		return list;
 	} 
+	// GpuOne 상세보기
+	public Gpu selectGpuOne(int gpuNo) {
+		Gpu g = new Gpu();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	gpu_no gpuNo"
+				+ "	,gpu_name gpuName"
+				+ "	,company_name companyName"
+				+ "	,category_name categoryName"
+				+ "	,chipset_company chipsetCompany"
+				+ "	,gpu_size gpuSize"
+				+ "	,price"
+				+ "	,quantity"
+				+ "	,gpu_image_no gpuImageNo"
+				+ "	,memo"
+				+ "	,update_date updateDate"
+				+ " FROM gpu WHERE gpu_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, gpuNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				g.setGpuNo(rs.getInt("gpuNo"));
+				g.setGpuName(rs.getString("gpuName"));
+				g.setCompanyName(rs.getString("companyName"));
+				g.setCategoryName(rs.getString("categoryName"));
+				g.setChipsetCompany(rs.getString("chipsetCompany"));
+				g.setGpuSize(rs.getInt("gpuSize"));
+				g.setQuantity(rs.getInt("quantity"));
+				g.setPrice(rs.getInt("price"));
+				g.setGpuImageNo(rs.getInt("gpuImageNo"));
+				g.setMemo(rs.getString("memo"));
+				g.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return g;
+	}
 }
