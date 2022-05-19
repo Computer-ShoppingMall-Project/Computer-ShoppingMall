@@ -45,7 +45,7 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li> 
+					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 				</ul>
 				<h2>상품삭제</h2>
 			</div>
@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>CPU</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="updateinsertCpuform" method="post" name="updateinsertCpuform" action="${pageContextrequest.contextPath}/UpdateCpuController">
 						<div class="form-group">
 							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
 						</div>
@@ -109,10 +109,10 @@
 							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="quantity" class="form-control" placeholder="Quantity">
+							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="price" class="form-control" placeholder="Price">
+							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
 							<input type="text" readonly name="memo" class="form-control" placeholder="memo">

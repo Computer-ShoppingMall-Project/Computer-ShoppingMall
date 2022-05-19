@@ -73,7 +73,7 @@
 						<span>COOLER</span>
 					</h4>
 					<form id="insertCoolerform" method="post" name="insertCoolerform"
-						action="${pageContextrequest.contextPath}/InsertCoolerController">
+						action="${pageContextrequest.contextPath}/DeleteCoolerController">
 						<div class="form-group">
 							<input type="number" readonly name="coolerNo" class="form-control" placeholder="CoolerNo">
 						</div>

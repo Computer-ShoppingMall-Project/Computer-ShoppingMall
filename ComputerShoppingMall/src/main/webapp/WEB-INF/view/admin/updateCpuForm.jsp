@@ -45,7 +45,7 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li> 
+					<li><a href="index.jsp">Home</a></li>
 				</ul>
 				<h2>상품삭제</h2>
 			</div>
@@ -54,7 +54,7 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>CPU</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/UpdateCpuController">
 						<div class="form-group">
 							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
 						</div>
@@ -84,10 +84,14 @@
 							<input type='radio' name='kind' value='AMD' onclick="onclick=" return(false);"/>AMD
 						</div>
 						<div class="form-group">
-							<input type='radio' name='socketSize' value='1700' onclick="return(false);" />1700 <input type='radio' name='socketSize' value='AMD4' onclick="return(false);" />AMD4
+							<input type='radio' name='socketSize' value='1700'
+								onclick="return(false);" />1700 <input type='radio'
+								name='socketSize' value='AMD4' onclick="return(false);" />AMD4
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="core" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+							<select class="readonly" name="core"
+								onFocus="this.initialSelect = this.selectedIndex;"
+								onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>core</option>
 								<option value="16">16(core)</option>
 								<option value="12">12(core)</option>
@@ -109,10 +113,10 @@
 							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="quantity" class="form-control" placeholder="Quantity">
+							<input type="number"  name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="price" class="form-control" placeholder="Price">
+							<input type="number"  name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
 							<input type="text" readonly name="memo" class="form-control" placeholder="memo">

@@ -39,13 +39,13 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li> 
+					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 				</ul>
 				<h2>상품삭제</h2>
 			</div>
@@ -54,7 +54,7 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -70,52 +70,46 @@
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<h4 class="title">
-						<span>CPU</span>
+						<span>GPU</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="updateGpuform" method="post" name="updatedeleteGpuform" action="${pageContextrequest.contextPath}/UpdateGpuController">
 						<div class="form-group">
-							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
+							<input type="number" readonly name="gpuNo" class="form-control" placeholder="GpuNo">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="cpuName" class="form-control" placeholder="CpuName">
+							<input type="text" readonly name="gpuName" class="form-control" placeholder="GpuName">
+						</div>
+
+						<div class="form-group">
+							<input type='radio' name='chipSetCompany' value='NVDIA' onclick="clickCheck(this)" />NVDIA <input type='radio' name='chipSetCompany' value='라데온' onclick="clickCheck(this)" />라데온
 						</div>
 						<div class="form-group">
-							<input type='radio' name='kind' value='인텔' onclick="onclick=" return(false);"/>인텔
-							<input type='radio' name='kind' value='AMD' onclick="onclick=" return(false);"/>AMD
-						</div>
-						<div class="form-group">
-							<input type='radio' name='socketSize' value='1700' onclick="return(false);" />1700 <input type='radio' name='socketSize' value='AMD4' onclick="return(false);" />AMD4
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="core" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>core</option>
-								<option value="16">16(core)</option>
-								<option value="12">12(core)</option>
-								<option value="8">8(core)</option>
-								<option value="6">6(core)</option>
+							<select class="readonly" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>companyName</option>
+								<option value="GALAX">GALAX</option>
+								<option value="이엠텍">이엠텍</option>
+								<option value="MSI">MSI</option>
+								<option value="ASRock">ASRock</option>
+								<option value="ASUS">ASUS</option>
+								<option value="ZOTAC">ZOTAC</option>
+								<option value="SAPPHIRE">SAPPHIRE</option>
+								<option value="GIGABYTE">GIGABYTE</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="thread" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>thread</option>
-								<option value="32">32(thread)</option>
-								<option value="24">24(thread)</option>
-								<option value="20">20(thread)</option>
-								<option value="16">16(thread)</option>
-								<option value="12">12(thread)</option>
-							</select>
+							<input type="text" readonly name="gpuSize" class="form-control" placeholder="GpuSize">
 						</div>
 						<div class="form-group">
-							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
+							<input type="file" name="gpuImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="quantity" class="form-control" placeholder="Quantity">
+							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="price" class="form-control" placeholder="Price">
+							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="memo" class="form-control" placeholder="memo">
+							<input type="textarea" readonly name="memo" class="form-control" placeholder="Memo">
 						</div>
 						<div class="form-group">
 							<input type="submit" class="button" value="삭제">

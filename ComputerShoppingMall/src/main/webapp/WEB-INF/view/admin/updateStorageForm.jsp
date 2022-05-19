@@ -39,22 +39,23 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li> 
+					<li><a href="index.jsp">Home</a></li>
 				</ul>
-				<h2>상품삭제</h2>
+				<h2>상품수정</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> 
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -70,55 +71,54 @@
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<h4 class="title">
-						<span>CPU</span>
+						<span>STORAGE</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="updateStorageform" method="post" name="updateStorageform" action="${pageContext.request.contextPath}/UpdateStorageController">
 						<div class="form-group">
-							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
+							<input type="number" readonly name="storageNo" class="form-control" placeholder="StorageNo">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="cpuName" class="form-control" placeholder="CpuName">
+							<input type="text" readonly name="storageName" class="form-control" placeholder="StorageName">
 						</div>
 						<div class="form-group">
-							<input type='radio' name='kind' value='인텔' onclick="onclick=" return(false);"/>인텔
-							<input type='radio' name='kind' value='AMD' onclick="onclick=" return(false);"/>AMD
-						</div>
-						<div class="form-group">
-							<input type='radio' name='socketSize' value='1700' onclick="return(false);" />1700 <input type='radio' name='socketSize' value='AMD4' onclick="return(false);" />AMD4
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="core" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>core</option>
-								<option value="16">16(core)</option>
-								<option value="12">12(core)</option>
-								<option value="8">8(core)</option>
-								<option value="6">6(core)</option>
+							<select class="readonly" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>companyname</option>
+								<option value="삼성전자">삼성전자</option>
+								<option value="SK하이닉스">SK하이닉스</option>
+								<option value="Western">Western</option>
+								<option value="Seagate">Seagate</option>
+								<option value="도시바">도시바</option>
+								<option value="마이크론">마이크론</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="thread" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>thread</option>
-								<option value="32">32(thread)</option>
-								<option value="24">24(thread)</option>
-								<option value="20">20(thread)</option>
-								<option value="16">16(thread)</option>
-								<option value="12">12(thread)</option>
+							<input type='radio' name='storageInterface' value='SATA3' onclick="return(false);" />SATA3 <input type='radio' name='storageInterface' value='PCIe4.0x4' onclick="return(false);" />PCIe4.0x4
+						</div>
+						<div class="form-group">
+							<select class="readonly" name="capacity" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>capacity</option>
+								<option value="4TB">4TB</option>
+								<option value="2TB">2TB</option>
+								<option value="1TB">1TB</option>
+								<option value="512GB">512GB</option>
+								<option value="500GB">500GB</option>
+								<option value="250GB">250GB</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
+							<input type="file" name="strageImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="quantity" class="form-control" placeholder="Quantity">
+							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="price" class="form-control" placeholder="Price">
+							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="memo" class="form-control" placeholder="memo">
+							<input type="textarea" readony name="memo" class="form-control" placeholder="memo">
 						</div>
 						<div class="form-group">
-							<input type="submit" class="button" value="삭제">
+							<input type="submit" class="button" value="등록">
 						</div>
 					</form>
 				</div>

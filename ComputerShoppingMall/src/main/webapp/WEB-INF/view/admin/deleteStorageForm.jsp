@@ -47,7 +47,7 @@
 				<ul class="breadcrumb">
 					<li><a href="index.jsp">Home</a></li>
 				</ul>
-				<h2>상품수정</h2>
+				<h2>상품삭제</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -73,7 +73,7 @@
 					<h4 class="title">
 						<span>STORAGE</span>
 					</h4>
-					<form id="updateStorageform" method="post" name="updateStorageform" action="${pageContext.request.contextPath}/UpdateStorageController">
+					<form id="deleteStorageform" method="post" name="deleteStorageform" action="${pageContext.request.contextPath}/DeleteStorageController">
 						<div class="form-group">
 							<input type="number" readonly name="storageNo" class="form-control" placeholder="StorageNo">
 						</div>

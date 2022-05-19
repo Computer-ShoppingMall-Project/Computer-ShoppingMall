@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>CPU</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="deleteCpuform" method="post" name="deleteCpuform" action="${pageContextrequest.contextPath}/DeleteCpuController">
 						<div class="form-group">
 							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
 						</div>
