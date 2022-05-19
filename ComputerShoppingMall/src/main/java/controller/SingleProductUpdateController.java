@@ -19,7 +19,7 @@ public class SingleProductUpdateController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/admin/singleProductUpdateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/singleProductUpdateForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -35,6 +35,6 @@ public class AdminQnaListController extends HttpServlet {
 		request.setAttribute("qnaList", list);
 		
 		// 관리자 QNA (모든 고객의 문의 모아보기)
-		request.getRequestDispatcher("/WEB-INF/admin/adminQnaList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/adminQnaList.jsp").forward(request, response);
 	}
 }

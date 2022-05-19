@@ -22,7 +22,7 @@ public class DeletePowerController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/insertPowerForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/view/insertPowerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

@@ -25,7 +25,7 @@ public class InsertCpuController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/admin/insertCpuForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/insertCpuForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

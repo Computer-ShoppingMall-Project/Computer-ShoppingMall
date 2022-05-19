@@ -20,6 +20,6 @@ public class SingleProductController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/nonCustomer/single-product.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/single-product.jsp").forward(request, response);
 	}
 }

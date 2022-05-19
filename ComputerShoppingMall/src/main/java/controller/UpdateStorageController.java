@@ -14,7 +14,7 @@ import vo.Storage;
 public class UpdateStorageController extends HttpServlet {
 	private StorageDao storageDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/admin/deleteStorageForm.jsp").forward(request, response);		
+		request.getRequestDispatcher("/WEB-INF/view/admin/deleteStorageForm.jsp").forward(request, response);		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
