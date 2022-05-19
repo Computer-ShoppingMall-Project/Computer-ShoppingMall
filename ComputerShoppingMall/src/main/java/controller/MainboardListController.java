@@ -39,7 +39,7 @@ public class MainboardListController extends HttpServlet {
 		request.setAttribute("chipsetList", chipsetList);
 		request.setAttribute("ramVersionList", ramVersionList);
 		request.setAttribute("kindList", kindList);
-		request.getRequestDispatcher("/WEB-INF/nonCustomer/mainboardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/mainboardList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

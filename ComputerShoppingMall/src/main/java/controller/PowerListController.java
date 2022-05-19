@@ -26,7 +26,7 @@ public class PowerListController extends HttpServlet {
 		
 		request.setAttribute("powerList", powerList);
 		request.setAttribute("ratedPowerList", ratedPowerList);
-		request.getRequestDispatcher("/WEB-INF/customer/powerList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/powerList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

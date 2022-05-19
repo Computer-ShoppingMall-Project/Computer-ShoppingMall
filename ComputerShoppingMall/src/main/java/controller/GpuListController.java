@@ -32,7 +32,7 @@ public class GpuListController extends HttpServlet {
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("chipsetCompanyList", chipsetCompanyList);
 		request.setAttribute("gpuSizeList", gpuSizeList);
-		request.getRequestDispatcher("/WEB-INF/nonCustomer/gpuList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/gpuList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -75,30 +75,17 @@
         <div class="divider"></div>
    		<div id="productMenu" style="align-center">
           <ul>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CpuListController">CPU</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/RamListController">RAM</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/GpuListController">GPU</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CaseListController">CASE</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/PowerListController">POWER</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a>
-            </li>
+            <li><a href="${pageContext.request.contextPath}/CpuListController">CPU</a></li>
+            <li><a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
+            <li><a href="${pageContext.request.contextPath}/RamListController">RAM</a></li>
+            <li><a href="${pageContext.request.contextPath}/GpuListController">GPU</a></li>
+            <li><a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a></li>
+            <li><a href="${pageContext.request.contextPath}/CaseListController">CASE</a></li>
+            <li><a href="${pageContext.request.contextPath}/PowerListController">POWER</a></li>
+            <li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
           </ul>
+        </div>
+       </div>
         <br><br><br>
             <!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
       <!-- CPU 상세검색 체크박스 테이블 -->
@@ -167,8 +154,10 @@
                 <!-- he view -->
               </div>
               <!-- he wrap -->
-              <h3 class="title">${c.cpuName}<h3>
-              <p><span class="text-info">price</span>&nbsp; ${c.price}</p>
+              <h3 class="title">${c.cpuName}</h3>
+              <p>
+              	<span class="text-info">price</span>&nbsp; ${c.price}
+              </p>
             </div>
             </c:forEach>
             <!-- end col-4 -->
