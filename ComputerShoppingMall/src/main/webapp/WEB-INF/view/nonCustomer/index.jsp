@@ -68,9 +68,7 @@
 							<h4>Responsive Layout</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry"s
-							standard dummy text ever since..</p>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
 					</div>
 					<!-- service-icon -->
 				</div>
@@ -90,9 +88,7 @@
 							<h4>Creative Design</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry"s
-							standard dummy text ever since..</p>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
 					</div>
 					<!-- service-icon -->
 				</div>
@@ -104,17 +100,15 @@
 				<div class="servicebox text-center">
 					<div class="service-icon">
 						<div class="dm-icon-effect-1" data-effect="slide-right">
-							<a href="#" class=""> <i
-								class="active dm-icon fa fa-book fa-3x"></i>
+							<a href="#" class=""> 
+							<i class="active dm-icon fa fa-book fa-3x"></i>
 							</a>
 						</div>
 						<div class="servicetitle">
 							<h4>Easy to Setup</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry. Lorem Ipsum has been the industry"s
-							standard dummy text ever since..</p>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
 					</div>
 					<!-- service-icon -->
 				</div>
@@ -138,14 +132,10 @@
 			<div class="col-lg-6 col-md-6 col-sm-12 columns">
 				<div class="widget clearfix">
 					<div class="services_lists">
-
 						<div class="services_lists_boxes clearfix">
 							<div class="col-lg-3 col-md-3 col-sm-12">
-								<div class="services_lists_boxes_icon"
-									data-effect="slide-bottom">
-									<a href="#" class=""> <i
-										class="active dm-icon-medium fa fa-key fa-2x"></i>
-									</a>
+								<div class="services_lists_boxes_icon" data-effect="slide-bottom">
+									<a href="#" class=""> <i class="active dm-icon-medium fa fa-key fa-2x"></i></a>
 								</div>
 							</div>
 							<div class="col-lg-9 col-md-9 col-sm-9">
@@ -215,7 +205,8 @@
 			<div id="owl-demo" class="owl-carousel">
 
 				<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_01.jpg"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_01.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_01.jpg" alt="">
+					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_01.jpg">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_01.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_01.jpg" alt="">
 						<div>
 							<small>Product Design</small> <span>Project Name Here</span> <i class="fa fa-search"></i>
 						</div>
@@ -223,7 +214,8 @@
 				</div>
 
 				<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_02.jpg"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_02.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_02.jpg" alt="">
+					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_02.jpg">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_02.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_02.jpg" alt="">
 						<div>
 							<small>Product Design</small> <span>Project Name Here</span> <i
 								class="fa fa-search"></i>
@@ -232,7 +224,8 @@
 				</div>
 
 				<div class="item">
-					<a href="${pageContext.request.contextPath}/single-portfolio-1.jsp"> <img class="lazyOwl" src="/${pageContext.request.contextPath}/img/portfolio_07.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_07.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/single-portfolio-1.jsp">
+					<img class="lazyOwl" src="/${pageContext.request.contextPath}/img/portfolio_07.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_07.jpg" alt="">
 						<div>
 							<small>Product Design</small> <span>Project Name Here</span> <i class="fa fa-link"></i>
 						</div>
@@ -240,16 +233,18 @@
 				</div>
 
 				<div class="item">
-					<a href="${pageContext.request.contextPath}/single-portfolio-1.jsp"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_05.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_05.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/single-portfolio-1.jsp">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_05.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_05.jpg" alt="">
 						<div>
-							<small>Product Design</small> <span>Project Name Here</span> <i
-								class="fa fa-link"></i>
+							<small>Product Design</small> <span>Project Name Here</span>
+							<i class="fa fa-link"></i>
 						</div>
 					</a>
 				</div>
 
 				<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_09.jpg"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_09.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_09.jpg" alt="">
+					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_09.jpg">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_09.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_09.jpg" alt="">
 						<div>
 							<small>Product Design</small> <span>Project Name Here</span> <i
 								class="fa fa-search"></i>
@@ -258,7 +253,8 @@
 				</div>
 
 				<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_10.jpg"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_10.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_10.jpg" alt="">
+					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_10.jpg">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_10.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_10.jpg" alt="">
 						<div>
 							<small>Product Design</small> <span>Project Name Here</span> <i class="fa fa-search"></i>
 						</div>
@@ -266,9 +262,10 @@
 				</div>
 
 				<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_06.jpg"> <img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_06.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_06.jpg" alt="">
+					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_06.jpg">
+					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_06.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_06.jpg" alt="">
 						<div>
-							<small>Product Design</small> <span>Project Name Here</span> <i class="fa fa-search"></i>
+							<small>Product Design</small> <span>Project Name Here</span>
 						</div>
 					</a>
 				</div>

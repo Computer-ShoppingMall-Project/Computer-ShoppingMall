@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +10,21 @@
 <meta content="" name="description">
 
 <!-- Favicons -->
-<link href="img/favicon.png" rel="icon">
-<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+<link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
 <link href="css/style.css" rel="stylesheet">
@@ -74,29 +74,14 @@
         <div class="divider"></div>
    		<div id="productMenu" style="align-center">
           <ul>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CpuListController">CPU</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/RamListController">RAM</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/GpuListController">GPU</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CaseListController">CASE</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/PowerListController">POWER</a>
-            </li>
-            <li>
-            	<a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a>
-            </li>
+            <li><a href="${pageContext.request.contextPath}/CpuListController">CPU</a></li>
+            <li><a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
+            <li><a href="${pageContext.request.contextPath}/RamListController">RAM</a></li>
+            <li><a href="${pageContext.request.contextPath}/GpuListController">GPU</a></li>
+            <li><a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a></li>
+            <li><a href="${pageContext.request.contextPath}/CaseListController">CASE</a></li>
+            <li><a href="${pageContext.request.contextPath}/PowerListController">POWER</a></li>
+            <li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
           </ul>
           </div>
         </div>
@@ -145,7 +130,7 @@
          <c:forEach var="c" items="${coolerList}">
             <div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
               <div class="he-wrap tpl6 market-item">
-                <img src="img/portfolio_01.jpg" alt="">   <!-- 이미지 후에 셋팅 -->
+                <img src="${pageContext.request.contextPath}/img/portfolio_01.jpg" alt="">   <!-- 이미지 후에 셋팅 -->
                 <div class="he-view">
                   <div class="bg a0" data-animate="fadeIn">
                     <h3 class="big a1" data-animate="fadeInDown"></h3>
@@ -180,21 +165,21 @@
   <div class="dmtop">Scroll to Top</div>
 
   <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="lib/php-mail-form/validate.js"></script>
-  <script src="lib/prettyphoto/js/prettyphoto.js"></script>
-  <script src="lib/isotope/isotope.min.js"></script>
-  <script src="lib/hover/hoverdir.js"></script>
-  <script src="lib/hover/hoverex.min.js"></script>
-  <script src="lib/unveil-effects/unveil-effects.js"></script>
-  <script src="lib/owl-carousel/owl-carousel.js"></script>
-  <script src="lib/jetmenu/jetmenu.js"></script>
-  <script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
-  <script src="lib/jigowatt/jigowatt.js"></script>
-  <script src="lib/easypiechart/easypiechart.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>

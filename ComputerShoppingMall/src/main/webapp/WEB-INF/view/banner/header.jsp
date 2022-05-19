@@ -6,12 +6,10 @@
          <div class="social_buttons">
             <c:choose>
                <c:when test="${sessionCustomerId == null}">
-                  <a href="${pageContext.request.contextPath}/LoginController"
-                     data-toggle="tooltip" data-placement="bottom">Login</a>
+                  <a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">Login</a>
                </c:when>
                <c:otherwise>
-                  <a href="${pageContext.request.contextPath}/LogoutController"
-                     data-toggle="tooltip" data-placement="bottom">Logout</a>
+                  <a href="${pageContext.request.contextPath}/LogoutController" data-toggle="tooltip" data-placement="bottom">Logout</a>
                </c:otherwise>
             </c:choose>
          </div>

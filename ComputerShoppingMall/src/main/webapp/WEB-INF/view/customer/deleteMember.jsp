@@ -55,7 +55,8 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" />
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -72,8 +73,7 @@
 					<h4 class="title">
 						<span>Delete Member</span>
 					</h4>
-					<form method="post"
-						action="${pageContext.request.contextPath}/DeleteMemberController">
+					<form method="post" action="${pageContext.request.contextPath}/DeleteMemberController">
 						<div>
 							<table class="table">
 								<tr>
@@ -126,6 +126,5 @@
 
 	<!-- Template Main Javascript File!-->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-
 </body>
 </html>
