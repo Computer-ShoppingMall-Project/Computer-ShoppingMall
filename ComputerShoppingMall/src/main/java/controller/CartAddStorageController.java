@@ -32,7 +32,7 @@ public class CartAddStorageController extends HttpServlet {
 		int price = 0;
 		int quantity = 0;
 	
-		// request 값 받아오기
+		// request 값 받아오기 storage -> basket
 		productName = request.getParameter("storageName");
 		categoryName = request.getParameter("categoryName");
 		productNumber = Integer.parseInt(request.getParameter("storageNo"));
@@ -60,6 +60,5 @@ public class CartAddStorageController extends HttpServlet {
 	    	System.out.println("등록 실패! CartAddStorageController.dopost");
 	    	response.sendRedirect(request.getContextPath() + "/StorageListController?error=error!");
 	    }
-		
 	} 
 }

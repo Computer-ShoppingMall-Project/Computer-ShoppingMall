@@ -20,7 +20,6 @@ import vo.Customer;
 @WebServlet("/OrderController")
 public class OrderController extends HttpServlet {
 	private OrderDao dao;
-	private BasketDao bDao;
 	private MemberDao memberDao;
 	private BasketDao myBasketDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,18 +32,17 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		// MyBasketDao
-		bDao = new BasketDao();
+		myBasketDao = new BasketDao();
 		memberDao = new MemberDao();
 		// MyBasketDao select
-		ArrayList<Basket> list = bDao.selectMyBasket(customerId);
+		ArrayList<Basket> list = myBasketDao.selectMyBasket(customerId);
 		// vo
 		Customer c = memberDao.selectMemberOne(customerId);
 		
 		// request set
 		request.setAttribute("basketList", list);
 		request.setAttribute("customer", c);
-		
-		request.getRequestDispatcher("/WEB-INF/customer/order.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/customer/order.jsp").forward(request, response); // 05.18 경로수정
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +55,7 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		
-		// CheckoutDao insert
+		// orderDao insert
 		dao = new OrderDao();
 		int row = dao.insertOrder(customerId);
 		
@@ -66,8 +64,8 @@ public class OrderController extends HttpServlet {
 		myBasketDao.paymentDeleteMyBasket(customerId);
 		
 		if(row > 0) {
-			System.out.println("결제 정보 저장 성공 InsertCheckoutController.dopost");
-			response.sendRedirect(request.getContextPath() + "/MypaymentController");
+			System.out.println("결제 정보 저장 성공 OrderController.dopost");
+			response.sendRedirect(request.getContextPath() + "/MyPaymentController");
 			return;
 		} else {
 			System.out.println("입력실패");

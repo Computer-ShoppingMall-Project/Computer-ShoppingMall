@@ -31,7 +31,7 @@ public class CartAddCoolerController extends HttpServlet {
 		int price = 0;
 		int quantity = 0;
 		
-		// request 값 받아오기
+		// request 값 받아오기 cooler -> basket
 		productName = request.getParameter("coolerName");
 		categoryName = request.getParameter("categoryName");
 		productNumber = Integer.parseInt(request.getParameter("coolerNo"));

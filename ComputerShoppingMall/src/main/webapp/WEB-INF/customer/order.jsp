@@ -69,7 +69,7 @@
 		<div class="container clearfix">
 			<h5 class="title">PERSONAL INFORMATION</h5>
 
-			<form id="personalinfo" action="" name="personalinfo" method="post">
+			<form id="personalinfo" action="${pageContext.request.contextPath}/MyPaymentController" name="personalinfo" method="post">
 				<div
 					class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 					<label for="email">Name <span class="required">*</span>

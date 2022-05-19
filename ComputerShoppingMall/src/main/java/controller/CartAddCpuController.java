@@ -56,7 +56,7 @@ public class CartAddCpuController extends HttpServlet {
 			   response.sendRedirect(request.getContextPath() + "/CpuListController");
 			   return;
 		} else {
-			   System.out.println("등록 실패! CartAddCpyuController.dopost");
+			   System.out.println("등록 실패! CartAddCpuController.dopost");
 			   response.sendRedirect(request.getContextPath() + "/CpuListController?error=error!");
 		}
 	}
