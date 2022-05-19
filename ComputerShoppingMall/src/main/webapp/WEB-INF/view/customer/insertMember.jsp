@@ -35,7 +35,7 @@
 </head>
 <body>
 	<!-- header적용. -->
-	<jsp:include page="/WEB-INF/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -145,7 +145,7 @@
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<div class="dmtop">Scroll to Top</div>
 	<!-- JavaScript Libraries -->

@@ -44,6 +44,6 @@ public class QnaOneController extends HttpServlet {
 		request.setAttribute("qna", qna);
 		request.setAttribute("adminAnswer", adminAnswer);
 		
-		request.getRequestDispatcher("/WEB-INF/customer/qnaOne.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/customer/qnaOne.jsp").forward(request, response);
 	}
 }

@@ -91,7 +91,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="section1">
 		<div class="container clearfix">
@@ -126,7 +126,7 @@
 	<!-- end section -->
 
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->

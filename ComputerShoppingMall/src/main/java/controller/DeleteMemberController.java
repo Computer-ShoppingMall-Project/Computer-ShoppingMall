@@ -26,7 +26,7 @@ public class DeleteMemberController extends HttpServlet {
 	        System.out.println("로그아웃 상태");
 	        return;
 	      }
-	    request.getRequestDispatcher("/WEB-INF/admin/deleteMember.jsp").forward(request, response);
+	    request.getRequestDispatcher("/WEB-INF/view/customer/deleteMember.jsp").forward(request, response);
 	}	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

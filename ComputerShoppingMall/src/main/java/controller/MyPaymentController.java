@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/MyPaymentController")
 public class MyPaymentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 작업중 05.19
-		request.getRequestDispatcher("/WEB-INF/customer/myPayment.jsp").forward(request, response);
+		// 작업중 05.19 페이지 로딩 성공
+		request.getRequestDispatcher("/WEB-INF/view/customer/myPayment.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

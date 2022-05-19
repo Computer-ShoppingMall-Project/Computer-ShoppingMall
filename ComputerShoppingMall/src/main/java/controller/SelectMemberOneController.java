@@ -30,6 +30,6 @@ public class SelectMemberOneController extends HttpServlet {
 		Customer customer = dao.selectMemberOne(sessionCustomerId);
 		
 		request.setAttribute("customer", customer);
-		request.getRequestDispatcher("/WEB-INF/customer/memberOne.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/customer/memberOne.jsp").forward(request, response);
 	}
 }

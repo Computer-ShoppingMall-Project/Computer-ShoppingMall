@@ -42,7 +42,7 @@ public class OrderController extends HttpServlet {
 		// request set
 		request.setAttribute("basketList", list);
 		request.setAttribute("customer", c);
-		request.getRequestDispatcher("/WEB-INF/customer/order.jsp").forward(request, response); // 05.18 경로수정
+		request.getRequestDispatcher("/WEB-INF/view/customer/order.jsp").forward(request, response); // 05.18 경로수정
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

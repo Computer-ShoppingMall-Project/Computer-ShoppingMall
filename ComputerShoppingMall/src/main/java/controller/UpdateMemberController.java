@@ -32,7 +32,7 @@ public class UpdateMemberController extends HttpServlet {
 			MemberDao dao = new MemberDao();
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
-			request.getRequestDispatcher("/WEB-INF/customer/updateMember.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/customer/updateMember.jsp").forward(request, response);
 		}
 		
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

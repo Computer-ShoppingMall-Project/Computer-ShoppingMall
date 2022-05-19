@@ -36,7 +36,7 @@ public class UpdateMemberPwController extends HttpServlet {
 			request.setAttribute("customer", customer);
 			
 			// updateMemberForm.jsp 생성 작업 필요
-			request.getRequestDispatcher("/WEB-INF/customer/updateMemberPw.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/customer/updateMemberPw.jsp").forward(request, response);
 		}
 		
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
