@@ -45,7 +45,7 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li> 
 				</ul>
 				<h2>상품삭제</h2>
 			</div>
