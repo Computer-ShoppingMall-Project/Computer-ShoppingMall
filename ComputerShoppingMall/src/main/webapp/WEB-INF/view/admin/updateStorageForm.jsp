@@ -39,22 +39,23 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 				</ul>
-				<h2>상품등록</h2>
+				<h2>상품수정</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> 
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -70,62 +71,42 @@
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<h4 class="title">
-						<span>MAINBOARD</span>
+						<span>STORAGE</span>
 					</h4>
-					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContextrequest.contextPath}/InsertMainboardController">
+					<form id="updateStorageform" method="post" name="updateStorageform" action="${pageContext.request.contextPath}/UpdateStorageController">
 						<div class="form-group">
-							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+							<input type="number" readonly name="storageNo" class="form-control" placeholder="StorageNo">
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
+							<input type="text" readonly name="storageName" class="form-control" placeholder="StorageName">
+						</div>
+						<div class="form-group">
+							<select class="readonly" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>companyname</option>
+								<option value="삼성전자">삼성전자</option>
+								<option value="SK하이닉스">SK하이닉스</option>
+								<option value="Western">Western</option>
+								<option value="Seagate">Seagate</option>
+								<option value="도시바">도시바</option>
+								<option value="마이크론">마이크론</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="mainboardKind">
-								<option value="" selected disabled hidden>mainboardKind</option>
-								<option value="Z690">Z690</option>
-								<option value="Z590">Z590</option>
-								<option value="Z460">Z460</option>
-								<option value="B660">B660</option>
-								<option value="B550">B550</option>
-								<option value="B450">B450</option>
-								<option value="H610">H610</option>
-								<option value="X399">X399</option>
+							<input type='radio' name='storageInterface' value='SATA3' onclick="return(false);" />SATA3 <input type='radio' name='storageInterface' value='PCIe4.0x4' onclick="return(false);" />PCIe4.0x4
+						</div>
+						<div class="form-group">
+							<select class="readonly" name="capacity" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>capacity</option>
+								<option value="4TB">4TB</option>
+								<option value="2TB">2TB</option>
+								<option value="1TB">1TB</option>
+								<option value="512GB">512GB</option>
+								<option value="500GB">500GB</option>
+								<option value="250GB">250GB</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="socketSize">
-								<option value="" selected disabled hidden>soketSize</option>
-								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
-								<option value="인텔(소켓1200)">인텔(소켓1200)</option>
-								<option value="AMD(소켓AM4)">AMD(소켓AM4)</option>
-								<option value="AMD(소켓TR4)">AMD(소켓TR4)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type='radio' name='ramVersion' value='DDR4' onclick="clickCheck(this)" />DDR4<input type='radio' name='ramVersion' value='DDR5' onclick="clickCheck(this)" />DDR5
-						</div>
-						<div class="form-group">
-							<input type="text" name="chipSet" class="form-control" placeholder="Chipset">
-						</div>
-						<div class="form-group">
-							<input type="file" name="mainboardImage" class="form-control" placeholder="Img">
+							<input type="file" name="strageImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
@@ -134,7 +115,7 @@
 							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
+							<input type="textarea" readony name="memo" class="form-control" placeholder="memo">
 						</div>
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">

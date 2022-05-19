@@ -39,22 +39,22 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 				</ul>
-				<h2>상품등록</h2>
+				<h2>상품삭제</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -72,12 +72,15 @@
 					<h4 class="title">
 						<span>MAINBOARD</span>
 					</h4>
-					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContextrequest.contextPath}/InsertMainboardController">
+					<form id="updateMainboardform" method="post" name=“updateMainBoardform” action="${pageContextrequest.contextPath}/UpdateMainboardController">
 						<div class="form-group">
-							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+							<input type="number" readonly name="mainboardNo" class="form-control" placeholder="mainboardNo">
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
+							<input type="text" readonly name="mainboardName" class="form-control" placeholder="mainboardName">
+						</div>
+						<div class="form-group">
+							<select class="form-group" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>companyName</option>
 								<option value="ASUS">ASUS</option>
 								<option value="MSI">MSI</option>
@@ -87,7 +90,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="mainboardKind">
+							<select class="form-group" name="mainboardKind" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>mainboardKind</option>
 								<option value="Z690">Z690</option>
 								<option value="Z590">Z590</option>
@@ -100,7 +103,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
+							<select class="form-group" name="companyName" ${pageContext.request.contextPath}/onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>companyName</option>
 								<option value="ASUS">ASUS</option>
 								<option value="MSI">MSI</option>
@@ -110,7 +113,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="socketSize">
+							<select class="form-group" name="socketSize" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
 								<option value="" selected disabled hidden>soketSize</option>
 								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
 								<option value="인텔(소켓1200)">인텔(소켓1200)</option>
@@ -119,10 +122,10 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type='radio' name='ramVersion' value='DDR4' onclick="clickCheck(this)" />DDR4<input type='radio' name='ramVersion' value='DDR5' onclick="clickCheck(this)" />DDR5
+							<input type='radio' name='ramVersion' value='DDR4'onclick="return(false);" />DDR4 <input type='radio'name='ramVersion' value='DDR5' onclick="return(false);" />DDR5
 						</div>
 						<div class="form-group">
-							<input type="text" name="chipSet" class="form-control" placeholder="Chipset">
+							<input type="text" readonly name="chipSet" class="form-control" placeholder="Chipset">
 						</div>
 						<div class="form-group">
 							<input type="file" name="mainboardImage" class="form-control" placeholder="Img">
@@ -134,7 +137,7 @@
 							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
+							<input type="textarea" readonly name="memo" class="form-control" placeholder="Memo">
 						</div>
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">

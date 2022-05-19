@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>MAINBOARD</span>
 					</h4>
-					<form id="deleteMainboardform" method="post" action="${pageContextrequest.contextPath}/DeleteMainboardController">
+					<form id="deleteMainboardform" method="post" name=“deleteMainboardform” action="${pageContextrequest.contextPath}/DeleteMainboardController">
 						<div class="form-group">
 							<input type="number" readonly name="mainboardNo" class="form-control" placeholder="mainboardNo">
 						</div>

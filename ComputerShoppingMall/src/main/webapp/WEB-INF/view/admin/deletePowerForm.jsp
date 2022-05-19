@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>POWER</span>
 					</h4>
-					<form id="updatePowerform" method="post" name="updatePowerform" action="${pageContextrequest.contextPath}/UdatePowerController">
+					<form id="deletePowerform" method="post" name="deletePowerform" action="${pageContextrequest.contextPath}/DeletePowerController">
 						<div class="form-group">
 							<input type="number" readonly name="powerNo" class="form-control" placeholder="PowerNo">
 						</div>

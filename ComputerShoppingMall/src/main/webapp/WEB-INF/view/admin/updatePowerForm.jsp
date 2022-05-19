@@ -39,7 +39,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -47,7 +47,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 				</ul>
-				<h2>상품등록</h2>
+				<h2>상품수정</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -70,62 +70,30 @@
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<h4 class="title">
-						<span>MAINBOARD</span>
+						<span>POWER</span>
 					</h4>
-					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContextrequest.contextPath}/InsertMainboardController">
+					<form id="updatePowerform" method="post" name="updatePowerform" action="${pageContextrequest.contextPath}/UdatePowerController">
 						<div class="form-group">
-							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+							<input type="number" readonly name="powerNo" class="form-control" placeholder="PowerNo">
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
+							<input type="text" readonly name="powerName" class="form-control" placeholder="PowerName">
+						</div>
+						<div class="form-group">
+							<select class="readonly" name="ratedPower" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
+								<option value="" selected disabled hidden>ratedPower</option>
+								<option value="1000">1000</option>
+								<option value="850">850</option>
+								<option value="750">750</option>
+								<option value="700">700</option>
+								<option value="650">650</option>
+								<option value="600">600</option>
+								<option value="550">550</option>
+								<option value="500">500</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="mainboardKind">
-								<option value="" selected disabled hidden>mainboardKind</option>
-								<option value="Z690">Z690</option>
-								<option value="Z590">Z590</option>
-								<option value="Z460">Z460</option>
-								<option value="B660">B660</option>
-								<option value="B550">B550</option>
-								<option value="B450">B450</option>
-								<option value="H610">H610</option>
-								<option value="X399">X399</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="socketSize">
-								<option value="" selected disabled hidden>soketSize</option>
-								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
-								<option value="인텔(소켓1200)">인텔(소켓1200)</option>
-								<option value="AMD(소켓AM4)">AMD(소켓AM4)</option>
-								<option value="AMD(소켓TR4)">AMD(소켓TR4)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type='radio' name='ramVersion' value='DDR4' onclick="clickCheck(this)" />DDR4<input type='radio' name='ramVersion' value='DDR5' onclick="clickCheck(this)" />DDR5
-						</div>
-						<div class="form-group">
-							<input type="text" name="chipSet" class="form-control" placeholder="Chipset">
-						</div>
-						<div class="form-group">
-							<input type="file" name="mainboardImage" class="form-control" placeholder="Img">
+							<input type="file" name="powerImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
@@ -134,7 +102,7 @@
 							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
+							<input type="text" readonly name="memo" class="form-control" placeholder="Memo">
 						</div>
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">
