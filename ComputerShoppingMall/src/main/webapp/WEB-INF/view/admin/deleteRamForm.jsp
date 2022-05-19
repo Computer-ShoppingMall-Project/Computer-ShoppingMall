@@ -39,7 +39,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -131,7 +131,7 @@
 	<!-- end section -->
 
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

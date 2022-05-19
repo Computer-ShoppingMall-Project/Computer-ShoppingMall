@@ -40,7 +40,7 @@
 <body>
 	<!-- 관리자 답변/답변수정/고객 질문 상세보기 페이지 -->
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/banner/adminHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -98,7 +98,7 @@
 	<!-- end section -->
 
 	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/banner/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<div class="dmtop">Scroll to Top</div>
 
