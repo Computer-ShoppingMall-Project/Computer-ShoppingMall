@@ -174,7 +174,7 @@
 										<div class="he-view">
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
-												<a href="${pageContext.request.contextPath}/CartAddMainboardController?cpuNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight">
+												<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight">
 												<i class="fa fa-search">Detail</i></a>
 												<a href="${pageContext.request.contextPath}/CartAddMainboardController?" class="dmbutton a2" data-animate="bounceInRight">
 												<i class="fa fa-cart-plus">Add</i></a>

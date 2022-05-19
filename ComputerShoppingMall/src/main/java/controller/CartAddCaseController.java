@@ -18,7 +18,6 @@ public class CartAddCaseController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 새션 확인
 		HttpSession session = request.getSession();
-		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if ((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
