@@ -134,7 +134,7 @@ public class CpuDao {
 		}
 		return row;
 	}
-	// cpu 정보 상세보기
+	// cpuList 보기
 	public ArrayList<Cpu> selectCpuList() {
 		ArrayList<Cpu> list = new ArrayList<Cpu>();
 		// DB 기본값 셋팅
@@ -173,6 +173,7 @@ public class CpuDao {
 				c.setQuantity(rs.getInt("quantity"));
 				c.setCpuImageNo(rs.getInt("cpuImageNo"));
 				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
 				list.add(c);
 			}
 		} catch (SQLException e) {
@@ -314,7 +315,7 @@ public class CpuDao {
 		}
 		return list;
 	}
-	// cpu 정보 상세보기
+	// cpuOne 상세보기
 	public Cpu selectCpuOne(int cpuNo) {
 		Cpu c = new Cpu();
 		// DB 기본값 셋팅
@@ -353,6 +354,7 @@ public class CpuDao {
 				c.setQuantity(rs.getInt("quantity"));
 				c.setCpuImageNo(rs.getInt("cpuImageNo"));
 				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

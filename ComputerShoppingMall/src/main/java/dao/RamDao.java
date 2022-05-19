@@ -24,7 +24,7 @@ public class RamDao {
 			stmt.setString(3, ram.getCategoryName());
 			stmt.setInt(4, ram.getRamNo());
 			stmt.setInt(5, ram.getPrice());
-			stmt.setInt(5, ram.getQuantity());
+			stmt.setInt(6, ram.getQuantity());
 			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
@@ -128,7 +128,7 @@ public class RamDao {
 		}
 		return row;
 	}
-	// ram 정보 상세보기
+	// ramList 보기
 	public ArrayList<Ram> selectRamList() {
 		ArrayList<Ram> list = new ArrayList<Ram>();
 		// DB 기본값 셋팅
@@ -241,5 +241,56 @@ public class RamDao {
 			}
 		}
 		return list;
+	}
+	// ramOne 상세보기
+	public Ram selectRamOne(int ramNo) {
+		Ram r = new Ram();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	ram_no ramNo"
+				+ "	,ram_name ramName"
+				+ "	,company_name companyName"
+				+ "	,category_name categoryName"
+				+ "	,kind"
+				+ "	,price"
+				+ "	,quantity"
+				+ "	,ram_image_no ramImageNo"
+				+ "	,memo"
+				+ "	,update_date updateDate"
+				+ " FROM ram WHERE ram_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, ramNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				r.setRamNo(rs.getInt("ramNo"));
+				r.setRamName(rs.getString("ramName"));
+				r.setCompanyName(rs.getString("companyName"));
+				r.setCategoryName(rs.getString("categoryName"));
+				r.setKind(rs.getString("kind"));
+				r.setPrice(rs.getInt("price"));
+				r.setQuantity(rs.getInt("quantity"));
+				r.setRamImageNo(rs.getInt("ramImageNo"));
+				r.setMemo(rs.getString("memo"));
+				r.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return r;
 	}
 }

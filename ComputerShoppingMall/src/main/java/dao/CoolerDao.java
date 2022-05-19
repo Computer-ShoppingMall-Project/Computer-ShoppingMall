@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ public class CoolerDao {
 		PreparedStatement stmt =  null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
+				+ "VALUES (?, ?, ?, ?, ?, ?,  NOW(), NOW())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -130,7 +130,7 @@ public class CoolerDao {
 		return row;
 	}
 	
-	// cooler 상세보기
+	// coolerList 보기
 	public ArrayList<Cooler> selectCoolerList() {
 		ArrayList<Cooler> list = new ArrayList<Cooler>();
 		// DB 기본값 셋팅
@@ -275,5 +275,56 @@ public class CoolerDao {
 			}
 		}
 		return list;
+	}
+	// coolerOne 상세보기
+	public Cooler selectCoolerOne(int coolerNo) {
+		Cooler c = new Cooler();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT "
+				+ " cooler_no coolerNo"
+				+ ", cooler_name coolerName"
+				+ ", company_name companyName"
+				+ ", kind"
+				+ ", cooler_size coolerSize"
+				+ ", price"
+				+ ", quantity"
+				+ ", cooler_image_no coolerImageNo"
+				+ ", memo"
+				+ ", update_date updateDate"
+				+ " FROM cooler WHERE mainboard_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, coolerNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				c.setCoolerNo(rs.getInt("coolerNo"));
+				c.setCoolerName(rs.getString("coolerName"));
+				c.setCompanyName(rs.getString("companyName"));
+				c.setKind(rs.getString("kind"));
+				c.setCoolerSize(rs.getInt("coolerSize"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCoolerImageNo(rs.getInt("coolerImageNo"));
+				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return c;
 	}
 }

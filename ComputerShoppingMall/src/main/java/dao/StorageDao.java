@@ -17,7 +17,7 @@ public class StorageDao {
 		PreparedStatement stmt =  null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
+				+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -132,7 +132,7 @@ public class StorageDao {
 		
 		return row;
 	}
-	// storage 정보 상세보기
+	// storageList 보기
 	public ArrayList<Storage> selectStorageList() {
 		ArrayList<Storage> list = new ArrayList<Storage>();
 		// DB 기본값 셋팅
@@ -278,6 +278,59 @@ public class StorageDao {
 			}
 		}
 		return list;
+	}
+	// storageOne 상세보기
+	public Storage selectStorageOne(int storageNo) {
+		Storage s = new Storage();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	storage_no storageNo"
+				+ "	,storage_name storageName"
+				+ "	,company_name companyName"
+				+ "	,category_name categoryName"
+				+ "	,storage_interface storageInterface"
+				+ "	,capacity"
+				+ "	,price"
+				+ "	,quantity"
+				+ "	,storage_image_no storageImageNo"
+				+ "	,memo"
+				+ "	,update_date updateDate"
+				+ " FROM storage WHERE storage_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, storageNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				s.setStorageNo(rs.getInt("storageNo"));
+				s.setStorageName(rs.getString("storageName"));
+				s.setCompanyName(rs.getString("companyName"));
+				s.setCategoryName(rs.getString("categoryName"));
+				s.setStorageInterface(rs.getString("storageInterface"));
+				s.setCapacity(rs.getString("capacity"));
+				s.setPrice(rs.getInt("price"));
+				s.setQuantity(rs.getInt("quantity"));
+				s.setStorageImageNo(rs.getInt("storageImageNo"));
+				s.setMemo(rs.getString("memo"));
+				s.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return s;
 	}
 	
 }

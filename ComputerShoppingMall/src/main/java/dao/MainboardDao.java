@@ -130,7 +130,7 @@ public class MainboardDao {
 		}
 		return row;
 	}
-	// mainboard 정보 상세보기
+	// mainboardList 보기
 	public ArrayList<Mainboard> selectMainboardList() {
 		ArrayList<Mainboard> list = new ArrayList<Mainboard>();
 		// DB 기본값 셋팅
@@ -342,6 +342,63 @@ public class MainboardDao {
 			}
 		}
 		return list;
+	}
+	// mainboardOne 상세보기
+	public Mainboard selectMainboardOne(int mainboardNo) {
+		Mainboard m = new Mainboard();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	mainboard_no mainboardNo"
+				+ "	, mainboard_name mainboardName"
+				+ "	, category_name categoryName"
+				+ "	, kind"
+				+ "	, socket_size socketSize"
+				+ "	, chipset"
+				+ "	, ram_version ramVersion"
+				+ "	, price"
+				+ "	, quantity"
+				+ "	, company_name companyName"
+				+ "	, mainboard_image_no mainboardImageNo"
+				+ "	, memo"
+				+ "	, update_date updateDate"
+				+ " FROM mainboard WHERE mainboard_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, mainboardNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				m.setMainboardNo(rs.getInt("mainboardNo"));
+				m.setMainboardName(rs.getString("mainboardName"));
+				m.setCategoryName(rs.getString("categoryName"));
+				m.setKind(rs.getString("kind"));
+				m.setSocketSize(rs.getString("socketSize"));
+				m.setChipset(rs.getString("chipset"));
+				m.setRamVersion(rs.getString("ramVersion"));
+				m.setPrice(rs.getInt("price"));
+				m.setQuantity(rs.getInt("quantity"));
+				m.setCompanyName(rs.getString("companyName"));
+				m.setMainboardImageNo(rs.getInt("mainboardImageNo"));
+				m.setMemo(rs.getString("memo"));
+				m.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return m;
 	}
 }
 

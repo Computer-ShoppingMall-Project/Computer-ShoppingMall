@@ -8,12 +8,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CpuDao;
 import dao.MainboardDao;
+import vo.Cpu;
 import vo.Mainboard;
 
 @WebServlet("/CartAddMainboardController")
 public class CartAddMainboardController extends HttpServlet {
 	private MainboardDao mainboardDao;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 새션 확인
+		HttpSession session = request.getSession();
+		String customerId = (String)session.getAttribute("sessionCustomerId");
+		if ((String)session.getAttribute("sessionCustomerId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// request 값 받기
+		int mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
+		
+		// vo
+		Mainboard mainboard = new Mainboard();
+		
+		// dao
+		mainboardDao = new MainboardDao();
+		mainboard = mainboardDao.selectMainboardList(mainboardNo);
+		
+		
+		
+		// 값 보내주기
+		request.setAttribute("cpuOne", mainboard);
+		request.getRequestDispatcher("WEB-INF/view/customer/mainboardOne.jsp").forward(request, response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();

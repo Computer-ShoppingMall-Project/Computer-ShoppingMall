@@ -126,7 +126,7 @@ public class PowerDao {
 		}
 		return row;
 	}
-	// Power 정보 상세보기
+	// PowerList 보기
 	public ArrayList<Power> selectPowerList() {
 		ArrayList<Power> list = new ArrayList<Power>();
 		// DB 기본값 셋팅
@@ -206,5 +206,54 @@ public class PowerDao {
 			}
 		}
 		return list;
+	}
+	// PowerOne 상세보기
+	public Power selectPowerOne(int powerNo) {
+		Power p = new Power();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ " power_no powerNo"
+				+ " ,power_name powerName"
+				+ " ,category_name categoryName"
+				+ " ,rated_power ratedPower"
+				+ " ,price"
+				+ " ,quantity"
+				+ " ,power_image_no powerImageNo"
+				+ " ,memo"
+				+ " ,update_date updateDate"
+				+ " FROM power WHERE power_no = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, powerNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				p.setPowerNo(rs.getInt("powerNo"));
+				p.setPowerName(rs.getString("powerName"));
+				p.setCategoryName(rs.getString("categoryName"));
+				p.setRatedPower(rs.getString("ratedPower"));
+				p.setPrice(rs.getInt("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setPowerImageNo(rs.getInt("powerImageNo"));
+				p.setMemo(rs.getString("memo"));
+				p.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return p;
 	}
 }
