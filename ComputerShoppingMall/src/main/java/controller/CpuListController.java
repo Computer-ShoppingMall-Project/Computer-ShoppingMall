@@ -53,7 +53,7 @@ public class CpuListController extends HttpServlet {
 		request.setAttribute("coreList", coreList);
 		request.setAttribute("threadList", threadList);
 		
-		request.getRequestDispatcher("/WEB-INF/view/cpuList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
