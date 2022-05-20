@@ -25,7 +25,7 @@ public class InsertCaseController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/admin/insertCaseForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/insertCaseForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,7 +97,9 @@ public class InsertCaseController extends HttpServlet {
 		caseDao.insertCase(c);
 		
 		// 홈페이지 이동
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
+		
+		response.sendRedirect(request.getContextPath() + "/CaseListController");
 	}
 
 }
+
