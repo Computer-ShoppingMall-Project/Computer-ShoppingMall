@@ -1,6 +1,8 @@
 package controller;
 
-import java.io.IOException; 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,86 +10,95 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import dao.StorageDao;
+import vo.Image;
 import vo.Storage;
 
 @WebServlet("/InsertStorageController")
 public class InsertStorageController extends HttpServlet {
 	private StorageDao storageDao;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
-		System.out.println(sessionCustomerId+"<-sessionCustomerId");
-		if(sessionCustomerId == null) {
-			response.sendRedirect(request.getContextPath()+"/LoginController");
-			return;
+
+		HttpSession session = request.getSession(); 
+		String adminId = (String)session.getAttribute("sessionAdminId");
+		if((String)session.getAttribute("sessionAdminId") == null) { // 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기 
+			response.sendRedirect(request.getContextPath() +"/LoginController");
+			return; 
 		}
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertStorageForm.jsp").forward(request, response);
-	}
+		}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("sessionAdminId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
+		 // 세션확인 HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); String adminId = (String)session.getAttribute("sessionAdminId");
+		if((String)session.getAttribute("sessionAdminId") == null) { // 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기 
+			response.sendRedirect(request.getContextPath() +"/LoginController");
+			return; 
+		}
+		request.getRequestDispatcher("/WEB-INF/view/admin/insertStorageForm.jsp").forward(request, response);
+		 //상태 -> 로그인 폼으로 돌아가기 response.sendRedirect("/LoginController"); return; }
+	
+		String path = request.getSession().getServletContext().getRealPath("/image");
+		System.out.println("[InsertStorageController.doPost photo path] : " + path);
+
+		MultipartRequest multiReq = new MultipartRequest(request, path, 1024 * 1024 * 100, "utf-8", new DefaultFileRenamePolicy());
+
+		// 사진 받아오기
+		String originalName = multiReq.getOriginalFileName("image"); // 사진 원본 이름
+		String name = multiReq.getFilesystemName("image"); // 중복 발생 시 변경된 이름
+		String type = multiReq.getContentType("image");
+		Image i = null;
+		if (type.equals("image/gif") || type.equals("image/png") || type.equals("image/jpeg")) { // 이미지 형태라면 하나의 변수로 묶기
+			// 하나의 변수로 묶어주기 -> DB 저장용
+			i = new Image();
+			i.setOriginalName(originalName);
+			i.setName(name);
+			i.setType(type);
+		} else { // 이미지 등록 실패시, StorageListController로 이동
+			System.out.println("[InsertStorageController] : 이미지 타입 아님");
+			// 잘못 업로드 된 파일이므로 삭제 처리
+			File file = new File(path + "\\" + name);
+			file.delete();
+
+			response.sendRedirect(request.getContextPath() + "/StorageListController");
 			return;
 		}
-		
-		// 변수등록
-		String storageName = null;
-		String companyName = null;
-		String categoryName = null;
-		String storageInterface = null;
-		String capacity = null;
-		int price = 0;
-		int quantity = 0;
-		String memo = null;
-		
-		// request값 받아오기
-		if(request.getParameter("storageName") != null && request.getParameter("storageName") !="") {
-			storageName = request.getParameter("storageName");
-		}
-		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
-			companyName = request.getParameter("companyName");
-		}
-		if(request.getParameter("categoryName") != null && request.getParameter("categoryName") !="") {
-			companyName = request.getParameter("categoryName");
-		}
-		if(request.getParameter("storageInterface") != null && request.getParameter("storageInterface") !="") {
-			storageInterface = request.getParameter("storageInterface");
-		}
-		if(request.getParameter("capacity") != null && request.getParameter("capacity") !="") {
-			capacity = request.getParameter("capacity");
-		}
-		if(request.getParameter("price") != null && request.getParameter("price") !="") {
-			price = Integer.parseInt(request.getParameter("price"));
-		}
-		if(request.getParameter("quantity") != null && request.getParameter("quantity") !="") {
-			quantity = Integer.parseInt(request.getParameter("quantity"));
-		}
-		if(request.getParameter("memo") != null && request.getParameter("memo") !="") {
-			memo = request.getParameter("memo");
-		}
-		
-		
-		// 
+
+		String storageName = multiReq.getParameter("storageName");
+		String companyName = multiReq.getParameter("companyName");
+		String categoryName = multiReq.getParameter("categoryName");
+		String storageInterface = multiReq.getParameter("storageInterface");
+		String capacity = multiReq.getParameter("capacity");
+		int price = Integer.parseInt(multiReq.getParameter("price"));
+		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
+		String memo = multiReq.getParameter("memo");
+		// 하나의 변수로 묶어주기
 		Storage s = new Storage();
 		s.setStorageName(storageName);
 		s.setCompanyName(companyName);
-		s.setCompanyName(categoryName);
+		s.setCategoryName(categoryName);
 		s.setStorageInterface(storageInterface);
 		s.setCapacity(capacity);
 		s.setPrice(price);
 		s.setQuantity(quantity);
 		s.setMemo(memo);
-		
-		// 디버깅
-		System.out.println("[insertCoolerController] : " + s.toString());
-		
-		storageDao = new StorageDao();
-		storageDao.insertStorage(s);
-		
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
-	}
 
+		System.out.println("[InsertStorageController] : " + i.toString());
+		System.out.println("[InsertStorageController] : " + s.toString());
+		storageDao = new StorageDao();
+		int row = storageDao.insertStorage(i, s);
+		if (row == 1) {
+			System.out.println("[InsertStorageController] : 저장소 등록 성공");
+			response.sendRedirect("/StorageListController");
+			return;
+		} else {
+			System.out.println("[InsertStorageController] : 저장소 등록 실패");
+			response.sendRedirect("/StorageListController");
+			return;
+		}
+	}
 }

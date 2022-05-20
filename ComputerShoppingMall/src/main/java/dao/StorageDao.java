@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
+import vo.Image;
 import vo.Storage;
 
 public class StorageDao {
@@ -97,14 +98,30 @@ public class StorageDao {
 		return row;
 	}
 	// storage 상품등록
-	public int insertStorage(Storage s) {
+	public int insertStorage(Image i, Storage s) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt =  null;
-		int row = 0;
-		String sql="INSERT INTO storage(storage_name, company_name, category_name, storage_interface, capacity, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
+		ResultSet rs = null;
 		conn = DButil.getConnection();
+		
+		String imgSql = "INSERT INTO storage_image(NAME, original_name, `type`, create_date, update_date) VALUE(?,?,?,NOW(),NOW())";
+		String productSql="INSERT INTO storage(storage_name, company_name, category_name, storage_interface, capacity, price, quantity, storage_image_no, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?, NOW())";
 		try {
-			stmt = conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if(rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1,s.getStorageName());
 			stmt.setString(2,s.getCompanyName());
 			stmt.setString(3,s.getCategoryName());
@@ -113,20 +130,25 @@ public class StorageDao {
 			stmt.setInt(6,s.getPrice());
 			stmt.setInt(7,s.getQuantity());
 			stmt.setString(8,s.getMemo());
-			stmt.executeUpdate();
+			stmt.setInt(9, imgNo);
+			row = stmt.executeUpdate();
+			
 			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 		

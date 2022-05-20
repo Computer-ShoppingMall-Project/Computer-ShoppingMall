@@ -50,16 +50,6 @@
 				<h2>상품등록</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
@@ -73,7 +63,7 @@
 					<h4 class="title">
 						<span>STORAGE</span>
 					</h4>
-					<form id="insertStorageform" method="post" name="insertStorageform" action="${pageContextrequest.contextPath}/InsertStorageController">
+					<form id="insertStorageForm" method="post" name="insertStorageForm" action="${pageContext.request.contextPath}/InsertStorageController?categoryName=storage" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" name="storageName" class="form-control" placeholder="StorageName">
 						</div>
@@ -89,7 +79,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type='radio' name='storageInterface' value='SATA3' onclick="clickCheck(this)" />SATA3 <input type='radio' name='storageInterface' value='PCIe4.0x4' onclick="clickCheck(this)" />PCIe4.0x4
+							<input type="text" name="storageInterface" value="PCIe4.0x4" onclick="clickCheck(this)" />
 						</div>
 						<div class="form-group">
 							<select class="form-group" name="capacity">
@@ -103,7 +93,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="strageImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
