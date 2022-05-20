@@ -80,8 +80,8 @@ public class InsertCpuController extends HttpServlet {
 		// vo
 		Cpu c = new Cpu();
 		c.setCpuName(cpuName);
-		c.setCompnayName(companyName);
-		c.setCompnayName(categoryName);
+		c.setCompanyName(companyName);
+		c.setCompanyName(categoryName);
 		c.setSocketSize(socketSize);
 		c.setCore(core);
 		c.setThread(thread);

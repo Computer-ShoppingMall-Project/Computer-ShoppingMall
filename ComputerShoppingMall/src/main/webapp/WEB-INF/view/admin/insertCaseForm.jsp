@@ -38,6 +38,14 @@
   ======================================================= -->
 </head>
 <body>
+<script>
+    function checkIt(값) {
+            var form=document.abc;
+            form.companyName.value=case;
+            form.submit();
+    }
+</script>
+	<div class="row">
 	<!-- header적용 -->
 	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
@@ -72,7 +80,7 @@
 					<h4 class="title">
 						<span>CASE</span>
 					</h4>
-					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContextrequest.contextPath}/InsertCaseController">
+					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController">
 						<div class="form-group">
 							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
 						</div>
@@ -109,6 +117,11 @@
 							</select>
 						</div>
 						<div class="form-group">
+							<select class="form-group" name="categoryName">
+								<option value="case">case</option>
+							</select>
+						</div>
+						<div class="form-group">
 							<input type="file" name="caseImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
@@ -123,6 +136,7 @@
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">
 						</div>
+					</div>
 					</form>
 				</div>
 				<!-- end login -->

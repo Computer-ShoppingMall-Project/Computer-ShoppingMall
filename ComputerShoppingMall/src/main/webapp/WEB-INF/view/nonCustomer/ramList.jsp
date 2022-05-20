@@ -113,7 +113,7 @@
 				<form>
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 20%" class="bg-info text-light text-center">Compnay</th>
+							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
 							<td><c:forEach var="c" items="${companyList}">
 									<input type="checkbox" name="companyName" value="${c}">
 									<span>&nbsp;${c}&nbsp;</span>

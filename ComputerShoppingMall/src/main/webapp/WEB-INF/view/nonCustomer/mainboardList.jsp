@@ -110,14 +110,14 @@
 				<form>
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 20%" class="bg-info text-light text-center">Compnay</th>
+							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
 							<td><c:forEach var="c" items="${companyList}">
 									<input type="checkbox" name="companyName" value="${c}">
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
 						<tr>
-							<th class="bg-info text-center">CPU Socket</th>
+							<th class="bg-info text-center">CPU SOCKET</th>
 							<!-- socketSize -->
 							<td><c:forEach var="c" items="${socketSizeList}">
 									<input type="checkbox" name="socketSize" value="${c}">

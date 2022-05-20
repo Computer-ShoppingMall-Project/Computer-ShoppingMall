@@ -147,7 +147,6 @@
 					<button type="reset" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</button>
 				</div>
 				</form>
-				</div>
 				<br>
 				<h4 class="title">CASE</h4>
 				<!-- 상품 리스트 -->
@@ -189,7 +188,6 @@
 				</div>
 				<!-- end container -->
 			</div>
-		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

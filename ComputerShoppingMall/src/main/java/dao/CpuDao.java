@@ -108,7 +108,7 @@ public class CpuDao {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());
 			stmt.setString(2, c.getCategoryName());
-			stmt.setString(3, c.getCompnayName());
+			stmt.setString(3, c.getCompanyName());
 			stmt.setString(4, c.getSocketSize());
 			stmt.setString(5, c.getCore());
 			stmt.setString(6, c.getThread());
@@ -165,7 +165,7 @@ public class CpuDao {
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
 				c.setCategoryName(rs.getString("categoryName"));
-				c.setCompnayName(rs.getString("companyName"));
+				c.setCompanyName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
 				c.setThread(rs.getString("thread"));
@@ -346,7 +346,7 @@ public class CpuDao {
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
 				c.setCategoryName(rs.getString("categoryName"));
-				c.setCompnayName(rs.getString("companyName"));
+				c.setCompanyName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
 				c.setThread(rs.getString("thread"));
@@ -395,76 +395,12 @@ public class CpuDao {
 				+ " FROM cpu"
 				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
 		
-		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
-		// companyName check값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
-		if(companyName != null) {
-			for(int i=0; i< companyName.length; i++) {
-				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					sql += " AND (company_name='" + companyName[i] + "'";
-					if(companyName.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-						sql+=")";
-					}
-				} else if(i > 0) {
-					sql += " OR '" + companyName[i] + "'";
-					if(i == companyName.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
-							sql += ")";
-					}
-				}
-			}	
-		}
-
-		// socketSize 값 불러오기
-		if(socketSize != null) {
-			for(int i=0; i< socketSize.length; i++) {
-				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					sql += " AND (socket_size='" + socketSize[i] + "'";
-					if(socketSize.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-					}
-				} else if(i > 0) {
-					sql += " OR '" + socketSize[i] + "'";
-					if(i == socketSize.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
-						sql += ")";
-					} 
-				}
-			}
-		}
-
-		
-		// core 값 불러오기
-		if(core != null) {
-			for(int i=0; i< core.length; i++) {
-				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					sql += " AND (core='" + core[i] + "'";
-						if(core.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-							sql+=")";
-						}
-				} else if(i > 0) {
-					sql += " OR '" + core[i] + "'";
-					if(i == core.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
-							sql += ")";
-					} 
-				}
-			}
-		}
-
-		
-		// thread 값 불러오기
-		if(thread != null) {
-			for(int i=0; i< thread.length; i++) {
-				if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
-					sql += " AND (thread='" + thread[i] + "'";
-					if(thread.length == 1) { // i가 첫번째이자 마지막이라면 ")"
-						sql+=")";
-					}
-				} else if(i > 0) {
-					sql += " OR '" + thread[i] + "'";
-					if(i == thread.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
-							sql += ")";
-					}
-				}
-			}
-		}
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("socket_size", socketSize);
+		sql += makeWhereSql("core", core);
+		sql += makeWhereSql("thread", thread);
 		
 		System.out.println("[CPU search SQL] : " + sql);
 		
@@ -476,7 +412,7 @@ public class CpuDao {
 					c.setCpuNo(rs.getInt("cpuNo"));
 					c.setCpuName(rs.getString("cpuName"));
 					c.setCategoryName(rs.getString("categoryName"));
-					c.setCompnayName(rs.getString("companyName"));
+					c.setCompanyName(rs.getString("companyName"));
 					c.setSocketSize(rs.getString("socketSize"));
 					c.setCore(rs.getString("core"));
 					c.setThread(rs.getString("thread"));
@@ -501,4 +437,26 @@ public class CpuDao {
 		}
 		return list;
 	}
+	
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR '" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
+		}
 }

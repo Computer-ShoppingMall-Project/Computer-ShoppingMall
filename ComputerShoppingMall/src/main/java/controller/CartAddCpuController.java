@@ -33,8 +33,6 @@ public class CartAddCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		cpu = cpuDao.selectCpuOne(cpuNo);
 		
-		
-		
 		// 값 보내주기
 		request.setAttribute("cpuOne", cpu);
 		request.getRequestDispatcher("WEB-INF/view/customer/cpuOne.jsp").forward(request, response);
@@ -56,8 +54,8 @@ public class CartAddCpuController extends HttpServlet {
 		
 		
 		// vo
-		Cpu cpuOne = new Cpu(); // cpuOne select용
 		Cpu cpu = new Cpu(); // 장바구니 insert용
+		Cpu cpuOne = new Cpu(); // cpuOne select용
 		
 		// cpu정보 뽑기
 		cpuOne = cpuDao.selectCpuOne(cpuNo);
