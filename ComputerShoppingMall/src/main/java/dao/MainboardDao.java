@@ -16,7 +16,7 @@ public class MainboardDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number,price,quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -24,7 +24,7 @@ public class MainboardDao {
 			stmt.setString(3, mainboard.getCategoryName());
 			stmt.setInt(4, mainboard.getMainboardNo());
 			stmt.setInt(5, mainboard.getPrice());
-			stmt.setInt(5, mainboard.getQuantity());
+			stmt.setInt(6, mainboard.getQuantity());
 			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");

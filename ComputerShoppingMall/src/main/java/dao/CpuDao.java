@@ -108,7 +108,7 @@ public class CpuDao {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());
 			stmt.setString(2, c.getCategoryName());
-			stmt.setString(3, c.getCompnayName());
+			stmt.setString(3, c.getCompanyName());
 			stmt.setString(4, c.getSocketSize());
 			stmt.setString(5, c.getCore());
 			stmt.setString(6, c.getThread());
@@ -165,7 +165,7 @@ public class CpuDao {
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
 				c.setCategoryName(rs.getString("categoryName"));
-				c.setCompnayName(rs.getString("companyName"));
+				c.setCompanyName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
 				c.setThread(rs.getString("thread"));
@@ -346,7 +346,7 @@ public class CpuDao {
 				c.setCpuNo(rs.getInt("cpuNo"));
 				c.setCpuName(rs.getString("cpuName"));
 				c.setCategoryName(rs.getString("categoryName"));
-				c.setCompnayName(rs.getString("companyName"));
+				c.setCompanyName(rs.getString("companyName"));
 				c.setSocketSize(rs.getString("socketSize"));
 				c.setCore(rs.getString("core"));
 				c.setThread(rs.getString("thread"));
@@ -412,7 +412,7 @@ public class CpuDao {
 					c.setCpuNo(rs.getInt("cpuNo"));
 					c.setCpuName(rs.getString("cpuName"));
 					c.setCategoryName(rs.getString("categoryName"));
-					c.setCompnayName(rs.getString("companyName"));
+					c.setCompanyName(rs.getString("companyName"));
 					c.setSocketSize(rs.getString("socketSize"));
 					c.setCore(rs.getString("core"));
 					c.setThread(rs.getString("thread"));

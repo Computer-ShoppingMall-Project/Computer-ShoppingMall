@@ -101,7 +101,7 @@ public class CoolerDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String  sql="INSERT INTO cooler (cooler_name, company_name, kind,cooler_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?, NOW())";  
+		String  sql="INSERT INTO cooler (cooler_name, company_name, kind,cooler_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?, NOW())";  
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCoolerName());
@@ -143,6 +143,7 @@ public class CoolerDao {
 				+ " cooler_no coolerNo"
 				+ ", cooler_name coolerName"
 				+ ", company_name companyName"
+				+ ", category_name categoryName"
 				+ ", kind"
 				+ ", cooler_size coolerSize"
 				+ ", price"
@@ -159,6 +160,7 @@ public class CoolerDao {
 				c.setCoolerNo(rs.getInt("coolerNo"));
 				c.setCoolerName(rs.getString("coolerName"));
 				c.setCompanyName(rs.getString("companyName"));
+				c.setCategoryName(rs.getString("categoryName"));
 				c.setKind(rs.getString("kind"));
 				c.setCoolerSize(rs.getInt("coolerSize"));
 				c.setPrice(rs.getInt("price"));
@@ -289,6 +291,7 @@ public class CoolerDao {
 				+ " cooler_no coolerNo"
 				+ ", cooler_name coolerName"
 				+ ", company_name companyName"
+				+ ", category_name categoryName"
 				+ ", kind"
 				+ ", cooler_size coolerSize"
 				+ ", price"
@@ -296,7 +299,7 @@ public class CoolerDao {
 				+ ", cooler_image_no coolerImageNo"
 				+ ", memo"
 				+ ", update_date updateDate"
-				+ " FROM cooler WHERE mainboard_no = ?";
+				+ " FROM cooler WHERE cooler_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, coolerNo);
@@ -305,6 +308,7 @@ public class CoolerDao {
 				c.setCoolerNo(rs.getInt("coolerNo"));
 				c.setCoolerName(rs.getString("coolerName"));
 				c.setCompanyName(rs.getString("companyName"));
+				c.setCategoryName(rs.getString("categoryName"));
 				c.setKind(rs.getString("kind"));
 				c.setCoolerSize(rs.getInt("coolerSize"));
 				c.setPrice(rs.getInt("price"));

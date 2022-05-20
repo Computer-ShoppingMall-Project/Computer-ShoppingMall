@@ -17,7 +17,7 @@ public class GpuDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, category_price, category_quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		String sql="INSERT INTO basket (customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -25,7 +25,7 @@ public class GpuDao {
 			stmt.setString(3, gpu.getCategoryName());
 			stmt.setInt(4, gpu.getGpuNo());
 			stmt.setInt(5, gpu.getPrice());
-			stmt.setInt(5, gpu.getQuantity());
+			stmt.setInt(6, gpu.getQuantity());
 			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");

@@ -121,7 +121,7 @@
 							<div class="form-group">
 								<div> 개수 선택 
 						<form  class="contact-form" 
-							action="${pageContext.request.contextPath}/CartAddGpuController?caseNo=${requestScope.gpuOne.gpuNo}" method="POST">
+							action="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" method="POST">
 								<input type="number" max="${requestScope.gpuOne.quantity}" name="quantity" value="1" class="text-center">개 
 								<input type="submit" class="btn btn-large btn-primary" value="담기">
 						</form>

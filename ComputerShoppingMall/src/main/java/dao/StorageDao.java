@@ -26,7 +26,7 @@ public class StorageDao {
 			stmt.setInt(4, storage.getStorageNo());
 			stmt.setInt(5, storage.getPrice());
 			stmt.setInt(6, storage.getQuantity());
-			stmt.executeUpdate();
+			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
 			} else {
