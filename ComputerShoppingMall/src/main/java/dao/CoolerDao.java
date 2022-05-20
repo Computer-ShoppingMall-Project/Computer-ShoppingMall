@@ -26,7 +26,7 @@ public class CoolerDao {
 			stmt.setInt(4, cooler.getCoolerNo());
 			stmt.setInt(5, cooler.getPrice());
 			stmt.setInt(6, cooler.getQuantity());
-			stmt.executeUpdate();
+			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
 			} else {

@@ -163,7 +163,7 @@
 										<div class="he-view">
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
-												<a href="${pageContext.request.contextPath}/CartAddCaseController?CaseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight">
+												<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight">
 												<i class="fa fa-search">Detail</i></a> <a href="${pageContext.request.contextPath}/CartAddCaseController?" class="dmbutton a2" data-animate="bounceInRight">
 												<i class="fa fa-cart-plus">Add</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>

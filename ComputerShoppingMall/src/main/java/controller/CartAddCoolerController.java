@@ -59,6 +59,7 @@ public class CartAddCoolerController extends HttpServlet {
 		
 		// cooler 정보 뽑기
 		coolerOne = coolerDao.selectCoolerOne(coolerNo);
+		System.out.println(coolerOne.toString());
 		
 		// 정보 담기
 		cooler.setCoolerName(coolerOne.getCoolerName());
