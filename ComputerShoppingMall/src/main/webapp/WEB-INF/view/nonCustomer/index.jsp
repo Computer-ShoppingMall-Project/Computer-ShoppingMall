@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>RedVelvet</title>
@@ -150,10 +150,9 @@
 
 						<div class="services_lists_boxes clearfix">
 							<div class="col-lg-3 col-md-3 col-sm-12">
-								<div class="services_lists_boxes_icon"
-									data-effect="slide-bottom">
-									<a href="#" class=""> <i
-										class="active dm-icon-medium fa fa-download fa-2x"></i>
+								<div class="services_lists_boxes_icon" data-effect="slide-bottom">
+									<a href="#" class="">
+									<i class="active dm-icon-medium fa fa-download fa-2x"></i>
 									</a>
 								</div>
 							</div>
@@ -169,10 +168,9 @@
 
 						<div class="services_lists_boxes clearfix">
 							<div class="col-lg-3 col-md-3 col-sm-12">
-								<div class="services_lists_boxes_icon_none"
-									data-effect="slide-bottom">
-									<a href="#" class=""> <i
-										class="active dm-icon-medium fa fa-dollar fa-2x"></i>
+								<div class="services_lists_boxes_icon_none" data-effect="slide-bottom">
+									<a href="#" class="">
+									<i class="active dm-icon-medium fa fa-dollar fa-2x"></i>
 									</a>
 								</div>
 							</div>
@@ -217,8 +215,8 @@
 					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/img/portfolio_02.jpg">
 					<img class="lazyOwl" src="${pageContext.request.contextPath}/img/portfolio_02.jpg" data-src="${pageContext.request.contextPath}/img/portfolio_02.jpg" alt="">
 						<div>
-							<small>Product Design</small> <span>Project Name Here</span> <i
-								class="fa fa-search"></i>
+							<small>Product Design</small> <span>Project Name Here</span>
+							<i class="fa fa-search"></i>
 						</div>
 					</a>
 				</div>

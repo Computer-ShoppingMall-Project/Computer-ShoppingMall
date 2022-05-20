@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="topbar clearfix">
 	<div class="container">
 		<div class="col-lg-10 text-right">
 			<div class="social_buttons">
 				<c:choose>
 					<c:when test="${sessionAdminId == null}">
-						<a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">Login</a>
+						<a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">로그인</a>
 					</c:when>
 					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/logoutController" data-toggle="tooltip" data-placement="bottom">Loginout</a>
+						<a href="${pageContext.request.contextPath}/LogoutController" data-toggle="tooltip" data-placement="bottom">로그아웃</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -39,75 +39,69 @@
 				<div id="nav" class="right">
 					<div class="container clearfix">
 						<ul id="jetmenu" class="jetmenu blue">
-							<li><a href="IndexController">Home</a></li>
-							<li class="active"><a href="#">Pages</a>
+							<li><a href="${pageContext.request.contextPath}/IndexController">홈</a></li>
+							<li class="active"><a href="#">로그인</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/Controller404">404 Error</a></li>
-									<li><a href="${pageContext.request.contextPath}/leftSidebarController">Left Sidebar</a></li>
-									<li><a href="${pageContext.request.contextPath}/LoginController">Login</a></li>
-									<li><a href="${pageContext.request.contextPath}/RegisterController">Register</a></li>
-									<li><a href="${pageContext.request.contextPath}/QnaListController">QNA</a></li>
+									<li>
+									<c:choose>
+										<c:when test="${sessionAdminId == null}">
+											<a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">로그인</a>
+										</c:when>
+										<c:otherwise>
+											<a href="${pageContext.request.contextPath}/LogoutController" data-toggle="tooltip" data-placement="bottom">로그아웃</a>
+										</c:otherwise>
+									</c:choose>
+									</li>
 								</ul>
 							</li>
-							<li><a href="#">Shop</a>
+							<li><a href="#">상품</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/DigitalDownloadController">Products Page</a></li>
-									<li><a href="${pageContext.request.contextPath}/SingleProductController">Single Product</a></li>
-									<li><a href="${pageContext.request.contextPath}/CheckoutController">Checkout</a></li>
-									<li><a href="${pageContext.request.contextPath}/AccountController">Account Page</a></li>
-									<li><a href="${pageContext.request.contextPath}/SupportController">Support Center</a></li>
+									<li><a href="${pageContext.request.contextPath}/DigitalDownloadController">상품</a></li>
+									<li><a href="${pageContext.request.contextPath}/SingleProductController">부품</a></li>
+									<li><a href="${pageContext.request.contextPath}/CheckoutController">결제</a></li>
+									<li><a href="${pageContext.request.contextPath}/AccountController">계정</a></li>
+									<li><a href="${pageContext.request.contextPath}/SupportController">고객센터</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Portfolio</a>
+							<li><a href="#">제품추가</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/PortfolioController">Portfolio (2 Columns)</a></li>
-									<li><a href="${pageContext.request.contextPath}/PortfolioController">Portfolio (3 Columns)</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertCaseController">케이스 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertCoolerController">쿨러 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertCpuController">씨피유 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertGpuController">그래픽카드 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertMainboardController">메인보드 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertPowerController">파워 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertRamController">램 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertStorageController">저장소 등록</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Blog</a>
+							<li><a href="#">제품갱신</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/single-with-sidebarController">Single with Sidebar</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateCaseController">케이스 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateCoolerController">쿨러 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateCpuController">씨피유 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateGpuController">그래픽카드 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateMainboardController">메인보드 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdatePowerController">파워 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateRamController">램 수정</a></li>
+									<li><a href="${pageContext.request.contextPath}/UpdateStorageController">저장소 수정</a></li>
 								</ul>
 							</li>
-							<li><a href="#">ProductInsert</a>
+							<li><a href="#">제품삭제</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/InsertCaseController">InsertCase</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertCoolerController">InsertCooler</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertCpuController">InsertCpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertGpuController">InsertGpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertMainboardController">InsertMainBoard</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertPowerController">InsertPower</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertRamController">InsertRam</a></li>
-									<li><a href="${pageContext.request.contextPath}/InsertStorageController">InsertStorage</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteCaseController">케이스 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteCoolerController">쿨러 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteCpuController">씨피유 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteGpuController">그래픽카드 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteMainboardController">메인보드 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeletePowerController">파워 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteRamController">램 삭제</a></li>
+									<li><a href="${pageContext.request.contextPath}/DeleteStorageController">저장소 삭제</a></li>
 								</ul>
 							</li>
-							<li><a href="#">ProductUpdate</a>
+							<li><a href="#">Q&A</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/UpdateCaseController">UpdateCase</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateCoolerController">UpdateCooler</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateCpuController">UpdateCpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateGpuController">UpdateGpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateMainboardController">UpdateMainBoard</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdatePowerController">UpdatePower</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateRamController">UpdateRam</a></li>
-									<li><a href="${pageContext.request.contextPath}/UpdateStorageController">UpdateStorage</a></li>
-								</ul>
-							</li>
-							<li><a href="#">ProductDelete</a>
-								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/DeleteCaseController">DeleteCase</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteCoolerController">DeleteCooler</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteCpuController">DeleteCpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteGpuController">DeleteGpu</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteMainboardController">DeleteMainBoard</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeletePowerController">DeletePower</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteRamController">DeleteRam</a></li>
-									<li><a href="${pageContext.request.contextPath}/DeleteStorageController">DeleteStorage</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Qna</a>
-								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">AdminQnaListController</a></li>
+									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">Q&A 관리</a></li>
 								</ul>
 							</li>
 						</ul>

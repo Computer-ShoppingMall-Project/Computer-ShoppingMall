@@ -123,7 +123,6 @@
 						<button type="reset" class="btn btn-link" style="float: right;">Reset</button>
 					</div>
 				</form>
-				</div>
 				<br>
 				<h4 class="title">POWER</h4>
 				<!-- 상품 리스트 -->
@@ -165,7 +164,6 @@
 				</div>
 				<!-- end container -->
 			</div>
-		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

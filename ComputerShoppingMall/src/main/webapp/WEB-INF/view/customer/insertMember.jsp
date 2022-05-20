@@ -99,7 +99,8 @@
 					<form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
 						<div class="form-group">
 							<!-- 4자이상 : blur이벤트 발생시 체크 -->
-							<input type="text" id="id" name="customerId" class="form-control" placeholder="ID"> <span id="idHelper" class="helper"></span>
+							<input type="text" id="id" name="customerId" class="form-control" placeholder="ID">
+							<span id="idHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
 							<input type="password" id="pw" name="customerPw1" class="form-control" placeholder="Password">
@@ -129,10 +130,12 @@
 							<span id="zipcodeHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
-							<input type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control" placeholder="Road address"> <span id="roadHelper" class="helper"></span>
+							<input type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control" placeholder="Road address">
+							<span id="roadHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
-							<input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="Detail address"> <span id="detailHelper" class="helper"></span>
+							<input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="Detail address">
+							<span id="detailHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
 							<button type="button" id="signup">Register</button>

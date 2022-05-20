@@ -39,7 +39,7 @@
             <div id="nav" class="right">
                <div class="container clearfix">
                   <ul id="jetmenu" class="jetmenu blue">
-                     <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+                     <li><a href="${pageContext.request.contextPath}/IndexController">홈</a></li>
                      <li><a href="#">Pages</a>
                         <ul class="dropdown">
                            <li>
