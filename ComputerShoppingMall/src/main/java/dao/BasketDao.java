@@ -10,13 +10,14 @@ import util.DButil;
 import vo.Basket;
 
 public class BasketDao {
-	public int deleteMyBasktet(int basketNo) {
+	// 장바구니 삭제 코드
+	public int deleteMyBasket(int basketNo) {
 		// DB변수 기본값(null)으로 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		int row = 0;
 		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
-		String sql = "DELETE basket FROM WHERE basket_no =?";
+		String sql = "DELETE FROM basket WHERE basket_no=?";
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setInt(1, basketNo); 
@@ -38,6 +39,37 @@ public class BasketDao {
 		}
 		return row;
 	}
+	// 장바구니 수랑 수정 코드
+	public int updateMyBasket(int quantity, int basketNo) {
+		// DB변수 기본값(null)으로 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int row = 0;
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "UPDATE basket SET quantity=? WHERE basket_no=?";
+		try {
+			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
+			stmt.setInt(1, quantity); 
+			stmt.setInt(2, basketNo); 
+			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			if(row > 0) {
+				System.out.println("수정성공");
+			} else {
+				System.out.println("수정실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	// 결제 후, 장바구니 삭제 코드
 	public int paymentDeleteMyBasket(String customerId) {
 		// DB변수 기본값(null)으로 선언
 		Connection conn = null;

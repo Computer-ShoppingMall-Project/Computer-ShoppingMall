@@ -29,7 +29,6 @@
 <!-- Main Stylesheet File -->
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
-
 <!-- =======================================================
     Template Name: MaxiBiz
     Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
@@ -68,9 +67,10 @@
 
 	<section class="section1">
 		<div class="container clearfix">
-			<a href="${pageContext.request.contextPath}/InsertMyBasketController" type="button" class="btn btn-outline-primary">추가구매</a>
-			<div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
-				<table class="table table-striped checkout" data-effect="fade">
+			
+			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+			<a href="${pageContext.request.contextPath}/CpuListController" type="button" style="float:right" class="btn btn-outline-primary">추가구매</a>
+				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
 							<th>부품 이름</th>
@@ -78,7 +78,6 @@
 							<th>부품 번호</th>
 							<th>가격</th>
 							<th>수량</th>
-							<th>저장 날짜</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -89,9 +88,13 @@
 								<td>${basket.categoryName}</td>
 								<td>${basket.productNumber}</td>
 								<td>${basket.price}</td>
-								<td>${basket.quantity}</td>
-								<td>${basket.createDate}</td>
-								<td><a href="${pageContext.request.contextPath}/DeleteMyBasketController?basketNo=${basket.basketNo}">삭제</a></td>
+								<td>
+									<div class="col-sm-5">
+										<input type="number" name="basketNo" value="${basket.quantity}" min="1" max="10"  class="text-center form-control">
+									</div>
+										<a href="${pageContext.request.contextPath}/UpdateBasketController?basketNo=${basket.basketNo}">수정</a>
+								</td>
+								<td><a href="${pageContext.request.contextPath}/DeleteBasketController?basketNo=${basket.basketNo}">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
