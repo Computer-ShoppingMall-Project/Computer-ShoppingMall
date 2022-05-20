@@ -1,47 +1,65 @@
 package vo;
 
 public class CpuImage {
-	private int cpuImageNo; // FK -> cpu
+	private int cpuImageNo;
 	private String name;
-	private String kind;
-	private int size;
-	private String extension;
-	
+	private String originalName;
+	private String type;
+	private String createDate;
+	private String updateDate;
+
 	@Override
 	public String toString() {
-		return "CpuImage [cpuImageNo=" + cpuImageNo + ", extension=" + extension + ", name=" + name + ", size=" + size
-				+ ", kind=" + kind + "]";
+		return "CpuImage [cpuImageNo=" + cpuImageNo + ", name=" + name + ", originalName=" + originalName + ", type="
+				+ type + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
-	
-	// getter + setter
+
 	public int getCpuImageNo() {
 		return cpuImageNo;
 	}
+
 	public void setCpuImageNo(int cpuImageNo) {
 		this.cpuImageNo = cpuImageNo;
 	}
-	public String getExtension() {
-		return extension;
-	}
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getSize() {
-		return size;
+
+	public String getOriginalName() {
+		return originalName;
 	}
-	public void setSize(int size) {
-		this.size = size;
+
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
-	public String getKind() {
-		return kind;
+
+	public String getType() {
+		return type;
 	}
-	public void setKind(String kind) {
-		this.kind = kind;
+
+	public void setType(String type) {
+		this.type = type;
 	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 }

@@ -2,15 +2,16 @@ package vo;
 
 public class StorageImage {
 	private int storageImageNo;
-	private String extension;
 	private String name;
-	private int size; 
-	private String kind;
-	
+	private String originalName;
+	private String type;
+	private String createDate;
+	private String updateDate;
+
 	@Override
 	public String toString() {
-		return "StorageImage [storageImageNo=" + storageImageNo + ", extension=" + extension + ", name=" + name
-				+ ", size=" + size + ", kind=" + kind + "]";
+		return "StorageImage [storageImageNo=" + storageImageNo + ", name=" + name + ", originalName=" + originalName
+				+ ", type=" + type + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
 
 	public int getStorageImageNo() {
@@ -21,14 +22,6 @@ public class StorageImage {
 		this.storageImageNo = storageImageNo;
 	}
 
-	public String getExtension() {
-		return extension;
-	}
-
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -37,19 +30,36 @@ public class StorageImage {
 		this.name = name;
 	}
 
-	public int getSize() {
-		return size;
+	public String getOriginalName() {
+		return originalName;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
 
-	public String getKind() {
-		return kind;
+	public String getType() {
+		return type;
 	}
 
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setType(String type) {
+		this.type = type;
 	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 }
