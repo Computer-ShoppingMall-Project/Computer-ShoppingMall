@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.DButil;
 import vo.Admin;
@@ -312,5 +313,37 @@ public class MemberDao {
 						}
 					}
 			return customerId;
+		}
+		// 아이디리스트 -> 아이디중복 확인용
+		public ArrayList<Customer> MemberIdList() {
+			ArrayList<Customer> list = new ArrayList<Customer>();
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			// DButil
+			conn = DButil.getConnection();
+			// SQL 쿼리
+			String sql = "SELECT customer_id customerId FROM customer;";
+			try {
+				stmt = conn.prepareStatement(sql);
+				rs =stmt.executeQuery();
+				while(rs.next()) {
+					Customer c = new Customer();
+					c.setCustomerId(rs.getString("customerId"));
+					list.add(c);
+				}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							// DB 자원반납
+							rs.close();
+							stmt.close();
+							conn.close();
+						} catch(SQLException e) {
+							e.printStackTrace();
+						}
+					}
+			return list;
 		}
 }

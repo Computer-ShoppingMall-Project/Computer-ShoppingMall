@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,11 @@ public class InsertMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/IndexController");
 			return;
 		}
+		
+		// dao
+		ArrayList<Customer> customerList =dao.MemberIdList();
+		
+		request.setAttribute("customerList",customerList);
 		// 로그인 상태가 아니면 insertMemberForm.jsp 호출
 		request.getRequestDispatcher("/WEB-INF/view/customer/insertMember.jsp").forward(request, response);
 	}

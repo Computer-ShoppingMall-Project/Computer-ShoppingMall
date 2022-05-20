@@ -99,7 +99,7 @@
 					<form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
 						<div class="form-group">
 							<!-- 4자이상 : blur이벤트 발생시 체크 -->
-							<input type="text" id="id" name="customerId" class="form-control" placeholder="ID">
+							<input type="text" id="id" name="customerCk" class="form-control" placeholder="ID">
 							<span id="idHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
@@ -171,8 +171,6 @@
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script type="text/javascript">
-		$('#id').focus();
-
 		$('#id').blur(function() {
 			if ($('#id').val().length < 4) {
 				$('#idHelper').text('id는 4자이상');

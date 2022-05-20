@@ -100,9 +100,7 @@
 				<div class="servicebox text-center">
 					<div class="service-icon">
 						<div class="dm-icon-effect-1" data-effect="slide-right">
-							<a href="#" class=""> 
 							<i class="active dm-icon fa fa-book fa-3x"></i>
-							</a>
 						</div>
 						<div class="servicetitle">
 							<h4>Easy to Setup</h4>
