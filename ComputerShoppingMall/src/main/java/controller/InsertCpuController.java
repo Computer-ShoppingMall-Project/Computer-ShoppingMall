@@ -97,7 +97,7 @@ public class InsertCpuController extends HttpServlet {
 		cpuDao.insertCpu(c);
 		
 		// 홈페이지 이동
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath() + "/CpuListController");
 	}
 
 }

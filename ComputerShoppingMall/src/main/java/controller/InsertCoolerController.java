@@ -35,7 +35,6 @@ public class InsertCoolerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
 		// 변수등록
 		String coolerName = null;
 		String companyName = null;
@@ -91,6 +90,6 @@ public class InsertCoolerController extends HttpServlet {
 		insertcoolerDao = new CoolerDao();
 		insertcoolerDao.insertCooler(c);
 		
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath() + "/CoolerListController");
 		}
 	}

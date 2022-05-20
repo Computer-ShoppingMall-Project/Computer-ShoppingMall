@@ -72,10 +72,10 @@
 					<h4 class="title">
 						<span>GPU</span>
 					</h4>
-					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContextrequest.contextPath}/InsertGpuController">
+					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContext.request.contextPath}/InsertGpuController">
 						<div class="form-group">
 							<input type="text" name="gpuName" class="form-control"
-								placeholder="CpuName">
+								placeholder="GpuName">
 						</div>
 
 						<div class="form-group">
@@ -93,9 +93,12 @@
 								<option value="SAPPHIRE">SAPPHIRE</option>
 								<option value="GIGABYTE">GIGABYTE</option>
 							</select>
+						<div class="form-group">
+							<input type="text" name="categoryName" class="form-control"	placeholder="categoryName">
+						</div>
 						</div>
 						<div class="form-group">
-							<input type="text" name="gpuSize" class="form-control" placeholder="GpuSize">
+							<input type="number" name="gpuSize" class="form-control" placeholder="GpuSize">
 						</div>
 						<div class="form-group">
 							<input type="file" name="gpuImage" class="form-control" placeholder="Img">

@@ -17,7 +17,7 @@ public class CaseDao {
 		PreparedStatement stmt =  null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -26,7 +26,7 @@ public class CaseDao {
 			stmt.setInt(4, c.getCaseNo());
 			stmt.setInt(5, c.getPrice());
 			stmt.setInt(6, c.getQuantity());
-			row = stmt.executeUpdate();
+			stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
 			} else {
@@ -95,7 +95,7 @@ public class CaseDao {
 		}
 		return row;
 	}
-	// caseList
+	// case 상품등록
 	public int insertCase(Case c) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -130,7 +130,7 @@ public class CaseDao {
 		}
 		return row;
 	}
-	// caseList
+	// case 정보 상세보기
 	public ArrayList<Case> selectCaseList() {
 		ArrayList<Case> list = new ArrayList<Case>();
 		// DB 기본값 셋팅
@@ -312,59 +312,5 @@ public class CaseDao {
 			}
 		}
 		return list;
-	}
-	// caseOne 상세보기
-	public Case selectCaseOne(int caseOne) {
-		Case c = new Case();
-		// DB 기본값 셋팅
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		conn = DButil.getConnection();
-		
-		String sql = "SELECT"
-				+ "	case_no caseNo"
-				+ "	, case_name caseName"
-				+ "	, category_name categoryName"
-				+ "	, case_size caseSize"
-				+ "	, gpu_size gpuSize"
-				+ "	, bay89mm"
-				+ "	, bay64mm"
-				+ "	, price"
-				+ "	, quantity"
-				+ "	, case_image_no caseImageNo"
-				+ "	, memo"
-				+ "	, update_date updateDate"
-				+ " FROM `case`";
-		try {
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				c.setCaseNo(rs.getInt("caseNo"));
-				c.setCaseName(rs.getString("caseName"));
-				c.setCategoryName(rs.getString("categoryName"));
-				c.setCaseSize(rs.getString("caseSize"));
-				c.setGpuSize(rs.getInt("gpuSize"));
-				c.setBay64mm(rs.getInt("bay64mm"));
-				c.setBay89mm(rs.getInt("bay89mm"));
-				c.setPrice(rs.getInt("price"));
-				c.setQuantity(rs.getInt("quantity"));
-				c.setCaseImageNo(rs.getInt("caseImageNo"));
-				c.setMemo(rs.getString("memo"));
-				c.setUpdateDate(rs.getString("updateDate"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				// DB 자원반납
-				rs.close();
-				stmt.close();
-				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return c;
 	}
 }

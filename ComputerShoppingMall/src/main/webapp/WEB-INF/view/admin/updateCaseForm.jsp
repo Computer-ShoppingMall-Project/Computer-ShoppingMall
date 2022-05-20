@@ -38,26 +38,31 @@
   ======================================================= -->
 </head>
 <body>
+<script>
+    function checkIt(값) {
+            var form=document.abc;
+            form.companyName.value=case;
+            form.submit();
+    }
+</script>
+	<div class="row">
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 				</ul>
-				<h2>상품수정</h2>
+				<h2>상품등록</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image"
-								src="${pageContext.request.contextPath}/img/pixel.gif"
-								class="searchsubmit" alt="" /> <input type="text"
-								class="${pageContext.request.contextPath}/search_text showtextback"
-								name="s" id="s" value="Search..." />
+							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -75,20 +80,12 @@
 					<h4 class="title">
 						<span>CASE</span>
 					</h4>
-					<form id="UpdateCaseform" method="post" name="updatetCaseform"
-						action="${pageContextrequest.contextPath}/UpdateCaseController">
+					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController">
 						<div class="form-group">
-							<input type="number" readonly name="caseNo" class="form-control"
-								placeholder="CaseNo">
+							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="caseName" class="form-control"
-								placeholder="CaseName">
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="caseSize"
-								onFocus="this.initialSelect = this.selectedIndex;"
-								onChange="this.selectedIndex = this.initialSelect;">
+							<select class="form-group" name="caseSize">
 								<option value="" selected disabled hidden>caseSize</option>
 								<option value="빅타워">빅타워</option>
 								<option value="미들타워">미들타워</option>
@@ -97,13 +94,10 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="text" name="caseSize" readonly class="form-control"
-								placeholder="caseSize">
+							<input type="text" name="gpuSize" class="form-control" placeholder="gpuSize">
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="bay89mm"
-								onFocus="this.initialSelect = this.selectedIndex;"
-								onChange="this.selectedIndex = this.initialSelect;">
+							<select class="form-group" name="bay89mm">
 								<option value="" selected disabled hidden>bay89mm</option>
 								<option value="6">6</option>
 								<option value="4">4</option>
@@ -114,9 +108,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="bay64mm"
-								onFocus="this.initialSelect = this.selectedIndex;"
-								onChange="this.selectedIndex = this.initialSelect;">
+							<select class="form-group" name="bay64mm">
 								<option value="" selected disabled hidden>bay64mm</option>
 								<option value="6">6</option>
 								<option value="4">4</option>
@@ -125,24 +117,24 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="caseImage" class="form-control"
-								placeholder="Img">
+							<input type="file" name="caseImage" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" name="quantity" class="form-control"
-								placeholder="Quantity">
+							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number" name="price" class="form-control"
-								placeholder="Price">
+							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="memo" class="form-control"
-								placeholder="Memo">
+							<input type="text" name="memo" class="form-control" placeholder="Memo">
 						</div>
 						<div class="form-group">
-							<input type="submit" class="button" value="삭제">
+							<input type="hidden" name="categoryName" class="form-control" varlue=case>
 						</div>
+						<div class="form-group">
+							<input type="submit" class="button" value="등록">
+						</div>
+					</div>
 					</form>
 				</div>
 				<!-- end login -->
@@ -157,30 +149,19 @@
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
 	<!-- JavaScript Libraries -->
-	<script
-		src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>

@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>COOLER</span>
 					</h4>
-					<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContextrequest.contextPath}/InsertCoolerController">
+					<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContext.request.contextPath}/InsertCoolerController">
 						<div class="form-group">
 							<input type="text" name="coolerName" class="form-control" placeholder="CoolerName">
 						</div>
@@ -81,8 +81,8 @@
 						</div>
 
 						<div class="form-group">
-							<select class="form-group" name="coolerKind">
-								<option value="" selected disabled hidden>ratedPower</option>
+							<select class="form-group" name="Kind">
+								<option value="" selected disabled hidden>Kind</option>
 								<option value="CPU 쿨러 공랭">CPU 쿨러 공랭</option>
 								<option value="CPU 쿨러 수랭">CPU 쿨러 수랭</option>
 								<option value="M.2 SSD 쿨러 공랭">M.2 SSD 쿨러 공랭</option>

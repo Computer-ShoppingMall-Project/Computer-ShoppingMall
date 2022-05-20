@@ -103,7 +103,7 @@ public class CpuDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql="INSERT INTO cpu (cpu_name, category_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?,?, NOW())";
+		String sql="INSERT INTO cpu (cpu_name, category_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?, NOW())";
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCpuName());

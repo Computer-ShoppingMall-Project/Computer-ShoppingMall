@@ -102,4 +102,3 @@ public class InsertCaseController extends HttpServlet {
 	}
 
 }
-

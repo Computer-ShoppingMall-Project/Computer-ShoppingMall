@@ -100,18 +100,19 @@ public class MainboardDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql = "INSERT INTO mainboard(mainboard_name, mainboard_kind, socket_size, chipset, ram_version, price, quantity, company_name, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?, NOW())";
+		String sql = "INSERT INTO mainboard(mainboard_name, kind, category_name, socket_size, chipset, ram_version, price, quantity, company_name, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?,?, NOW())";
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, m.getMainboardName());
 			stmt.setString(2, m.getKind());
-			stmt.setString(3, m.getSocketSize());
-			stmt.setString(4, m.getChipset());
-			stmt.setString(5, m.getRamVersion());
-			stmt.setInt(6, m.getPrice());
-			stmt.setInt(7, m.getQuantity());
-			stmt.setString(8, m.getCompanyName());
-			stmt.setString(9, m.getMemo());
+			stmt.setString(3, m.getCategoryName());
+			stmt.setString(4, m.getSocketSize());
+			stmt.setString(5, m.getChipset());
+			stmt.setString(6, m.getRamVersion());
+			stmt.setInt(7, m.getPrice());
+			stmt.setInt(8, m.getQuantity());
+			stmt.setString(9, m.getCompanyName());
+			stmt.setString(10, m.getMemo());
 			row=stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");

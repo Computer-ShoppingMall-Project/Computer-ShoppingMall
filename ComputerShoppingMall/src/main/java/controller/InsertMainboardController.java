@@ -37,7 +37,8 @@ public class InsertMainboardController extends HttpServlet {
 		
 		// 변수등록
 		String mainboardName = null;
-		String mainboardKind = null;
+		String kind = null;
+		String categoryName = null;
 		String socketSize = null;
 		String chipSet = null;
 		String ramVersion = null;
@@ -50,8 +51,11 @@ public class InsertMainboardController extends HttpServlet {
 		if(request.getParameter("mainboardName") != null || request.getParameter("mainboardName") !="") {
 			mainboardName = request.getParameter("mainboardName");
 		}
-		if(request.getParameter("mainboardKind") != null ||request.getParameter("mainboardName") !="") {
-			mainboardKind = request.getParameter("mainboardKind");
+		if(request.getParameter("kind") != null ||request.getParameter("mainboardName") !="") {
+			kind = request.getParameter("kind");
+		}
+		if(request.getParameter("categoryName") != null ||request.getParameter("mainboardName") !="") {
+			categoryName = request.getParameter("categoryName");
 		}
 		if(request.getParameter("socketSize") != null || request.getParameter("mainboardName") !="") {
 			socketSize = request.getParameter("socketSize");
@@ -89,12 +93,12 @@ public class InsertMainboardController extends HttpServlet {
 		m.setMemo(memo);
 		
 		// 디버깅
-		System.out.println("[insertCoolerController] : " + m.toString());
+		System.out.println("[insertMainboardController] : " + m.toString());
 		
 		// dao
 		mainboardDao = new MainboardDao();
 		mainboardDao.insertMainboard(m);
 		
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath() + "/MainboardListController");
 	}
 }

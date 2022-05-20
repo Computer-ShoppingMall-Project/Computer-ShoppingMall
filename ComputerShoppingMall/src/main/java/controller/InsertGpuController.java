@@ -38,6 +38,7 @@ public class InsertGpuController extends HttpServlet {
 		// 변수등록
 		String gpuName = null;
 		String companyName = null;
+		String categoryName = null;
 		String chipsetCompany = null;
 		int gpuSize = 0;
 		int price = 0;
@@ -50,6 +51,9 @@ public class InsertGpuController extends HttpServlet {
 		}
 		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
 			companyName = request.getParameter("companyName");
+		}
+		if(request.getParameter("categoryName") != null && request.getParameter("categoryNameName") !="") {
+			categoryName = request.getParameter("categoryName");
 		}
 		if(request.getParameter("chipsetCompany") != null && request.getParameter("chipsetCompany") !="") {
 			chipsetCompany = request.getParameter("chipsetCompany");
@@ -71,21 +75,21 @@ public class InsertGpuController extends HttpServlet {
 		Gpu g = new Gpu();
 		g.setGpuName(gpuName);
 		g.setCompanyName(companyName);
-		g.setChipsetCompany(companyName);
+		g.setChipsetCompany(chipsetCompany);
 		g.setGpuSize(gpuSize);
 		g.setPrice(price);
 		g.setQuantity(quantity);
 		g.setMemo(memo);
 		
 		// 디버깅
-		System.out.println("[insertCoolerController] : " + g.toString());
+		System.out.println("[insertGpuController] : " + g.toString());
 		
 		// dao insert
 		gpuDao = new GpuDao();
 		gpuDao.insertGpu(g);
 		
 		// 홈페이지 이동
-		response.sendRedirect(request.getContextPath() + "/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath() + "/GpuListController");
 	}
 
 }

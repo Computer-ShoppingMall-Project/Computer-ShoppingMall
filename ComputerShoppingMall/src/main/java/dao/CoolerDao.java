@@ -101,16 +101,17 @@ public class CoolerDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String  sql="INSERT INTO cooler (cooler_name, company_name, kind,cooler_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?, NOW())";  
+		String  sql="INSERT INTO cooler (cooler_name, company_name, category_name, kind,cooler_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";  
 		try {
 			stmt=conn.prepareStatement(sql);
 			stmt.setString(1, c.getCoolerName());
 			stmt.setString(2, c.getCompanyName());
 			stmt.setString(3, c.getKind());
-			stmt.setInt(4, c.getCoolerSize());
-			stmt.setInt(5, c.getPrice());
-			stmt.setInt(6, c.getQuantity());
-			stmt.setString(7, c.getMemo());
+			stmt.setString(4, c.getCategoryName());
+			stmt.setInt(5, c.getCoolerSize());
+			stmt.setInt(6, c.getPrice());
+			stmt.setInt(7, c.getQuantity());
+			stmt.setString(8, c.getMemo());
 			row=stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");

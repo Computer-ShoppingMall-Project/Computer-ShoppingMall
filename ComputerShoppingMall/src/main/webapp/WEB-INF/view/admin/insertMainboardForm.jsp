@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>MAINBOARD</span>
 					</h4>
-					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContextrequest.contextPath}/InsertMainboardController">
+					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContext.request.contextPath}/InsertMainboardController">
 						<div class="form-group">
 							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
 						</div>
@@ -87,8 +87,8 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="mainboardKind">
-								<option value="" selected disabled hidden>mainboardKind</option>
+							<select class="form-group" name="kind">
+								<option value="" selected disabled hidden>kind</option>
 								<option value="Z690">Z690</option>
 								<option value="Z590">Z590</option>
 								<option value="Z460">Z460</option>
