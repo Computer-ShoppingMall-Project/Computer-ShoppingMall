@@ -103,9 +103,8 @@
 						<li><a href="${pageContext.request.contextPath}/CaseListController">CASE</a></li>
 						<li><a href="${pageContext.request.contextPath}/PowerListController">POWER</a></li>
 						<li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
-					</ul> <br><br><br>
-				</div>
-			</div> <br><br><br>
+					</ul>
+				</div> <br><br><br>
 			<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 			<!-- CPU 상세검색 체크박스 테이블 // 체크박스 유지 추가 -->
 			<h4>CPU DETAIL SEARCH</h4>
@@ -209,6 +208,7 @@
 			<div class="divider"></div>
 		</div>
 	</div>
+</div>
 	<!-- end container -->
 	</section>
 	<!-- end section -->

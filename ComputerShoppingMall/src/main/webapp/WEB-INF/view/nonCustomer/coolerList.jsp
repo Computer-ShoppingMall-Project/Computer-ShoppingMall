@@ -104,7 +104,7 @@
 						<li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
 					</ul> <br><br><br>
 				</div>
-				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
+		<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
       <!-- COOLER 상세검색 체크박스 테이블 -->
       <h4>COOLER DETAIL SEARCH</h4>
       <form>
@@ -139,7 +139,6 @@
             <button type="reset" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</button>
          </div>
       </form>
-				</div>
 				<br>
 				<h4 class="title">COOLER</h4>
 				<!-- 상품 리스트 -->
