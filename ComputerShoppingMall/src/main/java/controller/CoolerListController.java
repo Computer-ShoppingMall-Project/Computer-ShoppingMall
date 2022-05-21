@@ -46,10 +46,12 @@ public class CoolerListController extends HttpServlet {
 		String[] kind = request.getParameterValues("kind");
 		String[] coolerSize = request.getParameterValues("coolerSize");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		coolerDao = new CoolerDao();
 		
 		// 상세검색 리스트
-		ArrayList<Cooler> coolerList = coolerDao.coolerDetailSearch(companyName, kind, coolerSize);
+		ArrayList<Cooler> coolerList = coolerDao.coolerDetailSearch(companyName, kind, coolerSize, search);
 		
 		// cooler 이름, 가격 정보
 		ArrayList<String> companyList = coolerDao.companyKind(); // company
@@ -68,6 +70,8 @@ public class CoolerListController extends HttpServlet {
 		request.setAttribute("companyName", companyName);
 		request.setAttribute("kind", kind);
 		request.setAttribute("coolerSize", coolerSize);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/coolerList.jsp").forward(request, response);
 	}

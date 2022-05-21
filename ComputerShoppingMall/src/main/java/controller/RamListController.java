@@ -41,9 +41,11 @@ public class RamListController extends HttpServlet {
 		String[] companyName = request.getParameterValues("companyName");
 		String[] kind = request.getParameterValues("kind");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		ramDao = new RamDao();
 		// ram 제목, 가격 
-		ArrayList<Ram> ramList = ramDao.ramDetailSearch(companyName, kind);
+		ArrayList<Ram> ramList = ramDao.ramDetailSearch(companyName, kind, search);
 		// 체크박스 
 		ArrayList<String> companyList = ramDao.companyKind(); // COMPANY
 		ArrayList<String> kindList = ramDao.kindKind(); // KIND
@@ -58,6 +60,8 @@ public class RamListController extends HttpServlet {
 		// 체크여부 확인
 		request.setAttribute("companyName", companyName);
 		request.setAttribute("kind", kind);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/ramList.jsp").forward(request, response);
 	}

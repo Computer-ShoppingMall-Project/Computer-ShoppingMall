@@ -57,10 +57,12 @@ public class MainboardListController extends HttpServlet {
 		String[] ramVersion = request.getParameterValues("ramVersion");
 		String[] kind = request.getParameterValues("kind");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		// CPU 체크박스 값(중복제거 데이터)
 		mainboardDao = new MainboardDao();
 		// 검색결과 리스트 받아오기 -> 상품명, 가격 mainboardName, price
-		ArrayList<Mainboard> mainboardList = mainboardDao.mainboardDetailSearch(companyName, socketSize, chipset, ramVersion, kind);
+		ArrayList<Mainboard> mainboardList = mainboardDao.mainboardDetailSearch(companyName, socketSize, chipset, ramVersion, kind, search);
 		
 		// COMPANY
 		ArrayList<String> companyList = mainboardDao.companyKind();
@@ -90,6 +92,8 @@ public class MainboardListController extends HttpServlet {
 		request.setAttribute("chipset", chipset);
 		request.setAttribute("ramVersion", ramVersion);
 		request.setAttribute("kind", kind);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/mainboardList.jsp").forward(request, response);
 	}

@@ -265,7 +265,7 @@ public class PowerDao {
 		return p;
 	}
 	// power 상세검색
-	public ArrayList<Power> powerDetailSearch(String[] ratedPower) {
+	public ArrayList<Power> powerDetailSearch(String[] ratedPower, String search) {
 		ArrayList<Power> list = new ArrayList<Power>();
 		// DB 기본값 셋팅
 		Connection conn = null;
@@ -286,7 +286,7 @@ public class PowerDao {
 				+ ", pi.name imageName"
 				+ " FROM power p INNER JOIN power_image pi"
 				+ " ON p.power_image_no = pi.power_image_no"
-				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+				+ " WHERE power_name LIKE ?"; // WHERE절 아무 검색조건 없을 시 전체 상품 조회 -> 검색 키워드 들어올 시, 함께 검색
 		
 		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
 		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
@@ -296,6 +296,7 @@ public class PowerDao {
 		
 		try {
 			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, "%"+search+"%");
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Power p = new Power();

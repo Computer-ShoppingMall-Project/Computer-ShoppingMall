@@ -44,9 +44,11 @@ public class GpuListController extends HttpServlet {
 		String[] chipsetCompany = request.getParameterValues("chipsetCompany");
 		String[] gpuSize = request.getParameterValues("gpuSize");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		gpuDao = new GpuDao();
 		// gpu 상세검색 리스트
-		ArrayList<Gpu> gpuList = gpuDao.gpuDetailSearch(companyName, chipsetCompany, gpuSize);
+		ArrayList<Gpu> gpuList = gpuDao.gpuDetailSearch(companyName, chipsetCompany, gpuSize, search);
 		
 		// 체크박스
 		ArrayList<String> companyList = gpuDao.companyKind(); // company
@@ -65,6 +67,8 @@ public class GpuListController extends HttpServlet {
 		request.setAttribute("companyName", companyName);
 		request.setAttribute("chipsetCompany", chipsetCompany);
 		request.setAttribute("gpuSize", gpuSize);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/gpuList.jsp").forward(request, response);
 	}

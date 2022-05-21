@@ -49,9 +49,11 @@ public class CaseListController extends HttpServlet {
 		String[] bay64mm = request.getParameterValues("bay64mm");
 		String[] bay89mm = request.getParameterValues("bay89mm");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		caseDao = new CaseDao();
 		// case 이름, 가격 정보
-		ArrayList<Case> caseList = caseDao.caseDetailSearch(caseSize, gpuSize, bay64mm, bay89mm);
+		ArrayList<Case> caseList = caseDao.caseDetailSearch(caseSize, gpuSize, bay64mm, bay89mm, search);
 		// case size
 		ArrayList<String> caseSizeList = caseDao.caseSizeList();
 		// gpu size
@@ -75,6 +77,8 @@ public class CaseListController extends HttpServlet {
 		request.setAttribute("bay64mmList", bay64mmList);
 		request.setAttribute("bay89mmList", bay89mmList);
 		request.setAttribute("count", count);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/caseList.jsp").forward(request, response);
 	}

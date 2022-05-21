@@ -148,6 +148,10 @@
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
+						<tr>
+							<th class="bg-info text-center">SEARCH</th>
+							<td><input type="text" name="search" class="form-control" value="${search}" placeholder="검색어를 입력해주세요"></td>
+						</tr>
 					</table>
 					<div>
 						<button type="submit" style="float: right;">Search</button>

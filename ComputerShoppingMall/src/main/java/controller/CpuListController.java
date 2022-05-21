@@ -57,9 +57,11 @@ public class CpuListController extends HttpServlet {
 		String[] core = request.getParameterValues("core");
 		String[] thread = request.getParameterValues("thread");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		// CPU 체크박스 값(중복제거 데이터)
 		cpuDao = new CpuDao();
-		ArrayList<Cpu> list = cpuDao.cpuDetailSearch(companyName, socketSize, core, thread);
+		ArrayList<Cpu> list = cpuDao.cpuDetailSearch(companyName, socketSize, core, thread, search);
 		
 		// compnay
 		ArrayList<String> companyList = cpuDao.companyKind();
@@ -85,6 +87,8 @@ public class CpuListController extends HttpServlet {
 		request.setAttribute("socketSize", socketSize);
 		request.setAttribute("core", core);
 		request.setAttribute("thread", thread);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
 	}

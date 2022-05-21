@@ -36,9 +36,11 @@ public class PowerListController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] ratedPower = request.getParameterValues("ratedPower");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		powerDao = new PowerDao();
 		// power 상세검색 리스트
-		ArrayList<Power> powerList = powerDao.powerDetailSearch(ratedPower);
+		ArrayList<Power> powerList = powerDao.powerDetailSearch(ratedPower, search);
 		// rated_power
 		ArrayList<String> ratedPowerList = powerDao.ratedPowerList();
 		
@@ -50,6 +52,8 @@ public class PowerListController extends HttpServlet {
 		
 		// 체크여부 확인
 		request.setAttribute("ratedPower", ratedPower);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/powerList.jsp").forward(request, response);
 	}

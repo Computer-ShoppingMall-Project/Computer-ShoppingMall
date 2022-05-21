@@ -46,9 +46,11 @@ public class StorageListController extends HttpServlet {
 		String[] storageInterface = request.getParameterValues("storageInterface");
 		String[] capacity = request.getParameterValues("capacity");
 		
+		String search = request.getParameter("search"); // 검색어 받아오기
+		
 		storageDao = new StorageDao();
 		// gpu 상세검색 리스트 
-		ArrayList<Storage> storageList = storageDao.storageDetailSearch(companyName, storageInterface, capacity);
+		ArrayList<Storage> storageList = storageDao.storageDetailSearch(companyName, storageInterface, capacity, search);
 		// 체크박스
 		ArrayList<String> companyList = storageDao.companyKind(); // company
 		ArrayList<String> interfaceList = storageDao.interfaceKind(); // interface
@@ -66,6 +68,8 @@ public class StorageListController extends HttpServlet {
 		request.setAttribute("interfaceList", interfaceList);
 		request.setAttribute("capacityList", capacityList);
 		request.setAttribute("count", count);
+		// 검색어 유지
+		request.setAttribute("search", search);
 		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/storageList.jsp").forward(request, response);
 	}
