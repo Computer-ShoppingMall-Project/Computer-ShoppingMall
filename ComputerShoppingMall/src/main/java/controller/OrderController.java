@@ -58,11 +58,11 @@ public class OrderController extends HttpServlet {
 		// orderDao insert
 		dao = new OrderDao();
 		int row = dao.insertOrder(customerId);
-		
+		/*
 		// MybasketDao delete
 		myBasketDao = new BasketDao();
 		myBasketDao.paymentDeleteMyBasket(customerId);
-		
+		*/
 		if(row > 0) {
 			System.out.println("결제 정보 저장 성공 OrderController.dopost");
 			response.sendRedirect(request.getContextPath() + "/MyPaymentController");

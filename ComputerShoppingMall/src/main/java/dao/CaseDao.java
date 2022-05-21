@@ -130,7 +130,7 @@ public class CaseDao {
 		}
 		return row;
 	}
-	// case 정보 상세보기
+	// caseList
 	public ArrayList<Case> selectCaseList() {
 		ArrayList<Case> list = new ArrayList<Case>();
 		// DB 기본값 셋팅
@@ -312,5 +312,59 @@ public class CaseDao {
 			}
 		}
 		return list;
+	}
+	public Case selectCaseOne(int caseNo) {
+		Case c = new Case();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	case_no caseNo"
+				+ "	, case_name caseName"
+				+ "	, category_name categoryName"
+				+ "	, case_size caseSize"
+				+ "	, gpu_size gpuSize"
+				+ "	, bay89mm"
+				+ "	, bay64mm"
+				+ "	, price"
+				+ "	, quantity"
+				+ "	, case_image_no caseImageNo"
+				+ "	, memo"
+				+ "	, update_date updateDate"
+				+ " FROM `case` case_no=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, caseNo);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				c.setCaseNo(rs.getInt("caseNo"));
+				c.setCaseName(rs.getString("caseName"));
+				c.setCategoryName(rs.getString("categoryName"));
+				c.setCaseSize(rs.getString("caseSize"));
+				c.setGpuSize(rs.getInt("gpuSize"));
+				c.setBay64mm(rs.getInt("bay64mm"));
+				c.setBay89mm(rs.getInt("bay89mm"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCaseImageNo(rs.getInt("caseImageNo"));
+				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return c;
 	}
 }

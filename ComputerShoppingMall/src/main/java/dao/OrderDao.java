@@ -8,38 +8,55 @@ import vo.order;
 // import vo.Qna;
 
 public class OrderDao {
-   public int insertOrder(String customerId) {
-	      int row = 0;
-	      // DB 초기화
-	      Connection conn = null;
-	      PreparedStatement stmt = null;
-	      // DButil
-	      conn = DButil.getConnection();
-	      // SQL 쿼리
-	      String sql = "INSERT INTO `order` (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
-	            + "   SELECT basket_no, customer_id, product_name, product_number, price, quantity, NOW()"
-	            + "   FROM basket WHERE customer_id = ?";
-	      try {
-	         stmt = conn.prepareStatement(sql);
-	         stmt.setString(1, customerId);
-	         row = stmt.executeUpdate();
-	         if(row > 0) {
-					System.out.println("입력성공");
-				} else {
-					System.out.println("입력실패");
-				}
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      } finally {
-	         try {
-	            stmt.close();
-	            conn.close();
-	         } catch(SQLException e) {
-	            e.printStackTrace();
-	         }
-	      }      
-	      return row;
-	   }
+	// 결제
+	public int insertOrder(String customerId) {
+		int row = 0;
+		// DB 초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		// DButil
+		conn = DButil.getConnection();
+		// SQL 쿼리
+		String orderSql = "INSERT INTO `order` (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
+				+ "   SELECT basket_no, customer_id, product_name, product_number, price, quantity, NOW()"
+				+ "   FROM basket WHERE customer_id = ?";
+		String deleteBasketSql = "DELETE b"
+				+ " FROM basket b INNER JOIN `order` o"
+				+ "	ON b.customer_id = o.customer_id "
+				+ " WHERE o.customer_id=? ";
+		try {
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(orderSql);
+			stmt.setString(1, customerId);
+			row = stmt.executeUpdate();
+			stmt.close();
+			
+			// 장바구니 삭제
+			stmt = conn.prepareStatement(deleteBasketSql); // sql 쿼리 셋팅
+			stmt.setString(1, customerId); // customer_id = ?
+			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			if(row > 0) {
+				conn.commit();
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
+      }      
+      return row;
+   }
 	// 회원별 주문내역 상세보기
 	public ArrayList<order> selectOrderList(String customerId, String createDate) {
 		ArrayList<order> list = new ArrayList<order>();
