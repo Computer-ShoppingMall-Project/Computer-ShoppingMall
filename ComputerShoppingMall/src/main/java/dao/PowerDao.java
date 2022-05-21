@@ -136,16 +136,18 @@ public class PowerDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ " power_no powerNo"
-				+ " ,power_name powerName"
-				+ " ,category_name categoryName"
-				+ " ,rated_power ratedPower"
-				+ " ,price"
-				+ " ,quantity"
-				+ " ,power_image_no powerImageNo"
-				+ " ,memo"
-				+ " ,update_date updateDate"
-				+ " FROM power";
+				+ " p.power_no powerNo"
+				+ " ,p.power_name powerName"
+				+ " ,p.category_name categoryName"
+				+ " ,p.rated_power ratedPower"
+				+ " ,p.price"
+				+ " ,p.quantity"
+				+ " ,p.power_image_no powerImageNo"
+				+ " ,p.memo"
+				+ " ,p.update_date updateDate"
+				+ ", pi.name imageName"
+				+ " FROM power p INNER JOIN power_image pi"
+				+ " ON p.power_image_no = pi.power_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -160,6 +162,7 @@ public class PowerDao {
 				p.setPowerImageNo(rs.getInt("powerImageNo"));
 				p.setMemo(rs.getString("memo"));
 				p.setUpdateDate(rs.getString("updateDate"));
+				p.setPowerImageName(rs.getString("imageName"));
 				list.add(p);
 			}
 		} catch (SQLException e) {

@@ -141,18 +141,20 @@ public class CoolerDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT "
-				+ " cooler_no coolerNo"
-				+ ", cooler_name coolerName"
-				+ ", company_name companyName"
-				+ ", category_name categoryName"
-				+ ", kind"
-				+ ", cooler_size coolerSize"
-				+ ", price"
-				+ ", quantity"
-				+ ", cooler_image_no coolerImageNo"
-				+ ", memo"
-				+ ", update_date updateDate"
-				+ " FROM cooler";
+				+ " c.cooler_no coolerNo"
+				+ ", c.cooler_name coolerName"
+				+ ", c.company_name companyName"
+				+ ", c.category_name categoryName"
+				+ ", c.kind"
+				+ ", c.cooler_size coolerSize"
+				+ ", c.price"
+				+ ", c.quantity"
+				+ ", c.cooler_image_no coolerImageNo"
+				+ ", c.memo"
+				+ ", c.update_date updateDate"
+				+ ", ci.name imageName"
+				+ " FROM cooler c INNER JOIN cooler_image ci"
+				+ " ON c.cooler_image_no = ci.cooler_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -169,6 +171,7 @@ public class CoolerDao {
 				c.setCoolerImageNo(rs.getInt("coolerImageNo"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCoolerImageName(rs.getString("imageName"));
 				list.add(c);
 			}
 		} catch (SQLException e) {

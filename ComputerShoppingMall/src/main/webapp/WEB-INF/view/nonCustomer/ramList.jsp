@@ -145,8 +145,7 @@
 								<div
 									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
-										<img src="${pageContext.request.contextPath}/img/portfolio_01.jpg" alt="">
-										<!-- 이미지 후에 셋팅 -->
+										<img src="${pageContext.request.contextPath}/image/${c.ramImageName}" alt="">
 										<div class="he-view">
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>

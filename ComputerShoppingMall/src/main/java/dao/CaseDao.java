@@ -140,19 +140,21 @@ public class CaseDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	case_no caseNo"
-				+ "	, case_name caseName"
-				+ "	, category_name categoryName"
-				+ "	, case_size caseSize"
-				+ "	, gpu_size gpuSize"
-				+ "	, bay89mm"
-				+ "	, bay64mm"
-				+ "	, price"
-				+ "	, quantity"
-				+ "	, case_image_no caseImageNo"
-				+ "	, memo"
-				+ "	, update_date updateDate"
-				+ " FROM `case`";
+				+ "	c.case_no caseNo"
+				+ "	, c.case_name caseName"
+				+ "	, c.category_name categoryName"
+				+ "	, c.case_size caseSize"
+				+ "	, c.gpu_size gpuSize"
+				+ "	, c.bay89mm"
+				+ "	, c.bay64mm"
+				+ "	, c.price"
+				+ "	, c.quantity"
+				+ "	, c.case_image_no caseImageNo"
+				+ "	, c.memo"
+				+ "	, c.update_date updateDate"
+				+ " , ci.name imageName"
+				+ " FROM `case` c INNER JOIN case_image ci"
+				+ " ON c.case_image_no = ci.case_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -170,6 +172,7 @@ public class CaseDao {
 				c.setCaseImageNo(rs.getInt("caseImageNo"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCaseImageName(rs.getString("imageName"));
 				list.add(c);
 			}
 		} catch (SQLException e) {

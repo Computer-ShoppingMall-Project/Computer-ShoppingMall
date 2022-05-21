@@ -138,17 +138,19 @@ public class RamDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	ram_no ramNo"
-				+ "	,ram_name ramName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,kind"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,ram_image_no ramImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM ram";
+				+ "	r.ram_no ramNo"
+				+ "	,r.ram_name ramName"
+				+ "	,r.company_name companyName"
+				+ "	,r.category_name categoryName"
+				+ "	,r.kind"
+				+ "	,r.price"
+				+ "	,r.quantity"
+				+ "	,r.ram_image_no ramImageNo"
+				+ "	,r.memo"
+				+ "	,r.update_date updateDate"
+				+ " ,ri.name imageName"
+				+ " FROM ram r INNER JOIN ram_image ri"
+				+ " ON r.ram_image_no = ri.ram_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -164,6 +166,7 @@ public class RamDao {
 				r.setRamImageNo(rs.getInt("ramImageNo"));
 				r.setMemo(rs.getString("memo"));
 				r.setUpdateDate(rs.getString("updateDate"));
+				r.setRamImageName(rs.getString("imageName"));
 				list.add(r);
 			}
 		} catch (SQLException e) {

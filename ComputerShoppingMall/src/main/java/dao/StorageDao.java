@@ -164,18 +164,20 @@ public class StorageDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	storage_no storageNo"
-				+ "	,storage_name storageName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,storage_interface storageInterface"
-				+ "	,capacity"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,storage_image_no storageImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM storage";
+				+ "	s.storage_no storageNo"
+				+ "	,s.storage_name storageName"
+				+ "	,s.company_name companyName"
+				+ "	,s.category_name categoryName"
+				+ "	,s.storage_interface storageInterface"
+				+ "	,s.capacity"
+				+ "	,s.price"
+				+ "	,s.quantity"
+				+ "	,s.storage_image_no storageImageNo"
+				+ "	,s.memo"
+				+ "	,s.update_date updateDate"
+				+ " ,si.name imageName"
+				+ " FROM storage s INNER JOIN storage_image si"
+				+ " ON s.storage_image_no = si.storage_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -192,6 +194,7 @@ public class StorageDao {
 				s.setStorageImageNo(rs.getInt("storageImageNo"));
 				s.setMemo(rs.getString("memo"));
 				s.setUpdateDate(rs.getString("updateDate"));
+				s.setStorageImageName(rs.getString("imageName"));
 				list.add(s);
 			}
 		} catch (SQLException e) {
@@ -354,5 +357,4 @@ public class StorageDao {
 		}
 		return s;
 	}
-	
 }

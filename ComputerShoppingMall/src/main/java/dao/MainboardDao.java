@@ -141,20 +141,22 @@ public class MainboardDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	mainboard_no mainboardNo"
-				+ "	, mainboard_name mainboardName"
-				+ "	, category_name categoryName"
-				+ "	, kind"
-				+ "	, socket_size socketSize"
-				+ "	, chipset"
-				+ "	, ram_version ramVersion"
-				+ "	, price"
-				+ "	, quantity"
-				+ "	, company_name companyName"
-				+ "	, mainboard_image_no mainboardImageNo"
-				+ "	, memo"
-				+ "	, update_date updateDate"
-				+ " FROM mainboard";
+				+ "	m.mainboard_no mainboardNo"
+				+ "	, m.mainboard_name mainboardName"
+				+ "	, m.category_name categoryName"
+				+ "	, m.kind"
+				+ "	, m.socket_size socketSize"
+				+ "	, m.chipset"
+				+ "	, m.ram_version ramVersion"
+				+ "	, m.price"
+				+ "	, m.quantity"
+				+ "	, m.company_name companyName"
+				+ "	, m.mainboard_image_no mainboardImageNo"
+				+ "	, m.memo"
+				+ "	, m.update_date updateDate"
+				+ "	, mi.name imageName"
+				+ " FROM mainboard m INNER JOIN mainboard_image mi"
+				+ " 	ON m.mainboard_image_no = mi.mainboard_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -173,6 +175,7 @@ public class MainboardDao {
 				m.setMainboardImageNo(rs.getInt("mainboardImageNo"));
 				m.setMemo(rs.getString("memo"));
 				m.setUpdateDate(rs.getString("updateDate"));
+				m.setMainboardImageName(rs.getString("imageName"));
 				list.add(m);
 			}
 		} catch (SQLException e) {
@@ -402,4 +405,3 @@ public class MainboardDao {
 		return m;
 	}
 }
-

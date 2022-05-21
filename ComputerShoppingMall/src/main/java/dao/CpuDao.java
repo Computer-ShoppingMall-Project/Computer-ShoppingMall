@@ -384,19 +384,21 @@ public class CpuDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT "
-				+ " cpu_no cpuNo"
-				+ ", cpu_name cpuName"
-				+ ", category_name categoryName"
-				+ ", company_name companyName"
-				+ ", socket_size socketSize"
-				+ ", core"
-				+ ", thread"
-				+ ", price"
-				+ ", quantity"
-				+ ", cpu_image_no cpuImageNo"
-				+ ", memo"
-				+ ", update_date updateDate"
-				+ " FROM cpu"
+				+ "	 c.cpu_no cpuNo"
+				+ "	, c.cpu_name cpuName"
+				+ "	, c.category_name categoryName"
+				+ "	, c.company_name companyName"
+				+ "	, c.socket_size socketSize"
+				+ "	, c.core"
+				+ "	, c.thread"
+				+ "	, c.price"
+				+ "	, c.quantity"
+				+ "	, c.cpu_image_no cpuImageNo"
+				+ "	, c.memo"
+				+ "	, c.update_date updateDate"
+				+ "	, ci.name imageName"
+				+ " FROM cpu c INNER JOIN cpu_image ci"
+				+ " 	ON c.cpu_image_no = ci.cpu_image_no"
 				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
 		
 		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
@@ -424,7 +426,8 @@ public class CpuDao {
 					c.setQuantity(rs.getInt("quantity"));
 					c.setCpuImageNo(rs.getInt("cpuImageNo"));
 					c.setMemo(rs.getString("memo"));
-					c.setUpdateDate("updateDate");
+					c.setUpdateDate(rs.getString("updateDate"));
+					c.setCpuImageName(rs.getString("imageName"));
 					list.add(c);
 				}
 		} catch (SQLException e) {

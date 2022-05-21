@@ -137,18 +137,20 @@ public class GpuDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	gpu_no gpuNo"
-				+ "	,gpu_name gpuName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,chipset_company chipsetCompany"
-				+ "	,gpu_size gpuSize"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,gpu_image_no gpuImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM gpu";
+				+ "	g.gpu_no gpuNo"
+				+ "	,g.gpu_name gpuName"
+				+ "	,g.company_name companyName"
+				+ "	,g.category_name categoryName"
+				+ "	,g.chipset_company chipsetCompany"
+				+ "	,g.gpu_size gpuSize"
+				+ "	,g.price"
+				+ "	,g.quantity"
+				+ "	,g.gpu_image_no gpuImageNo"
+				+ "	,g.memo"
+				+ "	,g.update_date updateDate"
+				+ ", gi.name imageName"
+				+ " FROM gpu g INNER JOIN gpu_image gi"
+				+ " ON g.gpu_image_no = gi.gpu_image_no";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -165,6 +167,7 @@ public class GpuDao {
 				g.setGpuImageNo(rs.getInt("gpuImageNo"));
 				g.setMemo(rs.getString("memo"));
 				g.setUpdateDate(rs.getString("updateDate"));
+				g.setGpuImageName(rs.getString("imageName"));
 				list.add(g);
 			}
 		} catch (SQLException e) {
