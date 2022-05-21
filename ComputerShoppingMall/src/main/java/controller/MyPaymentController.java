@@ -17,8 +17,13 @@ import dao.OrderDao;
 public class MyPaymentController extends HttpServlet {
 	private OrderDao orderDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
+		// 새션 확인
+		if((String)session.getAttribute("sessionAdminId") != null) {
+			// 관리자 아이디로그인시 페이지로 이동
+			request.getRequestDispatcher("/WEB-INF/view/customer/myPayment.jsp").forward(request, response);
+			return;
+		}
 		String customerId = (String) session.getAttribute("sessionCustomerId");
 		if ((String) session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기

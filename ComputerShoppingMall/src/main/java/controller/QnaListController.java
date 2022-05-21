@@ -21,6 +21,11 @@ public class QnaListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") != null) {
+			// 관리자 아이디로그인시 페이지로 이동
+			request.getRequestDispatcher("/WEB-INF/view/customer/qnaList.jsp").forward(request, response);
+			return;
+		}
 		String customerId = (String)session.getAttribute("sessionCustomerId");
 		if((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기

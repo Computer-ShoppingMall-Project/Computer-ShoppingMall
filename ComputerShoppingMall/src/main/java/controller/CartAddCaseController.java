@@ -16,8 +16,13 @@ import vo.Case;
 public class CartAddCaseController extends HttpServlet {
 	private CaseDao caseDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
 		HttpSession session = request.getSession();
+		// 새션 확인
+		if((String)session.getAttribute("sessionAdminId") != null) {
+			// 관리자 아이디로그인시 페이지로 이동
+			request.getRequestDispatcher("WEB-INF/view/customer/caseOne.jsp").forward(request, response);
+			return;
+		}
 		if ((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
