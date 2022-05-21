@@ -12,13 +12,14 @@ public class Gpu {
 	private int gpuImageNo;
 	private String memo;
 	private String updateDate;
+	private String gpuImageName;
 	
 	@Override
 	public String toString() {
 		return "Gpu [gpuNo=" + gpuNo + ", gpuName=" + gpuName + ", companyName=" + companyName + ", categoryName="
 				+ categoryName + ", chipsetCompany=" + chipsetCompany + ", gpuSize=" + gpuSize + ", price=" + price
 				+ ", quantity=" + quantity + ", gpuImageNo=" + gpuImageNo + ", memo=" + memo + ", updateDate="
-				+ updateDate + "]";
+				+ updateDate + ", gpuImageName=" + gpuImageName + "]";
 	}
 
 	public int getGpuNo() {
@@ -107,5 +108,13 @@ public class Gpu {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public String getGpuImageName() {
+		return gpuImageName;
+	}
+
+	public void setGpuImageName(String gpuImageName) {
+		this.gpuImageName = gpuImageName;
 	}
 }

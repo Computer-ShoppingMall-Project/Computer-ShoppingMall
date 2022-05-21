@@ -14,13 +14,15 @@ public class Mainboard {
 	private int mainboardImageNo;
 	private String memo;
 	private String updateDate;
+	private String mainboardImageName;
+	
 	@Override
 	public String toString() {
-		return "Mainboard [mainboardNo=" + mainboardNo + ", mainboardName=" + mainboardName + ", kind="
-				+ kind + ", categoryName=" + categoryName + ", socketSize=" + socketSize + ", chipset="
-				+ chipset + ", ramVersion=" + ramVersion + ", price=" + price + ", quantity=" + quantity
-				+ ", companyName=" + companyName + ", mainboardImageNo=" + mainboardImageNo + ", memo=" + memo
-				+ ", updateDate=" + updateDate + "]";
+		return "Mainboard [mainboardNo=" + mainboardNo + ", mainboardName=" + mainboardName + ", categoryName="
+				+ categoryName + ", kind=" + kind + ", socketSize=" + socketSize + ", chipset=" + chipset
+				+ ", ramVersion=" + ramVersion + ", price=" + price + ", quantity=" + quantity + ", companyName="
+				+ companyName + ", mainboardImageNo=" + mainboardImageNo + ", memo=" + memo + ", updateDate="
+				+ updateDate + ", mainboardImageName=" + mainboardImageName + "]";
 	}
 
 	public int getMainboardNo() {
@@ -39,20 +41,20 @@ public class Mainboard {
 		this.mainboardName = mainboardName;
 	}
 
-	public String getKind() {
-		return kind;
-	}
-
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
 	public String getCategoryName() {
 		return categoryName;
 	}
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public String getSocketSize() {
@@ -125,5 +127,13 @@ public class Mainboard {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public String getMainboardImageName() {
+		return mainboardImageName;
+	}
+
+	public void setMainboardImageName(String mainboardImageName) {
+		this.mainboardImageName = mainboardImageName;
 	}
 }
