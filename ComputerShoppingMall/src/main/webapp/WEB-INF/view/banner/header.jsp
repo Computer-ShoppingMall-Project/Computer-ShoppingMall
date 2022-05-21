@@ -5,7 +5,7 @@
       <div class="col-lg-10 text-right">
          <div class="social_buttons">
             <c:choose>
-               <c:when test="${sessionCustomerId == null}">
+               <c:when test="${sessionCustomerId == null && sessionAdminId == null}">
                   <a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">Login</a>
                </c:when>
                <c:otherwise>
@@ -16,8 +16,15 @@
       </div>
       <div class="col-lg-1 text-right"></div>
       <div class="social_buttons">
-         <a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom">${sessionCustomerId}</a>
-      </div>
+      	<c:choose>
+			<c:when test="${sessionCustomerId != null}">
+				<a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom">${sessionCustomerId}</a>
+            </c:when>
+            <c:when test="${sessionAdminId != null }">
+            	<a href="${pageContext.request.contextPath}/AdminIndexController" data-toggle="tooltip" data-placement="bottom">${sessionAdminId}</a>
+            </c:when>
+        </c:choose>
+	</div>
       <!-- end container -->
    </div>
 </div>
@@ -58,8 +65,6 @@
                      <li><a href="#">Shop</a>
                         <ul class="dropdown">
                            <li><a href="${pageContext.request.contextPath}/DigitalDownloadController">Products Page</a></li>
-                           <li><a href="${pageContext.request.contextPath}/SingleProductController">Single Product</a></li>
-                           <li><a href="${pageContext.request.contextPath}/CheckoutController">Checkout</a></li>
                            <li><a href="${pageContext.request.contextPath}/AccountController">Account Page</a></li>
                            <li><a href="${pageContext.request.contextPath}/SupportController">Support Center</a></li>
                            <li><a href="${pageContext.request.contextPath}/MyBasketController">MyBasket</a></li>

@@ -38,8 +38,14 @@
 </head>
 <body>
 	<!-- header적용. -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

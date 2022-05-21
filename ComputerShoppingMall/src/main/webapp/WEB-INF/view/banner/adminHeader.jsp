@@ -54,10 +54,21 @@
 									</li>
 								</ul>
 							</li>
+							<li><a href="#">ProductList</a>
+		                        <ul class="dropdown">
+		                           <li><a href="${pageContext.request.contextPath}/CpuListController">Cpu List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/GpuListController">Gpu List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/MainboardListController">Mainboard List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/CaseListController">Case List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/RamListController">Ram List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/CoolerListController">Cooler List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/PowerListController">Power List</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/StorageListController">Storage List</a></li>
+		                        </ul>
+		                    </li>
 							<li><a href="#">상품</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/DigitalDownloadController">상품</a></li>
-									<li><a href="${pageContext.request.contextPath}/SingleProductController">부품</a></li>
 									<li><a href="${pageContext.request.contextPath}/CheckoutController">결제</a></li>
 									<li><a href="${pageContext.request.contextPath}/AccountController">계정</a></li>
 									<li><a href="${pageContext.request.contextPath}/SupportController">고객센터</a></li>
@@ -102,6 +113,7 @@
 							<li><a href="#">Q&A</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">Q&A 관리</a></li>
+									<li><a href="${pageContext.request.contextPath}/QnaListController">Q&A 리스트</a></li>
 								</ul>
 							</li>
 						</ul>
