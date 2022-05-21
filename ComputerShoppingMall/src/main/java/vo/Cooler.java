@@ -12,13 +12,14 @@ public class Cooler {
 	private String memo;
 	private String updateDate;
 	private String categoryName;
+	private String coolerImageName;
 	
 	@Override
 	public String toString() {
 		return "Cooler [coolerNo=" + coolerNo + ", coolerName=" + coolerName + ", companyName=" + companyName
 				+ ", kind=" + kind + ", coolerSize=" + coolerSize + ", price=" + price + ", quantity=" + quantity
 				+ ", coolerImageNo=" + coolerImageNo + ", memo=" + memo + ", updateDate=" + updateDate
-				+ ", categoryName=" + categoryName + "]";
+				+ ", categoryName=" + categoryName + ", coolerImageName=" + coolerImageName + "]";
 	}
 
 	public int getCoolerNo() {
@@ -107,5 +108,13 @@ public class Cooler {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public String getCoolerImageName() {
+		return coolerImageName;
+	}
+
+	public void setCoolerImageName(String coolerImageName) {
+		this.coolerImageName = coolerImageName;
 	}
 }

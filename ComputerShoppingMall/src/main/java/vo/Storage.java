@@ -12,13 +12,14 @@ public class Storage {
 	private int storageImageNo;
 	private String memo;
 	private String updateDate;
-
+	private String storageImageName;
+	
 	@Override
 	public String toString() {
 		return "Storage [storageNo=" + storageNo + ", storageName=" + storageName + ", companyName=" + companyName
-				+ ", storageInterface=" + storageInterface + ", capacity=" + capacity + ", price=" + price
-				+ ", quantity=" + quantity + ", storageImageNo=" + storageImageNo + ", memo=" + memo + ", updateDate="
-				+ updateDate + ", categoryName=" + categoryName + "]";
+				+ ", categoryName=" + categoryName + ", storageInterface=" + storageInterface + ", capacity=" + capacity
+				+ ", price=" + price + ", quantity=" + quantity + ", storageImageNo=" + storageImageNo + ", memo="
+				+ memo + ", updateDate=" + updateDate + ", storageImageName=" + storageImageName + "]";
 	}
 
 	public int getStorageNo() {
@@ -43,6 +44,14 @@ public class Storage {
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getStorageInterface() {
@@ -101,12 +110,11 @@ public class Storage {
 		this.updateDate = updateDate;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getStorageImageName() {
+		return storageImageName;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setStorageImageName(String storageImageName) {
+		this.storageImageName = storageImageName;
 	}
-
 }

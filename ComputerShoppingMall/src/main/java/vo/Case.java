@@ -13,13 +13,14 @@ public class Case {
 	private int caseImageNo;
 	private String memo;
 	private String updateDate;
+	private String caseImageName;
 	
 	@Override
 	public String toString() {
 		return "Case [caseNo=" + caseNo + ", caseName=" + caseName + ", caseSize=" + caseSize + ", categoryName="
 				+ categoryName + ", gpuSize=" + gpuSize + ", bay89mm=" + bay89mm + ", bay64mm=" + bay64mm + ", price="
 				+ price + ", quantity=" + quantity + ", caseImageNo=" + caseImageNo + ", memo=" + memo + ", updateDate="
-				+ updateDate + "]";
+				+ updateDate + ", caseImageName=" + caseImageName + "]";
 	}
 
 	public int getCaseNo() {
@@ -116,5 +117,13 @@ public class Case {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public String getCaseImageName() {
+		return caseImageName;
+	}
+
+	public void setCaseImageName(String caseImageName) {
+		this.caseImageName = caseImageName;
 	}
 }

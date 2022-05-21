@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CpuDao;
 import vo.Cpu;
+import vo.Image;
+
 import java.util.*;
 
 @WebServlet("/CpuListController")
