@@ -16,19 +16,6 @@ import vo.Case;
 public class CartAddCaseController extends HttpServlet {
 	private CaseDao caseDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		// 새션 확인
-		if((String)session.getAttribute("sessionAdminId") != null) {
-			// 관리자 아이디로그인시 페이지로 이동
-			request.getRequestDispatcher("WEB-INF/view/customer/caseOne.jsp").forward(request, response);
-			return;
-		}
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int caseNo = Integer.parseInt(request.getParameter("caseNo"));
 		
@@ -41,7 +28,7 @@ public class CartAddCaseController extends HttpServlet {
 		
 		// 값 보내주기
 		request.setAttribute("caseOne", case2);
-		request.getRequestDispatcher("WEB-INF/view/customer/caseOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/caseOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

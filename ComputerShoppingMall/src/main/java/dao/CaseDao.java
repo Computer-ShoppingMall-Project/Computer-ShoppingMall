@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Case;
+import vo.Cooler;
+import vo.Gpu;
 
 public class CaseDao {
 	// 장바구니에 담기
@@ -325,19 +327,22 @@ public class CaseDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	case_no caseNo"
-				+ "	, case_name caseName"
-				+ "	, category_name categoryName"
-				+ "	, case_size caseSize"
-				+ "	, gpu_size gpuSize"
-				+ "	, bay89mm"
-				+ "	, bay64mm"
-				+ "	, price"
-				+ "	, quantity"
-				+ "	, case_image_no caseImageNo"
-				+ "	, memo"
-				+ "	, update_date updateDate"
-				+ " FROM `case` case_no=?";
+				+ "	c.case_no caseNo"
+				+ "	, c.case_name caseName"
+				+ "	, c.category_name categoryName"
+				+ "	, c.case_size caseSize"
+				+ "	, c.gpu_size gpuSize"
+				+ "	, c.bay89mm"
+				+ "	, c.bay64mm"
+				+ "	, c.price"
+				+ "	, c.quantity"
+				+ "	, c.case_image_no caseImageNo"
+				+ "	, c.memo"
+				+ "	, c.update_date updateDate"
+				+ " , ci.name imageName"
+				+ " FROM `case` c INNER JOIN case_image ci"
+				+ " ON c.case_image_no = ci.case_image_no"
+				+ " WHERE c.case_no=?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, caseNo);
@@ -355,6 +360,7 @@ public class CaseDao {
 				c.setCaseImageNo(rs.getInt("caseImageNo"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCaseImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -369,5 +375,96 @@ public class CaseDao {
 			}
 		}
 		return c;
+	}
+	// case 상세검색
+	public ArrayList<Case> caseDetailSearch(String[] caseSize, String[] gpuSize, String[] bay64mm, String[] bay89mm) {
+		ArrayList<Case> list = new ArrayList<Case>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	c.case_no caseNo"
+				+ "	, c.case_name caseName"
+				+ "	, c.category_name categoryName"
+				+ "	, c.case_size caseSize"
+				+ "	, c.gpu_size gpuSize"
+				+ "	, c.bay89mm"
+				+ "	, c.bay64mm"
+				+ "	, c.price"
+				+ "	, c.quantity"
+				+ "	, c.case_image_no caseImageNo"
+				+ "	, c.memo"
+				+ "	, c.update_date updateDate"
+				+ " , ci.name imageName"
+				+ " FROM `case` c INNER JOIN case_image ci"
+				+ " ON c.case_image_no = ci.case_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("case_size", caseSize);
+		sql += makeWhereSql("gpu_size", gpuSize);
+		sql += makeWhereSql("bay64mm", bay64mm);
+		sql += makeWhereSql("bay89mm", bay89mm);
+		
+		System.out.println("[CPU case SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Case c = new Case();
+				c.setCaseNo(rs.getInt("caseNo"));
+				c.setCaseName(rs.getString("caseName"));
+				c.setCategoryName(rs.getString("categoryName"));
+				c.setCaseSize(rs.getString("caseSize"));
+				c.setGpuSize(rs.getInt("gpuSize"));
+				c.setBay64mm(rs.getInt("bay64mm"));
+				c.setBay89mm(rs.getInt("bay89mm"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCaseImageNo(rs.getInt("caseImageNo"));
+				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCaseImageName(rs.getString("imageName"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

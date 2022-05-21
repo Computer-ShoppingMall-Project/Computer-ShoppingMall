@@ -16,14 +16,6 @@ import vo.Ram;
 public class CartAddRamController extends HttpServlet {
 	private RamDao ramDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int ramNo = Integer.parseInt(request.getParameter("ramNo"));
 		
@@ -34,11 +26,9 @@ public class CartAddRamController extends HttpServlet {
 		ramDao = new RamDao();
 		ram = ramDao.selectRamOne(ramNo);
 		
-		
-		
 		// 값 보내주기
 		request.setAttribute("ramOne", ram);
-		request.getRequestDispatcher("WEB-INF/view/customer/ramOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/ramOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

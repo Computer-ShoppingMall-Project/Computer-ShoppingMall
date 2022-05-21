@@ -40,7 +40,7 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<c:choose>
+		<c:choose>
 		<c:when test="${sessionAdminId != null }">
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
@@ -56,15 +56,16 @@
 					<li><a href="index.jsp">Home</a></li>
 					<li>Main Product</li>
 				</ul>
-				<h2>COOLER</h2>
+				<h2>GRAPHIC CARD</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit"
+								alt="" /> <input type="text" class="search_text showtextback"
+								name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -76,8 +77,8 @@
 
 	<section class="marketplace-top">
 		<div id="market-wrapper">
-			<div class="item_image">
-				<img data-effect="fade" class="aligncenter" width="1260" height="400" src="img/market_single_01.png" alt="">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.gpuOne.gpuImageName}" alt="">
 			</div>
 			<!-- end item_image -->
 		</div>
@@ -88,7 +89,7 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 
 				<div class="general-title text-center">
-					<h3>${requestScope.coolerOne.coolerName}</h3>
+					<h3>${requestScope.gpuOne.gpuName}</h3>
 					<hr>
 				</div>
 
@@ -101,11 +102,11 @@
 							<div class="details_section">
 								<h3>Item Details</h3>
 								<ul>
-									<li class="version">cooler_no : <span>${requestScope.coolerOne.coolerNo}</span></li>
-									<li class="designer">category_name : <span>${requestScope.coolerOne.categoryName}</span></li>
-									<li class="designer">company_name : <span>${requestScope.coolerOne.companyName}</span></li>
-									<li class="designer">kind : <span>${requestScope.coolerOne.kind}</span></li>
-									<li class="designer">cooler_size : <span>${requestScope.coolerOne.coolerSize}</span></li>
+									<li class="version">gpu_no : <span>${requestScope.gpuOne.gpuNo}</span></li>
+									<li class="designer">company_name : <span>${requestScope.gpuOne.companyName}</span></li>
+									<li class="designer">category_name : <span>${requestScope.gpuOne.categoryName}</span></li>
+									<li class="designer">chipset_company : <span>${requestScope.gpuOne.chipsetCompany}</span></li>
+									<li class="designer">gpu_size : <span>${requestScope.gpuOne.gpuSize}</span></li>
 								</ul>
 							</div>
 						</div>
@@ -115,7 +116,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-12">
 						<div class="theme_details">
 							<div class="item-description">
-								<p>${requestScope.coolerOne.memo}</p>
+								<p>${requestScope.gpuOne.memo}</p>
 							</div>
 							<!-- item-description -->
 						</div>
@@ -125,26 +126,27 @@
 					<div class="col-lg-3 col-md-3 col-sm-12">
 							<div class="form-group">
 								<div> 개수 선택 
-									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${requestScope.coolerOne.coolerNo}" method="POST">
-										<input type="number" max="${requestScope.coolerOne.quantity}" name="quantity" value="1" class="text-center">개 
-										<input type="submit" class="btn btn-large btn-primary" value="담기">
-									</form>
-								</div>
+						<form  class="contact-form" 
+							action="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" method="POST">
+								<input type="number" max="${requestScope.gpuOne.quantity}" name="quantity" value="1" class="text-center">개 
+								<input type="submit" class="btn btn-large btn-primary" value="담기">
+						</form>
 							</div>
-							<h4 class="text-danger">재고 : ${requestScope.coolerOne.quantity}</h4>
+									<h4 class="text-danger">재고 : ${requestScope.gpuOne.quantity}</h4>
+								</div>
 							<div class="form-group">
 								<div class="item_price">
 									<h3>
-										<span>${requestScope.coolerOne.price}원</span>
+										<span>${requestScope.gpuOne.price}원</span>
 									</h3>
 								</div>
 							</div>
 							<!-- buttons -->
 							<hr>
 							<div class="rating text-center">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star-o"></i>
+								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+									class="fa fa-star-o"></i>
 								<p>Users Rating</p>
 							</div>
 							<!-- rating -->
@@ -158,110 +160,11 @@
 
 				<div class="clearfix"></div>
 
-				<div class="general-title text-center">
-					<h3>Product Features</h3>
-					<p>More information about your product</p>
-					<hr>
-				</div>
-
 				<div class="divider"></div>
-				<div class="theme_overviews clearfix">
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-arrows"></i>
-							</div>
-							<header>
-								<h3>Different Sizes</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-heart"></i>
-							</div>
-							<header>
-								<h3>HandMade in Italy</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-lock"></i>
-							</div>
-							<header>
-								<h3>Secure Metal Zip</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-trophy"></i>
-							</div>
-							<header>
-								<h3>Premium Design</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-cloud"></i>
-							</div>
-							<header>
-								<h3>Softly Padded</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-pencil"></i>
-							</div>
-							<header>
-								<h3>Signed Product</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-				</div>
 				<!-- theme / Products overview -->
 
 			</div>
 			<!-- end content -->
-		</div>
 		<!-- end container -->
 	</section>
 	<!-- end section -->

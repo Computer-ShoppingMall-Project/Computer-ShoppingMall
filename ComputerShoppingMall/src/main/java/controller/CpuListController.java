@@ -29,13 +29,13 @@ public class CpuListController extends HttpServlet {
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
 		
 		// compnay
-		List<String> companyList = cpuDao.companyKind();
+		ArrayList<String> companyList = cpuDao.companyKind();
 		// socketSize
-		List<String> socketSizeList = cpuDao.socketSizeKind();
+		ArrayList<String> socketSizeList = cpuDao.socketSizeKind();
 		// core
-		List<String> coreList = cpuDao.coreKind();
+		ArrayList<String> coreList = cpuDao.coreKind();
 		// thread
-		List<String> threadList = cpuDao.threadKind();
+		ArrayList<String> threadList = cpuDao.threadKind();
 		
 		int count = list.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
 		
@@ -62,13 +62,13 @@ public class CpuListController extends HttpServlet {
 		ArrayList<Cpu> list = cpuDao.cpuDetailSearch(companyName, socketSize, core, thread);
 		
 		// compnay
-		List<String> companyList = cpuDao.companyKind();
+		ArrayList<String> companyList = cpuDao.companyKind();
 		// socketSize
-		List<String> socketSizeList = cpuDao.socketSizeKind();
+		ArrayList<String> socketSizeList = cpuDao.socketSizeKind();
 		// core
-		List<String> coreList = cpuDao.coreKind();
+		ArrayList<String> coreList = cpuDao.coreKind();
 		// thread
-		List<String> threadList = cpuDao.threadKind();
+		ArrayList<String> threadList = cpuDao.threadKind();
 		
 		int count = list.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
 		

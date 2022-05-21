@@ -107,76 +107,112 @@
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- MAINBOARD 상세검색 체크박스 테이블 -->
 				<h4>MAINBOARD DETAIL SEARCH</h4>
-				<form>
+				<form method="post" action="${pageContext.request.contextPath}/MainboardListController">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
-							<td><c:forEach var="c" items="${companyList}">
-									<input type="checkbox" name="companyName" value="${c}">
+							<td>
+								<c:forEach var="c" items="${companyList}">
+									<input type="checkbox" name="companyName" value="${c}"
+										<c:forEach  var="c1" items="${companyName}">
+											<c:if test="${c1 eq c}">
+												checked="checked"
+											</c:if>
+										</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">CPU SOCKET</th>
 							<!-- socketSize -->
-							<td><c:forEach var="c" items="${socketSizeList}">
-									<input type="checkbox" name="socketSize" value="${c}">
+							<td>
+								<c:forEach var="c" items="${socketSizeList}">
+									<input type="checkbox" name="socketSize" value="${c}"
+										<c:forEach  var="c1" items="${socketSize}">
+											<c:if test="${c1 eq c}">
+												checked="checked"
+											</c:if>
+										</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">CHIPSET</th>
-							<!-- socketSize -->
-							<!--  -->
-							<td><c:forEach var="c" items="${chipsetList}">
-									<input type="checkbox" name="chipset" value="${c}">
+							<!-- chipsetSize -->
+							<td>
+								<c:forEach var="c" items="${chipsetList}">
+									<input type="checkbox" name="chipset" value="${c}"
+										<c:forEach  var="c1" items="${chipset}">
+											<c:if test="${c1 eq c}">
+												checked="checked"
+											</c:if>
+										</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">RAM VERSION</th>
 							<!-- chipset -->
-							<td><c:forEach var="c" items="${ramVersionList}">
-									<input type="checkbox" name="ramVersion" value="${c}">
+							<td>
+								<c:forEach var="c" items="${ramVersionList}">
+									<input type="checkbox" name="ramVersion" value="${c}"
+										<c:forEach  var="c1" items="${ramVersion}">
+											<c:if test="${c1 eq c}">
+												checked="checked"
+											</c:if>
+										</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">KIND</th>
-							<td><c:forEach var="c" items="${kindList}">
-									<input type="checkbox" name="kind" value="${c}">
+							<td>
+								<c:forEach var="c" items="${kindList}">
+									<input type="checkbox" name="kind" value="${c}"
+										<c:forEach  var="c1" items="${kind}">
+											<c:if test="${c1 eq c}">
+												checked="checked"
+											</c:if>
+										</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 					</table>
 					<div>
 						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-						<button type="reset" class="btn btn-link"
-							style="float: right; margin-rigth: 20px">Reset</button>
+						<a href="${pageContext.request.contextPath}/MainboardListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 					</div>
 				</form>
 				<br>
-				<h4 class="title">MAINBOARD</h4>
-				<!-- 상품 리스트 -->
-				<div class="portfolio-centered">
-					<div class="recentitems portfolio">
+				<h4 class="title">MAINBOARD(<span class="text-primary">${count}</span>)</h4>
+					<!-- 상품 리스트 -->
+					<!-- 조건에 해당하는 상품이 없을 경우 해당 상품이 존재하지 않다는 문구 안내 -->
+					<c:if test="${count==0}">
+						<h4 class="text-primary text-center">해당 조건의 상품의 존재하지 않습니다</h4>
+					</c:if>
+					<div class="portfolio-centered">
+						<div class="recentitems portfolio">
 						<div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
-							<c:forEach var="c" items="${mainboadList}">
+							<c:forEach var="c" items="${mainboardList}">
 								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
-										<img src="${pageContext.request.contextPath}/image/${c.mainboardImageName}" alt="">
+											<img src="${pageContext.request.contextPath}/image/${c.mainboardImageName}" alt="">
 										<div class="he-view">
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
-												<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight">
-													<i class="fa fa-search">Detail</i></a>
-												<a href="${pageContext.request.contextPath}/CartAddMainboardController?" class="dmbutton a2" data-animate="bounceInRight">
-													<i class="fa fa-cart-plus">Add</i></a>
-												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
+													<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+													<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+												<div class="portfolio_category text-center a2" data-animate="fadeIn">
+												</div>
 												<!-- portfolio_category -->
 											</div>
 											<!-- he bg -->
-										</div>
+										 </div>
 										<!-- he view -->
 									</div>
 									<!-- he wrap -->
@@ -186,38 +222,39 @@
 									</p>
 								</div>
 							</c:forEach>
-							<!-- end col-4 -->
-						</div>
-					</div>
-					<!--  container -->
-					<div class="divider"></div>
+					<!-- end col-4 -->
 				</div>
-				<!-- end container -->
-			</div>
+				</div>
+			<!--  container -->
+			<div class="divider"></div>
 		</div>
+	</div>
+</div>
+	<!-- end container -->
 	</section>
 	<!-- end section -->
+	
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
+	
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
-	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
-
+	<script src="lib/jquery/jquery.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="lib/php-mail-form/validate.js"></script>
+	<script src="lib/prettyphoto/js/prettyphoto.js"></script>
+	<script src="lib/isotope/isotope.min.js"></script>
+	<script src="lib/hover/hoverdir.js"></script>
+	<script src="lib/hover/hoverex.min.js"></script>
+	<script src="lib/unveil-effects/unveil-effects.js"></script>
+	<script src="lib/owl-carousel/owl-carousel.js"></script>
+	<script src="lib/jetmenu/jetmenu.js"></script>
+	<script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
+	<script src="lib/jigowatt/jigowatt.js"></script>
+	<script src="lib/easypiechart/easypiechart.min.js"></script>
+	
 	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

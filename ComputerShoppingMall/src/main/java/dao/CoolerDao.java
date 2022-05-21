@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Cooler;
+import vo.Gpu;
 
 public class CoolerDao {
 	// 장바구니에 담기
@@ -292,18 +293,21 @@ public class CoolerDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT "
-				+ " cooler_no coolerNo"
-				+ ", cooler_name coolerName"
-				+ ", company_name companyName"
-				+ ", category_name categoryName"
-				+ ", kind"
-				+ ", cooler_size coolerSize"
-				+ ", price"
-				+ ", quantity"
-				+ ", cooler_image_no coolerImageNo"
-				+ ", memo"
-				+ ", update_date updateDate"
-				+ " FROM cooler WHERE cooler_no = ?";
+				+ " c.cooler_no coolerNo"
+				+ ", c.cooler_name coolerName"
+				+ ", c.company_name companyName"
+				+ ", c.category_name categoryName"
+				+ ", c.kind"
+				+ ", c.cooler_size coolerSize"
+				+ ", c.price"
+				+ ", c.quantity"
+				+ ", c.cooler_image_no coolerImageNo"
+				+ ", c.memo"
+				+ ", c.update_date updateDate"
+				+ ", ci.name imageName"
+				+ " FROM cooler c INNER JOIN cooler_image ci"
+				+ " ON c.cooler_image_no = ci.cooler_image_no"
+				+ " WHERE c.cooler_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, coolerNo);
@@ -320,6 +324,7 @@ public class CoolerDao {
 				c.setCoolerImageNo(rs.getInt("coolerImageNo"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCoolerImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -334,5 +339,93 @@ public class CoolerDao {
 			}
 		}
 		return c;
+	}
+	// cooler 상세검색
+	public ArrayList<Cooler> coolerDetailSearch(String[] companyName, String[] kind, String[] coolerSize) {
+		ArrayList<Cooler> list = new ArrayList<Cooler>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT "
+				+ " c.cooler_no coolerNo"
+				+ ", c.cooler_name coolerName"
+				+ ", c.company_name companyName"
+				+ ", c.category_name categoryName"
+				+ ", c.kind"
+				+ ", c.cooler_size coolerSize"
+				+ ", c.price"
+				+ ", c.quantity"
+				+ ", c.cooler_image_no coolerImageNo"
+				+ ", c.memo"
+				+ ", c.update_date updateDate"
+				+ ", ci.name imageName"
+				+ " FROM cooler c INNER JOIN cooler_image ci"
+				+ " ON c.cooler_image_no = ci.cooler_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("kind", kind);
+		sql += makeWhereSql("cooler_size", coolerSize);
+		
+		System.out.println("[CPU cooler SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Cooler c = new Cooler();
+				c.setCoolerNo(rs.getInt("coolerNo"));
+				c.setCoolerName(rs.getString("coolerName"));
+				c.setCompanyName(rs.getString("companyName"));
+				c.setCategoryName(rs.getString("categoryName"));
+				c.setKind(rs.getString("kind"));
+				c.setCoolerSize(rs.getInt("coolerSize"));
+				c.setPrice(rs.getInt("price"));
+				c.setQuantity(rs.getInt("quantity"));
+				c.setCoolerImageNo(rs.getInt("coolerImageNo"));
+				c.setMemo(rs.getString("memo"));
+				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCoolerImageName(rs.getString("imageName"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

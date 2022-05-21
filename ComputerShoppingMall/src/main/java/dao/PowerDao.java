@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
+import vo.Gpu;
 import vo.Power;
 
 public class PowerDao {
@@ -220,16 +221,19 @@ public class PowerDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ " power_no powerNo"
-				+ " ,power_name powerName"
-				+ " ,category_name categoryName"
-				+ " ,rated_power ratedPower"
-				+ " ,price"
-				+ " ,quantity"
-				+ " ,power_image_no powerImageNo"
-				+ " ,memo"
-				+ " ,update_date updateDate"
-				+ " FROM power WHERE power_no = ?";
+				+ " p.power_no powerNo"
+				+ " ,p.power_name powerName"
+				+ " ,p.category_name categoryName"
+				+ " ,p.rated_power ratedPower"
+				+ " ,p.price"
+				+ " ,p.quantity"
+				+ " ,p.power_image_no powerImageNo"
+				+ " ,p.memo"
+				+ " ,p.update_date updateDate"
+				+ ", pi.name imageName"
+				+ " FROM power p INNER JOIN power_image pi"
+				+ " ON p.power_image_no = pi.power_image_no"
+				+ " WHERE p.power_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, powerNo);
@@ -244,6 +248,7 @@ public class PowerDao {
 				p.setPowerImageNo(rs.getInt("powerImageNo"));
 				p.setMemo(rs.getString("memo"));
 				p.setUpdateDate(rs.getString("updateDate"));
+				p.setPowerImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -258,5 +263,87 @@ public class PowerDao {
 			}
 		}
 		return p;
+	}
+	// power 상세검색
+	public ArrayList<Power> powerDetailSearch(String[] ratedPower) {
+		ArrayList<Power> list = new ArrayList<Power>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ " p.power_no powerNo"
+				+ " ,p.power_name powerName"
+				+ " ,p.category_name categoryName"
+				+ " ,p.rated_power ratedPower"
+				+ " ,p.price"
+				+ " ,p.quantity"
+				+ " ,p.power_image_no powerImageNo"
+				+ " ,p.memo"
+				+ " ,p.update_date updateDate"
+				+ ", pi.name imageName"
+				+ " FROM power p INNER JOIN power_image pi"
+				+ " ON p.power_image_no = pi.power_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("rated_power", ratedPower);
+		
+		System.out.println("[CPU power SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Power p = new Power();
+				p.setPowerNo(rs.getInt("powerNo"));
+				p.setPowerName(rs.getString("powerName"));
+				p.setCategoryName(rs.getString("categoryName"));
+				p.setRatedPower(rs.getString("ratedPower"));
+				p.setPrice(rs.getInt("price"));
+				p.setQuantity(rs.getInt("quantity"));
+				p.setPowerImageNo(rs.getInt("powerImageNo"));
+				p.setMemo(rs.getString("memo"));
+				p.setUpdateDate(rs.getString("updateDate"));
+				p.setPowerImageName(rs.getString("imageName"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

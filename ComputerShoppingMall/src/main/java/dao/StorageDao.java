@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
+import vo.Gpu;
 import vo.Image;
 import vo.Storage;
 
@@ -314,18 +315,21 @@ public class StorageDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	storage_no storageNo"
-				+ "	,storage_name storageName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,storage_interface storageInterface"
-				+ "	,capacity"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,storage_image_no storageImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM storage WHERE storage_no = ?";
+				+ "	s.storage_no storageNo"
+				+ "	,s.storage_name storageName"
+				+ "	,s.company_name companyName"
+				+ "	,s.category_name categoryName"
+				+ "	,s.storage_interface storageInterface"
+				+ "	,s.capacity"
+				+ "	,s.price"
+				+ "	,s.quantity"
+				+ "	,s.storage_image_no storageImageNo"
+				+ "	,s.memo"
+				+ "	,s.update_date updateDate"
+				+ " ,si.name imageName"
+				+ " FROM storage s INNER JOIN storage_image si"
+				+ " ON s.storage_image_no = si.storage_image_no"
+				+ " WHERE s.storage_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, storageNo);
@@ -342,6 +346,7 @@ public class StorageDao {
 				s.setStorageImageNo(rs.getInt("storageImageNo"));
 				s.setMemo(rs.getString("memo"));
 				s.setUpdateDate(rs.getString("updateDate"));
+				s.setStorageImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -356,5 +361,93 @@ public class StorageDao {
 			}
 		}
 		return s;
+	}
+	// storage 상세검색
+	public ArrayList<Storage> storageDetailSearch(String[] companyName, String[] storageInterface, String[] capacity) {
+		ArrayList<Storage> list = new ArrayList<Storage>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql =  "SELECT"
+				+ "	s.storage_no storageNo"
+				+ "	,s.storage_name storageName"
+				+ "	,s.company_name companyName"
+				+ "	,s.category_name categoryName"
+				+ "	,s.storage_interface storageInterface"
+				+ "	,s.capacity"
+				+ "	,s.price"
+				+ "	,s.quantity"
+				+ "	,s.storage_image_no storageImageNo"
+				+ "	,s.memo"
+				+ "	,s.update_date updateDate"
+				+ " ,si.name imageName"
+				+ " FROM storage s INNER JOIN storage_image si"
+				+ " ON s.storage_image_no = si.storage_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("storage_interface", storageInterface);
+		sql += makeWhereSql("capacity", capacity);
+		
+		System.out.println("[CPU storage SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Storage s = new Storage();
+				s.setStorageNo(rs.getInt("storageNo"));
+				s.setStorageName(rs.getString("storageName"));
+				s.setCompanyName(rs.getString("companyName"));
+				s.setCategoryName(rs.getString("categoryName"));
+				s.setStorageInterface(rs.getString("storageInterface"));
+				s.setCapacity(rs.getString("capacity"));
+				s.setPrice(rs.getInt("price"));
+				s.setQuantity(rs.getInt("quantity"));
+				s.setStorageImageNo(rs.getInt("storageImageNo"));
+				s.setMemo(rs.getString("memo"));
+				s.setUpdateDate(rs.getString("updateDate"));
+				s.setStorageImageName(rs.getString("imageName"));
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

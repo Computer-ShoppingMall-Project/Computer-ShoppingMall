@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
+import vo.Cpu;
 import vo.Mainboard;
 
 public class MainboardDao {
@@ -357,20 +358,23 @@ public class MainboardDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	mainboard_no mainboardNo"
-				+ "	, mainboard_name mainboardName"
-				+ "	, category_name categoryName"
-				+ "	, kind"
-				+ "	, socket_size socketSize"
-				+ "	, chipset"
-				+ "	, ram_version ramVersion"
-				+ "	, price"
-				+ "	, quantity"
-				+ "	, company_name companyName"
-				+ "	, mainboard_image_no mainboardImageNo"
-				+ "	, memo"
-				+ "	, update_date updateDate"
-				+ " FROM mainboard WHERE mainboard_no = ?";
+				+ "	m.mainboard_no mainboardNo"
+				+ "	, m.mainboard_name mainboardName"
+				+ "	, m.category_name categoryName"
+				+ "	, m.kind"
+				+ "	, m.socket_size socketSize"
+				+ "	, m.chipset"
+				+ "	, m.ram_version ramVersion"
+				+ "	, m.price"
+				+ "	, m.quantity"
+				+ "	, m.company_name companyName"
+				+ "	, m.mainboard_image_no mainboardImageNo"
+				+ "	, m.memo"
+				+ "	, m.update_date updateDate"
+				+ "	, mi.name imageName"
+				+ " FROM mainboard m INNER JOIN mainboard_image mi"
+				+ " ON m.mainboard_image_no = mi.mainboard_image_no"
+				+ " WHERE m.mainboard_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, mainboardNo);
@@ -389,6 +393,7 @@ public class MainboardDao {
 				m.setMainboardImageNo(rs.getInt("mainboardImageNo"));
 				m.setMemo(rs.getString("memo"));
 				m.setUpdateDate(rs.getString("updateDate"));
+				m.setMainboardImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -403,5 +408,98 @@ public class MainboardDao {
 			}
 		}
 		return m;
+	}
+	public ArrayList<Mainboard> mainboardDetailSearch(String[] companyName, String[] socketSize, String[] chipset, String[] ramVersion, String[] kind) {
+		ArrayList<Mainboard> list = new ArrayList<Mainboard>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql =  "SELECT"
+				+ "	m.mainboard_no mainboardNo"
+				+ "	, m.mainboard_name mainboardName"
+				+ "	, m.category_name categoryName"
+				+ "	, m.kind"
+				+ "	, m.socket_size socketSize"
+				+ "	, m.chipset"
+				+ "	, m.ram_version ramVersion"
+				+ "	, m.price"
+				+ "	, m.quantity"
+				+ "	, m.company_name companyName"
+				+ "	, m.mainboard_image_no mainboardImageNo"
+				+ "	, m.memo"
+				+ "	, m.update_date updateDate"
+				+ "	, mi.name imageName"
+				+ " FROM mainboard m INNER JOIN mainboard_image mi"
+				+ " 	ON m.mainboard_image_no = mi.mainboard_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("socket_size", socketSize);
+		sql += makeWhereSql("chipset", chipset);
+		sql += makeWhereSql("ramVersion", ramVersion);
+		sql += makeWhereSql("kind", kind);
+		
+		System.out.println("[CPU mainboard SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Mainboard m = new Mainboard();
+				m.setMainboardNo(rs.getInt("mainboardNo"));
+				m.setMainboardName(rs.getString("mainboardName"));
+				m.setCategoryName(rs.getString("categoryName"));
+				m.setKind(rs.getString("kind"));
+				m.setSocketSize(rs.getString("socketSize"));
+				m.setChipset(rs.getString("chipset"));
+				m.setRamVersion(rs.getString("ramVersion"));
+				m.setPrice(rs.getInt("price"));
+				m.setQuantity(rs.getInt("quantity"));
+				m.setCompanyName(rs.getString("companyName"));
+				m.setMainboardImageNo(rs.getInt("mainboardImageNo"));
+				m.setMemo(rs.getString("memo"));
+				m.setUpdateDate(rs.getString("updateDate"));
+				m.setMainboardImageName(rs.getString("imageName"));
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

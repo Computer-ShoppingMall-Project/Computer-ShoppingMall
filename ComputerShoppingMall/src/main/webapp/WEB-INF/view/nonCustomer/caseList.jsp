@@ -112,7 +112,13 @@
 							<th class="bg-info text-center">CASE SIZE</th>
 							<td>
 								<c:forEach var="c" items="${caseSizeList}">
-									<input type="checkbox" name="caseSize" value="${c}"><span>&nbsp;${c}&nbsp;</span>
+									<input type="checkbox" name="caseSize" value="${c}"
+							 		<c:forEach  var="c1" items="${caseSize}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
+									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach>
 							</td>
 						</tr>
@@ -120,7 +126,13 @@
 							<th class="bg-info text-center">GPU SIZE</th>
 							<td>
 								<c:forEach var="c" items="${gpuSizeList}">
-									<input type="checkbox" name="gpuSize" value="${c}"><span>&nbsp;${c}&nbsp;</span>
+									<input type="checkbox" name="gpuSize" value="${c}"
+							 		<c:forEach  var="c1" items="${gpuSize}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
+									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach>
 							</td>
 						</tr>
@@ -128,7 +140,13 @@
 							<th class="bg-info text-center">6.4cm BAY</th> 
 							<td>
 								<c:forEach var="c" items="${bay64mmList}">
-									<input type="checkbox" name="bay64mm" value="${c}"><span>&nbsp;${c}&nbsp;</span>
+									<input type="checkbox" name="bay64mm" value="${c}"
+							 		<c:forEach  var="c1" items="${bay64mm}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
+									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach>
 							</td>
 						</tr>
@@ -136,18 +154,28 @@
 							<th class="bg-info text-center">8.9cm BAY</th> 
 							<td>
 								<c:forEach var="c" items="${bay89mmList}">
-									<input type="checkbox" name="bay64mm" value="${c}"><span>&nbsp;${c}&nbsp;</span>
+									<input type="checkbox" name="bay89mm" value="${c}"
+							 		<c:forEach  var="c1" items="${bay89mm}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
+									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach>
 							</td>
 						</tr>
 					</table>
 				<div>
 					<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-					<button type="reset" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</button>
+					<a href="${pageContext.request.contextPath}/CaseListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 				</div>
 				</form>
 				<br>
-				<h4 class="title">CASE</h4>
+				<h4 class="title">CASE(<span class="text-primary">${count}</span>)</h4>
+				<!-- 조건에 해당하는 상품이 없을 경우 해당 상품이 존재하지 않다는 문구 안내 -->
+				<c:if test="${count==0}">
+					<h4 class="text-primary text-center">해당 조건의 상품의 존재하지 않습니다</h4>
+				</c:if>
 				<!-- 상품 리스트 -->
 				<div class="portfolio-centered">
 					<div class="recentitems portfolio">
@@ -186,6 +214,7 @@
 				</div>
 				<!-- end container -->
 			</div>
+		</div>
 	</section>
 	<!-- end section -->
 	<!-- footer적용 -->

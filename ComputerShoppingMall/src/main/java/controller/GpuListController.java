@@ -28,14 +28,44 @@ public class GpuListController extends HttpServlet {
 		// gpu_size
 		ArrayList<String> gpuSizeList = gpuDao.gpuSizeKind();
 		
+		int count = gpuList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
 		request.setAttribute("gpuList", gpuList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("chipsetCompanyList", chipsetCompanyList);
 		request.setAttribute("gpuSizeList", gpuSizeList);
+		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/gpuList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// String[]로 다중선택값 저장(체크박스)
+		String[] companyName = request.getParameterValues("companyName");
+		String[] chipsetCompany = request.getParameterValues("chipsetCompany");
+		String[] gpuSize = request.getParameterValues("gpuSize");
+		
+		gpuDao = new GpuDao();
+		// gpu 상세검색 리스트
+		ArrayList<Gpu> gpuList = gpuDao.gpuDetailSearch(companyName, chipsetCompany, gpuSize);
+		
+		// 체크박스
+		ArrayList<String> companyList = gpuDao.companyKind(); // company
+		ArrayList<String> chipsetCompanyList = gpuDao.chipsetCompanyKind(); // chipset_company
+		ArrayList<String> gpuSizeList = gpuDao.gpuSizeKind(); // gpu_size
+		
+		int count = gpuList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
+		// 값 셋팅 후 보내주기
+		request.setAttribute("gpuList", gpuList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("chipsetCompanyList", chipsetCompanyList);
+		request.setAttribute("gpuSizeList", gpuSizeList);
+		request.setAttribute("count", count);
+		// 체크여부 확인
+		request.setAttribute("companyName", companyName);
+		request.setAttribute("chipsetCompany", chipsetCompany);
+		request.setAttribute("gpuSize", gpuSize);
+		
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/gpuList.jsp").forward(request, response);
 	}
 }

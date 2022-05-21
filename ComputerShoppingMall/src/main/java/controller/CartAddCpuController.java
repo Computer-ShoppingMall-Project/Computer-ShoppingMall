@@ -15,14 +15,6 @@ import vo.Cpu;
 public class CartAddCpuController extends HttpServlet {
 	private CpuDao cpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int cpuNo = Integer.parseInt(request.getParameter("cpuNo"));
 		
@@ -35,17 +27,18 @@ public class CartAddCpuController extends HttpServlet {
 		
 		// 값 보내주기
 		request.setAttribute("cpuOne", cpu);
-		request.getRequestDispatcher("WEB-INF/view/customer/cpuOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/cpuOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 새션 확인
 		HttpSession session = request.getSession();
 		String customerId = (String)session.getAttribute("sessionCustomerId");
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
+		if ((String) session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		// 변수 등록 (basket)
 		int cpuNo =Integer.parseInt(request.getParameter("cpuNo"));
 		System.out.println(cpuNo+"<-cpuNo");

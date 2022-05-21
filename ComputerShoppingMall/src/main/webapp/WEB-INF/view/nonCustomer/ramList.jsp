@@ -110,32 +110,47 @@
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- RAM 상세검색 체크박스 테이블 -->
 				<h4>RAM DETAIL SEARCH</h4>
-				<form>
+				<form method="post" action="${pageContext.request.contextPath}/RamListController">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
-							<td><c:forEach var="c" items="${companyList}">
-									<input type="checkbox" name="companyName" value="${c}">
-									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+							<td>
+								<c:forEach var="c" items="${companyList}">
+									<input type="checkbox" name="companyName" value="${c}" 
+									<c:forEach  var="c1" items="${companyName}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>><span>&nbsp;${c}&nbsp;</span>
+								</c:forEach>
+							</td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">KIND</th>
 							<!-- socketSize -->
-							<td><c:forEach var="c" items="${kindList}">
-									<input type="checkbox" name="socketSize" value="${c}">
-									<span>&nbsp;${c}&nbsp;</span>
-								</c:forEach></td>
+							<td>
+								<c:forEach var="c" items="${kindList}">
+									<input type="checkbox" name="kind" value="${c}" 
+									<c:forEach  var="c1" items="${kind}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>><span>&nbsp;${c}&nbsp;</span>
+								</c:forEach>
+							</td>
 						</tr>
 					</table>
 					<div>
 						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-						<button type="reset" class="btn btn-link"
-							style="float: right; margin-rigth: 20px">Reset</button>
+						<a href="${pageContext.request.contextPath}/RamListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 					</div>
 				</form>
 				<br>
-				<h4 class="title">RAM</h4>
+				<h4 class="title">RAM(<span class="text-primary">${count}</span>)</h4>
+				<!-- 조건에 해당하는 상품이 없을 경우 해당 상품이 존재하지 않다는 문구 안내 -->
+				<c:if test="${count==0}">
+					<h4 class="text-primary text-center">해당 조건의 상품의 존재하지 않습니다</h4>
+				</c:if>
 				<!-- 상품 리스트 -->
 				<div class="portfolio-centered">
 					<div class="recentitems portfolio">

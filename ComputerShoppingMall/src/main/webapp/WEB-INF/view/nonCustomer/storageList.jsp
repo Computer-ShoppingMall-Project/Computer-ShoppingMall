@@ -110,33 +110,48 @@
 			<!-- STORAGE 상세검색 체크박스 테이블 -->
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
 				<h4>STORAGE DETAIL SEARCH</h4>
-				<form>
+				<form method="post" action="${pageContext.request.contextPath}/StorageListController">
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 20%" class="bg-info text-light text-center">COMPANY</th>
 							<td><c:forEach var="c" items="${companyList}">
-									<input type="checkbox" name="companyName" value="${c}">
+									<input type="checkbox" name="companyName" value="${c}"
+							 		<c:forEach  var="c1" items="${companyName}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">INTERFACE</th>
 							<td><c:forEach var="c" items="${interfaceList}">
-									<input type="checkbox" name="socketSize" value="${c}">
+									<input type="checkbox" name="storageInterface" value="${c}"
+							 		<c:forEach  var="c1" items="${storageInterface}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
 						<tr>
 							<th class="bg-info text-center">CAPACITY</th>
 							<td><c:forEach var="c" items="${capacityList}">
-									<input type="checkbox" name="core" value="${c}">
+									<input type="checkbox" name="capacity" value="${c}"
+							 		<c:forEach  var="c1" items="${capacity}">
+										<c:if test="${c1 eq c}">
+											checked="checked"
+										</c:if>
+									</c:forEach>>
 									<span>&nbsp;${c}&nbsp;</span>
 								</c:forEach></td>
 						</tr>
 					</table>
 					<div>
 						<button type="submit" style="float: right;">Search</button>
-						<button type="reset" class="btn btn-link" style="float: right;">Reset</button>
+						<a href="${pageContext.request.contextPath}/StorageListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 					</div>
 				</form> <br>
 			<!-- 상품 리스트 -->
@@ -178,6 +193,7 @@
 			<!--  container -->
 			<div class="divider"></div>
 		</div>
+	</div>
 	</div>
 	<!-- end container -->
 	</section>

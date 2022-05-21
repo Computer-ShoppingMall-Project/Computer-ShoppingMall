@@ -15,14 +15,6 @@ import vo.Gpu;
 public class CartAddGpuController extends HttpServlet {
 	private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
 		
@@ -33,11 +25,9 @@ public class CartAddGpuController extends HttpServlet {
 		gpuDao = new GpuDao();
 		gpu = gpuDao.selectGpuOne(gpuNo);
 		
-		
-		
 		// 값 보내주기
 		request.setAttribute("gpuOne", gpu);
-		request.getRequestDispatcher("WEB-INF/view/customer/gpuOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/gpuOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

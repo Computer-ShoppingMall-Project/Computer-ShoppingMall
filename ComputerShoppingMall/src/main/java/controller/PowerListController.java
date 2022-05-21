@@ -24,12 +24,33 @@ public class PowerListController extends HttpServlet {
 		// rated_power
 		ArrayList<String> ratedPowerList = powerDao.ratedPowerList();
 		
+		int count = powerList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
 		request.setAttribute("powerList", powerList);
 		request.setAttribute("ratedPowerList", ratedPowerList);
+		request.setAttribute("count", count);
+		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/powerList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String[] ratedPower = request.getParameterValues("ratedPower");
+		
+		powerDao = new PowerDao();
+		// power 상세검색 리스트
+		ArrayList<Power> powerList = powerDao.powerDetailSearch(ratedPower);
+		// rated_power
+		ArrayList<String> ratedPowerList = powerDao.ratedPowerList();
+		
+		int count = powerList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
+		request.setAttribute("powerList", powerList);
+		request.setAttribute("ratedPowerList", ratedPowerList);
+		request.setAttribute("count", count);
+		
+		// 체크여부 확인
+		request.setAttribute("ratedPower", ratedPower);
+		
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/powerList.jsp").forward(request, response);
 	}
 }

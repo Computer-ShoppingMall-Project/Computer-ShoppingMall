@@ -16,14 +16,6 @@ import vo.Storage;
 public class CartAddStorageController extends HttpServlet {
 	private StorageDao storageDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int storageNo = Integer.parseInt(request.getParameter("storageNo"));
 		
@@ -34,11 +26,9 @@ public class CartAddStorageController extends HttpServlet {
 		storageDao = new StorageDao();
 		storage = storageDao.selectStorageOne(storageNo);
 		
-		
-		
 		// 값 보내주기
 		request.setAttribute("storageOne", storage);
-		request.getRequestDispatcher("WEB-INF/view/customer/storageOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/storageOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

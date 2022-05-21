@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
+import vo.Mainboard;
 import vo.Ram;
 
 public class RamDao {
@@ -255,17 +256,20 @@ public class RamDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	ram_no ramNo"
-				+ "	,ram_name ramName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,kind"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,ram_image_no ramImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM ram WHERE ram_no = ?";
+				+ "	r.ram_no ramNo"
+				+ "	,r.ram_name ramName"
+				+ "	,r.company_name companyName"
+				+ "	,r.category_name categoryName"
+				+ "	,r.kind"
+				+ "	,r.price"
+				+ "	,r.quantity"
+				+ "	,r.ram_image_no ramImageNo"
+				+ "	,r.memo"
+				+ "	,r.update_date updateDate"
+				+ " ,ri.name imageName"
+				+ " FROM ram r INNER JOIN ram_image ri"
+				+ " ON r.ram_image_no = ri.ram_image_no"
+				+ " WHERE r.ram_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, ramNo);
@@ -281,6 +285,7 @@ public class RamDao {
 				r.setRamImageNo(rs.getInt("ramImageNo"));
 				r.setMemo(rs.getString("memo"));
 				r.setUpdateDate(rs.getString("updateDate"));
+				r.setRamImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -295,5 +300,90 @@ public class RamDao {
 			}
 		}
 		return r;
+	}
+	// 램 상세검색
+	public ArrayList<Ram> ramDetailSearch(String[] companyName, String[] kind) {
+		ArrayList<Ram> list = new ArrayList<Ram>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	r.ram_no ramNo"
+				+ "	,r.ram_name ramName"
+				+ "	,r.company_name companyName"
+				+ "	,r.category_name categoryName"
+				+ "	,r.kind"
+				+ "	,r.price"
+				+ "	,r.quantity"
+				+ "	,r.ram_image_no ramImageNo"
+				+ "	,r.memo"
+				+ "	,r.update_date updateDate"
+				+ " ,ri.name imageName"
+				+ " FROM ram r INNER JOIN ram_image ri"
+				+ " ON r.ram_image_no = ri.ram_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("kind", kind);
+		
+		System.out.println("[CPU ram SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Ram r = new Ram();
+				r.setRamNo(rs.getInt("ramNo"));
+				r.setRamName(rs.getString("ramName"));
+				r.setCompanyName(rs.getString("companyName"));
+				r.setCategoryName(rs.getString("categoryName"));
+				r.setKind(rs.getString("kind"));
+				r.setPrice(rs.getInt("price"));
+				r.setQuantity(rs.getInt("quantity"));
+				r.setRamImageNo(rs.getInt("ramImageNo"));
+				r.setMemo(rs.getString("memo"));
+				r.setUpdateDate(rs.getString("updateDate"));
+				r.setRamImageName(rs.getString("imageName"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

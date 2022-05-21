@@ -329,19 +329,22 @@ public class CpuDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT "
-				+ " cpu_no cpuNo"
-				+ ", cpu_name cpuName"
-				+ ", category_name categoryName"
-				+ ", company_name companyName"
-				+ ", socket_size socketSize"
-				+ ", core"
-				+ ", thread"
-				+ ", price"
-				+ ", quantity"
-				+ ", cpu_image_no cpuImageNo"
-				+ ", memo"
-				+ ", update_date updateDate"
-				+ " FROM cpu WHERE cpu_no = ?" ;
+				+ "	 c.cpu_no cpuNo"
+				+ "	, c.cpu_name cpuName"
+				+ "	, c.category_name categoryName"
+				+ "	, c.company_name companyName"
+				+ "	, c.socket_size socketSize"
+				+ "	, c.core"
+				+ "	, c.thread"
+				+ "	, c.price"
+				+ "	, c.quantity"
+				+ "	, c.cpu_image_no cpuImageNo"
+				+ "	, c.memo"
+				+ "	, c.update_date updateDate"
+				+ "	, ci.name imageName"
+				+ " FROM cpu c INNER JOIN cpu_image ci"
+				+ " ON c.cpu_image_no = ci.cpu_image_no"
+				+ " WHERE c.cpu_no = ?" ;
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,cpuNo);
@@ -359,6 +362,7 @@ public class CpuDao {
 				c.setCpuImageNo(rs.getInt("cpuImageNo"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdateDate(rs.getString("updateDate"));
+				c.setCpuImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -457,7 +461,7 @@ public class CpuDao {
 							sql+=")";
 						}
 					} else if(i > 0) {
-							sql += " OR '" + columnValueArr[i] + "'";
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
 							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
 								sql += ")";
 							}

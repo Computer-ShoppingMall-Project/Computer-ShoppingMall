@@ -29,14 +29,46 @@ public class CoolerListController extends HttpServlet {
 		// size
 		ArrayList<String> sizeList = coolerDao.coolerSizeKind();
 		
+		int count = coolerList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
 		request.setAttribute("coolerList", coolerList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("kindList", kindList);
 		request.setAttribute("sizeList", sizeList);
+		request.setAttribute("count", count);
+		
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/coolerList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// String[]로 다중선택값 저장(체크박스)
+		String[] companyName = request.getParameterValues("companyName");
+		String[] kind = request.getParameterValues("kind");
+		String[] coolerSize = request.getParameterValues("coolerSize");
+		
+		coolerDao = new CoolerDao();
+		
+		// 상세검색 리스트
+		ArrayList<Cooler> coolerList = coolerDao.coolerDetailSearch(companyName, kind, coolerSize);
+		
+		// cooler 이름, 가격 정보
+		ArrayList<String> companyList = coolerDao.companyKind(); // company
+		ArrayList<String> kindList = coolerDao.kindKind(); // kind
+		ArrayList<String> sizeList = coolerDao.coolerSizeKind(); // size
+		
+		int count = coolerList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
+		request.setAttribute("coolerList", coolerList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("kindList", kindList);
+		request.setAttribute("sizeList", sizeList);
+		request.setAttribute("count", count);
+		
+		// 체크여부 확인
+		request.setAttribute("companyName", companyName);
+		request.setAttribute("kind", kind);
+		request.setAttribute("coolerSize", coolerSize);
+		
+		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/coolerList.jsp").forward(request, response);
 	}
 }

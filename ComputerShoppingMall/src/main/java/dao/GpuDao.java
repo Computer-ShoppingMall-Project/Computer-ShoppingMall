@@ -288,18 +288,21 @@ public class GpuDao {
 		conn = DButil.getConnection();
 		
 		String sql = "SELECT"
-				+ "	gpu_no gpuNo"
-				+ "	,gpu_name gpuName"
-				+ "	,company_name companyName"
-				+ "	,category_name categoryName"
-				+ "	,chipset_company chipsetCompany"
-				+ "	,gpu_size gpuSize"
-				+ "	,price"
-				+ "	,quantity"
-				+ "	,gpu_image_no gpuImageNo"
-				+ "	,memo"
-				+ "	,update_date updateDate"
-				+ " FROM gpu WHERE gpu_no = ?";
+				+ "	g.gpu_no gpuNo"
+				+ "	,g.gpu_name gpuName"
+				+ "	,g.company_name companyName"
+				+ "	,g.category_name categoryName"
+				+ "	,g.chipset_company chipsetCompany"
+				+ "	,g.gpu_size gpuSize"
+				+ "	,g.price"
+				+ "	,g.quantity"
+				+ "	,g.gpu_image_no gpuImageNo"
+				+ "	,g.memo"
+				+ "	,g.update_date updateDate"
+				+ ", gi.name imageName"
+				+ " FROM gpu g INNER JOIN gpu_image gi"
+				+ " ON g.gpu_image_no = gi.gpu_image_no"
+				+ " WHERE g.gpu_no = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, gpuNo);
@@ -316,6 +319,7 @@ public class GpuDao {
 				g.setGpuImageNo(rs.getInt("gpuImageNo"));
 				g.setMemo(rs.getString("memo"));
 				g.setUpdateDate(rs.getString("updateDate"));
+				g.setGpuImageName(rs.getString("imageName"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -330,5 +334,93 @@ public class GpuDao {
 			}
 		}
 		return g;
+	}
+	// gpu 상세검색
+	public ArrayList<Gpu> gpuDetailSearch(String[] companyName, String[] chipsetCompany, String[] gpuSize) {
+		ArrayList<Gpu> list = new ArrayList<Gpu>();
+		// DB 기본값 셋팅
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		
+		String sql = "SELECT"
+				+ "	g.gpu_no gpuNo"
+				+ "	,g.gpu_name gpuName"
+				+ "	,g.company_name companyName"
+				+ "	,g.category_name categoryName"
+				+ "	,g.chipset_company chipsetCompany"
+				+ "	,g.gpu_size gpuSize"
+				+ "	,g.price"
+				+ "	,g.quantity"
+				+ "	,g.gpu_image_no gpuImageNo"
+				+ "	,g.memo"
+				+ "	,g.update_date updateDate"
+				+ ", gi.name imageName"
+				+ " FROM gpu g INNER JOIN gpu_image gi"
+				+ " ON g.gpu_image_no = gi.gpu_image_no"
+				+ " WHERE (1=1)"; // WHERE절 1=1 아무 검색조건 없을 시 전체 상품 조회 -> where절을 놔두기 위해 둔 쿼리
+		
+		// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리 (makeWhereSql 메서드 이용)
+		// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+		sql += makeWhereSql("company_name", companyName);
+		sql += makeWhereSql("chipset_company", chipsetCompany);
+		sql += makeWhereSql("gpu_size", gpuSize);
+		
+		System.out.println("[CPU ram SQL] : " + sql);
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Gpu g = new Gpu();
+				g.setGpuNo(rs.getInt("gpuNo"));
+				g.setGpuName(rs.getString("gpuName"));
+				g.setCompanyName(rs.getString("companyName"));
+				g.setCategoryName(rs.getString("categoryName"));
+				g.setChipsetCompany(rs.getString("chipsetCompany"));
+				g.setGpuSize(rs.getInt("gpuSize"));
+				g.setQuantity(rs.getInt("quantity"));
+				g.setPrice(rs.getInt("price"));
+				g.setGpuImageNo(rs.getInt("gpuImageNo"));
+				g.setMemo(rs.getString("memo"));
+				g.setUpdateDate(rs.getString("updateDate"));
+				g.setGpuImageName(rs.getString("imageName"));
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// DB 자원반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 같은 배열끼리 비교는 OR 조건, 다른 배열끼리 비교는 AND -> 동적쿼리
+	// 값이 존재한다면 쿼리 추가 (AND 조건문으로 시작)
+	private String makeWhereSql (String columnName, String[] columnValueArr) {
+		String sql = "";
+		if(columnValueArr != null) {
+			for(int i=0; i< columnValueArr.length; i++) {
+					if(i == 0) { // 0번째 값에는 구분을 위해 "(" 추가
+						sql += " AND ("+columnName+"='" + columnValueArr[i] + "'";
+						if(columnValueArr.length == 1) { // i가 첫번째이자 마지막이라면 ")"
+							sql+=")";
+						}
+					} else if(i > 0) {
+							sql += " OR " + columnName + "='" + columnValueArr[i] + "'";
+							if(i == columnValueArr.length-1) { // 마지막 값에는 구분을 위해 ")" 추가
+								sql += ")";
+							}
+						}
+			}
+		}
+			return sql;
 	}
 }

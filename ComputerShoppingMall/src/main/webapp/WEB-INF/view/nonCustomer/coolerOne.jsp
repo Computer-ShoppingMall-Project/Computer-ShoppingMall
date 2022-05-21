@@ -56,7 +56,7 @@
 					<li><a href="index.jsp">Home</a></li>
 					<li>Main Product</li>
 				</ul>
-				<h2>POWER</h2>
+				<h2>COOLER</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -76,8 +76,8 @@
 
 	<section class="marketplace-top">
 		<div id="market-wrapper">
-			<div class="item_image">
-				<img data-effect="fade" class="aligncenter" width="1260" height="400" src="img/market_single_01.png" alt="">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.coolerOne.coolerImageName}" alt="">
 			</div>
 			<!-- end item_image -->
 		</div>
@@ -88,7 +88,7 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 
 				<div class="general-title text-center">
-					<h3>${requestScope.powerOne.powerName}</h3>
+					<h3>${requestScope.coolerOne.coolerName}</h3>
 					<hr>
 				</div>
 
@@ -101,9 +101,11 @@
 							<div class="details_section">
 								<h3>Item Details</h3>
 								<ul>
-									<li class="version">power_no : <span>${requestScope.powerOne.powerNo}</span></li>
-									<li class="designer">category_name : <span>${requestScope.powerOne.categoryName}</span></li>
-									<li class="designer">rated_power : <span>${requestScope.powerOne.ratedPower}</span></li>
+									<li class="version">cooler_no : <span>${requestScope.coolerOne.coolerNo}</span></li>
+									<li class="designer">category_name : <span>${requestScope.coolerOne.categoryName}</span></li>
+									<li class="designer">company_name : <span>${requestScope.coolerOne.companyName}</span></li>
+									<li class="designer">kind : <span>${requestScope.coolerOne.kind}</span></li>
+									<li class="designer">cooler_size : <span>${requestScope.coolerOne.coolerSize}</span></li>
 								</ul>
 							</div>
 						</div>
@@ -113,7 +115,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-12">
 						<div class="theme_details">
 							<div class="item-description">
-								<p>${requestScope.powerOne.memo}</p>
+								<p>${requestScope.coolerOne.memo}</p>
 							</div>
 							<!-- item-description -->
 						</div>
@@ -123,17 +125,17 @@
 					<div class="col-lg-3 col-md-3 col-sm-12">
 							<div class="form-group">
 								<div> 개수 선택 
-									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${requestScope.powerOne.powerNo}" method="POST">
-										<input type="number" max="${requestScope.powerOne.quantity}" name="quantity" value="1" class="text-center">개 
+									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${requestScope.coolerOne.coolerNo}" method="POST">
+										<input type="number" max="${requestScope.coolerOne.quantity}" name="quantity" value="1" class="text-center">개 
 										<input type="submit" class="btn btn-large btn-primary" value="담기">
 									</form>
 								</div>
 							</div>
-							<h4 class="text-danger">재고 : ${requestScope.powerOne.quantity}</h4>
+							<h4 class="text-danger">재고 : ${requestScope.coolerOne.quantity}</h4>
 							<div class="form-group">
 								<div class="item_price">
 									<h3>
-										<span>${requestScope.powerOne.price}원</span>
+										<span>${requestScope.coolerOne.price}원</span>
 									</h3>
 								</div>
 							</div>
@@ -156,110 +158,8 @@
 
 				<div class="clearfix"></div>
 
-				<div class="general-title text-center">
-					<h3>Product Features</h3>
-					<p>More information about your product</p>
-					<hr>
-				</div>
-
-				<div class="divider"></div>
-				<div class="theme_overviews clearfix">
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-arrows"></i>
-							</div>
-							<header>
-								<h3>Different Sizes</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-heart"></i>
-							</div>
-							<header>
-								<h3>HandMade in Italy</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-lock"></i>
-							</div>
-							<header>
-								<h3>Secure Metal Zip</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-trophy"></i>
-							</div>
-							<header>
-								<h3>Premium Design</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-cloud"></i>
-							</div>
-							<header>
-								<h3>Softly Padded</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-pencil"></i>
-							</div>
-							<header>
-								<h3>Signed Product</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-				</div>
-				<!-- theme / Products overview -->
-
 			</div>
 			<!-- end content -->
-		</div>
 		<!-- end container -->
 	</section>
 	<!-- end section -->

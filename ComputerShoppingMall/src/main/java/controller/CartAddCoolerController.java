@@ -15,14 +15,6 @@ import dao.CoolerDao;
 public class CartAddCoolerController extends HttpServlet {
 	private CoolerDao coolerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// request 값 받기
 		int coolerNo = Integer.parseInt(request.getParameter("coolerNo"));
 		
@@ -35,7 +27,7 @@ public class CartAddCoolerController extends HttpServlet {
 		
 		// 값 보내주기
 		request.setAttribute("coolerOne", cooler);
-		request.getRequestDispatcher("WEB-INF/view/customer/coolerOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/coolerOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

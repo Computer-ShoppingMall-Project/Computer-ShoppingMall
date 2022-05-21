@@ -48,6 +48,7 @@
 			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
+
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -55,7 +56,7 @@
 					<li><a href="index.jsp">Home</a></li>
 					<li>Main Product</li>
 				</ul>
-				<h2>MAINBOARD</h2>
+				<h2>RAM</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -75,8 +76,8 @@
 
 	<section class="marketplace-top">
 		<div id="market-wrapper">
-			<div class="item_image">
-				<img data-effect="fade" class="aligncenter" width="1260" height="400" src="img/market_single_01.png" alt="">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.ramOne.ramImageName}" alt="">
 			</div>
 			<!-- end item_image -->
 		</div>
@@ -87,7 +88,7 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 
 				<div class="general-title text-center">
-					<h3>${requestScope.mainboardOne.mainboardName}</h3>
+					<h3>${requestScope.ramOne.ramName}</h3>
 					<hr>
 				</div>
 
@@ -100,12 +101,10 @@
 							<div class="details_section">
 								<h3>Item Details</h3>
 								<ul>
-									<li class="version">mainboard_no : <span>${requestScope.mainboardOne.mainboardNo}</span></li>
-									<li class="designer">category_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
-									<li class="designer">kind : <span>${requestScope.mainboardOne.kind}</span></li>
-									<li class="designer">socket_size : <span>${requestScope.mainboardOne.socketSize}</span></li>
-									<li class="designer">chipset : <span>${requestScope.mainboardOne.chipset}</span></li>
-									<li class="designer">ram_version : <span>${requestScope.mainboardOne.ramVersion}</span></li>
+									<li class="version">ram_no : <span>${requestScope.ramOne.ramNo}</span></li>
+									<li class="designer">company_name : <span>${requestScope.ramOne.companyName}</span></li>
+									<li class="designer">category_name : <span>${requestScope.ramOne.categoryName}</span></li>
+									<li class="designer">kind : <span>${requestScope.ramOne.kind}</span></li>
 								</ul>
 							</div>
 						</div>
@@ -115,7 +114,7 @@
 					<div class="col-lg-6 col-md-6 col-sm-12">
 						<div class="theme_details">
 							<div class="item-description">
-								<p>${requestScope.mainboardOne.memo}</p>
+								<p>${requestScope.ramOne.memo}</p>
 							</div>
 							<!-- item-description -->
 						</div>
@@ -125,17 +124,17 @@
 					<div class="col-lg-3 col-md-3 col-sm-12">
 							<div class="form-group">
 								<div> 개수 선택 
-									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" method="POST">
-										<input type="number" max="${requestScope.mainboardOne.quantity}" name="quantity" value="1" class="text-center">개 
+									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddRamController?ramNo=${requestScope.ramOne.ramNo}" method="POST">
+										<input type="number" max="${requestScope.ramOne.quantity}" name="quantity" value="1" class="text-center">개 
 										<input type="submit" class="btn btn-large btn-primary" value="담기">
 									</form>
 								</div>
 							</div>
-							<h4 class="text-danger">재고 : ${requestScope.mainboardOne.quantity}</h4>
+							<h4 class="text-danger">재고 : ${requestScope.ramOne.quantity}</h4>
 							<div class="form-group">
 								<div class="item_price">
 									<h3>
-										<span>${requestScope.mainboardOne.price}원</span>
+										<span>${requestScope.ramOne.price}원</span>
 									</h3>
 								</div>
 							</div>
@@ -158,110 +157,12 @@
 
 				<div class="clearfix"></div>
 
-				<div class="general-title text-center">
-					<h3>Product Features</h3>
-					<p>More information about your product</p>
-					<hr>
-				</div>
-
 				<div class="divider"></div>
-				<div class="theme_overviews clearfix">
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-arrows"></i>
-							</div>
-							<header>
-								<h3>Different Sizes</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
 
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-heart"></i>
-							</div>
-							<header>
-								<h3>HandMade in Italy</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-lock"></i>
-							</div>
-							<header>
-								<h3>Secure Metal Zip</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 first">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-trophy"></i>
-							</div>
-							<header>
-								<h3>Premium Design</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-cloud"></i>
-							</div>
-							<header>
-								<h3>Softly Padded</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-4 col-sm-12 last">
-						<div class="services">
-							<div class="icon-container">
-								<i class="fa fa-pencil"></i>
-							</div>
-							<header>
-								<h3>Signed Product</h3>
-							</header>
-							<p>Lorem Ipsum is simply dummy text of the printing and
-								typesetting industry. It has survived not only five centuries,
-								but also the leap into electronic typesetting, remaining
-								essentially unchanged.</p>
-						</div>
-					</div>
-
-				</div>
 				<!-- theme / Products overview -->
 
 			</div>
 			<!-- end content -->
-		</div>
 		<!-- end container -->
 	</section>
 	<!-- end section -->

@@ -14,15 +14,7 @@ import vo.Mainboard;
 @WebServlet("/CartAddMainboardController")
 public class CartAddMainboardController extends HttpServlet {
 	private MainboardDao mainboardDao;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 새션 확인
-		HttpSession session = request.getSession();
-		if ((String)session.getAttribute("sessionCustomerId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		// request 값 받기
 		int mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
 		
@@ -35,7 +27,7 @@ public class CartAddMainboardController extends HttpServlet {
 		
 		// 값 보내주기
 		request.setAttribute("mainboardOne", mainboard);
-		request.getRequestDispatcher("WEB-INF/view/customer/mainboardOne.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/nonCustomer/mainboardOne.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
