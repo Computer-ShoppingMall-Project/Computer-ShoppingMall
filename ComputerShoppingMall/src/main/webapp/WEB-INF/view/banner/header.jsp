@@ -29,6 +29,7 @@
             <div class="site-title" id="title">
                <a href="${pageContext.request.contextPath}/IndexController" title="">
                   <h4>
+                  	<span><img src="${pageContext.request.contextPath}/img/logo.png" width="30" height="30"></span>
                   	Red<span>Velvet</span>
                   </h4>
                </a>
