@@ -204,24 +204,19 @@
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
 							<c:forEach var="c" items="${caseList}">
-								<div
-									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="${pageContext.request.contextPath}/image/${c.caseImageName}" alt="">
-										<div class="he-view">
-											<div class="bg a0" data-animate="fadeIn">
-												<h3 class="big a1" data-animate="fadeInDown"></h3>
-												<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-												
-													<div class="form-send">
-														<span hidden="hidden" id="caseNo"></span>
-														<a href="${pageContext.request.contextPath}/CartAddCaseController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.caseNo}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight" id="sendBtn" type="button"><i class="fa fa-cart-plus">Add</i></a>
-													</div>
-												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
-												<!-- portfolio_category -->
+											<div class="he-view">
+												<div class="bg a0" data-animate="fadeIn">
+													<h3 class="big a1" data-animate="fadeInDown"></h3>
+													<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
+															<a href="${pageContext.request.contextPath}/CartAddCaseController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.caseNo}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight" id="sendBtn" type="button"><i class="fa fa-cart-plus">Add</i></a>
+													<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
+													<!-- portfolio_category -->
+												</div>
+												<!-- he bg -->
 											</div>
-											<!-- he bg -->
-										</div>
 										<!-- he view -->
 									</div>
 									<!-- he wrap -->

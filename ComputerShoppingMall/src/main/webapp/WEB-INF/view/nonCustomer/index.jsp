@@ -39,10 +39,10 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<c:choose>
+	<c:choose> 
 		<c:when test="${sessionAdminId != null }">
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
-		</c:when>
+		</c:when> 
 		<c:otherwise>
 			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>

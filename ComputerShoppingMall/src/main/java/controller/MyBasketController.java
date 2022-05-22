@@ -38,7 +38,7 @@ public class MyBasketController extends HttpServlet {
 		String categoryName =request.getParameter("categoryName");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int quantity = 1;
-		
+		 
 		// vo
 		Basket basket = new Basket();
 		basket.setProductNumber(productNumber);

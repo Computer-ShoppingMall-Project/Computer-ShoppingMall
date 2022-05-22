@@ -180,8 +180,7 @@
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
 							<c:forEach var="c" items="${coolerList}">
-								<div
-									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="${pageContext.request.contextPath}/image/${c.coolerImageName}" alt="">
 										<!-- 이미지 후에 셋팅 -->
