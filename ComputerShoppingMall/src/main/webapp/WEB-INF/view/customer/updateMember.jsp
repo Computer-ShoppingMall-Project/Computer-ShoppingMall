@@ -89,35 +89,35 @@
 							<table class="table">
 								<tr>
 									<td>이름 수정</td>
-									<td><input type="text" name="name" value="${requestScope.customer.name}" required></td>
+									<td><input type="text" name="name" class="form-control"  value="${requestScope.customer.name}" required></td>
 								</tr>
 								<tr>
 									<td>닉네임 수정</td>
-									<td><input type="text" name="nickName" value="${requestScope.customer.nickName}" required></td>
+									<td><input type="text" name="nickName" class="form-control"  value="${requestScope.customer.nickName}" required></td>
 								</tr>
 								<tr>
 									<td>이메일 수정</td>
-									<td><input type="text" style="width: 300px;" name="email" value="${requestScope.customer.email}" required></td>
+									<td><input type="text" style="width: 300px;" name="email" class="form-control"  value="${requestScope.customer.email}" required></td>
 								</tr>
 								<tr>
 									<td>번호 수정</td>
-									<td><input type="text" name="phone" value="${requestScope.customer.phone}" required></td>
+									<td><input type="text" name="phone" class="form-control" value="${requestScope.customer.phone}" required></td>
 								</tr>
 								<tr>
 									<td>우편번호 수정</td>
-									<td><input type="text" id="zipcode" name="zipCode" value="${requestScope.customer.zipCode}" readonly="readonly" onclick="execDaumPostcode()"></td>
+									<td><input type="text" id="zipcode" name="zipCode" class="form-control"  value="${requestScope.customer.zipCode}" readonly="readonly" onclick="execDaumPostcode()"></td>
 								</tr>
 								<tr>
 									<td>도로명주소 수정</td>
-									<td><input style="width: 300px;" type="text" id="roadAddress" readonly="readonly" name="roadAddress" value="${requestScope.customer.roadAddress}" required></td>
+									<td><input style="width: 300px;" type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control"  value="${requestScope.customer.roadAddress}" required></td>
 								</tr>
 								<tr>
 									<td>상세 주소 수정</td>
-									<td><input type="text" id="detailAddress" name="detailAddress" value="${requestScope.customer.detailAddress}" required></td>
+									<td><input type="text" id="detailAddress" name="detailAddress" class="form-control"  value="${requestScope.customer.detailAddress}" required></td>
 								</tr>
 								<tr>
 									<td colspan="2">
-										<button type="submit" class="btn btn-outline-primary btn-sm">정보수정</button>
+										<button type="submit">Update</button>
 									</td>
 								</tr>
 							</table>

@@ -119,7 +119,6 @@
 					<a href="${pageContext.request.contextPath}/UpdateMemberController" type="button" class="btn btn-outline-primary">정보수정</a>
 					<a href="${pageContext.request.contextPath}/UpdateMemberPwController" type="button" class="btn btn-outline-primary">비밀번호 수정</a>
 					<a href="${pageContext.request.contextPath}/DeleteMemberController" type="button" class="btn btn-outline-danger">탈퇴</a> 
-					<a href="${pageContext.request.contextPath}/IndexController" type="button" class="btn btn-outline-info">index</a>
 				</div>
 			</div>
 			<!-- end content -->
