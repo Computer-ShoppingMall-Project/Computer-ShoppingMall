@@ -29,6 +29,7 @@ public class QnaOneController extends HttpServlet {
 		}
 		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
 		
 		
 		
@@ -43,6 +44,7 @@ public class QnaOneController extends HttpServlet {
 		
 		request.setAttribute("qna", qna);
 		request.setAttribute("adminAnswer", adminAnswer);
+		request.setAttribute("customerNo", customerNo);
 		
 		request.getRequestDispatcher("/WEB-INF/view/customer/qnaOne.jsp").forward(request, response);
 	}

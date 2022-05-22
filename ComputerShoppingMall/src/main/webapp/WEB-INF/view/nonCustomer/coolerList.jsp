@@ -72,7 +72,14 @@
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -173,8 +180,7 @@
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
 							<c:forEach var="c" items="${coolerList}">
-								<div
-									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="${pageContext.request.contextPath}/image/${c.coolerImageName}" alt="">
 										<!-- 이미지 후에 셋팅 -->
@@ -182,7 +188,7 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 												<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight">
-												<i class="fa fa-search">Detail</i></a> <a href="${pageContext.request.contextPath}/CartAddCoolerController?" class="dmbutton a2" data-animate="bounceInRight">
+												<i class="fa fa-search">Detail</i></a> <a href="${pageContext.request.contextPath}/CartAddCoolerController?productNumber=${c.coolerNo}&&productName=${c.coolerName}&&price=${c.coolerNo}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight">
 												<i class="fa fa-cart-plus">Add</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->

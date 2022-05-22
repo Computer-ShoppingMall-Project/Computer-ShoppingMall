@@ -69,10 +69,34 @@
 		text-decoration: none;
 	}
 </style>
+<script type="text/javascript">
+	function listView(cpuNo){
+	    let f = document.createElement('form');
+	    
+	    let obj;
+	    obj = document.createElement('input');
+	    obj.setAttribute('type', 'hidden');
+	    obj.setAttribute('name', 'userid');
+	    obj.setAttribute('value', userid);
+	    
+	    f.appendChild(obj);
+	    f.setAttribute('method', 'post');
+	    f.setAttribute('action', 'view.do');
+	    document.body.appendChild(f);
+	    f.submit();
+	}
+</script>
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -180,33 +204,33 @@
 			</c:if>
 			<div class="portfolio-centered">
 				<div class="recentitems portfolio">
-				<div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
-					<c:forEach var="c" items="${cpuList}">
-						<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
-							<div class="he-wrap tpl6 market-item">
-									<img src="${pageContext.request.contextPath}/image/${c.cpuImageName}" alt="">   <!-- 이미지 후에 셋팅 -->
-								<div class="he-view">
-									<div class="bg a0" data-animate="fadeIn">
-										<h3 class="big a1" data-animate="fadeInDown"></h3>
-											<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
-											<a href="${pageContext.request.contextPath}/CartAddCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
-										<div class="portfolio_category text-center a2" data-animate="fadeIn">
+					<div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 764px;">
+						<c:forEach var="c" items="${cpuList}">
+							<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
+								<div class="he-wrap tpl6 market-item">
+										<img src="${pageContext.request.contextPath}/image/${c.cpuImageName}" alt="">   <!-- 이미지 후에 셋팅 -->
+									<div class="he-view">
+										<div class="bg a0" data-animate="fadeIn">
+											<h3 class="big a1" data-animate="fadeInDown"></h3>
+												<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+												<a href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.cpuNo}&&productName=${c.cpuName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+											<div class="portfolio_category text-center a2" data-animate="fadeIn">
+											</div>
+											<!-- portfolio_category -->
 										</div>
-										<!-- portfolio_category -->
-									</div>
-									<!-- he bg -->
-								 </div>
-								<!-- he view -->
+										<!-- he bg -->
+									 </div>
+									<!-- he view -->
+								</div>
+								<!-- he wrap -->
+								<h3 class="title">${c.cpuName}</h3>
+								<p>
+									<span class="text-info">price</span>&nbsp; ${c.price}
+								</p>
 							</div>
-							<!-- he wrap -->
-							<h3 class="title">${c.cpuName}</h3>
-							<p>
-								<span class="text-info">price</span>&nbsp; ${c.price}
-							</p>
-						</div>
-					</c:forEach>
+						</c:forEach>
 					<!-- end col-4 -->
-				</div>
+					</div>
 				</div>
 			<!--  container -->
 			<div class="divider"></div>

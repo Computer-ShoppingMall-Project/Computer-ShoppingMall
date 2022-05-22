@@ -54,7 +54,7 @@
 									</li>
 								</ul>
 							</li>
-							<li><a href="#">ProductList</a>
+							<li><a href="#">고객용 상품 리스트</a>
 		                        <ul class="dropdown">
 		                           <li><a href="${pageContext.request.contextPath}/CpuListController">Cpu List</a></li>
 		                           <li><a href="${pageContext.request.contextPath}/GpuListController">Gpu List</a></li>
@@ -64,6 +64,18 @@
 		                           <li><a href="${pageContext.request.contextPath}/CoolerListController">Cooler List</a></li>
 		                           <li><a href="${pageContext.request.contextPath}/PowerListController">Power List</a></li>
 		                           <li><a href="${pageContext.request.contextPath}/StorageListController">Storage List</a></li>
+		                        </ul>
+		                    </li>
+		                    <li><a href="#">관리자용 상품 리스트</a>
+		                        <ul class="dropdown">
+		                           <li><a href="${pageContext.request.contextPath}/AdminCpuListController">씨피유 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminGpuListController">그래픽카드 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminMainboardListController">메인보드 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminCaseListController">케이스 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminRamListController">램 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminCoolerListController">쿨러 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminPowerListController">파워 리스트</a></li>
+		                           <li><a href="${pageContext.request.contextPath}/AdminStorageListController">저장소 리스트</a></li>
 		                        </ul>
 		                    </li>
 							<li><a href="#">상품</a>
