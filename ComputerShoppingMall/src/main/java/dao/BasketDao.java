@@ -188,4 +188,35 @@ public class BasketDao {
 		}		
 		return list;
 	}
+	// 장바구니 수량 count(화면 상단)
+	public int basketTotalCount(String customerId) {
+		int count = 0;
+		// DB 초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		String sql = "SELECT COUNT(*) cnt"
+				+ " FROM basket"
+				+ " WHERE customer_id=?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("cnt"); // 수량 적용
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 }
