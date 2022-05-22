@@ -152,7 +152,16 @@
 					</tbody>
 				</table>
 				<div class="well text-right">
-					<strong>TOTAL: $18.00</strong>
+				<table>
+					<c:set var ="sum" value="0"/>
+					<c:forEach var="basket" items="${basketList}">
+						<c:set var="sum" value="${sum + basket.price}"/>
+					</c:forEach>
+					<tr>
+						<td>총 합계 :</td>
+						<td><c:out value="${sum}"/></td>
+					</tr>
+				</table>
 				</div>
 				<!-- 결제품목 end-->
 				<div class="form-group">

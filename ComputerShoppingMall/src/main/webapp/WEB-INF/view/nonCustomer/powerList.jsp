@@ -161,7 +161,7 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<a href="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i>
-													</a> <a href="${pageContext.request.contextPath}/CartAddPowerController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+													</a> <a href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.powerNo}&&productName=${c.powerName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->
 											</div>
