@@ -36,7 +36,7 @@
             <div class="site-title" id="title">
                <a href="${pageContext.request.contextPath}/IndexController" title="">
                   <h4>
-                  Red<span>Velvet</span>
+                  	Red<span>Velvet</span>
                   </h4>
                </a>
             </div>
@@ -83,8 +83,16 @@
                         </ul>
                      </li>
                   </ul>
+                  <div style="float:right;">
+                  	<a href="${pageContext.request.contextPath}/MyBasketController">
+                      	<span class="label label-danger" style="z-index:999; position: absolute; top:25px; color:#FFFFFF; font-size:10pt; font-weight:200;">
+      						15 <!-- 후에 장바구니 카운트로 변경 -->
+    					</span>
+     				 <img src="${pageContext.request.contextPath}/img/shopping-cart.png" style="width:40px; position: absolute; right:23px;">
+    				</a>
+    			</div>
                </div>
-            </div>
+            	</div>
             <!-- nav -->
          </div>
          <!-- title area -->
