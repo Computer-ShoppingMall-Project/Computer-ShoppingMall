@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import dao.CoolerDao;
 import vo.Cooler;
-import vo.Mainboard;
+import vo.Image;
 
 @WebServlet("/InsertCoolerController")
 public class InsertCoolerController extends HttpServlet {
-	private CoolerDao insertcoolerDao; 
+	private CoolerDao coolerDao; 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -35,43 +39,46 @@ public class InsertCoolerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		// 변수등록
-		String coolerName = null;
-		String companyName = null;
-		String categoryName = null;
-		String kind = null;
-		int coolerSize = 0;
-		int price = 0;
-		int quantity = 0;
-		String memo = null;
+		request.getRequestDispatcher("/WEB-INF/view/admin/insertCoolerForm.jsp").forward(request, response);
 		
-		// request값 받아오기
-		if(request.getParameter("coolerName") != null && request.getParameter("coolerName") !="") {
-			coolerName = request.getParameter("coolerName");
-		}
-		if(request.getParameter("companyName") != null && request.getParameter("companyName") !="") {
-			companyName =request.getParameter("companyName");
-		}
-		if(request.getParameter("categoryName") != null && request.getParameter("categoryName") !="") {
-			companyName =request.getParameter("categoryName");
-		}
-		if(request.getParameter("kind") != null &&request.getParameter("kind") !="") {
-			kind = request.getParameter("kind");
-		}
-		if(request.getParameter("coolerSize") != null && request.getParameter("coolerSize") !="") {
-			coolerSize = Integer.parseInt(request.getParameter("coolerSize"));
-		}
-		if(request.getParameter("price") != null && request.getParameter("price") !="") {
-			price = Integer.parseInt(request.getParameter("price"));
-		}
-		if(request.getParameter("quantity") != null && request.getParameter("coolerName") !="") {
-			quantity = Integer.parseInt(request.getParameter("quantity"));
-		}
-		if(request.getParameter("memo") != null && request.getParameter("coolerName") !="") {
-			memo = request.getParameter("memo");
+		// Cooler image추가 경로지정
+		String path = request.getSession().getServletContext().getRealPath("/image");
+		System.out.println("[InsertCoolerController.doPost photo path] : " + path); // 디버깅 
+		// 사진 파일 처리
+		MultipartRequest multiReq = new MultipartRequest(request, path, 1024 * 1024 * 100, "utf-8", new DefaultFileRenamePolicy());
+		// 사진 받아오기
+		String originalName = multiReq.getOriginalFileName("image"); // 사진 원본 이름
+		String name = multiReq.getFilesystemName("image"); // 중복 발생 시 변경된 이름
+		String type = multiReq.getContentType("image");
+		Image i = null;
+
+		// 이미지 형태라면 하나의 변수로 묶기
+		if (type.equals("image/gif") || type.equals("image/png") || type.equals("image/jpeg")) {
+			// 하나의 변수로 묶어주기 -> DB 저장용
+			i = new Image();
+			i.setOriginalName(originalName);
+			i.setName(name);
+			i.setType(type);
+		} else { // 이미지 등록 실패시, CpuListController로 이동
+			System.out.println("[InsertCoolerController] : 이미지 타입 아님");
+			// 잘못 업로드 된 파일이므로 삭제 처리
+			File file = new File(path + "\\" + name);
+			file.delete();
+			
+			response.sendRedirect(request.getContextPath() + "/CoolerListController");
+			return;
 		}
 		
-		// vo
+		// Form에 입력된 값 받는 코드
+		String coolerName = multiReq.getParameter("coolerName");
+		String companyName = multiReq.getParameter("companyName");
+		String categoryName = multiReq.getParameter("categoryName");
+		String kind = multiReq.getParameter("kind");
+		int coolerSize = Integer.parseInt(multiReq.getParameter("coolerSize"));
+		int price = Integer.parseInt(multiReq.getParameter("price"));
+		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
+		String memo = multiReq.getParameter("memo");
+		// vo.Cooler
 		Cooler c = new Cooler();
 		c.setCoolerName(coolerName);
 		c.setCompanyName(companyName);
@@ -80,16 +87,20 @@ public class InsertCoolerController extends HttpServlet {
 		c.setCoolerSize(coolerSize);
 		c.setPrice(price);
 		c.setQuantity(quantity);
-		c.setCompanyName(companyName);
 		c.setMemo(memo);
-		
 		// 디버깅
-		System.out.println("[insertCoolerController] : " + c.toString());
-		
-		// dao
-		insertcoolerDao = new CoolerDao();
-		insertcoolerDao.insertCooler(c);
-		
-		response.sendRedirect(request.getContextPath() + "/CoolerListController");
+		System.out.println("[InsertCoolerController] : " + i.toString());
+		System.out.println("[InsertCoolerController] : " + c.toString());
+
+		// dao.insertCpu
+		coolerDao = new CoolerDao();
+		int row = coolerDao.insertCooler(i, c);
+
+		// 상품등록 성공/실패 확인 코드
+		if (row == 1) {
+			System.out.println("[InsertCoolerController] : Cooler 등록 성공");
+		} else {
+			System.out.println("[InsertCoolerController] : Cooler 등록 실패");
 		}
 	}
+}

@@ -72,16 +72,13 @@
 					<h4 class="title">
 						<span>CPU</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContext.request.contextPath}/InsertCpuController">
+					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContext.request.contextPath}/InsertCpuController?categoryName=cpu" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
 						</div>
 						<div class="form-group">
 							<input type='radio' name='companyName' value='인텔'/>인텔
 							<input type='radio' name='companyName' value='AMD'/>AMD
-						</div>
-						<div class="form-group">
-							<input type="text"  name="categoryName" readonly="readonly" value="cpu" class="form-control" placeholder="CategoryName">
 						</div>
 						<div class="form-group">
 							<input type='radio' name='socketSize' value='1700' />1700 
@@ -107,13 +104,13 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="number"  name="price" class="form-control" placeholder="Price">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number"  name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
+							<input type="number"  name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
 							<input type="textarea"  name="memo" class="form-control" placeholder="memo">

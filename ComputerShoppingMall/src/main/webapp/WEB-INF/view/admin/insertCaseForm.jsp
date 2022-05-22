@@ -80,7 +80,7 @@
 					<h4 class="title">
 						<span>CASE</span>
 					</h4>
-					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController">
+					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController?categoryName=case" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
 						</div>
@@ -117,12 +117,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="categoryName">
-								<option value="case">case</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="caseImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">

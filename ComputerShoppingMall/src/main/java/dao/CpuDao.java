@@ -108,10 +108,10 @@ public class CpuDao {
 		conn = DButil.getConnection();
 		// SQL 쿼리
 		String imgSql =
-			"INSERT INTO cpu_image(NAME, original_name, `type`, create_date, update_date) VALUE(?, ?, ?, NOW(), NOW())";
+			"INSERT INTO cpu_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
 		String productSql = 
 			"INSERT INTO cpu(cpu_name, company_name, category_name, socket_size, core, thread, price, quantity, cpu_image_no, memo, update_date)"
-			+ "VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조

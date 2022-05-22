@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Cooler;
-import vo.Gpu;
+import vo.Image;
 
 public class CoolerDao {
 	// 장바구니에 담기
@@ -97,36 +97,59 @@ public class CoolerDao {
 			return row;
 	}
 	// cooler 상품등록
-	public int insertCooler(Cooler c) {
+	public int insertCooler(Image i, Cooler c) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String  sql="INSERT INTO cooler (cooler_name, company_name, category_name, kind,cooler_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";  
+		// SQL 쿼리
+		String imgSql = "INSERT INTO cooler_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = "INSERT INTO cooler(cooler_name, company_name, category_name, kind, cooler_size, price, quantity, cooler_image_no, memo, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if (rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, c.getCoolerName());
 			stmt.setString(2, c.getCompanyName());
-			stmt.setString(3, c.getKind());
-			stmt.setString(4, c.getCategoryName());
+			stmt.setString(3, c.getCategoryName());
+			stmt.setString(4, c.getKind());
 			stmt.setInt(5, c.getCoolerSize());
 			stmt.setInt(6, c.getPrice());
 			stmt.setInt(7, c.getQuantity());
 			stmt.setString(8, c.getMemo());
-			row=stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+			stmt.setInt(9, imgNo);
+			row = stmt.executeUpdate();
+
+			if (row == 1) {
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
 		return row;

@@ -72,16 +72,15 @@
 					<h4 class="title">
 						<span>COOLER</span>
 					</h4>
-					<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContext.request.contextPath}/InsertCoolerController">
+					<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContext.request.contextPath}/InsertCoolerController?categoryName=cooler" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" name="coolerName" class="form-control" placeholder="CoolerName">
 						</div>
 						<div class="form-group">
 							<input type="text" name="companyName" class="form-control" placeholder="CompanyName">
 						</div>
-
 						<div class="form-group">
-							<select class="form-group" name="Kind">
+							<select class="form-group" name="kind">
 								<option value="" selected disabled hidden>Kind</option>
 								<option value="CPU 쿨러 공랭">CPU 쿨러 공랭</option>
 								<option value="CPU 쿨러 수랭">CPU 쿨러 수랭</option>
@@ -94,7 +93,7 @@
 							<input type="number" name="coolerSize" class="form-control" placeholder="CoolerSize">
 						</div>
 						<div class="form-group">
-							<input type="file" name="coolerImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import dao.CaseDao;
 import dao.CpuDao;
-import vo.Case;
 import vo.Cpu;
 import vo.Image;
 
@@ -66,6 +64,9 @@ public class InsertCpuController extends HttpServlet {
 			// 잘못 업로드 된 파일이므로 삭제 처리
 			File file = new File(path + "\\" + name);
 			file.delete();
+			
+			response.sendRedirect(request.getContextPath() + "/CpuListController");
+			return;
 		}
 
 		// Form에 입력된 값 받는 코드

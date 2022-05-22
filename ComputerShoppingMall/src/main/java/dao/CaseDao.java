@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Case;
-import vo.Cooler;
-import vo.Gpu;
+import vo.Image;
 
 public class CaseDao {
 	// 장바구니에 담기
@@ -98,38 +97,65 @@ public class CaseDao {
 		return row;
 	}
 	// case 상품등록
-	public int insertCase(Case c) {
+	public int insertCase(Image i, Case c) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "INSERT INTO `case`(case_name, category_name, case_size, gpu_size, bay89mm, bay64mm, price,quantity,memo, update_date) VALUES (?,?,?,?,?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql =
+			"INSERT INTO case_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = 
+			"INSERT INTO case(case_name, case_size, category_name, gpu_size, bay89mm, bay64mm, price, quantity, case_image_no, memo, update_date)"
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if(rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, c.getCaseName());
-			stmt.setString(2, c.getCategoryName());
-			stmt.setString(3, c.getCaseSize());
+			stmt.setString(2, c.getCaseSize());
+			stmt.setString(3, c.getCategoryName());
 			stmt.setInt(4, c.getGpuSize());
 			stmt.setInt(5, c.getBay89mm());
 			stmt.setInt(6, c.getBay64mm());
 			stmt.setInt(7, c.getPrice());
 			stmt.setInt(8, c.getQuantity());
 			stmt.setString(9, c.getMemo());
-			row=stmt.executeUpdate();
+			stmt.setInt(10, imgNo);
+			row = stmt.executeUpdate();
+			
 			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
+		
 		return row;
 	}
 	// caseList
