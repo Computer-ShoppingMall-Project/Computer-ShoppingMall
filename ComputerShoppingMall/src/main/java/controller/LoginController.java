@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
+import dao.BasketDao;
 import vo.Admin;
 import vo.Customer;
 //
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
    private MemberDao memberDao;
+   private BasketDao basketDao;
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       HttpSession session = request.getSession();
       String sessionCustomerId = (String)session.getAttribute("sessionCustomerId");
@@ -57,6 +59,7 @@ public class LoginController extends HttpServlet {
       returnCustomerId = memberDao.selectMemberByIdPw(c);
       returnAdminId = memberDao.selectAdminByIdPw(a);
       
+      
       // 디버깅
       System.out.println(returnCustomerId+"<-returnCustomerId");
       System.out.println(returnAdminId+"<-returnAdminId");
@@ -75,6 +78,10 @@ public class LoginController extends HttpServlet {
          return;
       }
       
+		// 장바구니 개수 반환
+		basketDao = new BasketDao();
+		int basetTotalCount = basketDao.basketTotalCount(returnCustomerId);
+		session.setAttribute("basketCount", basetTotalCount);
       // 로그인 성공
       // session에 sessionCustomerId 저장
       session.setAttribute("sessionCustomerId", returnCustomerId);

@@ -5,16 +5,11 @@
       <div class="col-lg-1 text-right"></div>
       <div class="social_buttons">
         <div class="social_buttons text-right text-align-center">
-	      	<c:choose>
-				<c:when test="${sessionCustomerId != null}">
-					<a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom" style=" vertical-align: middle;"><span>[${sessionCustomerId}]님 환영합니다</span> &nbsp; </a>
-	            </c:when>
-	            <c:when test="${sessionAdminId != null }">
-	            	<a href="${pageContext.request.contextPath}/AdminIndexController" data-toggle="tooltip" data-placement="bottom">[${sessionAdminId}]님 환영합니다 &nbsp;</a>
-	            </c:when>
-	        </c:choose>
+	      	<c:if test="${sessionCustomerId != null}">
+				<a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom" style=" vertical-align: middle;"><span>[${sessionCustomerId}]님 환영합니다</span> &nbsp; </a>
+	        </c:if>
 	        <c:choose>
-	          <c:when test="${sessionCustomerId == null && sessionAdminId == null}">
+	          <c:when test="${sessionCustomerId == null}">
 	             <a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom" class="btn">Login</a>
 	          </c:when>
 	          <c:otherwise>
@@ -89,7 +84,10 @@
                   <div style="float:right;">
                   	<a href="${pageContext.request.contextPath}/MyBasketController">
                       	<span class="label label-danger" style="z-index:999; position: absolute; top:25px; color:#FFFFFF; font-size:10pt; font-weight:200;">
-      						15 <!-- 후에 장바구니 카운트로 변경 -->
+                      	<c:if test="${sessionCustomerId==null}"> <!-- 세션아이디가 없다면 0으로 표시 -->
+                      		0
+                      	</c:if>
+							${basketCount}
     					</span>
      				 <img src="${pageContext.request.contextPath}/img/shopping-cart.png" style="width:40px; position: absolute; right:23px;">
     				</a>

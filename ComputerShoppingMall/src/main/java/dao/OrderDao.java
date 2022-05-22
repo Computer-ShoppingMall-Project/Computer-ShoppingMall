@@ -170,10 +170,11 @@ public class OrderDao {
 				+ "	, o.category_price categoryPrice"
 				+ "	, o.category_quantity categoryQuantity"
 				+ "	, o.create_date createDate"
-				+ " , o.odrer_status orderStatus"
+				+ " , o.order_status orderStatus"
 				+ "	, COUNT(*) cnt"
 				+ " FROM `order` o"
-				+ " GROUP BY customer_id, create_date";
+				+ " GROUP BY customer_id, create_date"
+				+ " ORDER BY o.create_date DESC";
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();

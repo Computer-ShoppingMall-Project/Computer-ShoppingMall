@@ -74,25 +74,33 @@
 
 	<section class="section1">
 		<div class="container clearfix">
-			<div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 				<div class="clearfix"></div>
 				<div class="clearfix"></div>
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
-							<th>CUSTOMER ID</th>
-							<th>DATE</th>
-							<th>AMOUNT(WON)</th>
-							<th>DETAILS</th>
+							<th class="text-center">CUSTOMER ID</th>
+							<th class="text-center">PURCHASE DATE</th>
+							<th>PRODUCT NAME</th>
+							<th class="text-center">ORDER STATUS</th>
+							<th class="text-center">DETAILS</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
 							<tr>
-								<td>${order.customerId}</td>
-								<td>${order.createDate}</td>
-								<td>${order.totalPrice}won</td>
-								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>
+								<td class="text-center">${order.customerId}</td>
+								<td class="text-center">${order.createDate}</td>
+								<td>
+									${order.productName}
+									<!-- 1개 이상이면 외 n개로로 띄어주기 -->
+									<c:if test="${order.productCount > 1}">
+										&nbsp; <span class="text-primary">외 ${order.productCount-1}개</span>
+									</c:if>
+								</td>
+								<td class="text-center">${order.orderStatus}</td>
+								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -101,32 +109,6 @@
 			</div>
 			<!-- end content -->
 
-			<div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-				<div class="widget">
-					<h4 class="title">
-						<span>RedVelvet</span>
-					</h4>
-					<ul class="pages">
-						<li><a href="${pageContext.request.contextPath}/IndexController">Homepage</a></li>
-						<li><a href="${pageContext.request.contextPath}/CpuListController">Buy more</a></li>
-						<li><a href="${pageContext.request.contextPath}/QnaListController">Go QnA</a></li>
-						<li><a href="#"></a></li>
-						<li><a href="#"></a></li>
-					</ul>
-				</div>
-					<div class="widget">
-					<h4 class="title">
-						<span>contact information</span>
-					</h4>
-					<ul class="contact_details">
-						<li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-						<li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-						<li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-					</ul>
-				</div>
-
-			</div>
-			<!-- end sidebar -->
 		</div>
 		<!-- end container -->
 	</section>
