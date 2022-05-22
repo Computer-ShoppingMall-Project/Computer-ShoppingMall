@@ -99,40 +99,65 @@ public class CpuDao {
 		return row;
 	}
 	// cpu 상품등록
-	public int insertCpu(Cpu c) {
+	public int insertCpu(Image i, Cpu c) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql="INSERT INTO cpu (cpu_name, category_name, company_name, socket_size, core, thread, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql =
+			"INSERT INTO cpu_image(NAME, original_name, `type`, create_date, update_date) VALUE(?, ?, ?, NOW(), NOW())";
+		String productSql = 
+			"INSERT INTO cpu(cpu_name, company_name, category_name, socket_size, core, thread, price, quantity, cpu_image_no, memo, update_date)"
+			+ "VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if(rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, c.getCpuName());
-			stmt.setString(2, c.getCategoryName());
-			stmt.setString(3, c.getCompanyName());
+			stmt.setString(2, c.getCompanyName());
+			stmt.setString(3, c.getCategoryName());
 			stmt.setString(4, c.getSocketSize());
 			stmt.setString(5, c.getCore());
 			stmt.setString(6, c.getThread());
 			stmt.setInt(7, c.getPrice());
 			stmt.setInt(8, c.getQuantity());
 			stmt.setString(9, c.getMemo());
-			row=stmt.executeUpdate();
+			stmt.setInt(10, imgNo);
+			row = stmt.executeUpdate();
+			
 			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
-				// DB 자원반납
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
+		
 		return row;
 	}
 	// cpuList 보기 + 이미지 이름 불러오기

@@ -77,8 +77,11 @@
 							<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
 						</div>
 						<div class="form-group">
-							<input type='radio' name='kind' value='인텔'/>인텔
-							<input type='radio' name='kind' value='AMD'/>AMD
+							<input type='radio' name='companyName' value='인텔'/>인텔
+							<input type='radio' name='companyName' value='AMD'/>AMD
+						</div>
+						<div class="form-group">
+							<input type="text"  name="categoryName" readonly="readonly" value="cpu" class="form-control" placeholder="CategoryName">
 						</div>
 						<div class="form-group">
 							<input type='radio' name='socketSize' value='1700' />1700 
@@ -104,16 +107,16 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
+							<input type="number"  name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
 							<input type="number"  name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<input type="number"  name="price" class="form-control" placeholder="Price">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="text"  name="memo" class="form-control" placeholder="memo">
+							<input type="textarea"  name="memo" class="form-control" placeholder="memo">
 						</div>
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">
