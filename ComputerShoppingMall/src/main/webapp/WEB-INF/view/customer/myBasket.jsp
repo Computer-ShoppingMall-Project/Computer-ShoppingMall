@@ -105,8 +105,15 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<a href="${pageContext.request.contextPath}/OrderController"
-					type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
+				<c:choose>
+					<c:when test="${basketCount eq 0}">
+						<h4 class="text-primary text-center">등록된 상품이 없습니다</h4>
+						<a href="${pageContext.request.contextPath}/CpuListController" type="button" class="button large btn-block">ADD ITEM</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/OrderController" type="button" class="button large btn-block">PURCHASE THIS ITEM</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<!-- end content! -->
 		</div>

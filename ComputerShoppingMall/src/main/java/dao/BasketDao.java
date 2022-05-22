@@ -85,7 +85,7 @@ public class BasketDao {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setInt(1, quantity); 
 			stmt.setInt(2, basketNo); 
-			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			row = stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 			if(row > 0) {
 				System.out.println("수정성공");
 			} else {
