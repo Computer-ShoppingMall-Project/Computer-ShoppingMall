@@ -93,7 +93,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<button type="submit" class="btn btn-outline-info btn-sm">탈퇴</button>
+										<button type="submit">탈퇴</button>
 									</td>
 								</tr>
 							</table>

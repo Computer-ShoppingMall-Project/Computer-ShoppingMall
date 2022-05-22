@@ -117,7 +117,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<button type="submit">Update</button>
+										<button type="submit" class="btn btn-outline-info btn-sm">Update</button>
 									</td>
 								</tr>
 							</table>

@@ -116,7 +116,7 @@
 							<td>${requestScope.customer.createDate}</td>
 						</tr>
 					</table>
-					<a href="${pageContext.request.contextPath}/UpdateMemberController" type="button" class="btn btn-outline-primary">정보수정</a>
+					<a href="${pageContext.request.contextPath}/UpdateMemberController" type="button" class="btn btn-outline-primary">정보 수정</a>
 					<a href="${pageContext.request.contextPath}/UpdateMemberPwController" type="button" class="btn btn-outline-primary">비밀번호 수정</a>
 					<a href="${pageContext.request.contextPath}/DeleteMemberController" type="button" class="btn btn-outline-danger">탈퇴</a> 
 				</div>

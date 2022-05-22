@@ -115,7 +115,7 @@
 							<span id="pwConfirmHelper" class="helper"></span>
 						</div>
 						<div class="form-group">
-							<button type="button" id="update">Update</button>
+							<button type="button" id="update" class="btn btn-outline-info btn-sm">Update</button>
 						</div>
 					</form>
 				</div>
