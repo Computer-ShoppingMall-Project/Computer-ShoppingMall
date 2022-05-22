@@ -33,13 +33,32 @@ public class MyBasketController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		//
-		request.setCharacterEncoding("utf-8");
-		// dao.selectMyBasket
+		int productNumber = Integer.parseInt(request.getParameter("productNumber"));
+		String productName = request.getParameter("productName");
+		String categoryName =request.getParameter("categoryName");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int quantity = 1;
+		
+		// vo
+		Basket basket = new Basket();
+		basket.setProductNumber(productNumber);
+		basket.setProductName(productName);
+		basket.setCategoryName(categoryName);
+		basket.setPrice(price);
+		basket.setQuantity(quantity);
+		// 디버깅
+		System.out.println("[basketList] :"+ basket.toString());
+		
+		// dao
 		basketDao = new BasketDao();
+		// dao.insertMyBasket
+		int row = basketDao.insertMyBasket(customerId, basket);
+		// dao.selectMyBasket
 		ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
 		
-		request.setAttribute("basketList", list);
-		request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+		if(row >1 ) {
+			request.setAttribute("basketList", list);
+			request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+		}
 	}
 }

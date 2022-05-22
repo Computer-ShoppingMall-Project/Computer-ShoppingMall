@@ -10,6 +10,40 @@ import util.DButil;
 import vo.Basket;
 
 public class BasketDao {
+	// 장바구니 담기
+	public int insertMyBasket(String customerId,Basket basket) {
+		// DB변수 기본값(null)으로 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int row = 0;
+		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
+		String sql = "INSERT INTO basket (customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date) VALUES (?,?,?,?,?,?,now(),now())";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, customerId);
+			stmt.setString(2, basket.getProductName());
+			stmt.setString(3, basket.getCategoryName());
+			stmt.setInt(4, basket.getProductNumber());
+			stmt.setInt(5, basket.getPrice());
+			stmt.setInt(6, basket.getQuantity());
+			row = stmt.executeUpdate();
+			if(row > 0) {
+				System.out.println("입력성공");
+			} else {
+				System.out.println("입력실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 	// 장바구니 삭제 코드
 	public int deleteMyBasket(int basketNo) {
 		// DB변수 기본값(null)으로 선언

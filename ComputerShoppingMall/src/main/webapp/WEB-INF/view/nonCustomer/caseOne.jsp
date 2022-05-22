@@ -100,7 +100,7 @@
 							<div class="form-group">
 								<div class="text-center">
 									<form  class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" max="${requestScope.caseOne.quantity}" name="quantity" min="1" value="1" class="text-center ">
+											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center ">
 											<input type="submit" class="btn btn-large btn-primary" value="담기">
 									</form>
 								</div>

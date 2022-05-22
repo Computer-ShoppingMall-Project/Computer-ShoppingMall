@@ -69,10 +69,34 @@
 		text-decoration: none;
 	}
 </style>
+<script type="text/javascript">
+	function listView(cpuNo){
+	    let f = document.createElement('form');
+	    
+	    let obj;
+	    obj = document.createElement('input');
+	    obj.setAttribute('type', 'hidden');
+	    obj.setAttribute('name', 'userid');
+	    obj.setAttribute('value', userid);
+	    
+	    f.appendChild(obj);
+	    f.setAttribute('method', 'post');
+	    f.setAttribute('action', 'view.do');
+	    document.body.appendChild(f);
+	    f.submit();
+	}
+</script>
 </head>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
@@ -189,7 +213,7 @@
 									<div class="bg a0" data-animate="fadeIn">
 										<h3 class="big a1" data-animate="fadeInDown"></h3>
 											<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
-											<a href="${pageContext.request.contextPath}/CartAddCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+											<a href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.cpuNo}&&productName=${c.cpuName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
 										<div class="portfolio_category text-center a2" data-animate="fadeIn">
 										</div>
 										<!-- portfolio_category -->
