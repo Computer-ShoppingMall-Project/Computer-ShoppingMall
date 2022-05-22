@@ -80,21 +80,21 @@
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>상품 이름</th>
 							<th>가격</th>
 							<th>구매 수량</th>
 							<th>주문일</th>
+							<th>주문상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
 							<tr>
-								<td>${order.customerId}</td>
-								<td>${order.categoryName}</td>
+								<td>${order.productName}</td>
 								<td>${order.categoryPrice}</td>
 								<td>${order.categoryQuantity}</td>
 								<td>${order.createDate}</td>
+								<td class="text-primary">${order.orderStatus}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

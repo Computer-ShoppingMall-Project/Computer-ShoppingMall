@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.OrderDao;
-import vo.order;
+import vo.Order;
 
 @WebServlet("/DetailOrderController")
 public class DetailOrderController extends HttpServlet {
@@ -33,7 +33,7 @@ public class DetailOrderController extends HttpServlet {
 		createDate = request.getParameter("createDate");
 		// dao
 		orderDao = new OrderDao();
-		ArrayList<order> list = orderDao.selectOrderList(customerId, createDate);
+		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate);
 		// request set
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/customer/detailOrder.jsp").forward(request, response);

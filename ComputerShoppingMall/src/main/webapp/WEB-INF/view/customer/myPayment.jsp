@@ -80,16 +80,14 @@
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>DATE</th>
-							<th>AMOUNT(won)</th>
+							<th>AMOUNT(WON)</th>
 							<th>DETAILS</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
 							<tr>
-								<td>${order.customerId}</td>
 								<td>${order.createDate}</td>
 								<td>${order.totalPrice}won</td>
 								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>

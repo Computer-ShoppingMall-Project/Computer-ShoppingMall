@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import util.DButil;
-import vo.order;
+import vo.Order;
 // import vo.Qna;
 
 public class OrderDao {
@@ -58,9 +58,9 @@ public class OrderDao {
       return row;
    }
 	// 회원별 주문내역 상세보기
-	public ArrayList<order> selectOrderList(String customerId, String createDate) {
-		ArrayList<order> list = new ArrayList<order>();
-		order checkout = null;
+	public ArrayList<Order> selectOrderList(String customerId, String createDate) {
+		ArrayList<Order> list = new ArrayList<Order>();
+		Order checkout = null;
 		// DB 초기화
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -72,9 +72,11 @@ public class OrderDao {
 				+ "		,basket_no basketNo"
 				+ "		,category_number categoryNumber"
 				+ "		,category_name categoryName"
+				+ "		,product_name productName"
 				+ "		,category_price categoryPrice"
 				+ "	 	,category_quantity categoryQuantity"
 				+ "		,create_date createDate"
+				+ "		,order_status orderStatus"
 				+ " FROM `order`"
 				+ " WHERE customer_id = ? AND create_date = ?";
 		try {
@@ -83,7 +85,7 @@ public class OrderDao {
 			stmt.setString(2, createDate);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				checkout = new order();
+				checkout = new Order();
 				checkout.setOrderNo(rs.getInt("orderNo"));
 				checkout.setCustomerId(rs.getString("customerId"));
 				checkout.setBasketNo(rs.getInt("basketNo"));
@@ -92,6 +94,8 @@ public class OrderDao {
 				checkout.setCategoryPrice(rs.getInt("categoryPrice"));
 				checkout.setCategoryQuantity(rs.getInt("categoryQuantity"));
 				checkout.setCreateDate(rs.getString("createDate"));
+				checkout.setOrderStatus(rs.getString("orderStatus"));
+				checkout.setProductName(rs.getString("productName"));
 				list.add(checkout);
 			}
 		} catch (SQLException e) {
@@ -148,4 +152,26 @@ public class OrderDao {
 		}
 		return list;
 	}
+	// 관리자 주문 모아보기 리스트
+	public ArrayList<Order> adminOrderList() {
+		ArrayList<Order> list = new ArrayList<Order>();
+		
+		return list;
+	}
+	// 관리자 주문 모아보기
+	/*
+	SELECT 
+	o.order_no orderNo
+	, o.customer_id customerId
+	, o.basket_no basketNo
+	, o.product_name productName
+	, o.category_name categoryName
+	, o.category_number categoryNumber
+	, o.category_price categoryPrice
+	, o.category_quantity categoryQuantity
+	, o.create_date createDate
+	, COUNT(*) cnt
+	FROM `order` o
+	GROUP BY customer_id, create_date
+	*/
 }

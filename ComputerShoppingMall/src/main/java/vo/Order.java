@@ -1,6 +1,6 @@
 package vo;
 
-public class order {
+public class Order {
 	private int orderNo;
 	private int basketNo;
 	private String customerId;
@@ -8,13 +8,16 @@ public class order {
 	private int categoryNumber;
 	private int categoryPrice;
 	private int categoryQuantity;
+	private String orderStatus;
 	private String createDate;
-
+	private String productName;
+	
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName="
 				+ categoryName + ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice
-				+ ", categoryQuantity=" + categoryQuantity + ", createDate=" + createDate + "]";
+				+ ", categoryQuantity=" + categoryQuantity + ", orderStatus=" + orderStatus + ", createDate="
+				+ createDate + ", productName=" + productName + "]";
 	}
 
 	public int getOrderNo() {
@@ -73,6 +76,14 @@ public class order {
 		this.categoryQuantity = categoryQuantity;
 	}
 
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
 	public String getCreateDate() {
 		return createDate;
 	}
@@ -81,4 +92,11 @@ public class order {
 		this.createDate = createDate;
 	}
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 }

@@ -40,9 +40,4 @@ public class MyPaymentController extends HttpServlet {
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/customer/myPayment.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 }

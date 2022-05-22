@@ -99,40 +99,46 @@
 							<hr>
 							<div class="form-group">
 								<div class="text-center">
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+									<div class="details_section  text-center">
+										<h3>Item Details</h3>
+										<ul>
+											<li class="version">case_no : <span>${requestScope.caseOne.caseNo}</span></li>
+											<li class="designer">category_name : <span>${requestScope.caseOne.categoryName}</span></li>
+											<li class="designer">case_size : <span>${requestScope.caseOne.caseSize}</span></li>
+											<li class="designer">gpu_size : <span>${requestScope.caseOne.gpuSize}</span></li>
+											<li class="designer">89cm_bay : <span>${requestScope.caseOne.bay89mm}</span></li>
+											<li class="designer">64cm_bay : <span>${requestScope.caseOne.bay64mm}</span></li>
+										</ul>
+									</div>
+								</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+						<div class="theme_details">
+							<div class="item-description">
+								<p>${requestScope.caseOne.memo}</p>
+							</div>
+							<!-- item-description -->
+						</div>  <br>
+								<div class="text-center">
 									<form  class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
 											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center ">
 											<input type="submit" class="btn btn-large btn-primary" value="담기">
 									</form>
 								</div>
 							<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
+							<br><br>
 							<div class="rating text-center">
 								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 									class="fa fa-star-o"></i>
 								<p>Users Rating</p>
-							</div>
-							</div>
-							<div class="theme_details">
-								<div class="item-description">
-									<p>${requestScope.caseOne.memo}</p>
-								</div>
-								<!-- item-description -->
-							</div>
-							<br><br><br>
-							<div class="theme_details">
-								<div class="details_section  text-center">
-									<h3>Item Details</h3>
-									<ul>
-										<li class="version">case_no : <span>${requestScope.caseOne.caseNo}</span></li>
-										<li class="designer">category_name : <span>${requestScope.caseOne.categoryName}</span></li>
-										<li class="designer">case_size : <span>${requestScope.caseOne.caseSize}</span></li>
-										<li class="designer">gpu_size : <span>${requestScope.caseOne.gpuSize}</span></li>
-										<li class="designer">89cm_bay : <span>${requestScope.caseOne.bay89mm}</span></li>
-										<li class="designer">64cm_bay : <span>${requestScope.caseOne.bay64mm}</span></li>
-									</ul>
-								</div>
-							</div>
+							</div> <br><br>
+						<!-- theme_details -->
 					</div>
+							</div>
+							<br><br>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -142,7 +148,6 @@
 		<!-- end container -->
 	</section>
 	<!-- end section -->
-
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
