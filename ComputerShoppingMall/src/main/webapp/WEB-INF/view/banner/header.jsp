@@ -2,28 +2,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="topbar clearfix">
    <div class="container">
-      <div class="col-lg-10 text-right">
-         <div class="social_buttons">
-            <c:choose>
-               <c:when test="${sessionCustomerId == null && sessionAdminId == null}">
-                  <a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom">Login</a>
-               </c:when>
-               <c:otherwise>
-                  <a href="${pageContext.request.contextPath}/LogoutController" data-toggle="tooltip" data-placement="bottom">Logout</a>
-               </c:otherwise>
-            </c:choose>
-         </div>
-      </div>
       <div class="col-lg-1 text-right"></div>
       <div class="social_buttons">
+        <div class="social_buttons text-right text-align-center">
       	<c:choose>
 			<c:when test="${sessionCustomerId != null}">
-				<a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom">${sessionCustomerId}</a>
+				<a href="${pageContext.request.contextPath}/SelectMemberOneController" data-toggle="tooltip" data-placement="bottom" style=" vertical-align: middle;"><span>[${sessionCustomerId}]님 환영합니다</span> &nbsp; </a>
             </c:when>
             <c:when test="${sessionAdminId != null }">
-            	<a href="${pageContext.request.contextPath}/AdminIndexController" data-toggle="tooltip" data-placement="bottom">${sessionAdminId}</a>
+            	<a href="${pageContext.request.contextPath}/AdminIndexController" data-toggle="tooltip" data-placement="bottom">[${sessionAdminId}]님 환영합니다 &nbsp;</a>
             </c:when>
         </c:choose>
+        <c:choose>
+          <c:when test="${sessionCustomerId == null && sessionAdminId == null}">
+             <a href="${pageContext.request.contextPath}/LoginController" data-toggle="tooltip" data-placement="bottom" class="btn">Login</a>
+          </c:when>
+          <c:otherwise>
+             <a href="${pageContext.request.contextPath}/LogoutController" data-toggle="tooltip" data-placement="bottom" class="btn">Logout</a>
+          </c:otherwise>
+       </c:choose>
+        </div>
 	</div>
       <!-- end container -->
    </div>
