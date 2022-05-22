@@ -48,7 +48,7 @@
 			// 유효성 검사 boolean 변환 
 			let vali = validate(params);
 
-			vali ? updateQnaForm.submit() : $('#qnaTitle').focus();// ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
+			vali ? updateQnaForm.submit() : $('#qnaTitle').focus(); // ? 연산자 사용 유효성 검사 통과시에 얼럿 실패시 제목에 포커스
 		});
 	});
 	// 이벤트 바인딩 끝
@@ -106,11 +106,11 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 center-block"
 					style="float: none; margin: 100 auto;">
 					<!-- QNA 리스트로 돌아가기 -->
-					<a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${requestScope.qna.qnaNo}">back</a>
+					<a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${requestScope.qna.qnaNo}&customerNo=${customerNo}">back</a>
 
 					<!-- 고객문의 수정 폼 -->
 					<h4 class="title">Update QNA</h4>
-					<form id="updateQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${requestScope.qna.qnaNo}" method="POST">
+					<form id="updateQnaForm" class="contact-form" role="form" action="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${requestScope.qna.qnaNo}&customerNo=${customerNo}" method="POST">
 						<div class="form-group">
 							<input type="text" name="customerId" class="form-control" id="customerId" value="${sessionCustomerId}" readonly="readonly">
 						</div>

@@ -78,8 +78,8 @@
 					<tbody>
 						<c:forEach var="qna" items="${qnaList}">
 							<tr>
-								<td>${qna.qnaNo}</td>
-								<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></td>
+								<td>${qna.customerNo}</td>
+								<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}&customerNo=${qna.customerNo}">${qna.qnaTitle}</a></td>
 								<td>${qna.createDate}</td>
 								<td>${qna.qnaAnswer}</td>
 							</tr>

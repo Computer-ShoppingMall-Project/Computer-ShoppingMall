@@ -98,17 +98,21 @@ public class QnaDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		conn = DButil.getConnection(); // DB연결 static 메서드 값 셋팅
-		String sql = "SELECT" // 고객 QNA 리스트 SQL 쿼리문 String sql 변수에 대입
-				+ "	qna_no qnaNo"
-				+ "	, qna_title qnaTitle"
-				+ "	, (CASE"
-				+ "		WHEN qna_answer IS NULL THEN 'X'"
-				+ "		ELSE 'O'"
-				+ "	  END) qnaAnswer"
-				+ "	, create_date createDate"
-				+ " FROM qna"
-				+ " WHERE customer_id=?"
-				+ " ORDER BY create_date DESC";
+		String sql = "SELECT *" // 고객 QNA 리스트 SQL 쿼리문 String sql 변수에 대입
+					+ " FROM ("
+					+ "      SELECT @ROWNUM:=@ROWNUM+1 AS rowNum"
+					+ "             , Q.qna_no AS qnaNo"
+					+ "              , Q.qna_title AS qnaTitle"
+					+ "              , (CASE WHEN Q.qna_answer IS NULL THEN 'X'"
+					+ "                       ELSE 'O' END"
+					+ "               ) AS qnaAnswer"
+					+ "              , Q.create_date createDate"
+					+ "          FROM qna Q"
+					+ "              ,(SELECT @ROWNUM:=0) R" // 고객에게 보이는 QNA 번호 추가
+					+ "       WHERE Q.customer_id = ?"
+					+ "        ORDER BY Q.create_date"
+					+ "     ) A"
+					+ " ORDER BY A.createDate desc"; 
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setString(1, customerId); // customer_id=?
@@ -117,6 +121,7 @@ public class QnaDao {
 			while(rs.next()) {
 				qna = new Qna(); // qna vo 선언
 				// vo 값 셋팅
+				qna.setCustomerNo(rs.getInt("rowNum"));
 				qna.setQnaNo(rs.getInt("qnaNo"));
 				qna.setQnaTitle(rs.getString("qnaTitle"));
 				qna.setQnaAnswer(rs.getString("qnaAnswer"));
@@ -148,7 +153,7 @@ public class QnaDao {
 		String sql = "UPDATE qna SET " // 고객 QNA 수정 SQL 쿼리문 String sql 변수에 대입
 				+ " qna_title=?"
 				+ ", qna_content=?"
-				+ ", update_date=NOW()"
+				+ ", update_date = NOW()"
 				+ " WHERE customer_id=? AND qna_no=?";
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
@@ -198,7 +203,7 @@ public class QnaDao {
 	}
 	
 	// 관리자 QNA 목록(고객 전채 문의 리스트)
-	public ArrayList<Qna> selectQnaListAdmin() {
+	public ArrayList<Qna> selectQnaListAdmin(String answer) {
 		ArrayList<Qna> list = new ArrayList<Qna>();
 		Qna qna = null;
 		// DB변수 기본값(null)으로 선언
@@ -213,8 +218,14 @@ public class QnaDao {
 				+ ", qna_answer qnaAnswer"
 				+ ", create_date createDate"
 				+ ", update_date updateDate"
-				+ " FROM qna"
-				+ " ORDER BY create_date DESC";
+				+ " FROM qna";
+		if("answer".equals(answer)) {
+			sql += " WHERE qna_answer IS NOT null ORDER BY create_date DESC"; // 답변 모아보기 선택이 있다면 qna_answer != null값만 보여주기
+		} else if("noAnswer".equals(answer)) {
+			sql += " WHERE qna_answer IS null ORDER BY create_date DESC"; // 미답변 모아보기 선택이 있다면 qna_answer = null값만 보여주기
+		} else {
+			sql += " ORDER BY create_date DESC"; // 아니라면 전체보여주기
+		}
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			rs = stmt.executeQuery();
