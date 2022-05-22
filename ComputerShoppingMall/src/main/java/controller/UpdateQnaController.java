@@ -29,12 +29,14 @@ public class UpdateQnaController extends HttpServlet {
 		}
 		
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
 		
 		// 기존 QNA 내용 불러오기
 		qnaDao = new QnaDao();
 		Qna qna = qnaDao.selectQnaOne(customerId, qnaNo);
 		
 		request.setAttribute("qna", qna);
+		request.setAttribute("customerNo", customerNo);
 		request.getRequestDispatcher("/WEB-INF/view/customer/updateQna.jsp").forward(request, response);
 	}
 	
@@ -52,6 +54,7 @@ public class UpdateQnaController extends HttpServlet {
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		String qnaTitle = request.getParameter("qnaTitle");
 		String qnaContent = request.getParameter("qnaContent");
+		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
 		
 		// Qna vo로 묶기
 		Qna qna = new Qna();
@@ -67,11 +70,11 @@ public class UpdateQnaController extends HttpServlet {
 		
 		if(row == 1) { // QNA 수정 성공 시, 수정성공된 상세보기 페이지로 이동
 			System.out.println("[UpdateQnaController.doPost] : qna 수정 성공");
-			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo=" + qnaNo);
+			response.sendRedirect(request.getContextPath() + "/QnaOneController?qnaNo=" + qnaNo+"&customerNo="+customerNo);
 			return;
 		} else { // QNA 수정 실패 시, 다시 UpdateQna 페이지로 이동 
 			System.out.println("[UpdateQnaController.doPost] : qna 수정 실패");
-			response.sendRedirect(request.getContextPath() + "/UpdateQnaContoller?qnaNo=" + qnaNo);
+			response.sendRedirect(request.getContextPath() + "/UpdateQnaContoller?qnaNo=" + qnaNo+"&customerNo="+customerNo);
 			return;
 		}
 	}

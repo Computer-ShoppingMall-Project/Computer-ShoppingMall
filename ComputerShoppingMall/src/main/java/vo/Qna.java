@@ -8,12 +8,13 @@ public class Qna {
 	private String qnaAnswer;
 	private String createDate;
 	private String updateDate;
-
+	private int customerNo;
+	
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", customerId=" + customerId + ", qnaTitle=" + qnaTitle + ", qnaContent="
 				+ qnaContent + ", qnaAnswer=" + qnaAnswer + ", createDate=" + createDate + ", updateDate=" + updateDate
-				+ "]";
+				+ ", customerNo=" + customerNo + "]";
 	}
 
 	public int getQnaNo() {
@@ -70,5 +71,13 @@ public class Qna {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public int getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(int customerNo) {
+		this.customerNo = customerNo;
 	}
 }

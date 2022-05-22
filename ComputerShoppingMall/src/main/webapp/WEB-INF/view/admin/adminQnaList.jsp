@@ -58,6 +58,9 @@
 		<div class="container clearfix">
 			<!-- div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix" -->
 			<div class="clearfix"></div>
+			<a href="${pageContext.request.contextPath}/AdminQnaListController" class="btn btn-large btn-primary">ALL</a>
+			<a href="${pageContext.request.contextPath}/AdminQnaListController?answer=answer" class="btn btn-large btn-primary">ANSWER</a>
+			<a href="${pageContext.request.contextPath}/AdminQnaListController?answer=noAnswer" class="btn btn-large btn-primary">NO ANSWER</a>
 			<hr>
 			<table class="table table-striped" data-effect="fade">
 				<thead>

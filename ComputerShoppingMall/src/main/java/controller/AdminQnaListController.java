@@ -29,9 +29,15 @@ public class AdminQnaListController extends HttpServlet {
 			return;
 		}
 		
+		String answer = null; // 답변/미답변 모아보기 여부(dao 판별용도)
+		if("answer".equals(request.getParameter("answer"))) {
+			answer = request.getParameter("answer"); // 답변 모아보기 버튼을 누른다면 answer 반환
+		} else if("noAnswer".equals(request.getParameter("answer"))) {
+			answer = request.getParameter("answer"); // 미답변 모아보기 버튼을 누른다면 noAnswer 반환 
+		}
 		
 		qnaDao = new QnaDao();
-		ArrayList<Qna> list = qnaDao.selectQnaListAdmin();
+		ArrayList<Qna> list = qnaDao.selectQnaListAdmin(answer);
 		request.setAttribute("qnaList", list);
 		
 		// 관리자 QNA (모든 고객의 문의 모아보기)
