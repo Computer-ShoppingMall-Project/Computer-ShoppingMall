@@ -155,23 +155,46 @@ public class OrderDao {
 	// 관리자 주문 모아보기 리스트
 	public ArrayList<Order> adminOrderList() {
 		ArrayList<Order> list = new ArrayList<Order>();
-		
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DButil.getConnection();
+		String sql = "SELECT"
+				+ "	o.order_no orderNo"
+				+ "	, o.customer_id customerId"
+				+ "	, o.basket_no basketNo"
+				+ "	, o.product_name productName"
+				+ "	, o.category_name categoryName"
+				+ "	, o.category_number categoryNumber"
+				+ "	, o.category_price categoryPrice"
+				+ "	, o.category_quantity categoryQuantity"
+				+ "	, o.create_date createDate"
+				+ " , o.odrer_status orderStatus"
+				+ "	, COUNT(*) cnt"
+				+ " FROM `order` o"
+				+ " GROUP BY customer_id, create_date";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Order o = new Order();
+				o.setOrderNo(rs.getInt("orderNo"));
+				o.setCustomerId(rs.getString("customerId"));
+				o.setBasketNo(rs.getInt("basketNo"));
+				o.setCategoryNumber(rs.getInt("categoryNumber"));
+				o.setCategoryName(rs.getString("categoryName"));
+				o.setCategoryPrice(rs.getInt("categoryPrice"));
+				o.setCategoryQuantity(rs.getInt("categoryQuantity"));
+				o.setCreateDate(rs.getString("createDate"));
+				o.setOrderStatus(rs.getString("orderStatus"));
+				o.setProductName(rs.getString("productName"));
+				o.setProductCount(rs.getInt("cnt"));
+				list.add(o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
-	// 관리자 주문 모아보기
-	/*
-	SELECT 
-	o.order_no orderNo
-	, o.customer_id customerId
-	, o.basket_no basketNo
-	, o.product_name productName
-	, o.category_name categoryName
-	, o.category_number categoryNumber
-	, o.category_price categoryPrice
-	, o.category_quantity categoryQuantity
-	, o.create_date createDate
-	, COUNT(*) cnt
-	FROM `order` o
-	GROUP BY customer_id, create_date
-	*/
 }

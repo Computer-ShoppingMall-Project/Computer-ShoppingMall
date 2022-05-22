@@ -8,16 +8,17 @@ public class Order {
 	private int categoryNumber;
 	private int categoryPrice;
 	private int categoryQuantity;
-	private String orderStatus;
+	private String orderStatus; // 주문상태
 	private String createDate;
 	private String productName;
+	private int productCount;
 	
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName="
 				+ categoryName + ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice
 				+ ", categoryQuantity=" + categoryQuantity + ", orderStatus=" + orderStatus + ", createDate="
-				+ createDate + ", productName=" + productName + "]";
+				+ createDate + ", productName=" + productName + ", productCount=" + productCount + "]";
 	}
 
 	public int getOrderNo() {
@@ -98,5 +99,13 @@ public class Order {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public int getProductCount() {
+		return productCount;
+	}
+
+	public void setProductCount(int productCount) {
+		this.productCount = productCount;
 	}
 }
