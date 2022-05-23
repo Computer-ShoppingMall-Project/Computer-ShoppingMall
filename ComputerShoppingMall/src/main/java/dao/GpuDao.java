@@ -106,7 +106,7 @@ public class GpuDao {
 			"INSERT INTO gpu_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
 		String productSql = 
 			"INSERT INTO gpu(gpu_name, company_name, category_name, chipset_company, gpu_size, price, quantity, gpu_image_no, memo, update_date)"
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조

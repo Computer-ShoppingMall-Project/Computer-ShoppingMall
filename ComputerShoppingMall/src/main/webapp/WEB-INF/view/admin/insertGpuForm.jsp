@@ -72,14 +72,9 @@
 					<h4 class="title">
 						<span>GPU</span>
 					</h4>
-					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContext.request.contextPath}/InsertGpuController">
+					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContext.request.contextPath}/InsertGpuController?categoryName=gpu" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="text" name="gpuName" class="form-control"
-								placeholder="GpuName">
-						</div>
-
-						<div class="form-group">
-							<input type='radio' name='chipSetCompany' value='NVDIA' onclick="clickCheck(this)" />NVDIA <input type='radio' name='chipSetCompany' value='라데온' onclick="clickCheck(this)" />라데온
+							<input type="text" name="gpuName" class="form-control" placeholder="GpuName">
 						</div>
 						<div class="form-group">
 							<select class="form-group" name="companyName">
@@ -93,15 +88,16 @@
 								<option value="SAPPHIRE">SAPPHIRE</option>
 								<option value="GIGABYTE">GIGABYTE</option>
 							</select>
-						<div class="form-group">
-							<input type="text" name="categoryName" class="form-control"	placeholder="categoryName">
 						</div>
+						<div class="form-group">
+							<input type="radio" name="chipsetCompany" value="NVDIA">NVDIA 
+							<input type="radio" name="chipsetCompany" value="라데온">라데온
 						</div>
 						<div class="form-group">
 							<input type="number" name="gpuSize" class="form-control" placeholder="GpuSize">
 						</div>
 						<div class="form-group">
-							<input type="file" name="gpuImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
@@ -109,11 +105,11 @@
 						<div class="form-group">
 							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
-						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
-						</div>
+						
 						<div class="form-group">
 							<input type="submit" class="button" value="등록">
+						</div><div class="form-group">
+							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
 						</div>
 					</form>
 				</div>

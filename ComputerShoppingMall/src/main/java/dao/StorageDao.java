@@ -123,15 +123,15 @@ public class StorageDao {
 			stmt.close();
 			// insert + img key값 받아오기
 			stmt = conn.prepareStatement(productSql);
-			stmt.setString(1,s.getStorageName());
-			stmt.setString(2,s.getCompanyName());
-			stmt.setString(3,s.getCategoryName());
-			stmt.setString(4,s.getStorageInterface());
-			stmt.setString(5,s.getCapacity());
-			stmt.setInt(6,s.getPrice());
-			stmt.setInt(7,s.getQuantity());
-			stmt.setString(8,s.getMemo());
-			stmt.setInt(9, imgNo);
+			stmt.setString(1, s.getStorageName());
+			stmt.setString(2, s.getCompanyName());
+			stmt.setString(3, s.getCategoryName());
+			stmt.setString(4, s.getStorageInterface());
+			stmt.setString(5, s.getCapacity());
+			stmt.setInt(6, s.getPrice());
+			stmt.setInt(7, s.getQuantity());
+			stmt.setInt(8, imgNo);
+			stmt.setString(9, s.getMemo());
 			row = stmt.executeUpdate();
 			
 			if(row == 1) {

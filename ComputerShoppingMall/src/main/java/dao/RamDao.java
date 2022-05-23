@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
-import vo.Mainboard;
+import vo.Image;
 import vo.Ram;
 
 public class RamDao {
@@ -96,37 +96,63 @@ public class RamDao {
 		}
 		return row;
 	}
+
 	// ram 상품등록
-	public int insertRam(Ram r) {
+	public int insertRam(Image i, Ram r) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "INSERT INTO ram(ram_name, company_name, kind, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql = "INSERT INTO ram_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = "INSERT INTO ram(ram_name, company_name, category_name, kind, price, quantity, ram_image_no, memo, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if (rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, r.getRamName());
 			stmt.setString(2, r.getCompanyName());
-			stmt.setString(3, r.getKind());
-			stmt.setInt(4, r.getPrice());
-			stmt.setInt(5, r.getQuantity());
-			stmt.setString(6, r.getMemo());
-			row=stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+			stmt.setString(3, r.getCategoryName());
+			stmt.setString(4, r.getKind());
+			stmt.setInt(5, r.getPrice());
+			stmt.setInt(6, r.getQuantity());
+			stmt.setInt(7, imgNo);
+			stmt.setString(8, r.getMemo());
+			row = stmt.executeUpdate();
+
+			if (row == 1) {
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
+
 		return row;
 	}
 	// ramList 보기

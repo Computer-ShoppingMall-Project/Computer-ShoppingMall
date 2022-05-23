@@ -47,7 +47,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 				</ul>
-				<h2>상품삭제</h2>
+				<h2>상품등록</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -71,55 +71,33 @@
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
 					<h4 class="title">
-						<span>CPU</span>
+						<span>RAM</span>
 					</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContextrequest.contextPath}/InsertCpuController">
+					<form id="insertRamform" method="post" name="insertRamform" action="${pageContext.request.contextPath}/InsertRamController?categoryName=ram" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="number" readonly name="cpuNo" class="form-control" placeholder="CpuNo">
+							<input type="text" name="ramName" class="form-control" placeholder="ramName">
 						</div>
 						<div class="form-group">
-							<input type="text" readonly name="cpuName" class="form-control" placeholder="CpuName">
+							<input type="text" name="companyName" class="form-control" placeholder="companyName">
 						</div>
 						<div class="form-group">
-							<input type='radio' name='kind' value='인텔' onclick="onclick=" return(false);"/>인텔
-							<input type='radio' name='kind' value='AMD' onclick="onclick=" return(false);"/>AMD
+							<input type="radio" name="kind" value="DDR4"/>DDR4
+							<input type="radio" name="kind" value="DDR5"/>DDR5
 						</div>
 						<div class="form-group">
-							<input type='radio' name='socketSize' value='1700' onclick="return(false);" />1700 <input type='radio' name='socketSize' value='AMD4' onclick="return(false);" />AMD4
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="core" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>core</option>
-								<option value="16">16(core)</option>
-								<option value="12">12(core)</option>
-								<option value="8">8(core)</option>
-								<option value="6">6(core)</option>
-							</select>
+							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
 						</div>
 						<div class="form-group">
-							<select class="readonly" name="thread" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>thread</option>
-								<option value="32">32(thread)</option>
-								<option value="24">24(thread)</option>
-								<option value="20">20(thread)</option>
-								<option value="16">16(thread)</option>
-								<option value="12">12(thread)</option>
-							</select>
+							<input type="number" name="price" class="form-control" placeholder="Price">
 						</div>
 						<div class="form-group">
-							<input type="file" name="cpuImage" class="form-control" placeholder="Img">
+							<input type="text" name="memo" class="form-control" placeholder="memo">
 						</div>
 						<div class="form-group">
-							<input type="number" readonly name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" readonly name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="memo" class="form-control" placeholder="memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="삭제">
+							<input type="submit" class="button" value="등록">
 						</div>
 					</form>
 				</div>

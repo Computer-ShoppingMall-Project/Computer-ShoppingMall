@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
-import vo.Gpu;
+import vo.Image;
 import vo.Power;
 
 public class PowerDao {
@@ -96,35 +96,60 @@ public class PowerDao {
 		return row;
 	}
 	// power 상품등록
-	public int insertPower(Power p) {
+	public int insertPower(Image i, Power p) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "INSERT INTO power(power_name, rated_power, price, quantity, memo, update_date) VALUES (?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql = "INSERT INTO power_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = "INSERT INTO power(power_name, category_name, rated_power, price, quantity, power_image_no, memo, update_date)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if (rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, p.getPowerName());
-			stmt.setString(2, p.getRatedPower());
-			stmt.setInt(3, p.getPrice());
-			stmt.setInt(4, p.getQuantity());
-			stmt.setString(5, p.getMemo());
-			row=stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+			stmt.setString(2, p.getCategoryName());
+			stmt.setString(3, p.getRatedPower());;
+			stmt.setInt(4, p.getPrice());
+			stmt.setInt(5, p.getQuantity());
+			stmt.setInt(6, imgNo);
+			stmt.setString(7, p.getMemo());
+			row = stmt.executeUpdate();
+
+			if (row == 1) {
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
+
 		return row;
 	}
 	// PowerList 보기

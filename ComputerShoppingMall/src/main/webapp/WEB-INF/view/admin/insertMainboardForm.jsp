@@ -72,19 +72,9 @@
 					<h4 class="title">
 						<span>MAINBOARD</span>
 					</h4>
-					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContext.request.contextPath}/InsertMainboardController">
+					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContext.request.contextPath}/InsertMainboardController?categoryName=mainboard" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
 						</div>
 						<div class="form-group">
 							<select class="form-group" name="kind">
@@ -100,16 +90,6 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
-						</div>
-						<div class="form-group">
 							<select class="form-group" name="socketSize">
 								<option value="" selected disabled hidden>soketSize</option>
 								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
@@ -119,13 +99,13 @@
 							</select>
 						</div>
 						<div class="form-group">
+							<input type="text" name="chipset" class="form-control" placeholder="Chipset">
+						</div>
+						<div class="form-group">
 							<input type='radio' name='ramVersion' value='DDR4' onclick="clickCheck(this)" />DDR4<input type='radio' name='ramVersion' value='DDR5' onclick="clickCheck(this)" />DDR5
 						</div>
 						<div class="form-group">
-							<input type="text" name="chipSet" class="form-control" placeholder="Chipset">
-						</div>
-						<div class="form-group">
-							<input type="file" name="mainboardImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">

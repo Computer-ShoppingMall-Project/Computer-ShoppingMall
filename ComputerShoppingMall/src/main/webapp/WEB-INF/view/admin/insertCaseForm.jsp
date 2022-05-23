@@ -38,13 +38,6 @@
   ======================================================= -->
 </head>
 <body>
-<script>
-    function checkIt(값) {
-            var form=document.abc;
-            form.companyName.value=case;
-            form.submit();
-    }
-</script>
 	<div class="row">
 	<!-- header적용 -->
 	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>

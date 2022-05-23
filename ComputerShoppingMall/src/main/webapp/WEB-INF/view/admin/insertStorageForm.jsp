@@ -79,7 +79,9 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="text" name="storageInterface" value="PCIe4.0x4" onclick="clickCheck(this)" />
+							<input type="radio" name="storageInterface" value="PCIe4.0x4">PCIe4.0x4 
+							<input type="radio" name="storageInterface" value="PCIe3.0x4">PCIe3.0x4 
+							<input type="radio" name="storageInterface" value="SATA3">SATA3
 						</div>
 						<div class="form-group">
 							<select class="form-group" name="capacity">

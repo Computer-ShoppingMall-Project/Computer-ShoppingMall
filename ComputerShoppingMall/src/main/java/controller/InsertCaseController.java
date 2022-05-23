@@ -64,6 +64,9 @@ public class InsertCaseController extends HttpServlet {
 			// 잘못 업로드 된 파일이므로 삭제 처리
 			File file = new File(path + "\\" + name);
 			file.delete();
+			
+			response.sendRedirect(request.getContextPath() + "/CaseListController");
+			return;
 		}
 
 		// Form에 입력된 값 받는 코드
@@ -82,8 +85,8 @@ public class InsertCaseController extends HttpServlet {
 		c.setCaseSize(caseSize);
 		c.setCategoryName(categoryName);
 		c.setGpuSize(gpuSize);
-		c.setBay64mm(bay64mm);
 		c.setBay89mm(bay89mm);
+		c.setBay64mm(bay64mm);
 		c.setPrice(price);
 		c.setQuantity(quantity);
 		c.setMemo(memo);

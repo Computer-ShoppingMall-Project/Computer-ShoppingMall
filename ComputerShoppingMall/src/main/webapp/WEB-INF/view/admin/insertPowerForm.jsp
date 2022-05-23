@@ -72,7 +72,7 @@
 					<h4 class="title">
 						<span>POWER</span>
 					</h4>
-					<form id="insertPowerform" method="post" name="insertPowerform" action="${pageContextrequest.contextPath}/InsertPowerController">
+					<form id="insertPowerform" method="post" name="insertPowerform" action="${pageContext.request.contextPath}/InsertPowerController?categoryName=power" enctype="multipart/form-data">
 						<div class="form-group">
 							<input type="text" name="powerName" class="form-control" placeholder="PowerName">
 						</div>
@@ -90,7 +90,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="file" name="powerImage" class="form-control" placeholder="Img">
+							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
 							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
