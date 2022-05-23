@@ -65,6 +65,15 @@
 }
 </style>
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('계속 쇼핑하시겠습니까')) {
+			document.getElementById('goList').click();
+		} else {
+			document.getElementById('goBasket').click();
+		}
+	}
+</script>
 <body>
 	<!-- header적용 -->
 	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
@@ -190,7 +199,9 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 												<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-												<a href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+												<a hidden="hidden" style="display: none;" id="goBasket" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.price}&&categoryName=${c.categoryName}"  class="dmbutton a2" data-animate="bounceInRight"></a>
+												<a hidden="hidden" style="display: none;" id="goList" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.price}&&categoryName=${c.categoryName}&&goList=goList" class="dmbutton a2" data-animate="bounceInRight"></a>
+												<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->
 											</div>

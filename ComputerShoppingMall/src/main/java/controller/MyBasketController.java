@@ -41,12 +41,11 @@ public class MyBasketController extends HttpServlet {
 		basketDao = new BasketDao();
 		if(request.getParameter("productNumber") != null && !"".equals(request.getParameter("productNumber"))) {
 			// request 값
-			int productNumber = Integer.parseInt(request.getParameter("productNumber"));
+			int productNumber =  Integer.parseInt(request.getParameter("productNumber"));
 			String productName = request.getParameter("productName");
 			String categoryName = request.getParameter("categoryName");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int quantity = 1;
-		
 			
 			// dao.selestMyBasket
 			ArrayList<Basket> checkList = basketDao.selectMyBasket(customerId);
@@ -69,8 +68,13 @@ public class MyBasketController extends HttpServlet {
 						System.out.println(basketCount+"basketCount");
 						session.setAttribute("basketCount", basketCount);
 						// 업데이트가 되면 바로 myBaske로 안하면 insert가 작동됨
-						request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
-						return;
+						if("goList".equals(request.getParameter("goList"))) {
+							request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
+							return;
+						} else {
+							request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+							return;
+						}
 					}
 				}
 			}
@@ -85,15 +89,33 @@ public class MyBasketController extends HttpServlet {
 			System.out.println("[basketList] :"+ basket.toString());
 			// dao.insertMyBasket
 			basketDao.insertMyBasket(customerId, basket);
+			// dao.selectMyBasket
+			ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
+			request.setAttribute("basketList", list);
+			// 고객의 장바구니 개수 등록
+			basketCount = list.size();
+			System.out.println(basketCount+"basketCount");
+			session.setAttribute("basketCount", basketCount);
+			if("goList".equals(request.getParameter("goList"))) {
+				request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
+				return;
+			} else {
+				request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+				return;
+			}
 		}
-		// dao.selectMyBasket
 		ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
 		request.setAttribute("basketList", list);
 		// 고객의 장바구니 개수 등록
 		basketCount = list.size();
 		System.out.println(basketCount+"basketCount");
 		session.setAttribute("basketCount", basketCount);
-		
-		request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+		if("goList".equals(request.getParameter("goList"))) {
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);
+			return;
+		} else {
+			request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+			return;
+		}
 	}
 }
