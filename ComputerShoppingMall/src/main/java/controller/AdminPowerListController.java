@@ -34,10 +34,4 @@ public class AdminPowerListController extends HttpServlet {
 		request.setAttribute("ratedPowerList", ratedPowerList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminPowerList.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

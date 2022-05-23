@@ -45,7 +45,8 @@ public class PowerDao {
 		return row;
 	}
 	// power 상품삭제
-	public void deletePower(int powerNo) {
+	public int deletePower(int powerNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -64,6 +65,7 @@ public class PowerDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 	// power 상품수정
 	public int updatePower(Power p) {

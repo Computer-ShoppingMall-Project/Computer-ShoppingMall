@@ -45,7 +45,8 @@ public class MainboardDao {
 		return row;
 	}
 	// mainboard 상품삭제
-	public void deleteMainboard(int mainboardNo) {
+	public  int deleteMainboard(int mainboardNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -64,6 +65,7 @@ public class MainboardDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 	// mainboard 상품수정
 	public int updateMainboard(Mainboard m) {

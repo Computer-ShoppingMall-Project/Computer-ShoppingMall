@@ -47,7 +47,8 @@ public class StorageDao {
 		return row;
 	}
 	// storage 상품삭제
-	public void deleteStorage(int storageNo) {
+	public int deleteStorage(int storageNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -66,6 +67,7 @@ public class StorageDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 
 	// storage 상품수정

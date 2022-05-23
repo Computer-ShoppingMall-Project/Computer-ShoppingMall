@@ -48,11 +48,6 @@ public class AdminRamListController extends HttpServlet {
 		request.setAttribute("chipsetList", chipsetList);
 		request.setAttribute("ramVersionList", ramVersionList);
 		request.setAttribute("kindList", kindList);
-		request.getRequestDispatcher("/WEB-INF/view/admin/aminMainboardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/adminRamList.jsp").forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

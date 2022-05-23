@@ -47,9 +47,4 @@ public class AdminMainboardListController extends HttpServlet {
 		request.setAttribute("kindList", kindList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminMainboardList.jsp").forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
