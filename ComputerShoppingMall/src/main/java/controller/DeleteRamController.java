@@ -23,17 +23,6 @@ public class DeleteRamController extends HttpServlet {
 			return;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-		HttpSession session = request.getSession();
-		if((String)session.getAttribute("sessionAdminId") == null) {
-			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/LoginController");
-			return;
-		}
-		
 		// 변수 등록
 		int ramNo = 0;
 		
@@ -47,9 +36,16 @@ public class DeleteRamController extends HttpServlet {
 		
 		// dao
 		ramDao = new RamDao();
-		ramDao.deleteRam(ramNo);
+		int row = ramDao.deleteRam(ramNo);
 		
-		response.sendRedirect(request.getContextPath()+"/DigitalDownloadController");
+		if(row == 1) { // 삭제 성공 시, List로 돌아가기
+			System.out.println("[DeleteRamController.doGet] : RAM 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/AdminRamListController");
+			return;
+		} else { // 삭제 실패해도 List로 돌아가기
+			System.out.println("[DeleteRamController.doGet] : SDD/HDD 삭제 실패");
+			response.sendRedirect(request.getContextPath() + "/AdminRamListController");
+			return;
+		}
 	}
-
 }

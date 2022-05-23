@@ -45,7 +45,8 @@ public class RamDao {
 		return row;
 	}
 	// ram 상품삭제
-	public void deleteRam(int ramNo ) {
+	public int deleteRam(int ramNo ) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -64,6 +65,7 @@ public class RamDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 	// ram 상품수정
 	public int updateRam(Ram r) {
