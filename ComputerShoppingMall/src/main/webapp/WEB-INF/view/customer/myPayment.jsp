@@ -71,6 +71,7 @@
 						<tr>
 							<th>DATE</th>
 							<th>AMOUNT(WON)</th>
+							<th>ORDER STATUS</th>
 							<th>DETAILS</th>
 						</tr>
 					</thead>
@@ -79,6 +80,7 @@
 							<tr>
 								<td>${order.createDate}</td>
 								<td>${order.totalPrice}won</td>
+								<td>${order.orderStatus}</td>
 								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>
 							</tr>
 						</c:forEach>

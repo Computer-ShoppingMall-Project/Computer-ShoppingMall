@@ -23,7 +23,7 @@ public class AdminOrderListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if((String)session.getAttribute("sessionAdminId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/DetailOrderController");
+			response.sendRedirect(request.getContextPath() + "/MyPaymentController");
 			return;
 		}
 		
@@ -33,9 +33,4 @@ public class AdminOrderListController extends HttpServlet {
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderList.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }

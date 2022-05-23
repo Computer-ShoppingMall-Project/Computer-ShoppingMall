@@ -120,9 +120,10 @@ public class OrderDao {
 		ResultSet rs = null;
 		//  DBUtil
 		conn = DButil.getConnection();
-		String sql = "SELECT customer_id customerId"
-				+ "		,create_date createDate"
+		String sql = "SELECT o.customer_id customerId"
+				+ "		,o.create_date createDate"
 				+ "		,SUM(o.category_price) totalPrice"
+				+ "		,o.order_status orderStatus"
 				+ " FROM `order` o"
 				+ " WHERE customer_id=?"
 				+ " GROUP BY o.create_date"
@@ -137,6 +138,7 @@ public class OrderDao {
 				map.put("customerId", rs.getString("customerId"));
 				map.put("createDate", rs.getString("createDate"));
 				map.put("totalPrice", rs.getString("totalPrice"));
+				map.put("orderStatus", rs.getString("orderStatus"));
 				list.add(map);
 			}
 		} catch (SQLException e) {

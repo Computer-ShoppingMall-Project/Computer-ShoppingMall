@@ -80,21 +80,21 @@
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
-							<th>상품 이름</th>
-							<th>가격</th>
-							<th>구매 수량</th>
-							<th>주문일</th>
-							<th>주문상태</th>
+							<th class="text-center">상품 이름</th>
+							<th class="text-center">가격</th>
+							<th class="text-center">구매 수량</th>
+							<th class="text-center">주문일</th>
+							<th class="text-center">주문상태</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
 							<tr>
 								<td>${order.productName}</td>
-								<td>${order.categoryPrice}</td>
-								<td>${order.categoryQuantity}</td>
-								<td>${order.createDate}</td>
-								<td class="text-primary">${order.orderStatus}</td>
+								<td class="text-center">${order.categoryPrice}</td>
+								<td class="text-center">${order.categoryQuantity}</td>
+								<td class="text-center">${order.createDate}</td>
+								<td class="text-primary text-center">${order.orderStatus}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -109,11 +109,9 @@
 						<span>RedVelvet</span>
 					</h4>
 					<ul class="pages">
-						<li><a href="${pageContext.request.contextPath}/IndexController">Homepage</a></li>
-						<li><a href="${pageContext.request.contextPath}/CpuListController">Buy more</a></li>
-						<li><a href="${pageContext.request.contextPath}/QnaListController">Go QnA</a></li>
-						<li><a href="#"></a></li>
-						<li><a href="#"></a></li>
+						<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+						<li><a href="${pageContext.request.contextPath}/CpuListController">Buy More</a></li>
+						<li><a href="${pageContext.request.contextPath}/QnaListController">QnA</a></li>
 					</ul>
 				</div>
 					<div class="widget">

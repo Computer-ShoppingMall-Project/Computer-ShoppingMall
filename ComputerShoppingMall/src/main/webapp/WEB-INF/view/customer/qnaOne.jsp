@@ -94,7 +94,7 @@
 						<a href="${pageContext.request.contextPath}/UpdateQnaController?qnaNo=${requestScope.qna.qnaNo}&customerNo=${customerNo}" class="btn btn-large btn-primary">update</a>
 						<!-- 수정 -->
 					</c:if>
-					<a style="display: none;" hidden="hidden" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${requestScope.qna.qnaNo}&customerNo=${customerNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a>
+					<a style="display: none;" href="${pageContext.request.contextPath}/DeleteQnaController?qnaNo=${requestScope.qna.qnaNo}&customerNo=${customerNo}" id="deleteQna" class="btn btn-large btn-danger">delete</a>
 					<!-- 삭제 -->
 					<a href="#" class="btn btn-large btn-danger" onclick="del();">delete</a>
 				</div>
