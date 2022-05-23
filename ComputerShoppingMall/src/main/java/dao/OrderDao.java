@@ -17,8 +17,8 @@ public class OrderDao {
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
-		String orderSql = "INSERT INTO `order` (basket_no, customer_id, category_name, category_number, category_price, category_quantity, create_date)"
-				+ "   SELECT basket_no, customer_id, product_name, product_number, price, quantity, NOW()"
+		String orderSql = "INSERT INTO `order` (basket_no, customer_id,product_name, category_name , category_number, category_price, category_quantity, create_date)"
+				+ "   SELECT basket_no, customer_id, product_name, category_name,  product_number, price, quantity, NOW()"
 				+ "   FROM basket WHERE customer_id = ?";
 		String deleteBasketSql = "DELETE b"
 				+ " FROM basket b INNER JOIN `order` o"
