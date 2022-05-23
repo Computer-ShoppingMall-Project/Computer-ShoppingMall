@@ -34,8 +34,16 @@ public class AdminDetailOrderController extends HttpServlet {
 		
 		orderDao = new OrderDao();
 		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate);
+		for(int i=0; i > list.size(); i++) {
+			if(list.get(i).getOrderStatus() == null || "".equals(list.get(i).getOrderStatus())) {
+				list.get(i).setOrderStatus("입금 확인"); // 입금확인 기본값으로 바꿔두기
+			}
+		}
 		
 		request.setAttribute("detailOrderList", list);
+		request.setAttribute("customerId", customerId);
+		request.setAttribute("createDate", createDate);
+		request.setAttribute("orderStatus", list.get(0).getOrderStatus()); // 현재 주문 상태 보내주기 (옵션 유지를 위해)
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminDetailOrder.jsp").forward(request, response);
 	}
 
@@ -47,5 +55,24 @@ public class AdminDetailOrderController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/DetailOrderController");
 			return;
 		}
+		
+		// 상세보기로 돌아가기 위한 정보 받아오기 & 수정을 위한 정보 받아오기
+		String orderStatus = request.getParameter("orderStatus");
+		String customerId = request.getParameter("customerId");
+		String createDate = request.getParameter("createDate");
+		System.out.println("[AdminDetailOrderController.doPost] : " + customerId +"/"+ createDate);
+		
+		int row = 0;
+		
+		orderDao = new OrderDao();
+		row = orderDao.updateOrderStatus(orderStatus, customerId, createDate);
+		
+		if(row > 0) { // 업데이트 성공시 리스트로 돌아가기
+			System.out.println("[AdminDetailOrderController] : 상태변경 성공 " + row + "개 정보 업데이트 완료");
+		} else { // 업데이트 실패시 리스트로 돌아가기
+			System.out.println("[AdminDetailOrderController] : 상태변경 실패" + row + "개 정보 업데이트 완료 > 업데이트 실패");
+		}
+		
+		response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate);
 	}
 }

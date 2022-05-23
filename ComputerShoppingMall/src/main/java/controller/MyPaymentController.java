@@ -31,9 +31,9 @@ public class MyPaymentController extends HttpServlet {
 			return;
 		}
 		
-		
 		// dao
 		orderDao = new OrderDao();
+		
 		// OrderDao SELECT
 		List<Map<String,Object>> list = orderDao.selectOrderDateList(customerId);
 		// request set

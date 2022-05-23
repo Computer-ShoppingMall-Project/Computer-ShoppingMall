@@ -17,8 +17,8 @@ public class OrderDao {
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
-		String orderSql = "INSERT INTO `order` (basket_no, customer_id,product_name, category_name , category_number, category_price, category_quantity, create_date)"
-				+ "   SELECT basket_no, customer_id, product_name, category_name,  product_number, price, quantity, NOW()"
+		String orderSql = "INSERT INTO `order` (basket_no, customer_id,product_name, category_name , category_number, category_price, category_quantity, order_status, create_date)"
+				+ "   SELECT basket_no, customer_id, product_name, category_name,  product_number, price, quantity, '입금 확인' ,NOW()" // 바로 입금 확인 처리되게끔 처리
 				+ "   FROM basket WHERE customer_id = ?";
 		String deleteBasketSql = "DELETE b"
 				+ " FROM basket b INNER JOIN `order` o"
@@ -143,7 +143,7 @@ public class OrderDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				stmt.close();
@@ -197,7 +197,41 @@ public class OrderDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
+	}
+	// 관리자 주문상태 변경
+	public int updateOrderStatus(String orderStatus, String customerId, String createDate) {
+		int row = 0;
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql = "UPDATE `order` SET order_status=? WHERE customer_id=? AND create_date=?";
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, orderStatus);
+				stmt.setString(2, customerId);
+				stmt.setString(3, createDate);
+				row = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 }

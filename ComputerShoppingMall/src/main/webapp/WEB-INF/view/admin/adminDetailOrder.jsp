@@ -53,20 +53,11 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Detail Order</li>
+					<li>ORDER STATUS UPDATE</li>
 				</ul>
-				<h2>${order.createDate} Detail Order</h2>
+				<h2>ORDER STATUS UPDATE</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
@@ -75,10 +66,24 @@
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
-			<a href="${pageContext.request.contextPath}/AdminOrderListController">back</a>
+			<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
 				<div class="clearfix"></div>
+					<form name="orderStatus" method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+						<input type="text" value="${customerId}" hidden="hidden" name="customerId">
+						<input type="text" value="${createDate}" hidden="hidden" name="createDate">
+						<div class="form-inline form-group">
+							<h4 class="text-primary">&nbsp;&nbsp;&nbsp;&nbsp;ORDER STATUS UPDATE</h4>
+							<div class="col-xs-2">
+								<select name="orderStatus" class="form-control">
+									<option value="입금 전" <c:if test="${orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
+									<option value="입금 확인" <c:if test="${orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
+									<option value="배송 완료" <c:if test="${orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-primary">ORDER STATUS UPDATE</button>
+						</div>
+					</form>
 				<div class="clearfix"></div>
-				
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
@@ -88,10 +93,11 @@
 							<th class="text-center">가격</th>
 							<th class="text-center">구매 수량</th>
 							<th class="text-center">주문일</th>
-							<th class="text-center">주문상태</th>
+							<th class="text-center">현재 주문상태</th>
 						</tr>
 					</thead>
 					<tbody>
+					
 						<c:forEach var="order" items="${detailOrderList}">
 							<tr>
 								<td>${order.orderNo}</td>
@@ -100,20 +106,11 @@
 								<td class="text-center">${order.categoryPrice}</td>
 								<td class="text-center">${order.categoryQuantity}</td>
 								<td class="text-center">${order.createDate}</td>
-								<td class="text-center">
-									<form>
-										<select name="orderStatus" class="form-control">
-											<option value="입금 전" <c:if test="${order.orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
-											<option value="입금 확인" <c:if test="${order.orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
-											<option value="배송 완료" <c:if test="${order.orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
-										</select>
-									</form>
-								</td>
+								<td class="text-center">${order.orderStatus}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<button type="submit" style="float:right;">ORDER STATUS UPDATE</button>
 			</div>
 			<!-- end content -->
 		</div>
