@@ -130,8 +130,8 @@ public class CoolerDao {
 			stmt.setInt(5, c.getCoolerSize());
 			stmt.setInt(6, c.getPrice());
 			stmt.setInt(7, c.getQuantity());
-			stmt.setString(8, c.getMemo());
-			stmt.setInt(9, imgNo);
+			stmt.setInt(8, imgNo);
+			stmt.setString(9, c.getMemo());
 			row = stmt.executeUpdate();
 
 			if (row == 1) {

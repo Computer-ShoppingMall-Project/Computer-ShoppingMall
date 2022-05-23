@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Gpu;
-import vo.Ram;
+import vo.Image;
 
 public class GpuDao {
 	// 장바구니 담기
@@ -94,14 +94,34 @@ public class GpuDao {
 		}return row;
 	}
 	// gpu 상품등록
-	public int insertGpu(Gpu g) {
+	public int insertGpu(Image i, Gpu g) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql="INSERT INTO gpu(gpu_name, company_name, category_name, chipset_company, gpu_size, price, quantity, memo, update_date) VALUES (?,?,?,?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql =
+			"INSERT INTO gpu_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = 
+			"INSERT INTO gpu(gpu_name, company_name, category_name, chipset_company, gpu_size, price, quantity, gpu_image_no, memo, update_date)"
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if(rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, g.getGpuName());
 			stmt.setString(2, g.getCompanyName());
 			stmt.setString(3, g.getCategoryName());
@@ -109,22 +129,29 @@ public class GpuDao {
 			stmt.setInt(5, g.getGpuSize());
 			stmt.setInt(6, g.getPrice());
 			stmt.setInt(7, g.getQuantity());
-			stmt.setString(8, g.getMemo());
-			row=stmt.executeUpdate();
+			stmt.setInt(8, imgNo);
+			stmt.setString(9, g.getMemo());
+			row = stmt.executeUpdate();
+			
 			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
-		} try {
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
+		
 		return row;
 	}
 	// GPUList 보기

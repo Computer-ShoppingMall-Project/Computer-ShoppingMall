@@ -1,13 +1,13 @@
 package dao;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DButil;
-import vo.Cpu;
+import vo.Image;
 import vo.Mainboard;
 
 public class MainboardDao {
@@ -96,40 +96,65 @@ public class MainboardDao {
 		return row;
 	}
 	// mainboard 상품등록
-	public int insertMainboard(Mainboard m) {
+	public int insertMainboard(Image i, Mainboard m) {
+		// insert 성공/실패 확인 변수 선언
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "INSERT INTO mainboard(mainboard_name, kind, category_name, socket_size, chipset, ram_version, price, quantity, company_name, memo, update_date) VALUES (?,?,?,?,?,?,?,?,?,?, NOW())";
+		// SQL 쿼리
+		String imgSql =
+			"INSERT INTO mainboard_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		String productSql = 
+			"INSERT INTO mainboard(mainboard_name, category_name, kind, socket_size, chipset, ram_version, price, quantity, mainboard_image_no, memo, update_date)"
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
-			stmt=conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
+			stmt.setString(1, i.getName());
+			stmt.setString(2, i.getOriginalName());
+			stmt.setString(3, i.getType());
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			int imgNo = 0;
+			if(rs.next()) {
+				imgNo = rs.getInt(1);
+			}
+			stmt.close();
+			// insert + img key값 받아오기
+			stmt = conn.prepareStatement(productSql);
 			stmt.setString(1, m.getMainboardName());
-			stmt.setString(2, m.getKind());
-			stmt.setString(3, m.getCategoryName());
+			stmt.setString(2, m.getCategoryName());
+			stmt.setString(3, m.getKind());
 			stmt.setString(4, m.getSocketSize());
 			stmt.setString(5, m.getChipset());
 			stmt.setString(6, m.getRamVersion());
 			stmt.setInt(7, m.getPrice());
 			stmt.setInt(8, m.getQuantity());
-			stmt.setString(9, m.getCompanyName());
+			stmt.setInt(9, imgNo);
 			stmt.setString(10, m.getMemo());
-			row=stmt.executeUpdate();
+			row = stmt.executeUpdate();
+			
 			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
+				conn.commit();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-		}  finally {
 			try {
+				conn.rollback(); // 오류 발생시, rollback
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				rs.close();
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e2) {
+				e2.printStackTrace();
 			}
 		}
+		
 		return row;
 	}
 	// mainboardList 보기

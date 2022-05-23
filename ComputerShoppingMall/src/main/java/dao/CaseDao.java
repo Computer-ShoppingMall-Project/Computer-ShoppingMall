@@ -18,7 +18,7 @@ public class CaseDao {
 		PreparedStatement stmt =  null;
 		conn = DButil.getConnection();
 		String sql = "INSERT INTO basket(customer_id, product_name, category_name, product_number, price, quantity, create_date, update_date)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -27,7 +27,7 @@ public class CaseDao {
 			stmt.setInt(4, c.getCaseNo());
 			stmt.setInt(5, c.getPrice());
 			stmt.setInt(6, c.getQuantity());
-			row = stmt.executeUpdate();
+			stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
 			} else {
@@ -133,8 +133,8 @@ public class CaseDao {
 			stmt.setInt(6, c.getBay64mm());
 			stmt.setInt(7, c.getPrice());
 			stmt.setInt(8, c.getQuantity());
-			stmt.setString(9, c.getMemo());
-			stmt.setInt(10, imgNo);
+			stmt.setInt(9, imgNo);
+			stmt.setString(10, c.getMemo());
 			row = stmt.executeUpdate();
 			
 			if(row == 1) {

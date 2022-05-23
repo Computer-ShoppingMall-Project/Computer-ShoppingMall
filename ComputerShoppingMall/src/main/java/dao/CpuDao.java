@@ -135,8 +135,8 @@ public class CpuDao {
 			stmt.setString(6, c.getThread());
 			stmt.setInt(7, c.getPrice());
 			stmt.setInt(8, c.getQuantity());
-			stmt.setString(9, c.getMemo());
-			stmt.setInt(10, imgNo);
+			stmt.setInt(9, imgNo);
+			stmt.setString(10, c.getMemo());
 			row = stmt.executeUpdate();
 			
 			if(row == 1) {

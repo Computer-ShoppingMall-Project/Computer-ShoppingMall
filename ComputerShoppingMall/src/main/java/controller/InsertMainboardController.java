@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import dao.MainboardDao;
+import vo.Image;
 import vo.Mainboard;
 
 @WebServlet("/InsertMainboardController")
@@ -34,71 +39,70 @@ public class InsertMainboardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		request.getRequestDispatcher("/WEB-INF/view/admin/insertMainboardForm.jsp").forward(request, response);
 		
-		// 변수등록
-		String mainboardName = null;
-		String kind = null;
-		String categoryName = null;
-		String socketSize = null;
-		String chipSet = null;
-		String ramVersion = null;
-		int price = 0;
-		int quantity = 0;
-		String companyName = null;
-		String memo = null;
+		// Mainboard image 경로지정
+		String path = request.getSession().getServletContext().getRealPath("/image");
+		System.out.println("[InsertMainboardController.doPost photo path] : " + path); // 디버깅 
+		// 사진 파일 처리
+		MultipartRequest multiReq = new MultipartRequest(request, path, 1024 * 1024 * 100, "utf-8", new DefaultFileRenamePolicy());
+		// 사진 받아오기
+		String originalName = multiReq.getOriginalFileName("image"); // 사진 원본 이름
+		String name = multiReq.getFilesystemName("image"); // 중복 발생 시 변경된 이름
+		String type = multiReq.getContentType("image");
+		Image i = null;
 		
-		// request값 받아오기
-		if(request.getParameter("mainboardName") != null || request.getParameter("mainboardName") !="") {
-			mainboardName = request.getParameter("mainboardName");
+		// 이미지 형태라면 하나의 변수로 묶기
+		if (type.equals("image/gif") || type.equals("image/png") || type.equals("image/jpeg")) { 
+			// 하나의 변수로 묶어주기 -> DB 저장용
+			i = new Image();
+			i.setOriginalName(originalName);
+			i.setName(name);
+			i.setType(type);
+		} else { // 이미지 등록 실패시, CpuListController로 이동
+			System.out.println("[InsertMainboardController] : 이미지 타입 아님");
+			// 잘못 업로드 된 파일이므로 삭제 처리
+			File file = new File(path + "\\" + name);
+			file.delete();
+			
+			response.sendRedirect(request.getContextPath() + "/MainboardListController");
+			return;
 		}
-		if(request.getParameter("kind") != null ||request.getParameter("mainboardName") !="") {
-			kind = request.getParameter("kind");
-		}
-		if(request.getParameter("categoryName") != null ||request.getParameter("mainboardName") !="") {
-			categoryName = request.getParameter("categoryName");
-		}
-		if(request.getParameter("socketSize") != null || request.getParameter("mainboardName") !="") {
-			socketSize = request.getParameter("socketSize");
-		}
-		if(request.getParameter("chipSet") != null || request.getParameter("mainboardName") !="") {
-			chipSet = request.getParameter("chipSet");
-		}
-		if(request.getParameter("ramVersion") != null || request.getParameter("mainboardName") !="") {
-			ramVersion = request.getParameter("ramVersion");
-		}
-		if(request.getParameter("price") != null || request.getParameter("mainboardName") !="") {
-			price = Integer.parseInt(request.getParameter("price"));
-		}
-		if(request.getParameter("companyName") != null || request.getParameter("mainboardName") !="") {
-			companyName = request.getParameter("companyName");
-		}
-		if(request.getParameter("quantity") != null || request.getParameter("mainboardName") !="") {
-			quantity = Integer.parseInt(request.getParameter("quantity"));
-		}
-		if(request.getParameter("memo") != null || request.getParameter("mainboardName") !="") {
-			memo = request.getParameter("memo");
-		}
-		
-		
-		// vo
+
+		// Form에 입력된 값 받는 코드
+		String mainboardName = multiReq.getParameter("mainboardName");
+		String categoryName = multiReq.getParameter("categoryName");
+		String kind = multiReq.getParameter("kind");
+		String socketSize = multiReq.getParameter("socketSize");
+		String chipset = multiReq.getParameter("chipset");
+		String ramVersion = multiReq.getParameter("ramVersion");
+		int price = Integer.parseInt(multiReq.getParameter("price"));
+		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
+		String memo = multiReq.getParameter("memo");
+		// vo.Cpu
 		Mainboard m = new Mainboard();
 		m.setMainboardName(mainboardName);
-		m.setCompanyName(companyName);
+		m.setCategoryName(categoryName);
+		m.setKind(kind);
 		m.setSocketSize(socketSize);
-		m.setChipset(chipSet);
+		m.setChipset(chipset);
 		m.setRamVersion(ramVersion);
 		m.setPrice(price);
 		m.setQuantity(quantity);
-		m.setCompanyName(companyName);
 		m.setMemo(memo);
-		
 		// 디버깅
-		System.out.println("[insertMainboardController] : " + m.toString());
+		System.out.println("[InsertMainboardController] : " + i.toString());
+		System.out.println("[InsertMainboardController] : " + m.toString());
 		
-		// dao
+		// dao.insertCpu
 		mainboardDao = new MainboardDao();
-		mainboardDao.insertMainboard(m);
+		int row = mainboardDao.insertMainboard(i, m);
 		
-		response.sendRedirect(request.getContextPath() + "/MainboardListController");
+		// 상품등록 성공/실패 확인 코드
+		if (row == 1) {
+			System.out.println("[InsertMainboardController] : Mainboard 등록 성공");
+		} else {
+			System.out.println("[InsertMainboardController] : Mainboard 등록 실패");
+		}
 	}
 }
