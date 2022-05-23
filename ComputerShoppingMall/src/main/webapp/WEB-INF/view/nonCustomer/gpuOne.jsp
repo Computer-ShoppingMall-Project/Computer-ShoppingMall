@@ -100,7 +100,12 @@
 		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-
+				<c:if test="${sessionAdminId != null }">
+					<div>
+						<a href="UpdateGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-info">UPDATE</a>
+						<a href="DeleteGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-danger">DELETE</a>
+					</div>
+				</c:if>
 				<div class="general-title text-center">
 					<h3>${requestScope.gpuOne.gpuName}</h3>
 					<hr>

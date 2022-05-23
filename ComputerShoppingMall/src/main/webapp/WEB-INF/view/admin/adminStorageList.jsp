@@ -95,14 +95,14 @@
 				<div class="divider"></div>
 				<div id="productMenu" style="align-center">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/CpuListController">CPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
-						<li><a href="${pageContext.request.contextPath}/RamListController">RAM</a></li>
-						<li><a href="${pageContext.request.contextPath}/GpuListController">GPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a></li>
-						<li><a href="${pageContext.request.contextPath}/CaseListController">CASE</a></li>
-						<li><a href="${pageContext.request.contextPath}/PowerListController">POWER</a></li>
-						<li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCpuListController">CPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminMainboardListController">MAINBOARD</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminRamListController">RAM</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminGpuListController">GPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminStorageListController">STORAGE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCaseListController">CASE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminPowerListController">POWER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCoolerListController">COOLER</a></li>
 					</ul> <br><br><br>
 				</div>
 			</div> <br><br><br>

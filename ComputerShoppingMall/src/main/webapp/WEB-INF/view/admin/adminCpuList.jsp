@@ -95,14 +95,14 @@
 				<div class="divider"></div>
 				<div id="productMenu" style="align-center">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/CpuListController">CPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/MainboardListController">MAINBOARD</a></li>
-						<li><a href="${pageContext.request.contextPath}/RamListController">RAM</a></li>
-						<li><a href="${pageContext.request.contextPath}/GpuListController">GPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a></li>
-						<li><a href="${pageContext.request.contextPath}/CaseListController">CASE</a></li>
-						<li><a href="${pageContext.request.contextPath}/PowerListController">POWER</a></li>
-						<li><a href="${pageContext.request.contextPath}/CoolerListController">COOLER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCpuListController">CPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminMainboardListController">MAINBOARD</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminRamListController">RAM</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminGpuListController">GPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminStorageListController">STORAGE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCaseListController">CASE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminPowerListController">POWER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCoolerListController">COOLER</a></li>
 					</ul>
 				</div> <br><br><br>
 			<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
@@ -186,7 +186,7 @@
 										<h3 class="big a1" data-animate="fadeInDown"></h3>
 											<a href="${pageContext.request.contextPath}/UpdateCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
 											<a href="${pageContext.request.contextPath}/DeleteCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
-											<a href="${pageContext.request.contextPath}/AdminCpuOneController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+											<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 										<div class="portfolio_category text-center a2" data-animate="fadeIn">
 										</div>
 										<!-- portfolio_category -->

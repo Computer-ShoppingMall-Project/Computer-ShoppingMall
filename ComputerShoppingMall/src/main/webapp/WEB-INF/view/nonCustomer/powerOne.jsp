@@ -98,7 +98,12 @@
 		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-
+						<c:if test="${sessionAdminId != null }">
+							<div>
+								<a href="UpdatePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-info">UPDATE</a>
+								<a href="DeletePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-danger">DELETE</a>
+							</div>
+						</c:if>
 				<div class="general-title text-center">
 					<h3>${requestScope.powerOne.powerName}</h3>
 					<hr>

@@ -70,18 +70,6 @@
 				</ul>
 				<h2>MAINBOARD</h2>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
-			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
@@ -107,6 +95,12 @@
 
 				<div class="item_details">
 					<div class="col-lg-12 col-md-12 col-sm-12">
+						<c:if test="${sessionAdminId != null }">
+							<div>
+								<a href="UpdateMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" class="btn btn-info">UPDATE</a>
+								<a href="DeleteMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" class="btn btn-danger">DELETE</a>
+							</div>
+						</c:if>
 						<!-- theme_details -->
 							<div class="form-group">
 								<div class="item_price">
