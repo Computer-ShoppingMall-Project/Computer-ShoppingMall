@@ -8,6 +8,7 @@ public class Power {
 	private int price;
 	private int quantity;
 	private int powerImageNo;
+	private String companyName;
 	private String memo;
 	private String updateDate;
 	private String powerImageName;
@@ -16,8 +17,8 @@ public class Power {
 	public String toString() {
 		return "Power [powerNo=" + powerNo + ", powerName=" + powerName + ", categoryName=" + categoryName
 				+ ", ratedPower=" + ratedPower + ", price=" + price + ", quantity=" + quantity + ", powerImageNo="
-				+ powerImageNo + ", memo=" + memo + ", updateDate=" + updateDate + ", powerImageName=" + powerImageName
-				+ "]";
+				+ powerImageNo + ", companyName=" + companyName + ", memo=" + memo + ", updateDate=" + updateDate
+				+ ", powerImageName=" + powerImageName + "]";
 	}
 
 	public int getPowerNo() {
@@ -74,6 +75,14 @@ public class Power {
 
 	public void setPowerImageNo(int powerImageNo) {
 		this.powerImageNo = powerImageNo;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getMemo() {
