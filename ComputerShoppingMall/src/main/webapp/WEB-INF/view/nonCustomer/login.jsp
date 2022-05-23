@@ -152,7 +152,6 @@
 				if (form.id.value.length < 4 || form.id.value.length > 12)
 				{
 				 alert("아이디는 4자 이상 입력 가능합니다!");
-				
 				 form.id.select();// 입력한 문자를 선택 상태로 만듬.
 				 return;
 				}
@@ -163,6 +162,7 @@
 	                 alert("패스워드를 입력 해야 합니다!");
 	                 form.pw.focus();//포커스를 Password박스로 이동.
 	                 return;
+	                 
 	            }
 	            if (form.pw.value.length < 4 || form.pw.value.length > 12)
 	            {
