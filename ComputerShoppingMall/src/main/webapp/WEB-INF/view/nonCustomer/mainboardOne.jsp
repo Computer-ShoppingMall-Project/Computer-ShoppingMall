@@ -38,6 +38,19 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
 	<c:choose>
@@ -81,8 +94,7 @@
 			<!-- end item_image -->
 		</div>
 	</section>
-
-	<section class="section1">
+		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 
@@ -94,44 +106,8 @@
 				<div class="divider"></div>
 
 				<div class="item_details">
-
-					<div class="col-lg-3 col-md-3 col-sm-12">
-						<div class="theme_details">
-							<div class="details_section">
-								<h3>Item Details</h3>
-								<ul>
-									<li class="version">mainboard_no : <span>${requestScope.mainboardOne.mainboardNo}</span></li>
-									<li class="designer">category_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
-									<li class="designer">kind : <span>${requestScope.mainboardOne.kind}</span></li>
-									<li class="designer">socket_size : <span>${requestScope.mainboardOne.socketSize}</span></li>
-									<li class="designer">chipset : <span>${requestScope.mainboardOne.chipset}</span></li>
-									<li class="designer">ram_version : <span>${requestScope.mainboardOne.ramVersion}</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- col-lg-3 -->
-
-					<div class="col-lg-6 col-md-6 col-sm-12">
-						<div class="theme_details">
-							<div class="item-description">
-								<p>${requestScope.mainboardOne.memo}</p>
-							</div>
-							<!-- item-description -->
-						</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
 						<!-- theme_details -->
-					</div>
-					<!-- col-lg-6 -->
-					<div class="col-lg-3 col-md-3 col-sm-12">
-							<div class="form-group">
-								<div> 개수 선택 
-									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" method="POST">
-										<input type="number" max="${requestScope.mainboardOne.quantity}" name="quantity" value="1" class="text-center">개 
-										<input type="submit" class="btn btn-large btn-primary" value="담기">
-									</form>
-								</div>
-							</div>
-							<h4 class="text-danger">재고 : ${requestScope.mainboardOne.quantity}</h4>
 							<div class="form-group">
 								<div class="item_price">
 									<h3>
@@ -141,31 +117,58 @@
 							</div>
 							<!-- buttons -->
 							<hr>
-							<div class="rating text-center">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star-o"></i>
-								<p>Users Rating</p>
+							<div class="form-group">
+								<div class="text-center">
+									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+										<div class="details_section  text-center">
+										<br><br>
+											<h3>Item Details</h3>
+											<br>
+											<ul>
+												<li class="version">mainboard_no : <span>${requestScope.mainboardOne.mainboardNo}</span></li>
+												<li class="designer">category_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
+												<li class="designer">kind : <span>${requestScope.mainboardOne.kind}</span></li>
+												<li class="designer">socket_size : <span>${requestScope.mainboardOne.socketSize}</span></li>
+												<li class="designer">chipset : <span>${requestScope.mainboardOne.chipset}</span></li>
+												<li class="designer">ram_version : <span>${requestScope.mainboardOne.ramVersion}</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.mainboardOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" method="POST">
+											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.mainboardOne.quantity}" name="quantity" value="1" class="text-center ">
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.mainboardOne.quantity}</h4>
+									<br><br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> 
+								<!-- theme_details -->
+								</div>
 							</div>
-							<!-- rating -->
+							<br>
 						</div>
-						<!-- theme_details -->
 					</div>
-					<!-- col-lg-3 -->
-
+					<div class="clearfix"></div>
+					</div>
 				</div>
-				<!-- item_details -->
-
-				<div class="clearfix"></div>
-				<div class="divider"></div>
-				<div class="theme_overviews clearfix">
-				<!-- theme / Products overview -->
-
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->

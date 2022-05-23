@@ -38,6 +38,19 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
 	<c:choose>
@@ -95,77 +108,66 @@
 				<div class="divider"></div>
 
 				<div class="item_details">
-
-					<div class="col-lg-3 col-md-3 col-sm-12">
-						<div class="theme_details">
-							<div class="details_section">
-								<h3>Item Details</h3>
-								<ul>
-									<li class="version">storage_no : <span>${requestScope.storageOne.storageNo}</span></li>
-									<li class="designer">company_name : <span>${requestScope.storageOne.companyName}</span></li>
-									<li class="designer">category_name : <span>${requestScope.storageOne.categoryName}</span></li>
-									<li class="designer">storage_interface : <span>${requestScope.storageOne.storageInterface}</span></li>
-									<li class="designer">capacity : <span>${requestScope.storageOne.capacity}</span></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- col-lg-3 -->
-
-					<div class="col-lg-6 col-md-6 col-sm-12">
-						<div class="theme_details">
-							<div class="item-description">
-								<p>${requestScope.storageOne.memo}</p>
-							</div>
-							<!-- item-description -->
-						</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
 						<!-- theme_details -->
-					</div>
-					<!-- col-lg-6 -->
-					<div class="col-lg-3 col-md-3 col-sm-12">
-							<div class="form-group">
-								<div> 개수 선택 
-									<form  class="contact-form" action="${pageContext.request.contextPath}/CartAddStorageController?storageNo=${requestScope.storageOne.storageNo}" method="POST">
-										<input type="number" max="${requestScope.storageOne.quantity}" name="quantity" value="1" class="text-center">개 
-										<input type="submit" class="btn btn-large btn-primary" value="담기">
-									</form>
+						<div class="form-group">
+							<div class="item_price">
+								<h3>
+									<span>${requestScope.caseOne.price}원</span>
+								</h3>
+							</div>
+						</div>
+						<!-- buttons -->
+						<hr>
+						<div class="form-group">
+							<div class="text-center">
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+									<div class="details_section  text-center">
+										<h3>Item Details</h3>
+										<ul>
+											<li class="version">storage_no : <span>${requestScope.storageOne.storageNo}</span></li>
+											<li class="designer">company_name : <span>${requestScope.storageOne.companyName}</span></li>
+											<li class="designer">category_name : <span>${requestScope.storageOne.categoryName}</span></li>
+											<li class="designer">storage_interface : <span>${requestScope.storageOne.storageInterface}</span></li>
+											<li class="designer">capacity : <span>${requestScope.storageOne.capacity}</span></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-							<h4 class="text-danger">재고 : ${requestScope.storageOne.quantity}</h4>
-							<div class="form-group">
-								<div class="item_price">
-									<h3>
-										<span>${requestScope.storageOne.price}원</span>
-									</h3>
+							<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.storageOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form" action="${pageContext.request.contextPath}/CartAddStorageController?storageNo=${requestScope.storageOne.storageNo}" method="POST">
+											개수 선택 &nbsp;  <input type="number" max="${requestScope.storageOne.quantity}" name="quantity" value="1" class="text-center">개
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.storageOne.quantity}</h4>
+									<br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> <br>
+								<!-- theme_details -->
 								</div>
 							</div>
-							<!-- buttons -->
-							<hr>
-							<div class="rating text-center">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-								<i class="fa fa-star-o"></i>
-								<p>Users Rating</p>
-							</div>
-							<!-- rating -->
+							<br>
 						</div>
-						<!-- theme_details -->
 					</div>
-					<!-- col-lg-3 -->
-
+					<div class="clearfix"></div>
+					</div>
 				</div>
-				<!-- item_details -->
-
-				<div class="clearfix"></div>
-
-				<div class="divider"></div>
-
-				<!-- theme / Products overview -->
-
-			</div>
-			<!-- end content -->
-		<!-- end container -->
-	</section>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
