@@ -156,7 +156,7 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<a href="${pageContext.request.contextPath}/UpdateCoolserController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-													<a href="${pageContext.request.contextPath}/DeleteCoolerController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+													<a href="${pageContext.request.contextPath}/DeleteCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
 													<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->

@@ -46,7 +46,4 @@ public class AdminCaseListController extends HttpServlet {
 		request.setAttribute("bay89mmList", bay89mmList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminCaseList.jsp").forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

@@ -185,7 +185,7 @@
 									<div class="bg a0" data-animate="fadeIn">
 										<h3 class="big a1" data-animate="fadeInDown"></h3>
 											<a href="${pageContext.request.contextPath}/UpdateCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-											<a href="${pageContext.request.contextPath}/DeleteCpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+											<a href="${pageContext.request.contextPath}/DeleteCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
 											<a href="${pageContext.request.contextPath}/AdminCpuOneController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 										<div class="portfolio_category text-center a2" data-animate="fadeIn">
 										</div>

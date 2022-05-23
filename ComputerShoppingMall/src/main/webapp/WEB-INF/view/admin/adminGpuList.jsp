@@ -161,7 +161,7 @@
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 												<a href="${pageContext.request.contextPath}/UpdateGpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-												<a href="${pageContext.request.contextPath}/DeleteGpuController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+												<a href="${pageContext.request.contextPath}/DeleteGpuController?gpuNo=${c.gpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
 												<a href="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${c.gpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->

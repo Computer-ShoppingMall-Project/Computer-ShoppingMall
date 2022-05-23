@@ -46,7 +46,8 @@ public class CaseDao {
 		return row;
 	}
 	// case 상품삭제
-	public void deleteCase(int caseNo) {
+	public int deleteCase(int caseNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -65,6 +66,7 @@ public class CaseDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 	// case 상품수정
 	public int updateCase(Case c) {
