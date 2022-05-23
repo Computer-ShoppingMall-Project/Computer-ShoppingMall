@@ -47,34 +47,10 @@
 			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
-
-	<section class="post-wrapper-top">
-		<div class="container">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Detail Order</li>
-				</ul>
-				<h2>${order.createDate} Detail Order</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
-			</div>
-		</div>
-	</section>
-	<!-- end post-wrapper-top -->
-
 	<section class="section1">
 		<div class="container clearfix">
-			<div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+			<div class="content col-lg-9 col-md-9 col-sm-9 col-xs-12 clearfix">
+			<a href="${pageContext.request.contextPath}/MyPaymentController">back</a>
 				<div class="clearfix"></div>
 				<div class="clearfix"></div>
 				<table class="table" data-effect="fade">
@@ -85,6 +61,7 @@
 							<th class="text-center">구매 수량</th>
 							<th class="text-center">주문일</th>
 							<th class="text-center">주문상태</th>
+							<th class="text-center">주문변경</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,6 +72,16 @@
 								<td class="text-center">${order.categoryQuantity}</td>
 								<td class="text-center">${order.createDate}</td>
 								<td class="text-primary text-center">${order.orderStatus}</td>
+								<td>
+									<c:if test="${order.orderStatus eq '입금 확인'}">
+										<a class="btn btn-default btn-xs">주문 취소</a>
+									</c:if>
+									<c:if test="${order.orderStatus eq '배송 완료'}">
+										<div class="btn-group">
+											<a class="btn btn-default btn-xs">교환</a><a class="btn btn-default btn-xs">환불</a>
+										</div>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -103,7 +90,7 @@
 			</div>
 			<!-- end content -->
 
-			<div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+			<div id="sidebar" class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 				<div class="widget">
 					<h4 class="title">
 						<span>RedVelvet</span>
