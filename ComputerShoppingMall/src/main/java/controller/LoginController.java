@@ -77,11 +77,11 @@ public class LoginController extends HttpServlet {
          response.sendRedirect(request.getContextPath() + "/LoginController");
          return;
       }
-      
 		// 장바구니 개수 반환
 		basketDao = new BasketDao();
 		int basetTotalCount = basketDao.basketTotalCount(returnCustomerId);
 		session.setAttribute("basketCount", basetTotalCount);
+		
       // 로그인 성공
       // session에 sessionCustomerId 저장
       session.setAttribute("sessionCustomerId", returnCustomerId);
