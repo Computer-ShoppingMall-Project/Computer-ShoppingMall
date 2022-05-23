@@ -48,18 +48,10 @@ public class CartAddCpuController extends HttpServlet {
 		
 		// vo
 		Cpu cpu = new Cpu(); // 장바구니 insert용
-		Cpu cpuOne = new Cpu(); // cpuOne select용
 		
-		// cpu정보 뽑기
-		cpuOne = cpuDao.selectCpuOne(cpuNo);
-		
-		// 뽑은 정보 담기
-		cpu.setCpuName(cpuOne.getCpuName());
-		cpu.setCategoryName(cpuOne.getCategoryName());
-		cpu.setCpuNo(cpuOne.getCpuNo());
-		cpu.setPrice(cpuOne.getPrice());
+		// cpu정보 넣기
+		cpu = cpuDao.selectCpuOne(cpuNo);
 		cpu.setQuantity(quantity);
-		
 		// dao
 		cpuDao = new CpuDao();
 		int row = cpuDao.insertCartCpu(customerId, cpu);

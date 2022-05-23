@@ -49,16 +49,9 @@ public class CartAddStorageController extends HttpServlet {
 		
 		// vo
 		Storage storage = new Storage();
-		Storage storageOne = new Storage();
 		
 		// storage정보 뽑기
-		storageOne = storageDao.selectStorageOne(storageNo);
-		
-		// 뽑은 정보 담기
-		storage.setStorageName(storageOne.getStorageName());
-		storage.setCategoryName(storageOne.getCategoryName());
-		storage.setStorageNo(storageOne.getStorageNo());
-		storage.setPrice(storageOne.getPrice());
+		storage = storageDao.selectStorageOne(storageNo);
 		storage.setQuantity(quantity);
 		
 		// dao

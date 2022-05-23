@@ -48,17 +48,11 @@ public class CartAddCaseController extends HttpServlet {
 		
 		// vo
 		Case c = new Case(); // 장바구니 insert용
-		Case caseOne = new Case(); // caseOne selecrt용
 		
-		// caseOne정보 뽑기
-		caseOne = caseDao.selectCaseOne(caseNo);
-		
-		// 뽑은 정보 담기
-		c.setCaseName(caseOne.getCaseName());
-		c.setCategoryName(caseOne.getCategoryName());
-		c.setCaseNo(caseOne.getCaseNo());
-		c.setPrice(caseOne.getPrice());
+		// 정보 넣기
+		c = caseDao.selectCaseOne(caseNo);
 		c.setQuantity(quantity);
+		System.out.println("caseOne"+c.toString());
 		
 		// dao
 		caseDao = new CaseDao();

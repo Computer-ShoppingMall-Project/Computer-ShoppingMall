@@ -48,16 +48,9 @@ public class CartAddRamController extends HttpServlet {
 	      
 	     // vo
 	     Ram ram = new Ram();
-	     Ram ramOne = new Ram();
 	     
 	     // ram정보 봅기
-	     ramOne = ramDao.selectRamOne(ramNo);
-	     
-	     // 뽑은 정보 담기
-	     ram.setRamName(ramOne.getRamName());
-	     ram.setCategoryName(ramOne.getCategoryName());
-	     ram.setRamNo(ramOne.getRamNo());
-	     ram.setPrice(ramOne.getPrice());
+	     ram = ramDao.selectRamOne(ramNo);
 	     ram.setQuantity(quantity);
 	      
 	     // dao

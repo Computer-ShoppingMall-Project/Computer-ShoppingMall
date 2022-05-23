@@ -47,16 +47,8 @@ public class CartAddPowerController extends HttpServlet {
 		  
 		// vo
 		Power power = new Power();
-		Power powerOne = new Power();
-		
 		// mainboard정보 뽑기
-		powerOne = powerDao.selectPowerOne(powerNo);
-		
-		// 뽑은 정보 넣기
-		power.setPowerName(powerOne.getPowerName());
-		power.setCategoryName(powerOne.getCategoryName());
-		power.setPowerNo(powerOne.getPowerNo());
-		power.setPrice(powerOne.getPrice());
+		power = powerDao.selectPowerOne(powerNo);
 		power.setQuantity(quantity);
 		  
 		// dao

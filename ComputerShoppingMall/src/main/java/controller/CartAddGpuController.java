@@ -46,15 +46,8 @@ public class CartAddGpuController extends HttpServlet {
 		System.out.println(quantity+"<-quantity");
 		
 		// vo
-		Gpu gpuOne = new Gpu();
 		Gpu gpu = new Gpu();
-		// gpu정보 뽑기
-		gpuOne = gpuDao.selectGpuOne(gpuNo);
-		
-		gpu.setGpuName(gpuOne.getGpuName());
-		gpu.setCategoryName(gpuOne.getCategoryName());
-		gpu.setGpuNo(gpuOne.getGpuNo());
-		gpu.setPrice(gpuOne.getPrice());
+		gpu = gpuDao.selectGpuOne(gpuNo);
 		gpu.setQuantity(quantity);
 		  
 		// dao

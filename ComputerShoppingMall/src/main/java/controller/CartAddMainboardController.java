@@ -47,16 +47,9 @@ public class CartAddMainboardController extends HttpServlet {
 		  
 		// vo
 		Mainboard mainboard = new Mainboard();
-		Mainboard mainboardOne = new Mainboard();
 		
 		// mainboard정보 뽑기
-		mainboardOne = mainboardDao.selectMainboardOne(mainboardNo);
-		
-		// 뽑은 정보 담기
-		mainboard.setMainboardName(mainboardOne.getMainboardName());
-		mainboard.setCategoryName(mainboardOne.getCategoryName());
-		mainboard.setMainboardNo(mainboardOne.getMainboardNo());
-		mainboard.setPrice(mainboardOne.getPrice());
+		mainboard = mainboardDao.selectMainboardOne(mainboardNo);
 		mainboard.setQuantity(quantity);
 		  
 		// dao

@@ -38,6 +38,13 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function del() {
+		if (confirm('Are you sure you want to delete the QNA?')) {
+			document.getElementById('deleteQna').click();
+		}
+	}
+</script>
 <body>
 	<!-- header적용 -->
 	<c:choose>
@@ -124,7 +131,7 @@
 								<div class="text-center">
 									<form  class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
 											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input type="submit" class="btn btn-large btn-primary" value="담기">
+											<input id="Btn"  type="submit" class="btn btn-large btn-primary" value="담기">
 									</form>
 								</div>
 							<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
@@ -170,5 +177,19 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	    $('#Btn').click(function() {
+	        var result = confirm('Are you sure you want to do this?');
+			var url = "%{pageContext.request.contextPath}/MybasketController";
+	        if(result) {
+	           //yes
+	           window.location.replace(url);
+	        } else {
+	        	location.replace('%{pageContext.request.contextPath}/MybasketController');
+	        }
+	    });
+	});
+	</script>
 </body>
 </html>
