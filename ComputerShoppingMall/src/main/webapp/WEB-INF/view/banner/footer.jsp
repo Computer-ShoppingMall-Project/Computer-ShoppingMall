@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <footer class="footer">
     <div class="container">
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">About us</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since the 1500s..</p>
-        <a class="button small" href="#">read more</a>
+        <p>Redvelvet Team project @Since By 2022.05 </p>
+        <a class="button small" href="https://github.com/Computer-ShoppingMall-Project"> Git Site</a>
       </div>
       <!-- end widget -->
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Recent Posts</h4>
         <ul class="recent_posts">
           <li>
-            <a href="home1.jsp#">
-						<img src="${pageContext.request.contextPath}/img/recent_post_01.png" alt="" />Our New Dashboard Is Here</a>
-            <a class="readmore" href="#">read more</a>
+            <a href="${pageContext.request.contextPath}/image/cpuNo01.JPG">
+						<img src="${pageContext.request.contextPath}/image/cpuNo01.JPG" alt="" />Our New CPU Is Here</a>
+            <a class="readmore" href="${pageContext.request.contextPath}/CpuListController">read more</a>
           </li>
           <li>
-            <a href="home1.jsp#">
-						<img src="${pageContext.request.contextPath}/img/recent_post_02.png" alt="" />Design Is In The Air</a>
-            <a class="readmore" href="#">read more</a>
+            <a href="${pageContext.request.contextPath}/image/gpuNo01.JPG">
+						<img src="${pageContext.request.contextPath}/image/gpuNo01.JPG" alt="" />Our New GPU Is Here</a>
+            <a class="readmore" href="${pageContext.request.contextPath}/GpuListController">read more</a>
           </li>
         </ul>
         <!-- recent posts -->
@@ -28,10 +28,10 @@
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Get In Touch</h4>
         <ul class="contact_details">
-          <li><i class="fa fa-envelope-o"></i> info@yoursite.com</li>
-          <li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-          <li><i class="fa fa-home"></i> Some Fine Address, 887, Madrid, Spain.</li>
-          <li><a href="#"><i class="fa fa-map-marker"></i> View large map</a></li>
+          <li><i class="fa fa-envelope-o"></i><a href="https://github.com/Computer-ShoppingMall-Project"> RedVelvet Github</a></li>
+          <li><i class="fa fa-phone-square"></i> 010 1234 5678</li>
+          <li><i class="fa fa-home"></i> Korea RedVelvet</li>
+          <li><i class="fa fa-map-marker"></i><a href="https://github.com/Computer-ShoppingMall-Project"> View RedVelvet Github</a></li>
         </ul>
         <!-- contact_details -->
       </div>
@@ -39,14 +39,14 @@
       <div class="widget col-lg-3 col-md-3 col-sm-12">
         <h4 class="title">Flickr Stream</h4>
         <ul class="flickr">
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_01.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_02.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_03.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_04.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_05.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_06.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_07.jpg"></a></li>
-          <li><a href="#"><img alt="" src="${pageContext.request.contextPath}/img/flickr_08.jpg"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo01.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo02.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo03.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo04.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo05.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo06.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo07.JPG"></a></li>
+          <li><a href="${pageContext.request.contextPath}/CaseListController"><img alt="" src="${pageContext.request.contextPath}/image/caseNo08.JPG"></a></li>
         </ul>
       </div>
       <!-- end widget -->
@@ -66,16 +66,19 @@
             -->
             Created with MaxiBiz template by <a href="https://templatemag.com/">TemplateMag</a>
           </div>
+          <div>
+				<p>Since 2022.05 HomePage Made By<a href="https://github.com/Computer-ShoppingMall-Project"> RedVelvet Github</a></p>
+          </div>
         </div>
         <!-- end widget -->
         <div class="col-lg-6 col-md-6 col-sm-12 columns text-right">
           <div class="footer-menu right">
             <ul class="menu">
-              <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-              <li><a href="${pageContext.request.contextPath}/about.jsp">About</a></li>
-              <li><a href="#">Sitemap</a></li>
-              <li><a href="#">Site Terms</a></li>
-              <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
+              <li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/MyBasketController">MyBasket</a></li>
+              <li><a href="${pageContext.request.contextPath}/QnaListController">Q&A List</a></li>
+              <li><a href="${pageContext.request.contextPath}/InsertQnaController">Q&A Write</a></li>
+              <li><a href="${pageContext.request.contextPath}/SelectMemberOneController">Member</a></li>
             </ul>
           </div>
         </div>

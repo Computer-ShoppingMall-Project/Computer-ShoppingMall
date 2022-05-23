@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>RedVelvet</title>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -37,9 +38,6 @@
 ======================================================= -->
 </head>
 <body>
-	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -47,7 +45,7 @@
 					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 					<li>404 - Not Found</li>
 				</ul>
-				<h2>404 - NOT FOUND</h2>
+				<h2>페이지에 접근불가지롱</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -82,10 +80,6 @@
 		<!-- end container -->
 	</section>
 	<!-- end section -->
-
-	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
