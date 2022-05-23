@@ -10,7 +10,7 @@
 <meta content="" name="description">
 
 <!-- Favicons -->
-<link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+<link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
