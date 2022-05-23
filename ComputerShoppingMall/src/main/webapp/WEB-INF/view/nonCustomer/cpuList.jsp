@@ -94,7 +94,7 @@
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
 
@@ -247,21 +247,21 @@
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
-	<script src="lib/jquery/jquery.min.js"></script>
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="lib/php-mail-form/validate.js"></script>
-	<script src="lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="lib/isotope/isotope.min.js"></script>
-	<script src="lib/hover/hoverdir.js"></script>
-	<script src="lib/hover/hoverex.min.js"></script>
-	<script src="lib/unveil-effects/unveil-effects.js"></script>
-	<script src="lib/owl-carousel/owl-carousel.js"></script>
-	<script src="lib/jetmenu/jetmenu.js"></script>
-	<script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script src="lib/jigowatt/jigowatt.js"></script>
-	<script src="lib/easypiechart/easypiechart.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 	
 	<!-- Template Main Javascript File -->
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
