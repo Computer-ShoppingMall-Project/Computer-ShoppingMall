@@ -36,6 +36,13 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+</script>
 <body>
 	<!-- header적용 -->
 	<c:choose>
@@ -64,35 +71,43 @@
 			
 			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 			<a href="${pageContext.request.contextPath}/CpuListController" type="button" style="float:right" class="btn btn-outline-primary">추가구매</a>
-				<table class="table" data-effect="fade">
-					<thead>
-						<tr>
-							<th>부품 이름</th>
-							<th>부품 종류</th>
-							<th>부품 번호</th>
-							<th>가격</th>
-							<th>수량</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="basket" items="${basketList}">
+				<form action="${pageContext.request.contextPath}/UpdateMyBasketController" method="POST">
+					<table class="table" data-effect="fade">
+						<thead>
 							<tr>
-								<td>${basket.productName}</td>
-								<td>${basket.categoryName}</td>
-								<td>${basket.productNumber}</td>
-								<td>${basket.price}</td>
-								<td>
-									<div class="col-sm-5">
-										<input type="number" name="basketNo" value="${basket.quantity}" min="1" max="10"  class="text-center form-control">
-									</div>
-										<a href="${pageContext.request.contextPath}/UpdateBasketController?basketNo=${basket.basketNo}">수정</a>
-								</td>
-								<td><a href="${pageContext.request.contextPath}/DeleteBasketController?basketNo=${basket.basketNo}">삭제</a></td>
+								<th>부품 이름</th>
+								<th>부품 종류</th>
+								<th>부품 번호</th>
+								<th>가격</th>
+								<th>수량</th>
+								<th></th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach var="basket" items="${basketList}">
+								<tr>
+									<td>${basket.productName}</td>
+									<td>${basket.categoryName}</td>
+									<td>${basket.productNumber}</td>
+									<td>${basket.price*basket.quantity}</td>
+									<td>
+										<input type="hidden" name="basketNo" value="${basket.basketNo}">
+										<input type="number" name="quantity" value="${basket.quantity}" min="1" max="9"  class="text-center form-control">
+									</td>
+									<td>
+										<button type="submit" class="btn btn-success">수정</button>
+									</td>
+									<td>
+										<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/DeleteBasketController?basketNo=${basket.basketNo}">삭제</a>
+									</td>
+									<td>
+										<a href="#" class="btn btn-large btn-danger" onclick="plus();">delete</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</form>
 				<c:choose>
 					<c:when test="${basketCount eq 0}">
 						<h4 class="text-primary text-center">등록된 상품이 없습니다</h4>

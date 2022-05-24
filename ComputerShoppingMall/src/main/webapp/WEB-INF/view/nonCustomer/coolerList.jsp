@@ -194,10 +194,19 @@
 										<div class="he-view">
 											<div class="bg a0" data-animate="fadeIn">
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
-												<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-												<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.coolerNo}&&productName=${c.coolerName}&&price=${c.coolerNo}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
-												<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
-												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
+													<c:choose>
+														<c:when test="${sessionAdminId != null }">
+															<a href="${pageContext.request.contextPath}/UpdateCoolserController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
+															<a href="${pageContext.request.contextPath}/DeleteCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+															<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+														</c:when>
+														<c:otherwise>
+															<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
+															<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.coolerNo}&&productName=${c.coolerName}&&price=${c.coolerNo}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
+														</c:otherwise>
+													</c:choose>		
+													<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 												<!-- portfolio_category -->
 											</div>
 											<!-- he bg -->

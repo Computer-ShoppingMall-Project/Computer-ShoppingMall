@@ -55,7 +55,7 @@ public class BasketDao {
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setInt(1, basketNo); 
-			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			row=stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 			if(row > 0) {
 				System.out.println("입력성공");
 			} else {
@@ -117,7 +117,7 @@ public class BasketDao {
 		try {
 			stmt = conn.prepareStatement(sql); // sql 쿼리 셋팅
 			stmt.setString(1, customerId); // customer_id = ?
-			stmt.executeUpdate(); // row에 입력 성공여부 값 대입
+			row=stmt.executeUpdate(); // row에 입력 성공여부 값 대입
 			if(row > 0) {
 				System.out.println("입력성공");
 			} else {

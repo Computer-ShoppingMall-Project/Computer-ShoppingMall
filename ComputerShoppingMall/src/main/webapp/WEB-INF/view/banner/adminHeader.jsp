@@ -43,14 +43,14 @@
 							<li><a href="${pageContext.request.contextPath}/IndexController">홈</a></li>
 							<li><a href="#">조립PC</a>
 		                        <ul class="dropdown">
-		                           <li><a href="${pageContext.request.contextPath}/AdminCpuListController">CPU</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminMainboardListController">메인보드</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminRamListController">RAM</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminGpuListController">그래픽카드</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminStorageListController">SSD/HDD</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminCaseListController">케이스</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminPowerListController">파워</a></li>
-		                           <li><a href="${pageContext.request.contextPath}/AdminCoolerListController">쿨러</a></li>
+		                          	<li><a href="${pageContext.request.contextPath}/CpuListController">CPU</a></li>
+									<li><a href="${pageContext.request.contextPath}/MainboardListController">메인보드</a></li>
+									<li><a href="${pageContext.request.contextPath}/RamListController">RAM</a></li>
+									<li><a href="${pageContext.request.contextPath}/GpuListController">그래픽카드</a></li>
+									<li><a href="${pageContext.request.contextPath}/StorageListController">SSD/HDD</a></li>
+									<li><a href="${pageContext.request.contextPath}/CaseListController">케이스</a></li>
+									<li><a href="${pageContext.request.contextPath}/PowerListController">파워</a></li>
+									<li><a href="${pageContext.request.contextPath}/CoolerListController">쿨러</a></li>
 		                        </ul>
 		                    </li>
 							<li><a href="#">상품 등록</a>
