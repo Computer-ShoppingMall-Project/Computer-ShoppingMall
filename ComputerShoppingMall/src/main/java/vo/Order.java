@@ -12,13 +12,20 @@ public class Order {
 	private String createDate;
 	private String productName;
 	private int productCount;
+	private String refundCheck;
+	private String cancelCheck;
+	private int zipCode;
+	private String roadAddress;
+	private String detailAddress;
 	
 	@Override
 	public String toString() {
 		return "Order [orderNo=" + orderNo + ", basketNo=" + basketNo + ", customerId=" + customerId + ", categoryName="
 				+ categoryName + ", categoryNumber=" + categoryNumber + ", categoryPrice=" + categoryPrice
 				+ ", categoryQuantity=" + categoryQuantity + ", orderStatus=" + orderStatus + ", createDate="
-				+ createDate + ", productName=" + productName + ", productCount=" + productCount + "]";
+				+ createDate + ", productName=" + productName + ", productCount=" + productCount + ", refundCheck="
+				+ refundCheck + ", cancelCheck=" + cancelCheck + ", zipCode=" + zipCode + ", roadAddress=" + roadAddress
+				+ ", detailAddress=" + detailAddress + "]";
 	}
 
 	public int getOrderNo() {
@@ -107,5 +114,45 @@ public class Order {
 
 	public void setProductCount(int productCount) {
 		this.productCount = productCount;
+	}
+
+	public String getRefundCheck() {
+		return refundCheck;
+	}
+
+	public void setRefundCheck(String refundCheck) {
+		this.refundCheck = refundCheck;
+	}
+
+	public String getCancelCheck() {
+		return cancelCheck;
+	}
+
+	public void setCancelCheck(String cancelCheck) {
+		this.cancelCheck = cancelCheck;
+	}
+
+	public int getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(int zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getRoadAddress() {
+		return roadAddress;
+	}
+
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
+	}
+
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 }
