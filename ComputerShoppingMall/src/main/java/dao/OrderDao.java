@@ -9,7 +9,7 @@ import vo.Order;
 
 public class OrderDao {
 	// 결제
-	public int insertOrder(String customerId) {
+	public int insertOrder(String customerId, int zipCode, String roadAddress, String detailAddress) {
 		int row = 0;
 		// DB 초기화
 		Connection conn = null;
@@ -17,8 +17,8 @@ public class OrderDao {
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
-		String orderSql = "INSERT INTO `order` (basket_no, customer_id,product_name, category_name , category_number, category_price, category_quantity, order_status, create_date)"
-				+ "   SELECT basket_no, customer_id, product_name, category_name,  product_number, price, quantity, '입금 확인' ,NOW()" // 바로 입금 확인 처리되게끔 처리
+		String orderSql = "INSERT INTO `order` (basket_no, customer_id, product_name, category_name , category_number, category_price, category_quantity, order_status, create_date, zip_code, road_address, detail_address)"
+				+ "   SELECT basket_no, customer_id, product_name, category_name, product_number, price, quantity, '입금 확인', NOW(), ?, ?, ?" // 바로 입금 확인 처리되게끔 처리 + 주소 입력
 				+ "   FROM basket WHERE customer_id = ?";
 		String deleteBasketSql = "DELETE b"
 				+ " FROM basket b INNER JOIN `order` o"
@@ -27,7 +27,10 @@ public class OrderDao {
 		try {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(orderSql);
-			stmt.setString(1, customerId);
+			stmt.setInt(1, zipCode);
+			stmt.setString(2, "'" + roadAddress + "'");
+			stmt.setString(3, "'" + detailAddress + "'");
+			stmt.setString(4, customerId);
 			row = stmt.executeUpdate();
 			stmt.close();
 			
@@ -77,6 +80,9 @@ public class OrderDao {
 				+ "	 	,category_quantity categoryQuantity"
 				+ "		,create_date createDate"
 				+ "		,order_status orderStatus"
+				+ "		,zip_code zipCode"
+				+ "		,road_address roadAddress"
+				+ "		,detail_address detailAddress"
 				+ " FROM `order`"
 				+ " WHERE customer_id = ? AND create_date = ?";
 		try {
@@ -96,6 +102,9 @@ public class OrderDao {
 				checkout.setCreateDate(rs.getString("createDate"));
 				checkout.setOrderStatus(rs.getString("orderStatus"));
 				checkout.setProductName(rs.getString("productName"));
+				checkout.setZipCode(rs.getInt("zipCode"));
+				checkout.setRoadAddress(rs.getString("roadAddress"));
+				checkout.setDetailAddress(rs.getString("detailAddress"));
 				list.add(checkout);
 			}
 		} catch (SQLException e) {
@@ -173,6 +182,9 @@ public class OrderDao {
 				+ "	, o.category_quantity categoryQuantity"
 				+ "	, o.create_date createDate"
 				+ " , o.order_status orderStatus"
+				+ "	, o.zip_code zipCode"
+				+ "	, o.road_address roadAddress"
+				+ "	, o.detail_address detailAddress"
 				+ "	, COUNT(*) cnt"
 				+ " FROM `order` o"
 				+ " GROUP BY customer_id, create_date"
@@ -192,6 +204,9 @@ public class OrderDao {
 				o.setCreateDate(rs.getString("createDate"));
 				o.setOrderStatus(rs.getString("orderStatus"));
 				o.setProductName(rs.getString("productName"));
+				o.setZipCode(rs.getInt("zipCode"));
+				o.setRoadAddress(rs.getString("roadAddress"));
+				o.setDetailAddress(rs.getString("detailAddress"));
 				o.setProductCount(rs.getInt("cnt"));
 				list.add(o);
 			}

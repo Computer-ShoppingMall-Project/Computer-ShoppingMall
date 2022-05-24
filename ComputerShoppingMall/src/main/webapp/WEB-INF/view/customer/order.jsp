@@ -27,9 +27,10 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- =======================================================
     Template Name: MaxiBiz
     Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
@@ -62,7 +63,7 @@
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" />
+							<input type="image" src="${pageContext.request.contextPath}img/pixel.gif" class="searchsubmit" alt="" />
 							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
@@ -74,7 +75,7 @@
 	<!-- customerId -->
 	<section class="section1">
 		<div class="container clearfix">
-			<h5 class="title">PERSONAL INFORMATION</h5>
+			<h5 class="title">주문자 정보</h5>
 
 			<form id="personalinfo" action="" name="personalinfo" method="post">
 				<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
@@ -87,18 +88,25 @@
 							<input type="text" name="lname" id="lname" class="form-control" value="${requestScope.customer.phone}">
 					</label>
 				</div>
-
-				<div class="col-lg-1 col-md-4 col-sm-12">
-					<label for="lname">Zip_Code </label> 
-					<input type="text" name="ZipCode" id="Zip_Code" class="form-control"value="${requestScope.customer.zipCode}">
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12">
-					<label for="lname">Road_Address </label>
-					<input type="text" name="roadAddress" id="roadAddress" class="form-control" value="${requestScope.customer.roadAddress}">
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12">
-					<label for="lname">Detail_Address </label>
-					<input type="text" name="detailAddress" id="detailAddress" class="form-control" value="${requestScope.customer.detailAddress}">
+				<h5 class="title">배송 받을 주소</h5>
+				<div>배송 받을 주소가 회원 정보에 저장된 주소와 다를시, 주소를 새로 입력하십시오</div>
+				<div class="divider"></div>
+				<div>
+					<div class="col-lg-1 col-md-4 col-sm-12">
+						<label for="lname">Zip_Code </label> 
+						<input type="text" name="zipCode" id="zipcode" class="form-control" onclick="execDaumPostcode()" value="${requestScope.customer.zipCode}" class="form-control">
+						<span id="zipcodeHelper" class="helper"></span>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<label for="lname">Road_Address </label>
+						<input type="text" name="roadAddress" id="roadAddress" class="form-control" value="${requestScope.customer.roadAddress}" class="form-control">
+						<span id="roadHelper" class="helper"></span>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<label for="lname">Detail_Address </label>
+						<input type="text" name="detailAddress" id="detailAddress" class="form-control" value="${requestScope.customer.detailAddress}" class="form-control">
+						<span id="detailHelper" class="helper"></span>
+					</div>
 				</div>
 				<!-- customerId end -->
 				<div class="clearfix"></div>
@@ -108,12 +116,13 @@
 
 				<h5 class="title">무통장입금</h5>
 
-				<label for="">다음 질문 중 하나라도 해당하는 경우 입금하지 말고 즉시 경찰서에 신고하시기 바랍니다.</label>
-				<div>1. 다른 사람으로부터 상품권 구매로 일부 또는 전체 금액을 입금받기로 했습니까?</div>
-				<div>2. 상품권 일부 또는 전체를 대리구매하여 카카오톡 등 메신저로 다른 사람에게 주기로 했습니까?</div>
-				<div>3. 네이트온/카카오톡 등 메신저에서 지인이 급한 돈이 필요하다고 상품권을 요구했습니까?</div>
-				<div>4. 중고나라 또는 번개장터에서 물품대금을 현금 대신 상품권으로 요구 받았습니까?</div>
-				<div>5. 본인이 직접 게임 또는 쇼핑에 사용하기 위한 목적이 아닙니까?</div>
+				<label for="">무통장 입금시 주의 사항</label>
+				<div>1. 결제창에 입력한 입금자명과 실제 주문금액을 이체한 계좌의 입금자명(예금주)이 다른 경우 누락이 됩니다.</div>
+				<div>2. 결제금액과 실제 입금금액이 다른 경우 누락이 됩니다.</div>
+				<div>3. 주문을 완료하기 전에 입금을 먼저 한 경우에도 누락됩니다.</div>
+				<div>4. 개인결제나 추가입금, 주문취소 후 재결제, 주문취소 후 고객의 임의 입금 등의 경우 누락됩니다.</div>
+				<div>5. 주문이 접수된지 3일이 지난 경우 자동입금확인 처리가 되지 않아 해당 주문 건은 수동으로 처리해야 합니다.</div>
+				<div> ※ 자동입금확인 서비스는 서비스 계좌 최초 등록시 당일 데이터부터 수집 됩니다.</div>
 				<div class="clearfix"></div>
 				<div class="divider"></div>
 
@@ -196,5 +205,35 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script>
+		// 카카오 주소api
+		function execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var roadAddr = data.roadAddress; // 도로명 주소 
+					var extraRoadAddr = ''; // 참고 항목
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('zipcode').value = data.zonecode;
+					document.getElementById('roadAddress').value = roadAddr;
+				}
+			}).open();
+		}
+	</script>
 </body>
 </html>
