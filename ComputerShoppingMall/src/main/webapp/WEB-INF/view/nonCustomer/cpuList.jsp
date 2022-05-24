@@ -69,6 +69,7 @@
 		text-decoration: none;
 	}
 </style>
+<!-- 
 <script type="text/javascript">
 	function listView(cpuNo){
 	    let f = document.createElement('form');
@@ -84,6 +85,14 @@
 	    f.setAttribute('action', 'view.do');
 	    document.body.appendChild(f);
 	    f.submit();
+	}
+</script>
+ -->
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
 	}
 </script>
 </head>
@@ -213,9 +222,9 @@
 										<div class="bg a0" data-animate="fadeIn">
 											<h3 class="big a1" data-animate="fadeInDown"></h3>
 												<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
-												<a href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.cpuNo}&&productName=${c.cpuName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
-											<div class="portfolio_category text-center a2" data-animate="fadeIn">
-											</div>
+												<a  hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.cpuNo}&&productName=${c.cpuName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
+												<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
+											<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 											<!-- portfolio_category -->
 										</div>
 										<!-- he bg -->
@@ -247,21 +256,21 @@
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
-	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
+	<script src="lib/jquery/jquery.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="lib/php-mail-form/validate.js"></script>
+	<script src="lib/prettyphoto/js/prettyphoto.js"></script>
+	<script src="lib/isotope/isotope.min.js"></script>
+	<script src="lib/hover/hoverdir.js"></script>
+	<script src="lib/hover/hoverex.min.js"></script>
+	<script src="lib/unveil-effects/unveil-effects.js"></script>
+	<script src="lib/owl-carousel/owl-carousel.js"></script>
+	<script src="lib/jetmenu/jetmenu.js"></script>
+	<script src="lib/animate-enhanced/animate-enhanced.min.js"></script>
+	<script src="lib/jigowatt/jigowatt.js"></script>
+	<script src="lib/easypiechart/easypiechart.min.js"></script>
 	
 	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
