@@ -11,11 +11,29 @@ import javax.servlet.http.HttpSession;
 import dao.CaseDao;
 import vo.Case;
 
-@WebServlet("/login/UpdateCaseController")
+@WebServlet("/UpdateCaseController")
 public class UpdateCaseController extends HttpServlet {
 	private CaseDao caseDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/admin/deleteCaseForm.jsp").forward(request, response);
+		// 세션확인
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// dao
+		caseDao = new CaseDao();
+		// vo
+		Case c = new Case();
+		if(request.getParameter("caseNo") != null ){
+			int caseNo = Integer.parseInt(request.getParameter("caseNo"));
+			c = caseDao.selectCaseOne(caseNo);
+			
+			request.setAttribute("caseOne", c);
+			request.getRequestDispatcher("/WEB-INF/view/admin/updateCaseForm.jsp").forward(request, response);
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인

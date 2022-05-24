@@ -14,21 +14,22 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
+	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,116 +38,142 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
-<body>
-<script>
-    function checkIt(값) {
-            var form=document.abc;
-            form.companyName.value=case;
-            form.submit();
-    }
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
 </script>
-	<div class="row">
+<body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li>CASE</li>
 				</ul>
-				<h2>상품등록</h2>
+				<h2>CASE</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
+	<section class="marketplace-top">
+		<div id="market-wrapper">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400"
+					height="200" src="${pageContext.request.contextPath}/image/${requestScope.caseOne.caseImageName}" alt="">
+			</div>
+			<!-- end item_image -->
+		</div>
+	</section>
+
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<div class="col-lg-3 col-md-6 col-sm-12"></div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>CASE</span>
-					</h4>
-					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController">
-						<div class="form-group">
-							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="caseSize">
-								<option value="" selected disabled hidden>caseSize</option>
-								<option value="빅타워">빅타워</option>
-								<option value="미들타워">미들타워</option>
-								<option value="미니타워">미니타워</option>
-								<option value="미니ITX">미니ITX</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="text" name="gpuSize" class="form-control" placeholder="gpuSize">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="bay89mm">
-								<option value="" selected disabled hidden>bay89mm</option>
-								<option value="6">6</option>
-								<option value="4">4</option>
-								<option value="3">3</option>
-								<option value="2">2</option>
-								<option value="1">1</option>
-								<option value="0">0</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="bay64mm">
-								<option value="" selected disabled hidden>bay64mm</option>
-								<option value="6">6</option>
-								<option value="4">4</option>
-								<option value="2">2</option>
-								<option value="1">1</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="caseImage" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="text" name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="hidden" name="categoryName" class="form-control" varlue=case>
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
+				<c:if test="${sessionAdminId != null }">
+					<div>
+						<a href="UpdateCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-info">UPDATE</a>
+						<a href="DeleteCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-danger">DELETE</a>
+					</div>
+				</c:if>
+				<div class="general-title text-center">
+					<h3>${requestScope.updateCaseForm.caseNo}</h3>
+					<hr>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="item_details">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<!-- theme_details -->
+							<div class="form-group">
+								<div class="item_price">
+									<h3>
+										<span>${requestScope.caseOne.price}원</span>
+									</h3>
+								</div>
+							</div>
+							<!-- buttons -->
+							<hr>
+							<div class="form-group">
+								<div class="text-center">
+									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+										<div class="details_section  text-center">
+											<h3>Item Details</h3>
+											<ul>
+												<li class="version">case_no : <span>${requestScope.caseOne.caseNo}</span></li>
+												<li class="version">case_name : <span>${requestScope.caseOne.categoryName}</span></li>
+												<li class="designer">case_size : 
+												<input type ="number" name="caseSize" value="${requestScope.caseOne.caseSize}">
+												<li class="designer">gpu_size : 
+												<input type ="number" name="gpuSize" value="${requestScope.caseOne.gpuSize }">
+												<li class="designer">89cm_bay : 
+												<input type = "number" name="bay89mm" value="${requestScope.caseOne.bay89mm}">
+												<li class="designer">64cm_bay : 
+												<input type ="number" name="bay64mm" value="${requestScope.caseOne.bay64mm}">
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.caseOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
+											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center ">
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
+									<br><br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> <br>
+								<!-- theme_details -->
+								</div>
+							</div>
+							<br><br>
 						</div>
 					</div>
-					</form>
+					<div class="clearfix"></div>
+					</div>
 				</div>
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+			</section>
 	<!-- end section -->
-
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
+
+	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
