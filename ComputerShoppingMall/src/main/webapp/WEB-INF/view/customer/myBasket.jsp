@@ -57,7 +57,7 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 					<li>My Basket</li>
 				</ul>
 				<h2>My Basket</h2>

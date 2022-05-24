@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,15 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MainboardDao;
-import vo.Mainboard;
+import dao.RamDao;
+import vo.Ram;
 
-/**
- * Servlet implementation class AdminRamListController
- */
 @WebServlet("/AdminRamListController")
 public class AdminRamListController extends HttpServlet {
-	private MainboardDao mainboardDao;
+	private RamDao ramDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -27,27 +25,21 @@ public class AdminRamListController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		mainboardDao = new MainboardDao();
 		
-		// 상세보기 받아오기 -> 상품명, 가격 mainboardName, price
-		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		ramDao = new RamDao();
+		// ram 제목, 가격 
+		ArrayList<Ram> rmaList = ramDao.selectRamList();
 		// COMPANY
-		List<String> companyList = mainboardDao.companyKind();
-		// CPU Socket
-		List<String> socketSizeList = mainboardDao.socketSizeKind();
-		// CHIPSET
-		List<String> chipsetList = mainboardDao.chipsetKind();
-		// RAM VERSION
-		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		ArrayList<String> companyList = ramDao.companyKind();
 		// KIND
-		List<String> kindList = mainboardDao.kindKind();
+		ArrayList<String> kindList = ramDao.kindKind();
 		
-		request.setAttribute("mainboadList", mainboadList);
+		int count = rmaList.size(); // 상품 개수(0개일시, 조건해당 상품 없다는 메세지 띄우기 용도 + 개수 표시)
+		
+		request.setAttribute("ramList", rmaList);
 		request.setAttribute("companyList", companyList);
-		request.setAttribute("socketSizeList", socketSizeList);
-		request.setAttribute("chipsetList", chipsetList);
-		request.setAttribute("ramVersionList", ramVersionList);
 		request.setAttribute("kindList", kindList);
+		request.setAttribute("count", count);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminRamList.jsp").forward(request, response);
 	}
 }

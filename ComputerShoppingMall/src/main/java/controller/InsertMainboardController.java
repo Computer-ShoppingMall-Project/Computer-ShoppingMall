@@ -2,13 +2,14 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -28,7 +29,26 @@ public class InsertMainboardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		mainboardDao = new MainboardDao();
+		// 상세보기 받아오기
+		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		// COMPANY
+		List<String> companyList = mainboardDao.companyKind();
+		// CPU Socket
+		List<String> socketSizeList = mainboardDao.socketSizeKind();
+		// CHIPSET
+		List<String> chipsetList = mainboardDao.chipsetKind();
+		// RAM VERSION
+		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		// KIND
+		List<String> kindList = mainboardDao.kindKind();
 		
+		request.setAttribute("mainboadList", mainboadList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("socketSizeList", socketSizeList);
+		request.setAttribute("chipsetList", chipsetList);
+		request.setAttribute("ramVersionList", ramVersionList);
+		request.setAttribute("kindList", kindList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertMainboardForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -115,8 +115,7 @@
 								<div class="text-center">
 									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
 										<div class="details_section  text-center">
-											<h3>Item Details</h3>
-											<br>
+										<h3>Item Details</h3>
 											<ul>
 												<li class="version">cooler_no : <span>${requestScope.coolerOne.coolerNo}</span></li>
 												<li class="designer">category_name : <span>${requestScope.coolerOne.categoryName}</span></li>
@@ -169,7 +168,7 @@
 	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
-	<script src="${pageContext.request.contextPath}lib/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>

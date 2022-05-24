@@ -66,22 +66,10 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 					<li>Main Product</li>
 				</ul>
 				<h2>STORAGE</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
@@ -118,7 +106,7 @@
 						<div class="form-group">
 							<div class="item_price">
 								<h3>
-									<span>${requestScope.caseOne.price}원</span>
+									<span>${requestScope.storageOne.price}원</span>
 								</h3>
 							</div>
 						</div>

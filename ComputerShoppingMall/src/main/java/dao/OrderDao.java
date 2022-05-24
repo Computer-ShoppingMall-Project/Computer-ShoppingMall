@@ -28,8 +28,8 @@ public class OrderDao {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(orderSql);
 			stmt.setInt(1, zipCode);
-			stmt.setString(2, "'" + roadAddress + "'");
-			stmt.setString(3, "'" + detailAddress + "'");
+			stmt.setString(2, roadAddress);
+			stmt.setString(3,detailAddress);
 			stmt.setString(4, customerId);
 			row = stmt.executeUpdate();
 			stmt.close();

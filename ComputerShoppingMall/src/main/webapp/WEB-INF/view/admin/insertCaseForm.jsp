@@ -46,20 +46,9 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 				</ul>
 				<h2>상품등록</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
@@ -77,20 +66,20 @@
 						<div class="form-group">
 							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
 						</div>
-						<div class="form-group">
-							<select class="form-group" name="caseSize">
+						<div>
+							<select class="form-group form-control" name="caseSize">
 								<option value="" selected disabled hidden>caseSize</option>
-								<option value="빅타워">빅타워</option>
-								<option value="미들타워">미들타워</option>
-								<option value="미니타워">미니타워</option>
-								<option value="미니ITX">미니ITX</option>
+								<c:forEach var="c" items="caseSizeList">
+									<option value="${c}">${c}</option>
+								</c:forEach>
 							</select>
 						</div>
-						<div class="form-group">
+						<div>
+						
 							<input type="text" name="gpuSize" class="form-control" placeholder="gpuSize">
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="bay89mm">
+							<select class="form-group form-control" name="bay89mm">
 								<option value="" selected disabled hidden>bay89mm</option>
 								<option value="6">6</option>
 								<option value="4">4</option>
@@ -101,7 +90,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<select class="form-group" name="bay64mm">
+							<select class="form-group form-control" name="bay64mm">
 								<option value="" selected disabled hidden>bay64mm</option>
 								<option value="6">6</option>
 								<option value="4">4</option>
@@ -113,7 +102,7 @@
 							<input type="file" name="image" class="form-control" placeholder="Img">
 						</div>
 						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
+							<input type="number" name="quantity" class="form-control" min=1 placeholder="Quantity">
 						</div>
 						<div class="form-group">
 							<input type="number" name="price" class="form-control" placeholder="Price">

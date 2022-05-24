@@ -58,17 +58,6 @@
 				</ul>
 				<h2>Order</h2>
 			</div>
-			<!-- search -->
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}img/pixel.gif" class="searchsubmit" alt="" />
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->

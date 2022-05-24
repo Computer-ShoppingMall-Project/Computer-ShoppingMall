@@ -84,14 +84,15 @@
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/view/banner/header.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
+	
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="/IndexController">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 					<li>Product</li>
 				</ul>
 				<h2>Product</h2>
@@ -180,9 +181,19 @@
 											<div class="he-view">
 												<div class="bg a0" data-animate="fadeIn">
 													<h3 class="big a1" data-animate="fadeInDown"></h3>
-														<a href="${pageContext.request.contextPath}/CartAddRamController?ramNo=${c.ramNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
-														<a hidden="hidden" style="display: none;" id="plusCart" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.ramNo}&&productName=${c.ramName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"></a>
-														<a href="#"  onclick="plus();" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+													<c:choose>
+														<c:when test="${sessionAdminId != null }">
+															<a href="${pageContext.request.contextPath}/UpdateRamController?ramNo=${c.ramNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
+															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteRamController?ramNo=${c.ramNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
+															<a href="${pageContext.request.contextPath}/CartAddRamController?ramNo=${c.ramNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+														</c:when>
+														<c:otherwise>
+															<a href="${pageContext.request.contextPath}/CartAddRamController?ramNo=${c.ramNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
+															<a hidden="hidden" style="display: none;" id="plusCart" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.ramNo}&&productName=${c.ramName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"></a>
+															<a href="#"  onclick="plus();" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+														</c:otherwise>
+													</c:choose>	
 													<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
 													<!-- portfolio_category -->
 												</div>
