@@ -77,7 +77,7 @@
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="${pageContext.request.contextPath}//WEB-INF/view/banner/header.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
 
@@ -85,7 +85,7 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li><a href="/IndexController">Home</a></li>
 					<li>Product</li>
 				</ul>
 				<h2>Product</h2>

@@ -58,7 +58,7 @@
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/view/banner/header.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
 
@@ -97,7 +97,7 @@
 					</div>
 				</c:if>
 				<div class="general-title text-center">
-					<h3>${requestScope.caseOne.caseName}</h3>
+					<h3>${requestScope.updateCaseForm.caseNo}</h3>
 					<hr>
 				</div>
 

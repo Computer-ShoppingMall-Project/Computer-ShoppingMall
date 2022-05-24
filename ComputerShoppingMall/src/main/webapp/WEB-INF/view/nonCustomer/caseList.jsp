@@ -82,7 +82,7 @@
 		<div class="container">
 			<div class="container clear fix">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li><a href="IndexController">Home</a></li>
 					<li>Product</li>
 				</ul>
 				<h2>Product</h2>
