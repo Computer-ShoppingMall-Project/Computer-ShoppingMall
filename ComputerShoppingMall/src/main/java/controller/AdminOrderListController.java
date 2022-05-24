@@ -15,9 +15,7 @@ import vo.Order;
 
 @WebServlet("/AdminOrderListController")
 public class AdminOrderListController extends HttpServlet {
-	
 	private OrderDao orderDao;
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -26,9 +24,13 @@ public class AdminOrderListController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/MyPaymentController");
 			return;
 		}
+		String updateCheck = null;
+		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
+			updateCheck = request.getParameter("updateCheck");
+		}
 		
 		orderDao = new OrderDao();
-		ArrayList<Order> list = orderDao.adminOrderList();
+		ArrayList<Order> list = orderDao.adminOrderList(updateCheck);
 		
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderList.jsp").forward(request, response);

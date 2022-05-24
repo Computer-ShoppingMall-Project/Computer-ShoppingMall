@@ -75,22 +75,58 @@
 				 </c:otherwise>
 			</c:choose>
 				<div class="clearfix"></div>
-					<form name="orderStatus" method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+					<c:choose>
+						<c:when test="${updateCheck == null}">
+							<form name="orderStatus" method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+						</c:when>
+						<c:otherwise>
+							<form name="orderStatus" method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+						</c:otherwise>
+					</c:choose>
 						<input type="text" value="${customerId}" hidden="hidden" name="customerId">
 						<input type="text" value="${createDate}" hidden="hidden" name="createDate">
 						<div class="form-inline form-group">
-							<h4 class="text-primary">&nbsp;&nbsp;&nbsp;&nbsp;ORDER STATUS UPDATE</h4>
+							<h4 class="text-primary">ORDER STATUS UPDATE</h4>
 							<div class="col-xs-2">
+							<c:choose>
+								<c:when test="${updateCheck == null}">
+									<select name="orderStatus" class="form-control">
+										<option value="입금 전" <c:if test="${orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
+										<option value="입금 확인" <c:if test="${orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
+										<option value="배송 완료" <c:if test="${orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
+									</select>
+								</c:when>
+								<c:otherwise>
+								<input type="text" name="updateCheck" value="true" hidden="hidden">
 								<select name="orderStatus" class="form-control">
-									<option value="입금 전" <c:if test="${orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
-									<option value="입금 확인" <c:if test="${orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
-									<option value="배송 완료" <c:if test="${orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
+									<option value="취소 불가">취소 불가</option>
+									<option value="취소 완료">취소 완료</option>
+									<option value="환불 불가">환불 불가</option>
+									<option value="환불 완료">환불 완료</option>
 								</select>
+								</c:otherwise>
+							</c:choose>
 							</div>
 							<button type="submit" class="btn btn-primary">ORDER STATUS UPDATE</button>
 						</div>
 					</form>
 				<div class="clearfix"></div>
+				<h4 class="text-primary">DELIVERY ADDRESS</h4>
+				<table class="table" data-effect="fade">
+				<c:forEach var="order" items="${detailOrderList}">
+					<tr>
+						<th class="text-center">우편번호</th>
+						<th class="text-center">주소</th>
+						<th class="text-center">상세주소</th>
+					</tr>
+					<tr>
+						<td class="text-center">${order.zipCode}</td>
+						<td class="text-center">${order.roadAddress}</td>
+						<td class="text-center">${order.detailAddress}</td>
+					</tr>
+				</c:forEach>
+				</table>
+				<h4 class="text-primary">ORDER INFORMATION</h4>
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>

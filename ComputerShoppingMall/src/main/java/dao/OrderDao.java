@@ -86,7 +86,7 @@ public class OrderDao {
 				+ " FROM `order`"
 				+ " WHERE customer_id = ? AND create_date = ?";
 		if("true".equals(updateCheck)) {
-			sql += " AND (refund_check = 'Y' OR cancel_check = 'Y'"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
+			sql += " AND (refund_check = 'Y' OR cancel_check = 'Y')"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
 		}
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -140,7 +140,6 @@ public class OrderDao {
 				+ " WHERE customer_id=?"
 				+ " GROUP BY o.create_date"
 				+ " ORDER BY o.create_date DESC";
-		
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -167,7 +166,7 @@ public class OrderDao {
 		return list;
 	}
 	// 관리자 주문 모아보기 리스트
-	public ArrayList<Order> adminOrderList() {
+	public ArrayList<Order> adminOrderList(String updateCheck) {
 		ArrayList<Order> list = new ArrayList<Order>();
 		// DB 변수 선언
 		Connection conn = null;
@@ -185,15 +184,22 @@ public class OrderDao {
 				+ "	, o.category_quantity categoryQuantity"
 				+ "	, o.create_date createDate"
 				+ " , o.order_status orderStatus"
-				+ "	, COUNT(*) cnt"
 				+ " , o.refund_check refundCheck"
 				+ " , o.cancel_check cancelCheck"
 				+ "	, o.zip_code zipCode"
 				+ "	, o.road_address roadAddress"
 				+ "	, o.detail_address detailAddress"
-				+ " FROM `order` o"
-				+ " GROUP BY customer_id, create_date"
-				+ " ORDER BY o.create_date DESC";
+				+ "	, COUNT(*) cnt"
+				+ " FROM `order` o";
+		
+		if(updateCheck != null) {
+			sql += " WHERE refund_check='Y' OR cancel_check='Y'"
+					+ " ORDER BY o.create_date DESC";
+		} else {
+			sql += " GROUP BY customer_id, create_date"
+					+ " ORDER BY o.create_date DESC";
+		}
+		
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();

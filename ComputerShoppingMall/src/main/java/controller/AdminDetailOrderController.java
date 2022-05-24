@@ -34,16 +34,11 @@ public class AdminDetailOrderController extends HttpServlet {
 		
 		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
 		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
-			updateCheck = "true";
-		}
+			updateCheck = request.getParameter("updateCheck");
+		} 
 		
 		orderDao = new OrderDao();
 		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck);
-		for(int i=0; i > list.size(); i++) {
-			if(list.get(i).getOrderStatus() == null || "".equals(list.get(i).getOrderStatus())) {
-				list.get(i).setOrderStatus("입금 확인"); // 입금확인 기본값으로 바꿔두기
-			}
-		}
 		
 		request.setAttribute("updateCheck", updateCheck);
 		request.setAttribute("detailOrderList", list);
@@ -68,6 +63,8 @@ public class AdminDetailOrderController extends HttpServlet {
 		String createDate = request.getParameter("createDate");
 		System.out.println("[AdminDetailOrderController.doPost] : " + customerId +"/"+ createDate);
 		
+		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
+		
 		int row = 0;
 		
 		orderDao = new OrderDao();
@@ -79,6 +76,11 @@ public class AdminDetailOrderController extends HttpServlet {
 			System.out.println("[AdminDetailOrderController] : 상태변경 실패" + row + "개 정보 업데이트 완료 > 업데이트 실패");
 		}
 		
+		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
+			updateCheck = request.getParameter("updateCheck");
+			response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate+"&&updateCheck="+updateCheck);
+			return;
+		}	
 		response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate);
 	}
 }

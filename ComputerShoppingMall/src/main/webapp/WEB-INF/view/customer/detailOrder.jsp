@@ -53,6 +53,24 @@
 			<a href="${pageContext.request.contextPath}/MyPaymentController">back</a>
 				<div class="clearfix"></div>
 				<div class="clearfix"></div>
+				<h4 class="text-primary">DELIVERY ADDRESS</h4>
+				<table class="table" data-effect="fade">
+					<tr>
+						<th class="text-center">우편번호</th>
+						<th class="text-center">주소</th>
+						<th class="text-center">상세주소</th>
+					</tr>
+				<c:forEach var="order" items="${orderList}" varStatus="i">
+					<c:if test="${i.first}">
+					<tr>
+						<td class="text-center">${order.zipCode}</td>
+						<td class="text-center">${order.roadAddress}</td>
+						<td class="text-center">${order.detailAddress}</td>
+					</tr>
+					</c:if>
+				</c:forEach>
+				</table>
+				<h4 class="text-primary">ORDER INFORMATION</h4>
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>

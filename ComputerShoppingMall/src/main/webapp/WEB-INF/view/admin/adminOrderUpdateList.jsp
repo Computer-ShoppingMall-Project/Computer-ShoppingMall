@@ -84,10 +84,6 @@
 								<td class="text-center">${order.createDate}</td>
 								<td>
 									${order.productName}
-									<!-- 1개 이상이면 외 n개로로 띄어주기 -->
-									<c:if test="${order.productCount > 1}">
-										&nbsp; <span class="text-primary">외 ${order.productCount-1}개</span>
-									</c:if>
 								</td>
 								<td class="text-center">${order.orderStatus}</td>
 								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=true">View Detail OrderList</a></td>

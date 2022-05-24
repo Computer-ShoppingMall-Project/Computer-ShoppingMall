@@ -26,9 +26,13 @@ public class AdminOrderUpdateListController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/MyPaymentController");
 			return;
 		}
+		String updateCheck = null;
+		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
+			updateCheck = request.getParameter("updateCheck");
+		}
 		
 		orderDao = new OrderDao();
-		ArrayList<Order> list = orderDao.adminOrderList();
+		ArrayList<Order> list = orderDao.adminOrderList(updateCheck);
 		
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderUpdateList.jsp").forward(request, response);
