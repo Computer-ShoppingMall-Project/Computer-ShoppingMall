@@ -13,13 +13,14 @@ public class Customer {
 	private String createDate;
 	private String updateDate;
 	private int adminCk;
+	private int active;
 
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerPw=" + customerPw + ", name=" + name + ", nickName="
 				+ nickName + ", email=" + email + ", phone=" + phone + ", zipCode=" + zipCode + ", roadAddress="
 				+ roadAddress + ", detailAddress=" + detailAddress + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + ", adminCk=" + adminCk + "]";
+				+ updateDate + ", adminCk=" + adminCk + ", active=" + active + "]";
 	}
 
 	public String getCustomerId() {
@@ -116,6 +117,14 @@ public class Customer {
 
 	public void setAdminCk(int adminCk) {
 		this.adminCk = adminCk;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 
 }

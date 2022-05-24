@@ -11,7 +11,7 @@ import vo.Admin;
 import vo.Customer;
 
 public class MemberDao {
-	// 1) 로그인 page
+		// 1) 로그인 page
 		public String selectMemberByIdPw(Customer member) {
 			// 로그인 실패 -> null
 			String customerId = null; 
@@ -65,6 +65,7 @@ public class MemberDao {
 					+ "					,detail_address detailAddress"
 					+ "					,create_date createDate"
 					+ "					,update_date updateDate"
+					+ "					,active"
 					+ "		 FROM customer"
 					+ "		 WHERE customer_id=? ";
 			try {
@@ -82,6 +83,7 @@ public class MemberDao {
 					c.setDetailAddress(rs.getString("detailAddress"));
 					c.setCreateDate(rs.getString("createDate"));
 					c.setUpdateDate(rs.getString("updateDate"));
+					c.setActive(rs.getInt("active"));
 				}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -157,7 +159,7 @@ public class MemberDao {
 			// DButil
 			conn = DButil.getConnection();
 			// 1) customer 테이블 데이터 삭제
-			String sql1 = "DELETE FROM customer WHERE customer_id=? AND customer_pw=PASSWORD(?)";
+			String sql1 = "UPDATE customer SET active=1 WHERE customer_id=? AND customer_pw=PASSWORD(?)";
 			try {
 				// auto commit 해제
 				conn.setAutoCommit(false); 

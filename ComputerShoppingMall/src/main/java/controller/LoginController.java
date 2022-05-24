@@ -58,7 +58,8 @@ public class LoginController extends HttpServlet {
       String returnAdminId = null;
       returnCustomerId = memberDao.selectMemberByIdPw(c);
       returnAdminId = memberDao.selectAdminByIdPw(a);
-      
+      // 회원 탈퇴 관리 active = 0 이면 탈퇴상태
+      int active = memberDao.selectMemberOne(returnCustomerId).getActive();     
       
       // 디버깅
       System.out.println(returnCustomerId+"<-returnCustomerId");
@@ -72,8 +73,9 @@ public class LoginController extends HttpServlet {
       }
       
       // 로그인 실패시 로그인 폼을 재요청
-      if(returnCustomerId == null) {
+      if(returnCustomerId == null || active == 1) {
          System.out.println("로그인실패 <-- LoginController.doPost()");
+         System.out.println(active + " <-- active");
          response.sendRedirect(request.getContextPath() + "/LoginController");
          return;
       }
