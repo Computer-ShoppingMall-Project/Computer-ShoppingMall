@@ -90,7 +90,7 @@
 									</c:if>
 								</td>
 								<td class="text-center">${order.orderStatus}</td>
-								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}?updateCheck=true">View Detail OrderList</a></td>
+								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=true">View Detail OrderList</a></td>
 							</tr>
 							</c:if>
 						</c:forEach>

@@ -33,9 +33,4 @@ public class AdminOrderUpdateListController extends HttpServlet {
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderUpdateList.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }

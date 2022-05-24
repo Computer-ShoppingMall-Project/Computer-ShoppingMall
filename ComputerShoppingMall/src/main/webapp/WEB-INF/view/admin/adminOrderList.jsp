@@ -78,7 +78,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
-							<c:if test="${order.refundCheck eq 'N'&& order.cancelCheck eq 'N'}">
+							<c:if test="${order.refundCheck eq 'N' || order.cancelCheck eq 'N'}">
 							<tr>
 								<td class="text-center">${order.customerId}</td>
 								<td class="text-center">${order.createDate}</td>

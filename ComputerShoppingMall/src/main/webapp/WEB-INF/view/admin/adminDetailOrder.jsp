@@ -67,11 +67,11 @@
 		<div class="container clearfix">
 			<div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
 			<c:choose>
-				 <c:when test="${updateCheck == true}">
-				 	<a href="${pageContext.request.contextPath}/AdminOrderUpdateListController?updateCheck=true" class="btn">back</a>
+				 <c:when test="${updateCheck eq null}">
+				 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
 				 </c:when>
 				 <c:otherwise>
-				 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
+				 	<a href="${pageContext.request.contextPath}/AdminOrderUpdateListController" class="btn">back</a>
 				 </c:otherwise>
 			</c:choose>
 				<div class="clearfix"></div>
