@@ -40,8 +40,4 @@ public class AdminGpuListController extends HttpServlet {
 		request.setAttribute("gpuSizeList", gpuSizeList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminGpuList.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

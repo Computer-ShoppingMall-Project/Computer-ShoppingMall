@@ -45,7 +45,8 @@ public class GpuDao {
 		return row;
 	}
 	// gpu 상품삭제
-	public void deleteGpu(int gpuNo) {
+	public int deleteGpu(int gpuNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -62,7 +63,8 @@ public class GpuDao {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
+		return row;
 	}
 	// gpu 상품수정
 	public int updateGpu(Gpu g) {

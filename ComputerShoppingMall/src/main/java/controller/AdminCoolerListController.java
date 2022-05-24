@@ -41,9 +41,4 @@ public class AdminCoolerListController extends HttpServlet {
 		request.setAttribute("sizeList", sizeList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminCoolerList.jsp").forward(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

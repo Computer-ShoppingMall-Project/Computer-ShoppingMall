@@ -99,7 +99,12 @@
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-
+					<c:if test="${sessionAdminId != null }">
+						<div>
+							<a href="UpdateStorageController?storageNo=${requestScope.storageOne.storageNo}" class="btn btn-info">UPDATE</a>
+							<a href="DeleteStorageController?storageNo=${requestScope.storageOne.storageNo}" class="btn btn-danger">DELETE</a>
+						</div>
+					</c:if>
 				<div class="general-title text-center">
 					<h3>${requestScope.storageOne.storageName}</h3>
 					<hr>

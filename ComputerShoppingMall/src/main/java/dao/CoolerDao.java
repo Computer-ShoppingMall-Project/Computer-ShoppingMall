@@ -46,7 +46,8 @@ public class CoolerDao {
 		return row;
 	}
 	// cooler 상품삭제
-	public void deleteCooler(int cooler) {
+	public int deleteCooler(int cooler) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -65,6 +66,7 @@ public class CoolerDao {
 				e.printStackTrace();
 			}
 		}	
+		return row;
 	}
 	// cooler 상품수정	
 	public int updateCooler(Cooler c) {

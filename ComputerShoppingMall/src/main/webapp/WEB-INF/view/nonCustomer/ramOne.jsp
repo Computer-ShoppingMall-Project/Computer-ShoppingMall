@@ -71,18 +71,6 @@
 				</ul>
 				<h2>RAM</h2>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
-			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
@@ -98,7 +86,12 @@
 		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-
+					<c:if test="${sessionAdminId != null }">
+						<div>
+							<a href="UpdateRamController?ramNo=${requestScope.ramOne.ramNo}" class="btn btn-info">UPDATE</a>
+							<a href="DeleteRamController?ramNo=${requestScope.ramOne.ramNo}" class="btn btn-danger">DELETE</a>
+						</div>
+					</c:if>
 				<div class="general-title text-center">
 					<h3>${requestScope.ramOne.ramName}</h3>
 					<hr>

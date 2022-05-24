@@ -234,4 +234,316 @@ public class OrderDao {
 		}
 		return row;
 	}
+	// 판매 순위
+	public List<Map<String, Object>> rankCpuImage(int cpuRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT product_name productName,c.cpu_image_no , ci.name cpuImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN cpu c  "
+				+ "		ON o.product_name = c.cpu_name "
+				+ "	INNER JOIN cpu_image ci "
+				+ "		ON c.cpu_image_no = ci.cpu_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? " ;
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, cpuRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("cpuImage", rs.getString("cpuImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankCaseImage(int caseRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT product_name productName,c.case_image_no, ci.name caseImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN `case` c "
+				+ "		ON o.product_name = c.case_name "
+				+ "	INNER JOIN case_image ci "
+				+ "		ON c.case_image_no = ci.case_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? " ;
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, caseRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("caseImage", rs.getString("caseImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankCoolerImage(int coolerRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT product_name productName,c.cooler_image_no, ci.name coolerImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN cooler c "
+				+ "		ON o.product_name = c.cooler_name "
+				+ "	INNER JOIN cooler_image ci "
+				+ "		ON c.cooler_image_no = ci.cooler_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? " ;
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, coolerRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("coolerImage", rs.getString("coolerImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankGpuImage(int gpuRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT product_name productName,g.gpu_image_no , ci.name gpuImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN gpu g "
+				+ "		ON o.product_name = g.gpu_name "
+				+ "	INNER JOIN gpu_image ci "
+				+ "		ON g.gpu_image_no = ci.gpu_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? " ;
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, gpuRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("gpuImage", rs.getString("gpuImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankMainboardImage(int mianboardRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT o.product_name productName,m.mainboard_image_no , mi.name mainboardImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN mainboard m "
+				+ "		ON o.product_name = m.mainboard_name "
+				+ "	INNER JOIN mainboard_image mi "
+				+ "		ON m.mainboard_image_no = mi.mainboard_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? " ;
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, mianboardRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("mainboardImage", rs.getString("mainboardImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankPowerImage(int powerRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT o.product_name productName,p.power_image_no , pi.name powerImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN `power` p "
+				+ "		ON o.product_name = p.power_name "
+				+ "	INNER JOIN power_image pi "
+				+ "		ON p.power_no = pi.power_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? ";
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, powerRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("powerImage", rs.getString("powerImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankRamImage(int ramRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT o.product_name productName,r.ram_image_no , ri.name ramImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN ram r "
+				+ "		ON o.product_name = r.ram_name "
+				+ "	INNER JOIN ram_image ri "
+				+ "		ON r.ram_no = ri.ram_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? ";
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, ramRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("ramImage", rs.getString("ramImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 판매 순위
+	public List<Map<String, Object>> rankStorageImage(int storageRanking) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs= null;
+		conn = DButil.getConnection();
+		String sql ="SELECT o.product_name productName,st.storage_image_no , si.name storageImage,SUM(category_quantity) s "
+				+ "FROM `order` o "
+				+ "	INNER JOIN `storage` st "
+				+ "		ON o.product_name = st.storage_name "
+				+ "	INNER JOIN storage_image si "
+				+ "		ON st.storage_no = si.storage_image_no "
+				+ "GROUP BY product_name "
+				+ "	order BY s desc LIMIT 0,? ";
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, storageRanking);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					Map<String, Object> map = new HashMap<String, Object> ();
+					map.put("productName", rs.getString("productName"));
+					map.put("storageImage", rs.getString("storageImage"));
+					list.add(map);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

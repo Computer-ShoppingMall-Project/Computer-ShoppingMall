@@ -94,14 +94,14 @@
 				<div class="divider"></div>
 				<div id="productMenu" style="">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/CpuListController" class="nav-link">CPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/MainboardListController" class="nav-link">MAINBOARD</a></li>
-						<li><a href="${pageContext.request.contextPath}/RamListController" class="nav-link">RAM</a></li>
-						<li><a href="${pageContext.request.contextPath}/GpuListController" class="nav-link">GPU</a></li>
-						<li><a href="${pageContext.request.contextPath}/StorageListController">STORAGE</a></li>
-						<li><a href="${pageContext.request.contextPath}/CaseListController" class="nav-link">CASE</a></li>
-						<li><a href="${pageContext.request.contextPath}/PowerListController" class="nav-link">POWER</a></li>
-						<li><a href="${pageContext.request.contextPath}/CoolerListController" class="nav-link">COOLER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCpuListController" class="nav-link">CPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminMainboardListController" class="nav-link">MAINBOARD</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminRamListController" class="nav-link">RAM</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminGpuListController" class="nav-link">GPU</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminStorageListController">STORAGE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCaseListController" class="nav-link">CASE</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminPowerListController" class="nav-link">POWER</a></li>
+						<li><a href="${pageContext.request.contextPath}/AdminCoolerListController" class="nav-link">COOLER</a></li>
 					</ul><br><br><br>
 				</div>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->

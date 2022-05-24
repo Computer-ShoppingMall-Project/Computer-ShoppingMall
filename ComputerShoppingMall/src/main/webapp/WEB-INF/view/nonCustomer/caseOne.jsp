@@ -90,7 +90,12 @@
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-
+				<c:if test="${sessionAdminId != null }">
+					<div>
+						<a href="UpdateCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-info">UPDATE</a>
+						<a href="DeleteCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-danger">DELETE</a>
+					</div>
+				</c:if>
 				<div class="general-title text-center">
 					<h3>${requestScope.caseOne.caseName}</h3>
 					<hr>

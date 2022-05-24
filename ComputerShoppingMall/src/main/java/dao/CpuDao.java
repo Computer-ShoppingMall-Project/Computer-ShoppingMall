@@ -46,7 +46,8 @@ public class CpuDao {
 		return row;
 	}
 	// cpu 상품삭제
-	public void deleteCpu(int cpuNo) {
+	public int deleteCpu(int cpuNo) {
+		int row = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
@@ -66,6 +67,7 @@ public class CpuDao {
 				e.printStackTrace();
 			}
 		}
+		return row;
 	}
 	// cpu 상품수정
 	public int updateCpu(Cpu c) {
