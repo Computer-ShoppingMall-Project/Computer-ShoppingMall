@@ -31,16 +31,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
 <!-- =======================================================
-    Template Name: MaxiBiz
-    Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
+		Template Name: MaxiBiz
+		Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
+		Author: TemplateMag.com
+		License: https://templatemag.com/license/
+======================================================= -->
 </head>
 <body>
 	<!-- header적용 -->
 	<c:choose>
-		<c:when test="${sessionAdminId != null }">
+		<c:when test="${sessionAdminId != null}">
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
@@ -53,58 +53,51 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>QNA</li>
+					<li>ORDER LIST</li>
 				</ul>
-				<h2>QNA</h2>
+				<h2>ORDER LIST</h2>
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
+
 	<section class="section1">
 		<div class="container clearfix">
-			<div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+			<div class="content col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 				<div class="clearfix"></div>
-				<a href="${pageContext.request.contextPath}/InsertQnaController">write</a>
-				<hr>
-				<table class="table table-striped" data-effect="fade">
+				<div class="clearfix"></div>
+				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
-							<th>NO</th>
-							<th>TITLE</th>
-							<th>DATE</th>
-							<th class="text-center">ANSWER</th>
+							<th class="text-center">CUSTOMER ID</th>
+							<th class="text-center">PURCHASE DATE</th>
+							<th>PRODUCT NAME</th>
+							<th class="text-center">ORDER STATUS</th>
+							<th class="text-center">DETAILS</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="qna" items="${qnaList}">
+						<c:forEach var="order" items="${orderList}">
+							<c:if test="${order.refundCheck eq 'Y' || order.cancelCheck eq 'Y'}">
 							<tr>
-								<td>${qna.customerNo}</td>
-								<td><a href="${pageContext.request.contextPath}/QnaOneController?qnaNo=${qna.qnaNo}&customerNo=${qna.customerNo}">${qna.qnaTitle}</a></td>
-								<td>${qna.createDate}</td>
-								<td class="text-center">${qna.qnaAnswer}</td>
+								<td class="text-center">${order.customerId}</td>
+								<td class="text-center">${order.createDate}</td>
+								<td>
+									${order.productName}
+									<!-- 1개 이상이면 외 n개로로 띄어주기 -->
+									<c:if test="${order.productCount > 1}">
+										&nbsp; <span class="text-primary">외 ${order.productCount-1}개</span>
+									</c:if>
+								</td>
+								<td class="text-center">${order.orderStatus}</td>
+								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}?updateCheck=true">View Detail OrderList</a></td>
 							</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
-
 			</div>
 			<!-- end content -->
-
-			<div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<hr>
-			<h4>contact information</h4>
-			<ul class="contact_details">
-				<li><i class="fa fa-envelope-o"></i> redteam@github.com</li>
-				<li><i class="fa fa-phone-square"></i> +34 5565 6555</li>
-				<li><i class="fa fa-home"></i> Goodee Academy, Seoul, Korea.</li>
-			</ul>
-			<hr>
-			<!-- contact_details -->
 		</div>
 		<!-- end container -->
 	</section>

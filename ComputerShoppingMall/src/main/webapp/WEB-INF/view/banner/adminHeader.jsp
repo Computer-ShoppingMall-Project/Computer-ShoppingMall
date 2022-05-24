@@ -92,6 +92,7 @@
 							<li><a href="#">주문</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/AdminOrderListController">주문 내역</a></li>
+									<li><a href="${pageContext.request.contextPath}/AdminOrderUpdateListController">주문 변경 내역</a></li>
 									<li><a href="${pageContext.request.contextPath}/DigitalDownloadController">상품</a></li>
 									<li><a href="${pageContext.request.contextPath}/CheckoutController">결제</a></li>
 									<li><a href="${pageContext.request.contextPath}/AccountController">계정</a></li>

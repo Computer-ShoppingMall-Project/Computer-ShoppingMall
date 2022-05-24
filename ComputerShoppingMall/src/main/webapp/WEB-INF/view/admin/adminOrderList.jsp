@@ -40,7 +40,7 @@
 <body>
 	<!-- header적용 -->
 	<c:choose>
-		<c:when test="${sessionAdminId != null }">
+		<c:when test="${sessionAdminId != null}">
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
@@ -78,6 +78,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
+							<c:if test="${order.refundCheck eq 'N'&& order.cancelCheck eq 'N'}">
 							<tr>
 								<td class="text-center">${order.customerId}</td>
 								<td class="text-center">${order.createDate}</td>
@@ -91,6 +92,7 @@
 								<td class="text-center">${order.orderStatus}</td>
 								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
 							</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>

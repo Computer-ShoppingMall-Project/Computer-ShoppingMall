@@ -29,11 +29,15 @@ public class DetailOrderController extends HttpServlet {
 		}
 		// 변수 등록
 		String createDate = null;
+		String updateCheck = null;
+		if(request.getParameter("updateCheck") != null && "".equals(request.getParameter("updateCheck"))) {
+			updateCheck = request.getParameter("updateCheck");
+		}
 		// request create_date
 		createDate = request.getParameter("createDate");
 		// dao
 		orderDao = new OrderDao();
-		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate);
+		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck);
 		// request set
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/customer/detailOrder.jsp").forward(request, response);

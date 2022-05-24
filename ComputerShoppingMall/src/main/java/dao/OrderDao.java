@@ -61,7 +61,7 @@ public class OrderDao {
       return row;
    }
 	// 회원별 주문내역 상세보기
-	public ArrayList<Order> selectOrderList(String customerId, String createDate) {
+	public ArrayList<Order> selectOrderList(String customerId, String createDate, String updateCheck) {
 		ArrayList<Order> list = new ArrayList<Order>();
 		Order checkout = null;
 		// DB 초기화
@@ -85,6 +85,9 @@ public class OrderDao {
 				+ "		,detail_address detailAddress"
 				+ " FROM `order`"
 				+ " WHERE customer_id = ? AND create_date = ?";
+		if("true".equals(updateCheck)) {
+			sql += " AND (refund_check = 'Y' OR cancel_check = 'Y'"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
+		}
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, customerId);
@@ -182,10 +185,12 @@ public class OrderDao {
 				+ "	, o.category_quantity categoryQuantity"
 				+ "	, o.create_date createDate"
 				+ " , o.order_status orderStatus"
+				+ "	, COUNT(*) cnt"
+				+ " , o.refund_check refundCheck"
+				+ " , o.cancel_check cancelCheck"
 				+ "	, o.zip_code zipCode"
 				+ "	, o.road_address roadAddress"
 				+ "	, o.detail_address detailAddress"
-				+ "	, COUNT(*) cnt"
 				+ " FROM `order` o"
 				+ " GROUP BY customer_id, create_date"
 				+ " ORDER BY o.create_date DESC";
@@ -208,6 +213,8 @@ public class OrderDao {
 				o.setRoadAddress(rs.getString("roadAddress"));
 				o.setDetailAddress(rs.getString("detailAddress"));
 				o.setProductCount(rs.getInt("cnt"));
+				o.setRefundCheck(rs.getString("refundCheck"));
+				o.setCancelCheck(rs.getString("cancelCheck"));
 				list.add(o);
 			}
 		} catch (SQLException e) {
@@ -224,7 +231,7 @@ public class OrderDao {
 		return list;
 	}
 	// 관리자 주문상태 변경
-	public int updateOrderStatus(String orderStatus, String customerId, String createDate) {
+	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate) {
 		int row = 0;
 		// DB 변수 선언
 		Connection conn = null;
@@ -560,5 +567,36 @@ public class OrderDao {
 			}
 		}
 		return list;
+	}
+	
+	// 취소/환불 여부 변경
+	public int updateOrderStatus(String statusUpdateCheck, int orderNo) {
+		int row = 0;
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+
+		String sql = null;
+		if("cancel".equals(statusUpdateCheck)) {
+			sql = "UPDATE `order` SET cancel_check='Y', order_status='취소 요청중' WHERE order_no=?";
+		} else if("refund".equals(statusUpdateCheck)) {
+			sql = "UPDATE `order` SET refund_check='Y', order_status='환불 요청중' WHERE order_no=?";
+		}
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, orderNo);
+				row = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 }
