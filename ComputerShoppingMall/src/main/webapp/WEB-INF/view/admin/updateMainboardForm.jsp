@@ -14,10 +14,11 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
+	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
 <link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -27,8 +28,8 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,123 +38,143 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="index.jsp">Home</a></li>
+					<li>Main Product</li>
 				</ul>
-				<h2>상품삭제</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
+				<h2>MAINBOARD</h2>
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
-	<section class="section1">
+	<section class="marketplace-top">
+		<div id="market-wrapper">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.mainboardOne.mainboardImageName}" alt="">
+			</div>
+			<!-- end item_image -->
+		</div>
+	</section>
+		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<div class="col-lg-3 col-md-6 col-sm-12"></div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>MAINBOARD</span>
-					</h4>
-					<form id="updateMainboardform" method="post" name=“updateMainBoardform” action="${pageContextrequest.contextPath}/UpdateMainboardController">
-						<div class="form-group">
-							<input type="number" readonly name="mainboardNo" class="form-control" placeholder="mainboardNo">
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="mainboardName" class="form-control" placeholder="mainboardName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="mainboardKind" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>mainboardKind</option>
-								<option value="Z690">Z690</option>
-								<option value="Z590">Z590</option>
-								<option value="Z460">Z460</option>
-								<option value="B660">B660</option>
-								<option value="B550">B550</option>
-								<option value="B450">B450</option>
-								<option value="H610">H610</option>
-								<option value="X399">X399</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName" ${pageContext.request.contextPath}/onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="ASUS">ASUS</option>
-								<option value="MSI">MSI</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-								<option value="ASRock">ASRock</option>
-								<option value="BIOSTAR">BIOSTAR</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="socketSize" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>soketSize</option>
-								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
-								<option value="인텔(소켓1200)">인텔(소켓1200)</option>
-								<option value="AMD(소켓AM4)">AMD(소켓AM4)</option>
-								<option value="AMD(소켓TR4)">AMD(소켓TR4)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type='radio' name='ramVersion' value='DDR4'onclick="return(false);" />DDR4 <input type='radio'name='ramVersion' value='DDR5' onclick="return(false);" />DDR5
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="chipSet" class="form-control" placeholder="Chipset">
-						</div>
-						<div class="form-group">
-							<input type="file" name="mainboardImage" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea" readonly name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
-					</form>
+
+				<div class="general-title text-center">
+					<h3>${requestScope.mainboardOne.mainboardName}</h3>
+					<hr>
 				</div>
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+
+				<div class="divider"></div>
+
+				<div class="item_details">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<c:if test="${sessionAdminId != null }">
+							<div>
+								<a href="UpdateMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" class="btn btn-info">UPDATE</a>
+								<a href="DeleteMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" class="btn btn-danger">DELETE</a>
+							</div>
+						</c:if>
+						<!-- theme_details -->
+							<div class="form-group">
+								<div class="item_price">
+									<h3>
+										<span>${requestScope.mainboardOne.price}원</span>
+									</h3>
+								</div>
+							</div>
+							<!-- buttons -->
+							<hr>
+							<div class="form-group">
+								<div class="text-center">
+									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+										<div class="details_section  text-center">
+										<br><br>
+											<h3>Item Details</h3>
+											<br>
+											<ul>
+												<li class="version">mainboard_no : <span>${requestScope.mainboardrOne.coolerNo}</span></li>
+			                                    <li class="version">mainboard_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
+			                                    <li class="designer">company_name : 
+			                                    <input type ="text" name="company_name " value="${requestScope.mainboardOne.caseSize}">
+			                                    <li class="designer">kind : 
+			                                    <input type ="number" name="kind" value="${requestScope.mainboardOne.kind }">
+			                                    <li class="designer">socket_size  : 
+			                                    <input type = "number" name="socketSize" value="${requestScope.mainboardOne.socketSize}">
+			                                    <li class="designer">chipset  : 
+			                                    <input type = "text" name="chpiset" value="${requestScope.mainboardOne.chpiset}">
+			                                    <li class="designer">ram_version : 
+			                                    <input type = "text" name="ramVersion" value="${requestScope.mainboardOne.ramVersion}">
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.mainboardOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" method="POST">
+											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.mainboardOne.quantity}" name="quantity" value="1" class="text-center ">
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.mainboardOne.quantity}</h4>
+									<br><br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> 
+								<!-- theme_details -->
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</div>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
+
+	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

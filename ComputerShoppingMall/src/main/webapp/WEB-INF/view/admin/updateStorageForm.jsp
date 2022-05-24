@@ -75,7 +75,7 @@
 					</h4>
 					<form id="updateStorageform" method="post" name="updateStorageform" action="${pageContext.request.contextPath}/UpdateStorageController">
 						<div class="form-group">
-							<input type="number" readonly name="storageNo" class="form-control" placeholder="StorageNo">
+							<input type="hidden" name="coolerNo" value="${requestScope.cooler.coolerNo}"/>
 						</div>
 						<div class="form-group">
 							<input type="text" readonly name="storageName" class="form-control" placeholder="StorageName">

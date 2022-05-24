@@ -47,7 +47,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 				</ul>
-				<h2>상품삭제</h2>
+				<h2>상품수정</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
@@ -118,7 +118,7 @@
 							<input type="text" readonly name="memo" class="form-control" placeholder="memo">
 						</div>
 						<div class="form-group">
-							<input type="submit" class="button" value="삭제">
+							<input type="submit" class="button" value="등록">
 						</div>
 					</form>
 				</div>

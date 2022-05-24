@@ -14,7 +14,8 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
+	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
 <link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +28,8 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,24 +38,47 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
+					<li>Main Product</li>
 				</ul>
-				<h2>상품삭제</h2>
+				<h2>GRAPHIC CARD</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<!-- search -->
 				<div class="search-bar">
 					<form action="" method="get">
 						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+							<input type="image" src="img/pixel.gif" class="searchsubmit"
+								alt="" /> <input type="text" class="search_text showtextback"
+								name="s" id="s" value="Search..." />
 						</fieldset>
 					</form>
 				</div>
@@ -64,77 +88,111 @@
 	</section>
 	<!-- end post-wrapper-top -->
 
-	<section class="section1">
+	<section class="marketplace-top">
+		<div id="market-wrapper">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.gpuOne.gpuImageName}" alt="">
+			</div>
+			<!-- end item_image -->
+		</div>
+	</section>
+	
+		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<div class="col-lg-3 col-md-6 col-sm-12"></div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>GPU</span>
-					</h4>
-					<form id="updateGpuform" method="post" name="updatedeleteGpuform" action="${pageContextrequest.contextPath}/UpdateGpuController">
-						<div class="form-group">
-							<input type="number" readonly name="gpuNo" class="form-control" placeholder="GpuNo">
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="gpuName" class="form-control" placeholder="GpuName">
-						</div>
-
-						<div class="form-group">
-							<input type='radio' name='chipSetCompany' value='NVDIA' onclick="clickCheck(this)" />NVDIA <input type='radio' name='chipSetCompany' value='라데온' onclick="clickCheck(this)" />라데온
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="GALAX">GALAX</option>
-								<option value="이엠텍">이엠텍</option>
-								<option value="MSI">MSI</option>
-								<option value="ASRock">ASRock</option>
-								<option value="ASUS">ASUS</option>
-								<option value="ZOTAC">ZOTAC</option>
-								<option value="SAPPHIRE">SAPPHIRE</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="gpuSize" class="form-control" placeholder="GpuSize">
-						</div>
-						<div class="form-group">
-							<input type="file" name="gpuImage" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea" readonly name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="삭제">
-						</div>
-					</form>
+				<c:if test="${sessionAdminId != null }">
+					<div>
+						<a href="UpdateGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-info">UPDATE</a>
+						<a href="DeleteGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-danger">DELETE</a>
+					</div>
+				</c:if>
+				<div class="general-title text-center">
+					<h3>${requestScope.gpuOne.gpuName}</h3>
+					<hr>
 				</div>
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+
+				<div class="divider"></div>
+
+				<div class="item_details">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<!-- theme_details -->
+							<div class="form-group">
+								<div class="item_price">
+									<h3>
+										<span>${requestScope.gpuOne.price}원</span>
+									</h3>
+								</div>
+							</div>
+							<!-- buttons -->
+							<hr>
+							<div class="form-group">
+								<div class="text-center">
+									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+										<div class="details_section  text-center">
+										<br><br>
+											<h3>Item Details</h3>
+											<ul>
+												<li class="version">gpur_no : <span>${requestScope.gpuOne.coolerNo}</span></li>
+		                                    <li class="version">cooler_name : <span>${requestScope.gpuOne.categoryName}</span></li>
+		                                    <li class="designer">company_name : 
+		                                    <input type ="text" name="company_name " value="${requestScope.gpuOne.caseSize}">
+		                                    <li class="designer">chipset_company : 
+		                                    <input type ="text" name="chipsetCompany" value="${requestScope.gpuOne.chipsetCompany}">
+		                                    <li class="designer">gpu_size  : 
+		                                    <input type = "number" name="gpuSize" value="${requestScope.gpuOne.gpuSize}">
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.gpuOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" method="POST">
+											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.gpuOne.quantity}" name="quantity" value="1" class="text-center ">
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.gpuOne.quantity}</h4>
+									<br><br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div>
+								<!-- theme_details -->
+								</div>
+							</div>
+							<br><br>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</div>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
 
+	<div class="dmtop">Scroll to Top</div>
+
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
+	<script src="${pageContext.request.contextPath}lib/php-mail-form/validate.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
+	<script src="${pageContext.request.contextPath}lib/isotope/isotope.min.js"></script>
+	<script src="${pageContext.request.contextPath}lib/hover/hoverdir.js"></script>
+	<script src="${pageContext.request.contextPath}lib/hover/hoverex.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
