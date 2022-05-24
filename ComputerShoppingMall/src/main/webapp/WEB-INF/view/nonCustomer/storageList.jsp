@@ -72,8 +72,13 @@
 </head>
 <script type="text/javascript">
 	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+		if (confirm('정말로 장바구니에 담으시겠습니까?')) {
 			document.getElementById('btn').click();
+		}
+	}
+	function del() {
+		if (confirm('정말로 상품을 삭제 시키시겠습니까?')) {
+			document.getElementById('btnDel').click();
 		}
 	}
 </script>
@@ -190,8 +195,9 @@
 											<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
-															<a href="${pageContext.request.contextPath}/UpdateStorageController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-															<a href="${pageContext.request.contextPath}/DeleteStorageController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+															<a href="${pageContext.request.contextPath}/UpdateStorageController?storageNo=${c.storageNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
+															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteStorageController?storageNo=${c.storageNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddStorageController?storageNo=${c.storageNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>
 														<c:otherwise>
