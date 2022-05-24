@@ -491,7 +491,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
-					map.put("ramRanking", rs.getString("ramRanking"));
+					map.put("ramImage", rs.getString("ramImage"));
 					list.add(map);
 				}
 		} catch (Exception e) {
