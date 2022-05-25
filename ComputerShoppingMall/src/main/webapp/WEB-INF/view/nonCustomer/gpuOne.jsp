@@ -172,11 +172,11 @@
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}lib/php-mail-form/validate.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}lib/hover/hoverex.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>

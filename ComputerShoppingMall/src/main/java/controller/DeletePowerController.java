@@ -40,11 +40,11 @@ public class DeletePowerController extends HttpServlet {
 
 		if(row == 1) { // 삭제 성공 시, List로 돌아가기
 			System.out.println("[DeletePowerController.doGet] : Power 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/AdminPowerListController");
+			response.sendRedirect(request.getContextPath() + "/PowerListController");
 			return;
 		} else { // 삭제 실패해도 List로 돌아가기
 			System.out.println("[DeletePowerController.doGet] : Power 삭제 실패");
-			response.sendRedirect(request.getContextPath() + "/AdminPowerListController");
+			response.sendRedirect(request.getContextPath() + "/PowerListController");
 			return;
 		}
 	}

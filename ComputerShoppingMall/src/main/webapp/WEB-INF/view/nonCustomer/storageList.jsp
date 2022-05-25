@@ -254,6 +254,6 @@
 	<script src="lib/easypiechart/easypiechart.min.js"></script>
 	
 	<!-- Template Main Javascript File -->
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>

@@ -39,11 +39,11 @@ public class DeleteMainboardController extends HttpServlet {
 
 		if(row == 1) { // 삭제 성공 시, List로 돌아가기
 			System.out.println("[DeleteMainboardController.doGet] : Mainboard 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/AdminMainboardListController");
+			response.sendRedirect(request.getContextPath() + "/MainboardListController");
 			return;
 		} else { // 삭제 실패해도 List로 돌아가기
 			System.out.println("[DeleteMainboardController.doGet] : Mainboard 삭제 실패");
-			response.sendRedirect(request.getContextPath() + "/AdminMainboardListController");
+			response.sendRedirect(request.getContextPath() + "/MainboardListController");
 			return;
 		}
 	}

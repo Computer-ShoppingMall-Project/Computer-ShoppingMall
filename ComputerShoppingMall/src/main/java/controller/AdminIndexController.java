@@ -47,7 +47,7 @@ public class AdminIndexController extends HttpServlet {
 		request.setAttribute("ramRank",ramRank);
 		request.setAttribute("storageRank",storageRank);
 		
+		// index에서 관리자, 고객 헤더 구분
 		request.getRequestDispatcher("/WEB-INF/view/nonCustomer/index.jsp").forward(request, response);
-		request.getRequestDispatcher("/WEB-INF/view/admin/adminIndex.jsp").forward(request, response);
 	}
 }
