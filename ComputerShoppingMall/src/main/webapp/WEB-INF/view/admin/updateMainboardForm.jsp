@@ -120,9 +120,9 @@
 											<br>
 											<ul>
 												<li class="version">mainboard_no : <span>${requestScope.mainboardrOne.coolerNo}</span></li>
-			                                    <li class="version">mainboard_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
-			                                    <li class="designer">company_name : 
-			                                    <input type ="text" name="company_name " value="${requestScope.mainboardOne.caseSize}">
+			                                    <li class="version">category_name : <span>${requestScope.mainboardOne.categoryName}</span></li>
+			                                    <li class="designer">case_size : 
+			                                    <input type ="text" name="case_size " value="${requestScope.mainboardOne.caseSize}">
 			                                    <li class="designer">kind : 
 			                                    <input type ="number" name="kind" value="${requestScope.mainboardOne.kind }">
 			                                    <li class="designer">socket_size  : 
@@ -131,6 +131,8 @@
 			                                    <input type = "text" name="chpiset" value="${requestScope.mainboardOne.chpiset}">
 			                                    <li class="designer">ram_version : 
 			                                    <input type = "text" name="ramVersion" value="${requestScope.mainboardOne.ramVersion}">
+			                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.mainboardOne.quantity}">
 											</ul>
 										</div>
 									</div>
@@ -144,13 +146,6 @@
 										<!-- item-description -->
 									</div>  
 									<br>
-									<div class="text-center">
-										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${requestScope.mainboardOne.mainboardNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.mainboardOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
-											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
-										</form>
-									</div>
 									<h4 class="text-danger text-center">재고 : ${requestScope.mainboardOne.quantity}</h4>
 									<br><br>
 									<div class="rating text-center">

@@ -14,21 +14,22 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
+	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,89 +38,152 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
+					<li>Main Product</li>
 				</ul>
-				<h2>상품수정</h2>
+				<h2>STORAGE</h2>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<!-- search -->
+				<div class="search-bar">
+					<form action="" method="get">
+						<fieldset>
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+						</fieldset>
+					</form>
+				</div>
+				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
+	<section class="marketplace-top">
+		<div id="market-wrapper">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.storageOne.storageImageName}" alt="">
+			</div>
+			<!-- end item_image -->
+		</div>
+	</section>
+
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<div class="col-lg-3 col-md-6 col-sm-12"></div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>STORAGE</span>
-					</h4>
-					<form id="updateStorageform" method="post" name="updateStorageform" action="${pageContext.request.contextPath}/UpdateStorageController">
-						<div class="form-group">
-							<input type="hidden" name="coolerNo" value="${requestScope.cooler.coolerNo}"/>
+					<c:if test="${sessionAdminId != null }">
+						<div>
+							<a href="UpdateStorageController?storageNo=${requestScope.storageOne.storageNo}" class="btn btn-info">UPDATE</a>
+							<a href="DeleteStorageController?storageNo=${requestScope.storageOne.storageNo}" class="btn btn-danger">DELETE</a>
 						</div>
-						<div class="form-group">
-							<input type="text" readonly name="storageName" class="form-control" placeholder="StorageName">
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="companyName" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>companyname</option>
-								<option value="삼성전자">삼성전자</option>
-								<option value="SK하이닉스">SK하이닉스</option>
-								<option value="Western">Western</option>
-								<option value="Seagate">Seagate</option>
-								<option value="도시바">도시바</option>
-								<option value="마이크론">마이크론</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type='radio' name='storageInterface' value='SATA3' onclick="return(false);" />SATA3 <input type='radio' name='storageInterface' value='PCIe4.0x4' onclick="return(false);" />PCIe4.0x4
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="capacity" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>capacity</option>
-								<option value="4TB">4TB</option>
-								<option value="2TB">2TB</option>
-								<option value="1TB">1TB</option>
-								<option value="512GB">512GB</option>
-								<option value="500GB">500GB</option>
-								<option value="250GB">250GB</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="strageImage" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea" readony name="memo" class="form-control" placeholder="memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
-					</form>
+					</c:if>
+				<div class="general-title text-center">
+					<h3>${requestScope.storageOne.storageName}</h3>
+					<hr>
 				</div>
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+
+				<div class="divider"></div>
+
+				<div class="item_details">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<!-- theme_details -->
+						<div class="form-group">
+							<div class="item_price">
+								<h3>
+									<span>${requestScope.caseOne.price}원</span>
+								</h3>
+							</div>
+						</div>
+						<!-- buttons -->
+						<hr>
+						<div class="form-group">
+							<div class="text-center">
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+									<div class="details_section  text-center">
+										<h3>Item Details</h3>
+										<ul>
+											<li class="version">storage_no : <span>${requestScope.storageOne.storageNo}</span></li>
+		                                    <li class="version">category_name : <span>${requestScope.storageOne.categoryName}</span></li>
+		                                    <li class="designer">company_name : 
+		                                    <input type ="text" name="company_name " value="${requestScope.storageOne.companyName}">
+		                                    <li class="designer">storage_interface : 
+		                                    <input type ="text" name="storage_interface" value="${requestScope.storageOne.storageInterface}">
+		                                    <li class="designer">capacity : 
+		                                    <input type = "text" name="capacity" value="${requestScope.storageOne.capacity}">
+		                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.storageOne.quantity}">
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.storageOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+										<form id="frm" class="contact-form" action="${pageContext.request.contextPath}/CartAddStorageController?storageNo=${requestScope.storageOne.storageNo}" method="POST">
+											개수 선택 &nbsp;  <input type="number" max="${requestScope.storageOne.quantity}" name="quantity" value="1" class="text-center">개
+											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
+											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
+										</form>
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.storageOne.quantity}</h4>
+									<br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> <br>
+								<!-- theme_details -->
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</div>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
+
+	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

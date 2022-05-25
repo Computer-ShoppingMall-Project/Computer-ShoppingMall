@@ -31,8 +31,8 @@ public class UpdateCpuController extends HttpServlet {
 		int cpuNo = Integer.parseInt(request.getParameter("cpuNo"));
 		c = cpuDao.selectCpuOne(cpuNo);
 					
-		request.setAttribute("caseOne", c);
-		request.getRequestDispatcher("/WEB-INF/view/admin/updateCaseForm.jsp").forward(request, response);
+		request.setAttribute("cpu", c);
+		request.getRequestDispatcher("/WEB-INF/view/admin/updateCpuForm.jsp").forward(request, response);
 			}
 		}
 

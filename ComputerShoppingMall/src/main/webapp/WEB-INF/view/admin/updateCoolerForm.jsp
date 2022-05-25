@@ -119,13 +119,15 @@
 											<br>
 											<ul>
 												<li class="version">cooler_no : <span>${requestScope.coolerOne.coolerNo}</span></li>
-			                                    <li class="version">cooler_name : <span>${requestScope.coolerOne.categoryName}</span></li>
+			                                    <li class="version">category_name : <span>${requestScope.coolerOne.categoryName}</span></li>
 			                                    <li class="designer">case_size : 
-			                                    <input type ="text" name="company_name " value="${requestScope.coolerOne.caseSize}">
+			                                    <input type ="text" name="company_name " value="${requestScope.coolerOne.companyName}">
 			                                    <li class="designer">kind : 
-			                                    <input type ="number" name="kind" value="${requestScope.coolerOne.kind }">
+			                                    <input type ="text" name="kind" value="${requestScope.coolerOne.kind }">
 			                                    <li class="designer">cooler_size : 
 			                                    <input type = "number" name="coolerSize" value="${requestScope.coolerOne.coolerSize}">
+			                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.coolerOne.quantity}">
 											</ul>
 										</div>
 									</div>
@@ -139,13 +141,6 @@
 										<!-- item-description -->
 									</div>  
 									<br>
-									<div class="text-center">
-										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${requestScope.coolerOne.coolerNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.coolerOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
-											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
-										</form>
-									</div>
 									<h4 class="text-danger text-center">재고 : ${requestScope.coolerOne.quantity}</h4>
 									<br><br>
 									<div class="rating text-center">

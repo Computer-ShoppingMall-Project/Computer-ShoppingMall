@@ -120,13 +120,15 @@
 											<h3>Item Details</h3>
 											<ul>
 												<li class="version">gpur_no : <span>${requestScope.gpuOne.coolerNo}</span></li>
-		                                    <li class="version">cooler_name : <span>${requestScope.gpuOne.categoryName}</span></li>
-		                                    <li class="designer">company_name : 
-		                                    <input type ="text" name="company_name " value="${requestScope.gpuOne.caseSize}">
-		                                    <li class="designer">chipset_company : 
-		                                    <input type ="text" name="chipsetCompany" value="${requestScope.gpuOne.chipsetCompany}">
-		                                    <li class="designer">gpu_size  : 
-		                                    <input type = "number" name="gpuSize" value="${requestScope.gpuOne.gpuSize}">
+			                                    <li class="version">category_name : <span>${requestScope.gpuOne.categoryName}</span></li>
+			                                    <li class="designer">company_name : 
+			                                    <input type ="text" name="company_name" value="${requestScope.gpuOne.companyName}">
+			                                    <li class="designer">chipset_company : 
+			                                    <input type ="text" name="chipsetCompany" value="${requestScope.gpuOne.chipsetCompany}">
+			                                    <li class="designer">gpu_size  : 
+			                                    <input type = "number" name="gpuSize" value="${requestScope.gpuOne.gpuSize}">
+			                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.gpuOne.quantity}">
 											</ul>
 										</div>
 									</div>
@@ -140,13 +142,6 @@
 										<!-- item-description -->
 									</div>  
 									<br>
-									<div class="text-center">
-										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.gpuOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
-											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
-										</form>
-									</div>
 									<h4 class="text-danger text-center">재고 : ${requestScope.gpuOne.quantity}</h4>
 									<br><br>
 									<div class="rating text-center">

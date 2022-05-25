@@ -118,15 +118,17 @@
 											<h3>Item Details</h3>
 											<ul>
 												<li class="version">cpu_no : <span>${requestScope.cpuOne.cpuNo}</span></li>
-			                                    <li class="version">cpu_name : <span>${requestScope.cpuOne.categoryName}</span></li>
+			                                    <li class="version">category_name : <span>${requestScope.cpuOne.categoryName}</span></li>
 			                                    <li class="designer">case_size : 
-			                                    <input type ="text" name="company_name " value="${requestScope.cpurOne.caseSize}">
+			                                    <input type ="text" name="case_size " value="${requestScope.cpurOne.caseSize}">
 			                                    <li class="designer">soket_size : 
 			                                    <input type ="number" name="soketSize" value="${requestScope.cpuOne.soketSize }">
 			                                    <li class="designer">core : 
 			                                    <input type = "number" name="core" value="${requestScope.cpuOne.core}">
 			                                    <li class="designer">thread : 
 			                                    <input type = "number" name="thread" value="${requestScope.cpuOne.thread}">
+			                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.cpuOne.quantity}">
 											</ul>
 										</div>
 									</div>
@@ -143,12 +145,6 @@
 									<br>
 									<div class="text-center">
 									<br>
-										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${requestScope.cpuOne.cpuNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.cpuOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
-											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
-										</form>
-									</div>
 									<h4 class="text-danger text-center">재고 : ${requestScope.cpuOne.quantity}</h4>
 									<br><br>
 									<div class="rating text-center">

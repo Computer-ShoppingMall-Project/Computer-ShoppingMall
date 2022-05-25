@@ -131,6 +131,8 @@
 												<input type = "number" name="bay89mm" value="${requestScope.caseOne.bay89mm}">
 												<li class="designer">64cm_bay : 
 												<input type ="number" name="bay64mm" value="${requestScope.caseOne.bay64mm}">
+												<li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.caseOne.quantity}">
 											</ul>
 										</div>
 									</div>
@@ -144,13 +146,6 @@
 										<!-- item-description -->
 									</div>  
 									<br>
-									<div class="text-center">
-										<form id="frm" class="contact-form"  action="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${requestScope.caseOne.caseNo}" method="POST">
-											개수 선택 &nbsp; <input type="number" min="1" max="${requestScope.caseOne.quantity}" name="quantity" value="1" class="text-center ">
-											<input hidden="hidden" style="display: none;" id="btn" type="submit" class="btn btn-large btn-primary" value="담기">
-											<a href="#" class="btn btn-large btn-primary" onclick="plus();">담기</a>
-										</form>
-									</div>
 									<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
 									<br><br>
 									<div class="rating text-center">

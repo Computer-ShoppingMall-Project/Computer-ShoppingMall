@@ -14,7 +14,8 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
+	rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
 <link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +28,8 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,77 +38,144 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script type="text/javascript">
+	function plus() {
+		if (confirm('Are you sure you want to put it in your shopping cart?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	window.onload = function() {
+	    document.getElementById('btn').onclick = function() {
+	        document.getElementById('frm').submit();
+	        return false;
+	    };
+	};
+</script>
 <body>
 	<!-- header적용 -->
-	<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${sessionAdminId != null }">
+			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
+		</c:otherwise>
+	</c:choose>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
+					<li>Main Product</li>
 				</ul>
-				<h2>상품수정</h2>
+				<h2>POWER</h2>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<!-- search -->
+				<div class="search-bar">
+					<form action="" method="get">
+						<fieldset>
+							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+						</fieldset>
+					</form>
+				</div>
+				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
-	<section class="section1">
+	<section class="marketplace-top">
+		<div id="market-wrapper">
+			<div class="item_image" style="background: white;">
+				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.powerOne.powerImageName}" alt="">
+			</div>
+			<!-- end item_image -->
+		</div>
+	</section>
+		<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<div class="col-lg-3 col-md-6 col-sm-12"></div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>POWER</span>
-					</h4>
-					<form id="updatePowerform" method="post" name="updatePowerform" action="${pageContextrequest.contextPath}/UdatePowerController">
-						<div class="form-group">
-							<input type="number" readonly name="powerNo" class="form-control" placeholder="PowerNo">
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="powerName" class="form-control" placeholder="PowerName">
-						</div>
-						<div class="form-group">
-							<select class="readonly" name="ratedPower" onFocus="this.initialSelect = this.selectedIndex;" onChange="this.selectedIndex = this.initialSelect;">
-								<option value="" selected disabled hidden>ratedPower</option>
-								<option value="1000">1000</option>
-								<option value="850">850</option>
-								<option value="750">750</option>
-								<option value="700">700</option>
-								<option value="650">650</option>
-								<option value="600">600</option>
-								<option value="550">550</option>
-								<option value="500">500</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="powerImage" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="text" readonly name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
-					</form>
+						<c:if test="${sessionAdminId != null }">
+							<div>
+								<a href="UpdatePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-info">UPDATE</a>
+								<a href="DeletePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-danger">DELETE</a>
+							</div>
+						</c:if>
+				<div class="general-title text-center">
+					<h3>${requestScope.powerOne.powerName}</h3>
+					<hr>
 				</div>
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
+
+				<div class="divider"></div>
+
+				<div class="item_details">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<!-- theme_details -->
+							<div class="form-group">
+								<div class="item_price">
+									<h3>
+										<span>${requestScope.powerOne.price}원</span>
+									</h3>
+								</div>
+							</div>
+							<!-- buttons -->
+							<hr>
+							<div class="form-group">
+								<div class="text-center">
+									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+										<div class="details_section  text-center">
+											<h3>Item Details</h3>
+											<ul>
+												<li class="version">cooler_no : <span>${requestScope.powerOne.powerNo}</span></li>
+			                                    <li class="version">category_name : <span>${requestScope.powerOne.categoryName}</span></li>
+			                                    <li class="designer">company_name : 
+			                                    <input type ="text" name="company_name " value="${requestScope.powerOne.companyName}">
+			                                    <li class="designer">rated_power :
+			                                    <input type ="text" name="ratePower" value="${requestScope.powerOne.ratedPower }">
+			                                    <li class="designer">quantity :
+												<input type = "number" name="quantity" value="${requestScope.powerOne.quantity}">
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<br>
+									<div class="theme_details">
+										<div class="item-description">
+											<p>${requestScope.powerOne.memo}</p>
+										</div>
+										<!-- item-description -->
+									</div>  
+									<br>
+									<div class="text-center">
+									</div>
+									<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
+									<br><br>
+									<div class="rating text-center">
+										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+											class="fa fa-star-o"></i>
+										<p>Users Rating</p>
+									</div> <br>
+								<!-- theme_details -->
+								</div>
+							</div>
+							<br><br>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</div>
+			</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
+
+	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
