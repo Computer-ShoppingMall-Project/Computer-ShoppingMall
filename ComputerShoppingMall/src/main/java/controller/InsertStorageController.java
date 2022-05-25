@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,20 @@ public class InsertStorageController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() +"/LoginController");
 			return; 
 		}
+		storageDao = new StorageDao();
+		// 정보(상품명, 가격)
+		ArrayList<Storage> storageList = storageDao.selectStorageList();
+		// company
+		ArrayList<String> companyList = storageDao.companyKind();
+		// interface
+		ArrayList<String> interfaceList = storageDao.interfaceKind();
+		// capacity
+		ArrayList<String> capacityList = storageDao.capacityKind();
+		
+		request.setAttribute("storageList", storageList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("interfaceList", interfaceList);
+		request.setAttribute("capacityList", capacityList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertStorageForm.jsp").forward(request, response);
 		}
 

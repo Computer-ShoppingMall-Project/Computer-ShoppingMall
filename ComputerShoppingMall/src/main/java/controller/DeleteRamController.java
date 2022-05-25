@@ -40,11 +40,11 @@ public class DeleteRamController extends HttpServlet {
 		
 		if(row == 1) { // 삭제 성공 시, List로 돌아가기
 			System.out.println("[DeleteRamController.doGet] : RAM 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/AdminRamListController");
+			response.sendRedirect(request.getContextPath() + "/RamListController");
 			return;
 		} else { // 삭제 실패해도 List로 돌아가기
 			System.out.println("[DeleteRamController.doGet] : SDD/HDD 삭제 실패");
-			response.sendRedirect(request.getContextPath() + "/AdminRamListController");
+			response.sendRedirect(request.getContextPath() + "/RamListController");
 			return;
 		}
 	}

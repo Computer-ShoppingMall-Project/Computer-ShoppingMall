@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +29,17 @@ public class InsertRamController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		ramDao = new RamDao();
+		// ram 제목, 가격 
+		ArrayList<Ram> rmaList = ramDao.selectRamList();
+		// COMPANY
+		ArrayList<String> companyList = ramDao.companyKind();
+		// KIND
+		ArrayList<String> kindList = ramDao.kindKind();
+		
+		request.setAttribute("ramList", rmaList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("kindList", kindList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertRamForm.jsp").forward(request, response);
 	}
 

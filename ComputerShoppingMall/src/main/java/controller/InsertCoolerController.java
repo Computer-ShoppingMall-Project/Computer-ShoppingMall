@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,21 @@ public class InsertCoolerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		coolerDao = new CoolerDao();
 		
+		// cooler 정보
+		ArrayList<Cooler> coolerList = coolerDao.selectCoolerList();
+		// company
+		ArrayList<String> companyList = coolerDao.companyKind();
+		// kind
+		ArrayList<String> kindList = coolerDao.kindKind();
+		// size
+		ArrayList<String> sizeList = coolerDao.coolerSizeKind();
+		
+		request.setAttribute("coolerList", coolerList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("kindList", kindList);
+		request.setAttribute("sizeList", sizeList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertCoolerForm.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

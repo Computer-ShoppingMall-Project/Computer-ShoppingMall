@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +29,23 @@ public class InsertCaseController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		caseDao = new CaseDao();
+		// case  정보
+		ArrayList<Case> caseList = caseDao.selectCaseList();
+		// case size
+		ArrayList<String> caseSizeList = caseDao.caseSizeList();
+		// gpu size
+		ArrayList<String> gpuSizeList = caseDao.gpuSizeList();
+		// bay64mm
+		ArrayList<String> bay64mmList = caseDao.bay64mmList();
+		// bay89mm
+		ArrayList<String> bay89mmList = caseDao.bay89mmList();
 		
+		request.setAttribute("caseList", caseList); // 이름 중복 유효성 검사
+		request.setAttribute("caseSizeList", caseSizeList);
+		request.setAttribute("gpuSizeList", gpuSizeList);
+		request.setAttribute("bay64mmList", bay64mmList);
+		request.setAttribute("bay89mmList", bay89mmList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertCaseForm.jsp").forward(request, response);
 	}
 

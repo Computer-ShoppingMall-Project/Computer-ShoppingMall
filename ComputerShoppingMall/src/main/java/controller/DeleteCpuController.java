@@ -39,11 +39,11 @@ public class DeleteCpuController extends HttpServlet {
 
 		if(row == 1) { // 삭제 성공 시, List로 돌아가기
 			System.out.println("[DeleteCpuController.doGet] : Cpu 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/AdminCpuListController");
+			response.sendRedirect(request.getContextPath() + "/CpuListController");
 			return;
 		} else { // 삭제 실패해도 List로 돌아가기
 			System.out.println("[DeleteCpuController.doGet] : Cpu 삭제 실패");
-			response.sendRedirect(request.getContextPath() + "/AdminCpuListController");
+			response.sendRedirect(request.getContextPath() + "/CpuListController");
 			return;
 		}
 	}

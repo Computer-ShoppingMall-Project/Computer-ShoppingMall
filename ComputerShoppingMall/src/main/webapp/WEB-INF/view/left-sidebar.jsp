@@ -45,22 +45,10 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/indexController">Home</a></li>
 					<li>Page Left Sidebar</li>
 				</ul>
 				<h2>PAGE LEFT SIDEBAR</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" />
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>

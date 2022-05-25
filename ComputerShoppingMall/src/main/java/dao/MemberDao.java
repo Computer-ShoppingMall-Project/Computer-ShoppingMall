@@ -206,6 +206,7 @@ public class MemberDao {
 					+ "						,zip_code=? "
 					+ "						,road_address=? "
 					+ "						,detail_address=? "
+					+ " 					,update_date = NOW()"
 					+ "	WHERE customer_id=?";
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -253,7 +254,8 @@ public class MemberDao {
 					+ "						,zip_code = ? "
 					+ "						,road_address = ? "
 					+ "						,detail_address = ? "
-					+ "						,customer_pw = PASSWORD(?) "					
+					+ "						,customer_pw = PASSWORD(?) "
+					+ "						,last_pw_date =  NOW() "
 					+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
 			try {
 				stmt = conn.prepareStatement(sql);

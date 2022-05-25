@@ -72,12 +72,12 @@
 </head>
 <script type="text/javascript">
 	function plus() {
-		if (confirm('정말로 장바구니에 담으시겠습니까?')) {
+		if (confirm('장바구니에 담으시겠습니까?')) {
 			document.getElementById('btn').click();
 		}
 	}
 	function del() {
-		if (confirm('정말로 상품을 삭제 시키시겠습니까?')) {
+		if (confirm('상품을 삭제 하겠습니까?')) {
 			document.getElementById('btnDel').click();
 		}
 	}

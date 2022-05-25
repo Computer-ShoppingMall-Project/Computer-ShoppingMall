@@ -52,9 +52,9 @@
 		<div class="container">
 			<div class="ror">
 				<div class="col-md-8 col-md-offset-2">
-					<h1>RedVelvet Computer ShoppingMall</h1>
-					<p>조립PC 부품을 판매하는 쇼핑몰 프로젝트 입니다. 
-					-- 설명추가</p>
+					<h1>RedVelvet Computer</h1>
+					<p>조립PC 부품 쇼핑몰을 MVC 방식으로 구현한 세미 프로젝트 입니다. <br>
+					TEAM RedVelvet : 송원범, 박범진, 구혜민, 이규남, 강한빛</p>
 				</div>
 			</div>
 		</div>
