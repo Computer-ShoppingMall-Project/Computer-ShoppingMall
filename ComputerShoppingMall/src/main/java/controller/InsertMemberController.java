@@ -23,13 +23,21 @@ public class InsertMemberController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/IndexController");
 			return;
 		}
-		/*
+		// dao
 		dao = new MemberDao();
-		ArrayList<Customer> customerList = dao.MemberIdList();
-	
-		request.setAttribute("customerList",customerList);
-		*/
-		// 로그인 상태가 아니면 insertMemberForm.jsp 호출
+		// 중복을 검사할 아이디
+		String checkCustomerId = null;
+		if(request.getParameter("checkCustomerId") != null) {
+			checkCustomerId = request.getParameter("checkCustomerId");
+			if(dao.idCheckMember(checkCustomerId) == 1) { 
+				System.out.println("아이디 중복!");
+				request.setAttribute("msg", "이미 존재하는 아이디입니다!");
+				request.getRequestDispatcher("/WEB-INF/view/customer/insertMember.jsp").forward(request, response);
+				return;
+			}
+			request.setAttribute("customerId", checkCustomerId);
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/view/customer/insertMember.jsp").forward(request, response);
 	}
 	
@@ -51,10 +59,10 @@ public class InsertMemberController extends HttpServlet {
 		}
 		
 	    // customerPw = 비밀번호 선언후 초기화
-	    String customerPw = null; 
-	    if(request.getParameter("customerPw1") != null && request.getParameter("customerPw2") != null &&!request.getParameter("customerPw1").equals("") && request.getParameter("customerPw1").equals(request.getParameter("customerPw2"))) {
-	    // null, 빈칸이 아닌 비밀번호가 둘이 일치한다면 customerPw에 저장
-	     customerPw = request.getParameter("customerPw1");
+		String customerPw = null;
+	    if(request.getParameter("customerPw1") != null && request.getParameter("customerPw2") != null && request.getParameter("customerPw1").equals(request.getParameter("customerPw2"))) {
+		    // null, 빈칸이 아닌 비밀번호가 둘이 일치한다면 customerPw에 저장
+		    customerPw = request.getParameter("customerPw1");
 	    } 
 	    
 	    // vo
@@ -85,7 +93,7 @@ public class InsertMemberController extends HttpServlet {
 	    // 2) 회원가입 실패시(row값이 0이면...), 가입실패 + InsertMemberController 호출
 	    else if(row == 0) {
 	    	System.out.println("가입실패 InsertMemberController.dopost");
-	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=insertmemberfail");
+	    	response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=회원가입 실패!");
 	    }
 	    // 3) row값이 -1이면(default 값) SQL오류
 	    else if (row == -1) {

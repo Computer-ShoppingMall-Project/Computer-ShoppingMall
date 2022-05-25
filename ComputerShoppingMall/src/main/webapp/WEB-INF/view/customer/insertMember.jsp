@@ -91,51 +91,63 @@
 					<h4 class="title">
 						<span>Register Form</span>
 					</h4>
-					<form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
-						<div class="form-group">
-							<!-- 4자이상 : blur이벤트 발생시 체크 -->
-							<input type="text" id="id" name="customerId" class="form-control" placeholder="ID">
-							<span id="idHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="password" id="pw" name="customerPw1" class="form-control" placeholder="Password">
-							<span id="pwHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="password" id="pwConfirm" name="customerPw2" class="form-control" placeholder="Re-enter password">
-						</div>
-						<div class="form-group">
-							<input type="text" id="name" name="name" class="form-control" placeholder="Name">
-							<span id="nameHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="text" id="nickname" name="nickName" class="form-control" placeholder="Nickname">
-							<span id="nicknameHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="email" id="email" name="email" class="form-control" placeholder="Email">
-							<span id="emailHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="number" id="phone" name="phone" class="form-control" placeholder="Phone number">
-							<span id="phoneHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="number" id="zipcode" name="zipCode" readonly="readonly" onclick="execDaumPostcode()" class="form-control" placeholder="zip code"> 
-							<span id="zipcodeHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control" placeholder="Road address">
-							<span id="roadHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="Detail address">
-							<span id="detailHelper" class="helper"></span>
-						</div>
-						<div class="form-group">
-							<button type="button" id="signup">Register</button>
-						</div>
-					</form>
+						<!-- 아이뒤 중복체크 -> 중복이 아니면 customerId 저장후 c:if문으로 넘아감 -->
+						<c:if test="${empty customerId}">
+							<form id="checkIdForm" method="get" action="${pageContext.request.contextPath}/InsertMemberController" >
+								<input type="text" id="checkId" name="checkCustomerId" class="form-control" placeholder="ID Check">
+								<button type="button" id="check">ID 중복 확인 하기!</button>
+								<span id="idCheckHelper" class="helper"></span> 
+								<span class="helper">${msg}</span>
+							</form>
+						</c:if>
+						
+					<c:if test="${not empty customerId }">	
+						<form id="registerform" method="post" name="registerform" action="${pageContext.request.contextPath}/InsertMemberController">
+								<div class="form-group">
+									<!-- 4자이상 : blur이벤트 발생시 체크 -->
+									<input type="text" id="id" name="customerId" class="form-control" value="${customerId}" readonly="readonly">
+									<span id="idHelper" class="helper"></span> 
+								</div>
+								<div class="form-group">
+									<input type="password" id="pw" name="customerPw1" class="form-control" placeholder="Password">
+									<span id="pwHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="password" id="pwConfirm" name="customerPw2" class="form-control" placeholder="Re-enter password">
+								</div>
+								<div class="form-group">
+									<input type="text" id="name" name="name" class="form-control" placeholder="Name">
+									<span id="nameHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="text" id="nickname" name="nickName" class="form-control" placeholder="Nickname">
+									<span id="nicknameHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="email" id="email" name="email" class="form-control" placeholder="Email">
+									<span id="emailHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="number" id="phone" name="phone" class="form-control" placeholder="Phone number">
+									<span id="phoneHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="number" id="zipcode" name="zipCode" readonly="readonly" onclick="execDaumPostcode()" class="form-control" placeholder="zip code"> 
+									<span id="zipcodeHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control" placeholder="Road address">
+									<span id="roadHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<input type="text" id="detailAddress" name="detailAddress" class="form-control" placeholder="Detail address">
+									<span id="detailHelper" class="helper"></span>
+								</div>
+								<div class="form-group">
+									<button type="button" id="signup">Register</button>
+								</div>
+							</form>
+						</c:if>
 				</div>
 				<!-- end register -->
 			</div>
@@ -166,6 +178,29 @@
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script type="text/javascript">
+		// 아이디 중복 체크
+		$('#checkId').focus();
+		
+		$('#checkId').blur(function() {
+			if ($('#checkId').val().length < 4) {
+				$('#idCheckHelper').text('ID는 4자이상!');
+				$('#checkId').focus();
+			} else {
+				$('#idCheckHelper').text('');
+			}
+		});
+		// 아이디 중복 체크 버튼 누를시 발생 이벤트
+    	$('#check').click(function() {
+    		if($('#checkId').val() == '') {
+    			$('#idCheckHelper').text('id는 4자 이상 입력해주세요');
+    			$('#checkId').focus();
+    		} else {
+    			$('#checkIdForm').submit();
+    		}
+    	}); 
+		
+		
+		// 회원가입 입력폼 유효성 검사
 		$('#id').blur(function() {
 			if ($('#id').val().length < 4) {
 				$('#idHelper').text('id는 4자이상');
@@ -174,7 +209,8 @@
 				$('#idHelper').text('');
 			}
 		});
-
+		
+		// 회원가입 버튼 누를시 발생하는 이벤트
 		$('#pwConfirm').blur(function() {
 			if ($('#pw').val().length < 4) {
 				$('#pwHelper').text('pw는 4자이상');
@@ -259,6 +295,9 @@
 				$('#idHelper').text('');
 
 				$('#pwHelper').text('pw는 4자이상');
+				$('#pw').focus();
+			} else if ($('#pw').val() != $('#pwConfirm').val()) {
+				$('#pwHelper').text('pw가 일치하지 않습니다');
 				$('#pw').focus();
 			} else if ($('#name').val() == '') {
 				$('#pwHelper').text('');

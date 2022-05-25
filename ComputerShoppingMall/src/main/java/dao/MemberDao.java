@@ -148,6 +148,42 @@ public class MemberDao {
 			}
 			return row;
 		}
+
+		// 3-1) 아이디 중복 체크
+		public int idCheckMember(String customerId) {
+			// 아이디 중복 여부 리턴할 정수형 변수 선언
+			int row = -1;
+			// DB 초기화
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			// DButil
+			conn = DButil.getConnection();
+			String sql = "SELECT * FROM customer WHERE customer_id = ?";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+				rs = stmt.executeQuery();
+				
+				if(rs.next()) {
+					row = 1;
+					System.out.println("중복아이디가 존재!");
+				} else {
+					row = 0;
+					System.out.println("가입가능한 아이디입니다!");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return row;
+		}
 		
 		// 4) 회원 삭제 page
 		public int deleteMember(Customer member) {
@@ -206,7 +242,6 @@ public class MemberDao {
 					+ "						,zip_code=? "
 					+ "						,road_address=? "
 					+ "						,detail_address=? "
-					+ " 					,update_date = NOW()"
 					+ "	WHERE customer_id=?";
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -231,8 +266,7 @@ public class MemberDao {
 			}
 			return row;
 		}
-		
-		//  6) 회원 비밀번호 수정
+		// 6) 비밀번호 수정
 		public int updateMemberPasswordByIdPw(Customer member, String newCustomerPw) {
 			// 회원 정보 수정 성공 여부 리턴할 정수형 변수 선언
 			int row = -1; 
@@ -255,7 +289,6 @@ public class MemberDao {
 					+ "						,road_address = ? "
 					+ "						,detail_address = ? "
 					+ "						,customer_pw = PASSWORD(?) "
-					+ "						,last_pw_date =  NOW() "
 					+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -278,6 +311,42 @@ public class MemberDao {
 					stmt.close();
 					conn.close();
 				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return row;
+		}
+		
+		// 6-1) 현재 비밀번호 체크
+		public int pwCheckMember(String customerPw) {
+			// 아이디 중복 여부 리턴할 정수형 변수 선언
+			int row = -1;
+			// DB 초기화
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			// DButil
+			conn = DButil.getConnection();
+			String sql = "SELECT * FROM customer WHERE customer_pw = PASSWORD(?) ";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerPw);
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					row = 1;
+					System.out.println("비밀번호 일치!");
+				} else {
+					row = 0;
+					System.out.println("현재 비밀번호 틀림!");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}

@@ -29,13 +29,22 @@ public class UpdateMemberPwController extends HttpServlet {
 			
 			// vo
 			Customer customer = new Customer();
-			
-			// dao.selectMemberOne
+			// dao
 			dao = new MemberDao();
 			customer = dao.selectMemberOne(sessionCustomerId); 
 			request.setAttribute("customer", customer);
-			
-			// updateMemberForm.jsp 생성 작업 필요
+			// 중복을 검사할 아이디
+			String currentPw = "";
+			if(request.getParameter("currentPw") != null) {
+				currentPw = request.getParameter("currentPw");
+				if(dao.pwCheckMember(currentPw) == 0) { 
+					System.out.println("비밀번호 불 일치!");
+					request.setAttribute("msg", "현재 비밀번호를 확인하세요!");
+					request.getRequestDispatcher("/WEB-INF/view/customer/updateMemberPw.jsp").forward(request, response);
+					return;
+				}
+				request.setAttribute("customerPw", currentPw);
+			}
 			request.getRequestDispatcher("/WEB-INF/view/customer/updateMemberPw.jsp").forward(request, response);
 		}
 		
@@ -49,13 +58,6 @@ public class UpdateMemberPwController extends HttpServlet {
 			   System.out.println("로그아웃 상태");
 			   return;
 		   }
-		   // null 확인코드
-		   if(request.getParameter("customerId") == null || request.getParameter("customerPw") == null ) {
-			   System.out.println("null UpdateMemberPwcontroller.dopost");
-			   response.sendRedirect(request.getContextPath() + "/UpdateMemberPwController");
-			   return;
-		   }
-		   
 		   // UpdateMemberPw.jsp 요청 값 처리
 		   Customer customer = new Customer();
 		   customer.setCustomerId(request.getParameter("customerId"));
