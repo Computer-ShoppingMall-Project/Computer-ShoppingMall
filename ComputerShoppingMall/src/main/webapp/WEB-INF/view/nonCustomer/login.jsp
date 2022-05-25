@@ -52,10 +52,22 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 					<li>Login</li>
 				</ul>
 				<h2>LOGIN</h2>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<!-- search -->
+				<div class="search-bar">
+					<form action="" method="get">
+						<fieldset>
+							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" />
+							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
+						</fieldset>
+					</form>
+				</div>
+				<!-- / end div .search-bar.-->
 			</div>
 		</div>
 	</section>
@@ -88,7 +100,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<button type="submit" id="login" class="button" onclick="Login()" >로그인</button>
+							<button type="button" id="login" class="button" onclick="Login()" >로그인</button>
 							<a href="${pageContext.request.contextPath}/InsertMemberController" class="button" style="background-color: rgb(11, 201, 4);">회원가입</a>
 						</div>
 					</form>
@@ -120,45 +132,61 @@
 	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 
 	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/js/main.js"></script> --%>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 	
 	<!-- 아이디 검사 -->
 	 function Login()
 	   {
 	           var form = document.loginform;
-	                  
+	           
 	           // 아이디에서 입력 필수 조건문
 				if (form.id.value == "")
-				{
-				        alert("아이디를 입력해야 합니다!");
-				        form.id.focus();//포커스를 id박스로 이동.
-				        return;
+				{	
+					form.id.focus();//포커스를 id박스로 이동.
+			        Swal.fire({
+	    			 	icon : 'error',
+	    			 	text : '아이디를 입력해야 합니다!'
+	    			 });
+			        return;
 				}
 				// 아이디 입력 문자수를 4~12자로 제한하는 조건문
 				
 				if (form.id.value.length < 4 || form.id.value.length > 12)
 				{
-				 alert("아이디는 4자 이상 입력 가능합니다!");
-				 form.id.select();// 입력한 문자를 선택 상태로 만듬.
-				 return;
+					form.id.select();// 입력한 문자를 선택 상태로 만듬.
+					Swal.fire({
+	    			 	icon : 'error',
+	    			 	text : '아이디는 4자 이상 입력 가능합니다!'
+	    			 });
+				 	return;
 				}
 	       <!-- 패스워드 검사 -->
 
 	            if (form.pw.value == "")
 	            {
-	                 alert("패스워드를 입력 해야 합니다!");
-	                 form.pw.focus();//포커스를 Password박스로 이동.
+	            	 form.pw.focus();//포커스를 Password박스로 이동.
+	                 Swal.fire({
+		    			 	icon : 'error',
+		    			 	text : '패스워드를 입력 해야 합니다!'
+		    			 });
+	                 
 	                 return;
 	                 
 	            }
 	            if (form.pw.value.length < 4 || form.pw.value.length > 12)
 	            {
-	                 alert("비밀번호는 4~12자 이내로 입력 가능 합니다!");
+	            	form.pw.select();
+	            	 Swal.fire({
+	    			 	icon : 'error',
+	    			 	text : '비밀번호는 4~12자 이내로 입력 가능 합니다!'
+	    			 });
 
-	                 form.pw.select();
 	                 return;
 	            }
+	            
+	            loginform.submit();
 	   }
 	</script>
 </body>
