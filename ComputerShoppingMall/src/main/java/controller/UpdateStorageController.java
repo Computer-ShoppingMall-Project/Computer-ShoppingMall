@@ -28,7 +28,7 @@ public class UpdateStorageController extends HttpServlet {
 		storageDao = new StorageDao();
 		// vo
 		Storage s = new Storage();
-		if(request.getParameter("caseNo") != null ){
+		if(request.getParameter("storageNo") != null ){
 		int storageNo = Integer.parseInt(request.getParameter("storageNo"));
 			s = storageDao.selectStorageOne(storageNo);
 					

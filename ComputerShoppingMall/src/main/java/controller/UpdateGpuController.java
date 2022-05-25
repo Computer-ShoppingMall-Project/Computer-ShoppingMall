@@ -12,7 +12,7 @@ import dao.CpuDao;
 import dao.GpuDao;
 import vo.Cpu;
 import vo.Gpu;
-@WebServlet("/login/UpdateGpuController")
+@WebServlet("/UpdateGpuController")
 public class UpdateGpuController extends HttpServlet {
 	private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class UpdateGpuController extends HttpServlet {
 				g = gpuDao.selectGpuOne(gpuNo);
 							
 				request.setAttribute("gpu", g);
-				request.getRequestDispatcher("/WEB-INF/view/admin/updategpuForm.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/view/admin/updateGpuForm.jsp").forward(request, response);
 					}
 				}
 

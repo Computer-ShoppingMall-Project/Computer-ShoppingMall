@@ -72,8 +72,13 @@
 </head>
 <script type="text/javascript">
 	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
-			document.getElementById('plusCart').click();
+		if (confirm('장바구니에 담으시겠습니까?')) {
+			document.getElementById('btn').click();
+		}
+	}
+	function del() {
+		if (confirm('상품을 삭제 하겠습니까?')) {
+			document.getElementById('btnDel').click();
 		}
 	}
 </script>

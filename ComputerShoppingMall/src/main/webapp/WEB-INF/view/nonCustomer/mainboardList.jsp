@@ -230,8 +230,8 @@
 													<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
-															<a href="${pageContext.request.contextPath}/UpdateMainboardController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteMainboardController?" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>												
+															<a href="${pageContext.request.contextPath}/UpdateMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
+															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteMainboardController?mainboardNo=${c.mainboardNo }" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>												
 															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>

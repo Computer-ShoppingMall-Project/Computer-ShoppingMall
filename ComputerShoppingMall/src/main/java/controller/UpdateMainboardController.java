@@ -1,6 +1,8 @@
 package controller;
 
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,12 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CaseDao;
 import dao.MainboardDao;
-import vo.Case;
 import vo.Mainboard;
 
-@WebServlet("/login/UpdateMainboardController")
+@WebServlet("/UpdateMainboardController")
 public class UpdateMainboardController extends HttpServlet {
 	private MainboardDao mainboardDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,26 @@ public class UpdateMainboardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-	
+		mainboardDao = new MainboardDao();
+		// 상세보기 받아오기
+		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		// COMPANY
+		List<String> companyList = mainboardDao.companyKind();
+		// CPU Socket
+		List<String> socketSizeList = mainboardDao.socketSizeKind();
+		// CHIPSET
+		List<String> chipsetList = mainboardDao.chipsetKind();
+		// RAM VERSION
+		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		// KIND
+		List<String> kindList = mainboardDao.kindKind();
+		
+		request.setAttribute("mainboadList", mainboadList);
+		request.setAttribute("companyList", companyList);
+		request.setAttribute("socketSizeList", socketSizeList);
+		request.setAttribute("chipsetList", chipsetList);
+		request.setAttribute("ramVersionList", ramVersionList);
+		request.setAttribute("kindList", kindList);
 		// dao
 		mainboardDao = new MainboardDao();
 		// vo
@@ -51,10 +70,13 @@ public class UpdateMainboardController extends HttpServlet {
 		int MainboardNo = 0;
 		int price = 0;
 		int quantity = 0;
-		
+		String categoryName = null;
 		// request값 받기
 		if(request.getParameter("MainboardNo")!= null && request.getParameter("MainboardNo") != "") {
 			MainboardNo = Integer.parseInt(request.getParameter("MainboardNo"));
+		}
+		if(request.getParameter("categoryName")!= null && request.getParameter("categoryName") != "") {
+			categoryName = request.getParameter("categoryName");
 		}
 		if(request.getParameter("price")!= null && request.getParameter("price") != "") {
 			price = Integer.parseInt(request.getParameter("price"));
@@ -76,7 +98,7 @@ public class UpdateMainboardController extends HttpServlet {
 		mainboardDao = new MainboardDao();
 		mainboardDao.updateMainboard(m);
 		
-		response.sendRedirect(request.getContextPath()+"/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath()+"/MainboardListController");
 	}
 
 }
