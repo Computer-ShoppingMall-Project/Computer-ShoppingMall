@@ -8,15 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CpuDao;
 import dao.GpuDao;
+import vo.Cpu;
 import vo.Gpu;
 @WebServlet("/login/UpdateGpuController")
 public class UpdateGpuController extends HttpServlet {
 	private GpuDao gpuDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/WEB-INF/view/admin/deleteGpuForm.jsp").forward(request, response);
-	}
+		// 세션확인
+				HttpSession session = request.getSession();
+				if((String)session.getAttribute("sessionAdminId") == null) {
+					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+					response.sendRedirect(request.getContextPath() + "/LoginController");
+					return;
+				}
+				// dao
+				gpuDao = new GpuDao();
+				// vo
+				Gpu g = new Gpu();
+				if(request.getParameter("gpuNo") != null ){
+				int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
+				g = gpuDao.selectGpuOne(gpuNo);
+							
+				request.setAttribute("gpu", g);
+				request.getRequestDispatcher("/WEB-INF/view/admin/updategpuForm.jsp").forward(request, response);
+					}
+				}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
