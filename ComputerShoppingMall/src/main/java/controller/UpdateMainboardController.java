@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CaseDao;
 import dao.MainboardDao;
+import vo.Case;
 import vo.Mainboard;
 
 @WebServlet("/login/UpdateMainboardController")
@@ -16,16 +18,35 @@ public class UpdateMainboardController extends HttpServlet {
 	private MainboardDao mainboardDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("/WEB-INF/view/deleteMainboardForm.jsp").forward(request, response);
-	}
+		// 세션확인
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+	
+		// dao
+		mainboardDao = new MainboardDao();
+		// vo
+		Mainboard m = new Mainboard();
+		if(request.getParameter("mainboardNo") != null ){
+			int mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
+			m = mainboardDao.selectMainboardOne(mainboardNo);
+							
+			request.setAttribute("mainboardOne", m);
+			request.getRequestDispatcher("/WEB-INF/view/admin/updateMainboardForm.jsp").forward(request, response);
+				}
+			}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
-				HttpSession session = request.getSession();
-				if((String)session.getAttribute("sessionAdminId") == null) {
-					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-					response.sendRedirect(request.getContextPath() + "/LoginController");
-					return;
-				}
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
 		// 변수등록
 		int MainboardNo = 0;
 		int price = 0;

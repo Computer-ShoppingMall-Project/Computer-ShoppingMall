@@ -8,25 +8,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CaseDao;
 import dao.PowerDao;
 import dao.RamDao;
+import vo.Case;
 import vo.Power;
 import vo.Ram;
 @WebServlet("/UpdatePowerController")
 public class UpdatePowerController extends HttpServlet {
     private PowerDao powerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/admin/updatePowerForm.jsp").forward(request, response);
-	}
-
+		
+		// 세션확인
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		// dao
+		powerDao = new PowerDao();
+		// vo
+		Power p = new Power();
+		if(request.getParameter("powerNo") != null ){
+		int powerNo = Integer.parseInt(request.getParameter("powerNo"));
+			p = powerDao.selectPowerOne(powerNo);
+					
+			request.setAttribute("powerOne", p);
+			request.getRequestDispatcher("/WEB-INF/view/admin/updatePowerForm.jsp").forward(request, response);
+			}
+		}
+				
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
-				HttpSession session = request.getSession();
-				if((String)session.getAttribute("sessionAdminId") == null) {
-					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-					response.sendRedirect(request.getContextPath() + "/LoginController");
-					return;
-				}
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+			}
 		// 변수등록
 		int powerNo = 0;
 		int price = 0;

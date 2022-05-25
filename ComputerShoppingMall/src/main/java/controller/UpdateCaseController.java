@@ -15,6 +15,7 @@ import vo.Case;
 public class UpdateCaseController extends HttpServlet {
 	private CaseDao caseDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 세션확인
 		HttpSession session = request.getSession();
 		if((String)session.getAttribute("sessionAdminId") == null) {

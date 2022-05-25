@@ -8,14 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CaseDao;
 import dao.StorageDao;
+import vo.Case;
 import vo.Storage;
 @WebServlet("/UpdateStorageController")
 public class UpdateStorageController extends HttpServlet {
 	private StorageDao storageDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/admin/deleteStorageForm.jsp").forward(request, response);		
-	}
+		// 세션확인
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+		// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+			response.sendRedirect(request.getContextPath() + "/LoginController");
+			return;
+		}
+		
+		// dao
+		storageDao = new StorageDao();
+		// vo
+		Storage s = new Storage();
+		if(request.getParameter("caseNo") != null ){
+		int storageNo = Integer.parseInt(request.getParameter("storageNo"));
+			s = storageDao.selectStorageOne(storageNo);
+					
+			request.setAttribute("storageOne", s);
+			request.getRequestDispatcher("/WEB-INF/view/admin/updateStorageForm.jsp").forward(request, response);
+			}
+		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 				HttpSession session = request.getSession();

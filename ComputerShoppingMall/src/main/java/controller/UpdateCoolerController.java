@@ -18,9 +18,28 @@ public class UpdateCoolerController extends HttpServlet {
 	private CoolerDao coolerDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/view/admin/deleteCoolerForm.jsp").forward(request, response);
+		// 세션확인
+		HttpSession session = request.getSession();
+		if((String)session.getAttribute("sessionAdminId") == null) {
+		// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+		response.sendRedirect(request.getContextPath() + "/LoginController");
+		return;
+		
+		}
+		
+		coolerDao = new CoolerDao();
+		// vo
+		Cooler c = new Cooler();
+		if(request.getParameter("coolerNo") != null ){
+			int coolerNo = Integer.parseInt(request.getParameter("coolerNo"));
+			c = coolerDao.selectCoolerOne(coolerNo);
+			
+			request.setAttribute("coolerOne", c);
+			request.getRequestDispatcher("/WEB-INF/view/admin/updateCoolerForm.jsp").forward(request, response);
+		}
 	}
-
+		
+		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 				HttpSession session = request.getSession();
