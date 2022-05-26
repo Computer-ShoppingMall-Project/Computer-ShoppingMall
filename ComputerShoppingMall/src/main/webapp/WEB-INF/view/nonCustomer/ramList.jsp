@@ -164,7 +164,9 @@
 						</tr>
 					</table>
 					<div>
-						<a href="${pageContext.request.contextPath}/InsertRamController" class="button" style="background-color: LightSkyBlue;" ><i class="fa fa-plus"></i>RAM 등록</a>
+						<c:if test="${sessionAdminId != null}">
+							<a href="${pageContext.request.contextPath}/InsertRamController" class="button" style="background-color: LightSkyBlue;" ><i class="fa fa-plus"></i>RAM 등록</a>
+						</c:if>
 						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
 						<a href="${pageContext.request.contextPath}/RamListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 					</div>

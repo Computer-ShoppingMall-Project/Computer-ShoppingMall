@@ -512,4 +512,5 @@ public class MemberDao {
 				}
 			}
 		}
+		
 }
