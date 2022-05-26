@@ -148,7 +148,7 @@
 									<input type="text" id="town" name="town"  class="form-control" placeholder="Town"> 
 								</div>
 								<div class="form-group">
-									<input type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control" placeholder="Road address">
+									<input type="text" id="roadAddress" name="roadAddress" class="form-control" placeholder="Road address">
 									<span id="roadHelper" class="helper"></span>
 								</div>
 								<div class="form-group">
@@ -189,7 +189,7 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		// 아이디 중복 체크
 		$('#checkId').focus();
 		
@@ -201,6 +201,7 @@
 				$('#idCheckHelper').text('');
 			}
 		});
+		
 		// 아이디 중복 체크 버튼 누를시 발생 이벤트
     	$('#check').click(function() {
     		if($('#checkId').val() == '') {
@@ -211,8 +212,7 @@
     		}
     	}); 
 		
-		
-		// 회원가입 입력폼 유효성 검사
+		// 회원 가입 입력폼 개별 유효성 검사
 		$('#id').blur(function() {
 			if ($('#id').val().length < 4) {
 				$('#idHelper').text('id는 4자이상');
@@ -221,8 +221,7 @@
 				$('#idHelper').text('');
 			}
 		});
-		
-		// 회원가입 버튼 누를시 발생하는 이벤트
+	
 		$('#pwConfirm').blur(function() {
 			if ($('#pw').val().length < 4) {
 				$('#pwHelper').text('pw는 4자이상');
@@ -279,25 +278,25 @@
 				$('#zipcode').text('');
 			}
 		});
-
-		$('#roadAddress').blur(function() {
-			if ($('#roadAddress').val().length == 0) {
-				$('roadHelper').text('도로명 주소를 입력하세요');
-				$('#roadAddress').focus();
-			} else {
-				$('#roadAddress').text('');
-			}
-		});
 		
 		$('#province').blur(function() {
 			if ($('#province').val().length == 0) {
-				$('provinceHelper').text('시를 입력하세요');
+				$('provinceHelper').text('시(도)를 입력하세요');
 				$('#roadAddress').focus();
 			} else {
 				$('#roadAddress').text('');
 			}
 		});
-		
+
+		$('#city').blur(function() {
+			if ($('#city').val().length == 0) {
+				$('cityHelper').text('시군구를 입력하세요');
+				$('#city').focus();
+			} else {
+				$('#city').text('');
+			}
+		});
+	
 		$('#roadAddress').blur(function() {
 			if ($('#roadAddress').val().length == 0) {
 				$('roadHelper').text('도로명 주소를 입력하세요');
@@ -316,6 +315,7 @@
 			}
 		});
 
+		// 회원 가입 버튼을 눌렀을 시, 진행되는 이벤트 유효성 체크
 		$('#signup').click(function() {
 			if ($('#id').val() == '') {
 				$('#idHelper').text('id는 4자이상');
@@ -354,10 +354,20 @@
 
 				$('#zipcodeHelper').text('우편번호를 입력하세요');
 				$('#zipcode').focus();
-			} else if ($('#roadAddress').val() == '') {
+			} else if ($('#province').val() == '') {
 				$('#zipcodeHelper').text('');
 
-				$('#roadAddresssHelper').text('도로명 주소를 입력하세요');
+				$('#provinceHelper').text('시(도)를 입력하세요');
+				$('#province').focus();
+			} else if ($('#city').val() == '') {
+				$('#provinceHelper').text('');
+
+				$('#cityHelper').text('시군구를 입력하세요');
+				$('#city').focus();
+			} else if ($('#roadAddress').val() == '') {
+				$('#cityHelper').text('');
+
+				$('#roadHelper').text('도로명 주소를 입력하세요');
 				$('#roadAddress').focus();
 			} else if ($('#detailAddress').val() == '') {
 				$('#roadHelper').text('');
