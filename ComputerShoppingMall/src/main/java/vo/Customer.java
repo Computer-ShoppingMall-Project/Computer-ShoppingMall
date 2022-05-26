@@ -16,7 +16,16 @@ public class Customer {
 	private String createDate;
 	private String updateDate;
 	private int adminCk;
+	private String lastPwDate; // 비밀번호 변경 날짜 + 3달
 	private int active;
+
+	public String getlastPwDate() {
+		return lastPwDate;
+	}
+
+	public void setlastPwDate(String lastPwDate) {
+		this.lastPwDate = lastPwDate;
+	}
 
 	@Override
 	public String toString() {
@@ -24,7 +33,15 @@ public class Customer {
 				+ nickName + ", email=" + email + ", phone=" + phone + ", zipCode=" + zipCode + ", province=" + province
 				+ ", city=" + city + ", town=" + town + ", roadAddress=" + roadAddress + ", detailAddress="
 				+ detailAddress + ", createDate=" + createDate + ", updateDate=" + updateDate + ", adminCk=" + adminCk
-				+ ", active=" + active + "]";
+				+ ", lastPwDate=" + lastPwDate + ", active=" + active + "]";
+	}
+
+	public String getLastPwDate() {
+		return lastPwDate;
+	}
+
+	public void setLastPwDate(String lastPwDate) {
+		this.lastPwDate = lastPwDate;
 	}
 
 	public String getCustomerId() {
