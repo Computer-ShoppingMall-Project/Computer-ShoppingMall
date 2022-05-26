@@ -64,51 +64,103 @@
 						<span>STORAGE</span>
 					</h4>
 					<form id="insertStorageForm" method="post" name="insertStorageForm" action="${pageContext.request.contextPath}/InsertStorageController?categoryName=storage" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text" name="storageName" class="form-control" placeholder="StorageName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyname</option>
-								<option value="삼성전자">삼성전자</option>
-								<option value="SK하이닉스">SK하이닉스</option>
-								<option value="Western">Western</option>
-								<option value="Seagate">Seagate</option>
-								<option value="도시바">도시바</option>
-								<option value="마이크론">마이크론</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="radio" name="storageInterface" value="PCIe4.0x4">PCIe4.0x4 
-							<input type="radio" name="storageInterface" value="PCIe3.0x4">PCIe3.0x4 
-							<input type="radio" name="storageInterface" value="SATA3">SATA3
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="capacity">
-								<option value="" selected disabled hidden>capacity</option>
-								<option value="4TB">4TB</option>
-								<option value="2TB">2TB</option>
-								<option value="1TB">1TB</option>
-								<option value="512GB">512GB</option>
-								<option value="500GB">500GB</option>
-								<option value="250GB">250GB</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
+						<table class="table text-primary">
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+								</td>
+							</tr>
+							<tr>
+								<th>COMPANY</th>
+								<td>
+									<select class="form-control" id="company" name="company" id="company">
+										<option value="" selected disabled>company 선택</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+									<input type="hidden" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>KIND</th>
+								<td>
+									<select class="form-control" id="kindbox" name="kind" id="kindBox">
+										<option value="" selected disabled>kind 선택</option>
+											<c:forEach var="c" items="${kindList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+									<input type="hidden" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>SOCKET SIZE</th>
+								<td>
+									<select class="form-control" name="socketSize" id="socketSizeBox">
+										<option value="" selected disabled>SOCKET SIZE 선택</option>
+											<c:forEach var="c" items="${socketSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+									<input type="hidden" id="socketSizeDirect" name="socketSize" class="form-control" placeholder="SOCKET SIZE 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>CHIPSET</th>
+								<td>
+									<select class="form-control" name="chipset" id="chipsetBox">
+										<option value="" selected disabled>CHIPSET 선택</option>
+											<c:forEach var="c" items="${chipsetList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+									<input type="hidden" id="chipsetDirect" name="chipset" class="form-control" placeholder="CHIPSET 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>RAM VERSION</th>
+								<td>
+									<select class="form-control" name="ramVersion" id="ramVersionBox">
+											<c:forEach var="c" items="${ramVersionList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+									<input type="hidden" id="ramVersionDirect" name="ramVersion" class="form-control" placeholder="RAM VERSION 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->

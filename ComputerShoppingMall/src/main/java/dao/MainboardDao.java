@@ -110,7 +110,7 @@ public class MainboardDao {
 			"INSERT INTO mainboard_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
 		String productSql = 
 			"INSERT INTO mainboard(mainboard_name, category_name, kind, socket_size, chipset, ram_version, price, quantity, mainboard_image_no, memo, update_date)"
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";	
 		try {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(imgSql, PreparedStatement.RETURN_GENERATED_KEYS); // 기본키를 외래키로 참조
@@ -136,6 +136,7 @@ public class MainboardDao {
 			stmt.setInt(8, m.getQuantity());
 			stmt.setInt(9, imgNo);
 			stmt.setString(10, m.getMemo());
+			stmt.setString(11, m.getCompanyName());
 			row = stmt.executeUpdate();
 			
 			if(row == 1) {

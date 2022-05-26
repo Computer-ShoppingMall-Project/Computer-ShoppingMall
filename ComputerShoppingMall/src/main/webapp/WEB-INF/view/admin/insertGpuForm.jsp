@@ -62,44 +62,27 @@
 						<span>GPU</span>
 					</h4>
 					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContext.request.contextPath}/InsertGpuController?categoryName=gpu" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text" name="gpuName" class="form-control" placeholder="GpuName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="companyName">
-								<option value="" selected disabled hidden>companyName</option>
-								<option value="GALAX">GALAX</option>
-								<option value="이엠텍">이엠텍</option>
-								<option value="MSI">MSI</option>
-								<option value="ASRock">ASRock</option>
-								<option value="ASUS">ASUS</option>
-								<option value="ZOTAC">ZOTAC</option>
-								<option value="SAPPHIRE">SAPPHIRE</option>
-								<option value="GIGABYTE">GIGABYTE</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="radio" name="chipsetCompany" value="NVDIA">NVDIA 
-							<input type="radio" name="chipsetCompany" value="라데온">라데온
-						</div>
-						<div class="form-group">
-							<input type="number" name="gpuSize" class="form-control" placeholder="GpuSize">
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div><div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
-						</div>
+						<table class="table text-primaty">
+						  <tr>
+	                        <th>NAME</th>
+	                        <td>
+                           <input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+                        </td>
+                     </tr>
+                     <tr>
+                     	<th>KIND</th>
+                        <td>
+                           <select class="form-control" id="kindbox" name="kind" id="kindBox">
+                              <option value="" selected disabled>kind 선택</option>
+                                 <c:forEach var="c" items="${kindList}">
+                                    <option value="${c}">${c}</option>
+                                 </c:forEach>
+                              <option onclick="dis()">직접 입력</option>
+                           </select>
+                                <input type="text" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+                        </td>
+                        </tr>
+                       </table>
 					</form>
 				</div>
 				<!-- end login -->

@@ -92,6 +92,7 @@ public class InsertMainboardController extends HttpServlet {
 		// Form에 입력된 값 받는 코드
 		String mainboardName = multiReq.getParameter("mainboardName");
 		String categoryName = multiReq.getParameter("categoryName");
+		String companyName = multiReq.getParameter("categoryName");
 		String kind = multiReq.getParameter("kind");
 		String socketSize = multiReq.getParameter("socketSize");
 		String chipset = multiReq.getParameter("chipset");
@@ -103,6 +104,7 @@ public class InsertMainboardController extends HttpServlet {
 		Mainboard m = new Mainboard();
 		m.setMainboardName(mainboardName);
 		m.setCategoryName(categoryName);
+		m.setCompanyName(companyName);
 		m.setKind(kind);
 		m.setSocketSize(socketSize);
 		m.setChipset(chipset);

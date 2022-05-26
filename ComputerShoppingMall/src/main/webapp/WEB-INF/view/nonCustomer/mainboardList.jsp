@@ -237,7 +237,7 @@
 														</c:when>
 														<c:otherwise>
 														<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${c.mainboardNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
-														<a hidden="hidden" style="display: none;" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.mainboardNo}&&productName=${c.mainboardName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+														<a hidden="hidden" style="display: none;"id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.mainboardNo}&&productName=${c.mainboardName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
 														<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
 														</c:otherwise>
 													</c:choose>																

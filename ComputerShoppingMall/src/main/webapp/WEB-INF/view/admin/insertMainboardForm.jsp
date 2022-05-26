@@ -38,16 +38,75 @@
   ======================================================= -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+// kind 직접입력 
 	$(function(){
-	$("#kindDirect").hide();
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
 	
-	if($("#kindBox").change(function dis() {
-			$("#kindDirect").show();
-		}) else {
-			$("#kindDirect").hide();
-		}
-	}) 
-});
+	// company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct2") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// socketSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct3") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// chipSet 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct4") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
+	
+	// ramVersion 직접입력
+	$(function(){
+		$("#selboxDirect5").hide();
+		
+		$("#selbox5").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox5").val() == "direct5") {
+				$("#selboxDirect5").show();
+			}  else {
+				$("#selboxDirect5").hide();
+			}
+		}) 
+	});
 </script>
 </head>
 <body>
@@ -83,52 +142,65 @@
 							<tr>
 								<th>KIND</th>
 								<td>
-									<select class="form-control" id="kindbox" name="kind" id="kindBox">
+									<select class="form-control" id="selbox" name="kind">
 										<option value="" selected disabled>kind 선택</option>
 											<c:forEach var="c" items="${kindList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-										<input type="text" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+									<input type="text" id="selboxDirect" name="kind" class="form-control" value="" placeholder="KIND 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox2" name="companyName" >
+										<option value="" selected disabled>company 선택</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct2">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="companyName" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>
 								<th>SOCKET SIZE</th>
 								<td>
-									<select class="form-control" name="socketSize" id="socketSizeBox">
+									<select class="form-control" id="selbox3" name="socketSize">
 										<option value="" selected disabled>SOCKET SIZE 선택</option>
 											<c:forEach var="c" items="${socketSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct">직접 입력</option>
-										<input type="hidden" id="socketSizeDirect" name="socketSize" class="form-control" placeholder="SOCKET SIZE 직접 입력">
+										<option value="direct3">직접 입력</option>
 									</select>
+									<input type="text" id="selboxDirect3" name="socketSize" class="form-control" value="" placeholder="SOCKET SIZE 직접 입력">
 								</td>
 							</tr>
 							<tr>
 								<th>CHIPSET</th>
 								<td>
-									<select class="form-control" name="chipset" id="chipsetBox">
+									<select class="form-control" id="selbox4" name="chipSet">
 										<option value="" selected disabled>CHIPSET 선택</option>
 											<c:forEach var="c" items="${chipsetList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct">직접 입력</option>
-										<input type="hidden" id="chipsetDirect" name="chipset" class="form-control" placeholder="CHIPSET 직접 입력">
+										<option value="direct4">직접 입력</option>
 									</select>
+									<input type="text" id="selboxDirect4" name="chipSet" class="form-control" value="" placeholder="CHIPSET 직접 입력">
 								</td>
 							</tr>
 							<tr>
 								<th>RAM VERSION</th>
 								<td>
-									<select class="form-control" name="ramVersion" id="ramVersionBox">
+									<select class="form-control" id="selbox5" name="ramVersion">
 											<c:forEach var="c" items="${ramVersionList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct">직접 입력</option>
-										<input type="text" id="ramVersionDirect" name="ramVersion" class="form-control" placeholder="RAM VERSION 직접 입력">
+										<option value="direct5">직접 입력</option>
 									</select>
+									<input type="text" id="selboxDirect5" name="ramVersion" class="form-control" value="" placeholder="RAM VERSION 직접 입력">
 								</td>
 							</tr>
 							<tr>

@@ -39,6 +39,7 @@ public class InsertStorageController extends HttpServlet {
 		ArrayList<String> interfaceList = storageDao.interfaceKind();
 		// capacity
 		ArrayList<String> capacityList = storageDao.capacityKind();
+		// companyList
 		
 		request.setAttribute("storageList", storageList);
 		request.setAttribute("companyList", companyList);

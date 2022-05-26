@@ -47,6 +47,15 @@ public class MyBasketController extends HttpServlet {
 			int price = Integer.parseInt(request.getParameter("price"));
 			int quantity = 1;
 		
+			// vo
+			Basket basket = new Basket();
+			basket.setProductNumber(productNumber);
+			basket.setProductName(productName);
+			basket.setCategoryName(categoryName);
+			basket.setPrice(price);
+			basket.setQuantity(quantity);
+			// 디버깅
+			System.out.println("[basketList] :"+ basket.toString());
 			
 			// dao.selestMyBasket
 			ArrayList<Basket> checkList = basketDao.selectMyBasket(customerId);
@@ -68,23 +77,13 @@ public class MyBasketController extends HttpServlet {
 						basketCount = list.size();
 						System.out.println(basketCount+"basketCount");
 						session.setAttribute("basketCount", basketCount);
-//						// 업데이트가 되면 바로 myBaske로 안하면 insert가 작동됨
-//						request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
-//						return;
+						// 업데이트가 되면 바로 myBaske로 안하면 insert가 작동됨
+						request.getRequestDispatcher("/WEB-INF/view/customer/myBasket.jsp").forward(request, response);
+						return;
 					} 
-					
 				}
 			}
 			// 장바구니에 새로운 물품이 들어온다면 insert
-			// vo
-			Basket basket = new Basket();
-			basket.setProductNumber(productNumber);
-			basket.setProductName(productName);
-			basket.setCategoryName(categoryName);
-			basket.setPrice(price);
-			basket.setQuantity(quantity);
-			// 디버깅
-			System.out.println("[basketList] :"+ basket.toString());
 			
 			// 물품 등록
 			basketDao.insertMyBasket(customerId, basket);
