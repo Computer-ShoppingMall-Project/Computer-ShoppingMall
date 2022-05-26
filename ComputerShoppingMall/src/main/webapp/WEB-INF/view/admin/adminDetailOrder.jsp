@@ -65,45 +65,16 @@
 
 	<section class="section1">
 		<div class="container clearfix">
-			<div class="content col-lg-10 col-md-10 col-sm-10 col-xs-10 clearfix">
+			<div class="content col-lg-11 col-md-11 col-sm-11col-xs-11 clearfix">
 			<c:choose>
-				 <c:when test="${updateCheck eq true}">
-				 	<a href="${pageContext.request.contextPath}/AdminOrderUpdateListController" class="btn">back</a>
+				 <c:when test="${updateCheck == null || updateCheck == ''}">
+				 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
 				 </c:when>
 				 <c:otherwise>
-				 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
+				 	<a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true" class="btn">back</a>
 				 </c:otherwise>
 			</c:choose>
 				<div class="clearfix"></div>
-					<form name="orderStatus" method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
-						<input type="text" value="${customerId}" hidden="hidden" name="customerId">
-						<input type="text" value="${createDate}" hidden="hidden" name="createDate">
-						<div class="form-inline form-group">
-							<h4 class="text-primary">ORDER STATUS UPDATE</h4>
-							<div class="col-xs-2">
-							<c:choose>
-								<c:when test="${updateCheck == null}">
-									<select name="orderStatus" class="form-control">
-										<option value="입금 전" <c:if test="${orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
-										<option value="입금 확인" <c:if test="${orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
-										<option value="배송 완료" <c:if test="${orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
-									</select>
-								</c:when>
-								<c:otherwise>
-									<input type="text" name="orderNo" value="${orderNo}" hidden="hidden">
-									<input type="text" name="updateCheck" value="true" hidden="hidden">
-									<select name="orderStatus" class="form-control">
-										<option value="취소 불가">취소 불가</option>
-										<option value="취소 완료">취소 완료</option>
-										<option value="환불 불가">환불 불가</option>
-										<option value="환불 완료">환불 완료</option>
-									</select>
-								</c:otherwise>
-							</c:choose>
-							</div>
-							<button type="submit" class="btn btn-primary">ORDER STATUS UPDATE</button>
-						</div>
-					</form>
 				<div class="clearfix"></div>
 				<h4 class="text-primary">DELIVERY ADDRESS</h4>
 				<table class="table" data-effect="fade">
@@ -133,6 +104,7 @@
 							<th class="text-center">구매 수량</th>
 							<th class="text-center">주문일</th>
 							<th class="text-center">현재 주문상태</th>
+							<th class="text-center">주문상태 수정</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -146,6 +118,35 @@
 								<td class="text-center">${order.categoryQuantity}</td>
 								<td class="text-center">${order.createDate}</td>
 								<td class="text-center">${order.orderStatus}</td>
+								<td class="text-center">
+										<form method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+											<input type="hidden" value="${order.customerId}" name="customerId">
+											<input type="hidden" value="${order.createDate}" name="createDate">
+											<input type="hidden" value="${order.orderNo}" name="orderNo">
+											<c:choose>
+												<c:when test="${updateCheck == null|| updateCheck == ''}">
+													<select name="orderStatus" class="form-control" onchange="this.form.submit()">
+														<option value="입금 전"<c:if test="${order.orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
+														<option value="입금 확인"<c:if test="${order.orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
+														<option value="배송 중"<c:if test="${order.orderStatus eq '배송 중'}">selected</c:if>>배송 중</option> <!-- 기능x -->
+														<option value="배송 완료"<c:if test="${order.orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
+													</select>
+												</c:when>
+												<c:otherwise>
+													<input type="hidden" value="true" name="updateCheck">
+													<select name="orderStatus" class="form-control" onchange="this.form.submit()">
+														<option value="취소 요청중"<c:if test="${order.orderStatus eq '취소 요청중'}">selected</c:if>>취소 요청중</option>
+														<option value="취소 불가"<c:if test="${order.orderStatus eq '취소 불가'}">selected</c:if>>취소 불가</option>
+														<option value="취소 완료"<c:if test="${order.orderStatus eq '취소 완료'}">selected</c:if>>취소 완료</option>
+														<option value="환불 불가"<c:if test="${order.orderStatus eq '환불 불가'}">selected</c:if>>환불 불가</option>
+														<option value="환불 완료"<c:if test="${order.orderStatus eq '환불 완료'}">selected</c:if>>환불 완료</option>
+														<option value="교환 불가"<c:if test="${order.orderStatus eq '교환 불가'}">selected</c:if>>교환 불가</option>
+														<option value="교환 완료"<c:if test="${order.orderStatus eq '교환 완료'}">selected</c:if>>교환 완료</option>
+													</select>
+												</c:otherwise>
+											</c:choose>
+										</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

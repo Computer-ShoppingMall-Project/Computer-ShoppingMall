@@ -40,7 +40,7 @@
 <body>
 	<!-- header적용 -->
 	<c:choose>
-		<c:when test="${sessionAdminId != null }">
+		<c:when test="${sessionAdminId != null}">
 			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 		</c:when>
 		<c:otherwise>
@@ -80,7 +80,7 @@
 							<tr>
 								<td>${order.createDate}</td>
 								<td>${order.productName}
-									(<span class="text-primary">${order.productCount}</span>)
+								(<span class="text-primary">${order.productCount}</span>)
 								</td>
 								<td>${order.totalPrice}won</td>
 								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>

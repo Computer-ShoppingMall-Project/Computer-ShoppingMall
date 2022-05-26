@@ -24,6 +24,7 @@ public class AdminUpdateQnaController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		// 답변 / 수정할 내용 받아오기
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo")); // 수정 번호
 		String qnaAnswer = request.getParameter("qnaAnswer"); // 답변 내용

@@ -79,16 +79,21 @@
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
-								<c:if test="${order.refundCheck eq 'N' && order.cancelCheck eq 'N'}">
 									<tr>
 										<td>${order.orderNo}</td>
 										<td class="text-center">${order.customerId}</td>
 										<td class="text-center">${order.createDate}</td>
 										<td>${order.productName}(<span class="text-primary">${order.productCount}</span>)</td>
 										<td class="text-center">${order.orderStatus}</td>
-										<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
+										<c:choose>
+											<c:when test="${updateCheck != null}">
+												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=${updateCheck}">View Detail OrderList</a></td>
+											</c:when>
+											<c:otherwise>
+												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
-								</c:if>
 						</c:forEach>
 					</tbody>
 				</table>

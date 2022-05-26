@@ -28,15 +28,16 @@ public class DetailOrderController extends HttpServlet {
 			return;
 		}
 		// 변수 등록
-		// request create_date
 		String customerUpdateCheck = null;
-		
-		if(request.getParameter("customerUpdateCheck") != null && !"".equals(request.getParameter("customerUpdateCheck"))) {
-			customerUpdateCheck = request.getParameter("customerUpdateCheck");
+		String createDate = request.getParameter("createDate");
+		int orderNo = 0;
+		String updateCheck = null;
+		if(request.getParameter("updateCheck") != null && !"".equals(request.getParameter("updateCheck"))) {
+			updateCheck = request.getParameter("updateCheck");
 		}
 		// dao
 		orderDao = new OrderDao();
-		List<Map<String, Object>> list = orderDao.selectOrderDateList(customerId);
+		List<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck, orderNo);
 		// request set
 		request.setAttribute("customerUpdateCheck", customerUpdateCheck);
 		request.setAttribute("orderList", list);

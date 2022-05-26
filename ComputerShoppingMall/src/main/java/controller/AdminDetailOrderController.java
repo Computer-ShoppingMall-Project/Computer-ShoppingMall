@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
@@ -32,21 +34,16 @@ public class AdminDetailOrderController extends HttpServlet {
 		String customerId = request.getParameter("customerId");
 		String createDate = request.getParameter("createDate");
 		int orderNo = 0;
-		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
-		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
-			updateCheck = request.getParameter("updateCheck");
-			orderNo = Integer.parseInt(request.getParameter("orderNo"));
-		} 
+		String updateCheck = null; // 배송 상태 수정이 들어오지 않았을 때 상태
+		if(request.getParameter("updateCheck") != null && !"".equals("updateCheck")) {
+			updateCheck = request.getParameter("updateCheck"); // 주문 취소/환불 사항 리스트
+		}
 		
 		orderDao = new OrderDao();
-		ArrayList<Order> list = orderDao.adminOrderList(updateCheck);
+		List<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck, orderNo);
 		
-		request.setAttribute("orderNo", orderNo);
-		request.setAttribute("updateCheck", updateCheck);
 		request.setAttribute("detailOrderList", list);
-		request.setAttribute("customerId", customerId);
-		request.setAttribute("createDate", createDate);
-		request.setAttribute("orderStatus", list.get(0).getOrderStatus()); // 현재 주문 상태 보내주기 (옵션 유지를 위해)
+		request.setAttribute("updateCheck", updateCheck); // 뒤로가기 버튼 경로지정을 위해 값 전송
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminDetailOrder.jsp").forward(request, response);
 	}
 
@@ -65,30 +62,30 @@ public class AdminDetailOrderController extends HttpServlet {
 		String createDate = request.getParameter("createDate");
 		System.out.println("[AdminDetailOrderController.doPost] : " + customerId +"/"+ createDate);
 		
-		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
 		int orderNo = 0;
-		
-		int row = 0;
-		
-		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
+		String updateCheck = null;
+		if(request.getParameter("updateCheck") != null && !"".equals(request.getParameter("updateCheck"))) {
 			updateCheck = request.getParameter("updateCheck");
 			orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		}
 		
 		orderDao = new OrderDao();
-		row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate, updateCheck, orderNo);
 		
-		if(updateCheck!=null && "".equals(updateCheck)) { // 취소폼이라면 updateCheck 여부도 같이 보내주기
-			response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate+"&&updateCheck="+updateCheck);
-			return;
-		}
+		System.out.println(updateCheck);
 		
-		if(row > 0) { // 업데이트 성공시 리스트로 돌아가기
+		int row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate, updateCheck, orderNo);
+		
+		if(row > 0) { // 업데이트 성공시 해당 상세보기로 돌아가기
 			System.out.println("[AdminDetailOrderController] : 상태변경 성공 " + row + "개 정보 업데이트 완료");
-		} else { // 업데이트 실패시 리스트로 돌아가기
+		} else { // 업데이트 성공시 해당 상세보기로 돌아가기
 			System.out.println("[AdminDetailOrderController] : 상태변경 실패" + row + "개 정보 업데이트 완료 > 업데이트 실패");
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate);
+		orderDao = new OrderDao();
+		List<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck, orderNo);
+		
+		request.setAttribute("detailOrderList", list);
+		request.setAttribute("updateCheck", updateCheck);
+		request.getRequestDispatcher("/WEB-INF/view/admin/adminDetailOrder.jsp").forward(request, response);
 	}
 }

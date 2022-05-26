@@ -68,7 +68,7 @@
 							<li><a href="#">주문 확인</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/AdminOrderListController">주문 내역</a></li>
-									<li><a href="${pageContext.request.contextPath}/AdminOrderUpdateListController">주문 변경 내역</a></li>
+									<li><a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true">주문 변경 내역</a></li>
 								</ul>
 							</li>
 							<li><a href="#">Q&A</a>

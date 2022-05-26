@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,12 +31,14 @@ public class MyPaymentController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-	
+		
+		String adminId = null; // 관리자가 아님을 표시
+		String updateCheck = null; // 관리자만 이용 가능한 정보
 		// dao
 		orderDao = new OrderDao();
-		
 		// OrderDao SELECT
-		List<Map<String,Object>> list = orderDao.selectOrderDateList(customerId);
+		List<Map<String,Object>> list = orderDao.selectOrderDateList(customerId, adminId, updateCheck);
+		
 		// request set
 		request.setAttribute("orderList", list);
 		request.getRequestDispatcher("/WEB-INF/view/customer/myPayment.jsp").forward(request, response);

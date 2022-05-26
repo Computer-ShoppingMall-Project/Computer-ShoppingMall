@@ -60,240 +60,6 @@ public class OrderDao {
       }      
       return row;
    }
-	// 회원별 주문내역 상세보기
-	public ArrayList<Order> selectOrderList(String customerId, String createDate, String updateCheck, int orderNo) {
-		ArrayList<Order> list = new ArrayList<Order>();
-		Order checkout = null;
-		// DB 초기화
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		//  DBUtil
-		conn = DButil.getConnection();
-		String sql = "SELECT order_no orderNo"
-				+ "		,customer_id customerId "
-				+ "		,basket_no basketNo"
-				+ "		,category_number categoryNumber"
-				+ "		,category_name categoryName"
-				+ "		,product_name productName"
-				+ "		,category_price categoryPrice"
-				+ "	 	,category_quantity categoryQuantity"
-				+ "		,create_date createDate"
-				+ "		,order_status orderStatus"
-				+ "		,zip_code zipCode"
-				+ "		,road_address roadAddress"
-				+ "		,detail_address detailAddress"
-				+ "		,COUNT(*) cnt"
-				+ " FROM `order`";
-			if(updateCheck == null || "".equals(updateCheck)) {
-				sql += " WHERE customer_id = ? AND create_date = ?";
-				try {
-					stmt = conn.prepareStatement(sql);
-					stmt.setString(1, customerId);
-					stmt.setString(2, createDate);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			} else {
-				sql += " WHERE (refund_check = 'Y' OR cancel_check = 'Y') AND order_no=?"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
-				try {
-					stmt = conn.prepareStatement(sql);
-					stmt.setInt(1, orderNo);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		try {
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				checkout = new Order();
-				checkout.setOrderNo(rs.getInt("orderNo"));
-				checkout.setCustomerId(rs.getString("customerId"));
-				checkout.setBasketNo(rs.getInt("basketNo"));
-				checkout.setCategoryNumber(rs.getInt("categoryNumber"));
-				checkout.setCategoryName(rs.getString("categoryName"));
-				checkout.setCategoryPrice(rs.getInt("categoryPrice"));
-				checkout.setCategoryQuantity(rs.getInt("categoryQuantity"));
-				checkout.setCreateDate(rs.getString("createDate"));
-				checkout.setOrderStatus(rs.getString("orderStatus"));
-				checkout.setProductName(rs.getString("productName"));
-				checkout.setZipCode(rs.getInt("zipCode"));
-				checkout.setRoadAddress(rs.getString("roadAddress"));
-				checkout.setDetailAddress(rs.getString("detailAddress"));
-				checkout.setProductCount(rs.getInt("cnt"));
-				list.add(checkout);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	// 날짜별로 주문 총액 확인 (MyPaymentController)
-	public List<Map<String, Object>> selectOrderDateList(String customerId) {
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		// DB 초기화
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		//  DBUtil
-		conn = DButil.getConnection();
-		String sql = "SELECT o.customer_id customerId"
-				+ "		,o.product_name productName"
-				+ "		,o.create_date createDate"
-				+ "		,SUM(o.category_price) totalPrice"
-				+ "		,o.order_no orderNo"
-				+ "		,o.order_status orderStatus"
-				+ "		,COUNT(*) cnt"
-				+ "		,o.zip_code zipCode"
-				+ "		,o.detail_address detailAddress"
-				+ "		,o.road_address roadAddress"
-				+ " FROM `order` o"
-				+ " WHERE customer_id=?"
-				+ " GROUP BY o.create_date"
-				+ " ORDER BY o.create_date DESC";
-		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, customerId);
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("customerId", rs.getString("customerId"));
-				map.put("createDate", rs.getString("createDate"));
-				map.put("totalPrice", rs.getString("totalPrice"));
-				map.put("orderStatus", rs.getString("orderStatus"));
-				map.put("productName", rs.getString("productName"));
-				map.put("productCount", rs.getInt("cnt"));
-				map.put("orderNo", rs.getInt("orderNo"));
-				map.put("zipCode", rs.getString("zipCode"));
-				map.put("detailAddress", rs.getString("detailAddress"));
-				map.put("roadAddress", rs.getString("roadAddress"));
-				list.add(map);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	// 관리자 주문 모아보기 리스트
-	public ArrayList<Order> adminOrderList(String updateCheck) {
-		ArrayList<Order> list = new ArrayList<Order>();
-		// DB 변수 선언
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		conn = DButil.getConnection();
-		String sql = "SELECT"
-				+ "	o.order_no orderNo"
-				+ "	, o.customer_id customerId"
-				+ "	, o.basket_no basketNo"
-				+ "	, o.product_name productName"
-				+ "	, o.category_name categoryName"
-				+ "	, o.category_number categoryNumber"
-				+ "	, o.category_price categoryPrice"
-				+ "	, o.category_quantity categoryQuantity"
-				+ "	, o.create_date createDate"
-				+ " , o.order_status orderStatus"
-				+ " , o.refund_check refundCheck"
-				+ " , o.cancel_check cancelCheck"
-				+ "	, o.zip_code zipCode"
-				+ "	, o.road_address roadAddress"
-				+ "	, o.detail_address detailAddress"
-				+ "	, COUNT(*) cnt"
-				+ " FROM `order` o";
-		
-		if(updateCheck != null) {
-			sql += " WHERE (refund_check='Y' OR cancel_check='Y')"
-					+ " GROUP BY customer_id, create_date"
-					+ " ORDER BY o.create_date DESC";
-		} else {
-			sql += " GROUP BY customer_id, create_date"
-					+ " ORDER BY o.create_date DESC";
-		}
-		
-		try {
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				Order o = new Order();
-				o.setOrderNo(rs.getInt("orderNo"));
-				o.setCustomerId(rs.getString("customerId"));
-				o.setBasketNo(rs.getInt("basketNo"));
-				o.setCategoryNumber(rs.getInt("categoryNumber"));
-				o.setCategoryName(rs.getString("categoryName"));
-				o.setCategoryPrice(rs.getInt("categoryPrice"));
-				o.setCategoryQuantity(rs.getInt("categoryQuantity"));
-				o.setCreateDate(rs.getString("createDate"));
-				o.setOrderStatus(rs.getString("orderStatus"));
-				o.setProductName(rs.getString("productName"));
-				o.setZipCode(rs.getInt("zipCode"));
-				o.setRoadAddress(rs.getString("roadAddress"));
-				o.setDetailAddress(rs.getString("detailAddress"));
-				o.setProductCount(rs.getInt("cnt"));
-				o.setRefundCheck(rs.getString("refundCheck"));
-				o.setCancelCheck(rs.getString("cancelCheck"));
-				list.add(o);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				stmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-	// 관리자 주문 리스트 (주문 변경/변경x)
-	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate, String updateCheck, int orderNo) {
-		int row = 0;
-		// DB 변수 선언
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		conn = DButil.getConnection();
-		String sql = "UPDATE `order` SET order_status=? WHERE customer_id=? AND create_date=?";
-		if(updateCheck != null) { // updateCheck가 null이 아니면 쿼리 조건 추가
-			sql += " AND order_no=?";
-		}
-		try {
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, orderStatus);
-				stmt.setString(2, customerId);
-				stmt.setString(3, createDate);
-				if(updateCheck != null) {
-					stmt.setInt(4, orderNo);
-				}
-				row = stmt.executeUpdate();
-			} catch (SQLException e) {
-			e.printStackTrace();
-			} finally {
-				try {
-					stmt.close();
-					conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return row;
-	}
 	// 판매 순위
 	public List<Map<String, Object>> rankCpuImage(int cpuRanking) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -388,7 +154,7 @@ public class OrderDao {
 				+ "	INNER JOIN cooler_image ci "
 				+ "		ON c.cooler_image_no = ci.cooler_image_no "
 				+ " GROUP BY o.product_name "
-				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
+				+ "	ORDER BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, coolerRanking);
@@ -610,7 +376,117 @@ public class OrderDao {
 		return list;
 	}
 	
-	// 취소/환불 여부 변경
+	// 날짜별로 주문 내역 리스트(MyPaymentController) // 관리자 페이지에서 관리자는 전체 주문내역 리스트를 볼 수 있음
+	public List<Map<String, Object>> selectOrderDateList(String customerId, String adminId, String updateCheck) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		// DB 초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		//  DBUtil
+		conn = DButil.getConnection();
+		String sql = "SELECT o.customer_id customerId"
+				+ "		,o.product_name productName"
+				+ "		,o.create_date createDate"
+				+ "		,SUM(o.category_price) totalPrice"
+				+ "		,o.order_no orderNo"
+				+ "		,o.order_status orderStatus"
+				+ "		,o.zip_code zipCode"
+				+ "		,o.detail_address detailAddress"
+				+ "		,o.road_address roadAddress"
+				+ "		,o.order_status orderStatus"
+				+ "		,COUNT(*) productCount"
+				+ " FROM `order` o";
+		
+		if(adminId != null) { // 관리자 페이지에서 관리자는 전체 주문내역 리스트를 볼 수 있음(주문 상태 변경건 제외 -> 페이지 분리)
+			if(updateCheck == null) {
+				sql += " WHERE (o.refund_check='N' AND o.cancel_check='N')"; // updateCheck로 폼 확인
+			} else {
+				sql += " WHERE (o.refund_check='Y' OR o.cancel_check='Y')";
+			}
+			sql+= " GROUP BY o.create_date"
+				+ " ORDER BY o.create_date DESC";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else if(customerId != null) {
+			sql  += " WHERE o.customer_id=?"
+					+ " GROUP BY o.create_date"
+					+ " ORDER BY o.create_date DESC";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(sql);
+		try {
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("customerId", rs.getString("customerId"));
+				map.put("createDate", rs.getString("createDate"));
+				map.put("totalPrice", rs.getString("totalPrice"));
+				map.put("orderStatus", rs.getString("orderStatus"));
+				map.put("productName", rs.getString("productName"));
+				map.put("orderNo", rs.getInt("orderNo"));
+				map.put("zipCode", rs.getString("zipCode"));
+				map.put("detailAddress", rs.getString("detailAddress"));
+				map.put("roadAddress", rs.getString("roadAddress"));
+				map.put("orderStatus", rs.getString("orderStatus"));
+				map.put("productCount", rs.getInt("productCount"));
+				list.add(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	// 관리자 주문 상태 변경 (주문 변경/변경x)
+	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate, String updateCheck, int orderNo) {
+		int row = 0;
+		// DB 변수 선언
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		conn = DButil.getConnection();
+		String sql = "UPDATE `order` SET order_status=? WHERE customer_id=? AND create_date=?";
+		if(orderNo != 0 || (updateCheck != null && !"".equals(updateCheck))) { // updateCheck가 null이 아니면 쿼리 조건 추가
+			sql += " AND order_no=?";
+		}
+		try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, orderStatus);
+				stmt.setString(2, customerId);
+				stmt.setString(3, createDate);
+				if((updateCheck != null && !"".equals(updateCheck)) || orderNo!=0) {
+					stmt.setInt(4, orderNo);
+				}
+				row = stmt.executeUpdate();
+			} catch (SQLException e) {
+			e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	// 고객 취소/환불 여부 변경
 	public int updateOrderStatus(String customerUpdateCheck, int orderNo) {
 		int row = 0;
 		// DB 변수 선언
@@ -639,5 +515,82 @@ public class OrderDao {
 			}
 		}
 		return row;
+	}
+	// 회원별 주문내역 상세보기
+	public ArrayList<Order> selectOrderList(String customerId, String createDate, String updateCheck, int orderNo) {
+		ArrayList<Order> list = new ArrayList<Order>();
+		Order checkout = null;
+		// DB 초기화
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		//  DBUtil
+		conn = DButil.getConnection();
+		String sql = "SELECT order_no orderNo"
+				+ "		,customer_id customerId "
+				+ "		,basket_no basketNo"
+				+ "		,category_number categoryNumber"
+				+ "		,category_name categoryName"
+				+ "		,product_name productName"
+				+ "		,category_price categoryPrice"
+				+ "	 	,category_quantity categoryQuantity"
+				+ "		,create_date createDate"
+				+ "		,order_status orderStatus"
+				+ "		,zip_code zipCode"
+				+ "		,road_address roadAddress"
+				+ "		,detail_address detailAddress"
+				+ " FROM `order`";
+			if(updateCheck == null || "".equals(updateCheck)) {
+				sql += " WHERE customer_id = ? AND create_date = ?";
+				try {
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, customerId);
+					stmt.setString(2, createDate);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				sql += " WHERE customer_id = ? AND create_date = ?"
+						+ " AND (refund_check='Y' OR cancel_check='Y')";
+				try {
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, customerId);
+					stmt.setString(2, createDate);
+					stmt.setInt(3, orderNo);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		try {
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				checkout = new Order();
+				checkout.setOrderNo(rs.getInt("orderNo"));
+				checkout.setCustomerId(rs.getString("customerId"));
+				checkout.setBasketNo(rs.getInt("basketNo"));
+				checkout.setCategoryNumber(rs.getInt("categoryNumber"));
+				checkout.setCategoryName(rs.getString("categoryName"));
+				checkout.setCategoryPrice(rs.getInt("categoryPrice"));
+				checkout.setCategoryQuantity(rs.getInt("categoryQuantity"));
+				checkout.setCreateDate(rs.getString("createDate"));
+				checkout.setOrderStatus(rs.getString("orderStatus"));
+				checkout.setProductName(rs.getString("productName"));
+				checkout.setZipCode(rs.getInt("zipCode"));
+				checkout.setRoadAddress(rs.getString("roadAddress"));
+				checkout.setDetailAddress(rs.getString("detailAddress"));
+				list.add(checkout);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }
