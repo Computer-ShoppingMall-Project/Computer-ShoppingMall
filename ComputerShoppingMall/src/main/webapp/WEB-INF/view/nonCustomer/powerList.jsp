@@ -148,6 +148,7 @@
 						</tr>
 					</table>
 					<div>
+						<a href="${pageContext.request.contextPath}/InsertPowerController" class="button" style="background-color: LightSkyBlue;" ><i class="fa fa-plus"></i>파워 등록</a>
 						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
 						<a href="${pageContext.request.contextPath}/PowerListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
 					</div>
@@ -174,7 +175,7 @@
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
-															<a href="${pageContext.request.contextPath}/UpdatePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
+															<a href="${pageContext.request.contextPath}/UpdatePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
 															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeletePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
 															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>

@@ -119,8 +119,12 @@ public class InsertCaseController extends HttpServlet {
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertCaseController] : Case 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/CaseListController");
+			return;
 		} else {
 			System.out.println("[InsertCaseController] : Case 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/InsertCaseController");
+			return;
 		}
 	}
 

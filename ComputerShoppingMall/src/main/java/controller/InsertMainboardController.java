@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.File;
+import java.io.File; 
 import java.io.IOException;
 import java.util.List;
 
@@ -123,8 +123,12 @@ public class InsertMainboardController extends HttpServlet {
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/MainboardListController");
+			return;
 		} else {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/ InsertMainboardController");
+			return;
 		}
 	}
 }

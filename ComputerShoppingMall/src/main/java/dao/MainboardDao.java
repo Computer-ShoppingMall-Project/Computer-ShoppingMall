@@ -109,7 +109,7 @@ public class MainboardDao {
 		String imgSql =
 			"INSERT INTO mainboard_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
 		String productSql = 
-			"INSERT INTO mainboard(mainboard_name, category_name, kind, socket_size, chipset, ram_version, price, quantity, mainboard_image_no, memo, update_date)"
+			"INSERT INTO mainboard(mainboard_name, category_name, kind, socket_size, chipset, ram_version, price, quantity,company_name ,mainboard_image_no, memo, update_date)"
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";	
 		try {
 			conn.setAutoCommit(false);
@@ -134,9 +134,9 @@ public class MainboardDao {
 			stmt.setString(6, m.getRamVersion());
 			stmt.setInt(7, m.getPrice());
 			stmt.setInt(8, m.getQuantity());
-			stmt.setInt(9, imgNo);
-			stmt.setString(10, m.getMemo());
-			stmt.setString(11, m.getCompanyName());
+			stmt.setString(9, m.getCompanyName());
+			stmt.setInt(10, imgNo);
+			stmt.setString(11, m.getMemo());
 			row = stmt.executeUpdate();
 			
 			if(row == 1) {

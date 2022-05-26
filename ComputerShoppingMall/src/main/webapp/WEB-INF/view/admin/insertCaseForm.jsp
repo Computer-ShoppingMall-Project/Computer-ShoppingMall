@@ -37,8 +37,65 @@
     License: https://templatemag.com/license/
   ======================================================= -->
 </head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+// caseSize 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// gpuSize 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct2") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// bay89mm 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct3") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// bay64mm 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct4") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
+</script>
 <body>
-	<div class="row">
 	<!-- header적용 -->
 	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
@@ -59,61 +116,93 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>CASE</span>
-					</h4>
+					<h4 class="title text-primary">MAINBOARD 등록</h4>
 					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController?categoryName=case" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text" name="caseName" class="form-control" placeholder="CaseName">
-						</div>
-						<div>
-							<select class="form-group form-control" name="caseSize">
-								<option value="" selected disabled hidden>caseSize</option>
-								<c:forEach var="c" items="caseSizeList">
-									<option value="${c}">${c}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div>
-						
-							<input type="text" name="gpuSize" class="form-control" placeholder="gpuSize">
-						</div>
-						<div class="form-group">
-							<select class="form-group form-control" name="bay89mm">
-								<option value="" selected disabled hidden>bay89mm</option>
-								<option value="6">6</option>
-								<option value="4">4</option>
-								<option value="3">3</option>
-								<option value="2">2</option>
-								<option value="1">1</option>
-								<option value="0">0</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group form-control" name="bay64mm">
-								<option value="" selected disabled hidden>bay64mm</option>
-								<option value="6">6</option>
-								<option value="4">4</option>
-								<option value="2">2</option>
-								<option value="1">1</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" min=1 placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="text" name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
-					</div>
+						<table class="table text-primary">
+							<tr>
+								<th>CASE</th>
+								<td>
+									<input type="text" name="caseName" class="form-control" placeholder="CaseName">
+								</td>							
+							</tr>	
+							<tr>
+								<th>CASESIZE</th>
+								<td>
+									<select class="form-group form-control" id="selbox" name="caseSize">
+										<option value="" selected disabled>caseSize</option>
+										<c:forEach var="c" items="${caseSizeList }">
+											<option value="${c}">${c}</option>
+										</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="caseSize" class="form-control" value="" placeholder="casSize 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>GPUSIZE</th>
+								<td>
+									<select class="form-group form-control" id="selbox2" name="gpuSize">
+										<option value="" selected disabled>gpuSize</option>
+										<c:forEach var="c" items="${gpuSizeList}">
+											<option value="${c}">${c}</option>
+										</c:forEach>
+										<option value="direct2">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2" name="gpuSIze" class="form-control" value="" placeholder="gpuSize 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>BAY89mm</th>
+								<td>
+									<select class="form-group form-control" id="selbox3" name="bay89mm">
+										<option value="" selected disabled>BAY89mm</option>
+										<c:forEach var="c" items="${bay89mmList }">
+											<option value="${c}">${c}</option>
+										</c:forEach>
+										<option value="direct3">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect3" name="bay89mm" class="form-control" value="" placeholder="bay89mm 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>BAY64mm</th>
+								<td>
+									<select class="form-group form-control" id="selbox4" name="bay64mm">
+										<option value="" selected disabled>BAY64mm</option>
+										<c:forEach var="c" items="${bay64mmList }">
+											<option value="${c}">${c}</option>
+										</c:forEach>
+										<option value="direct4">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect4" name="bay64mm" class="form-control" value="" placeholder="bay64mm 직접 입력">
+								</td>
+							</tr>	
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->

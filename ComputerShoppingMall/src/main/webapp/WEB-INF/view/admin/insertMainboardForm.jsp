@@ -181,14 +181,14 @@
 							<tr>
 								<th>CHIPSET</th>
 								<td>
-									<select class="form-control" id="selbox4" name="chipSet">
+									<select class="form-control" id="selbox4" name="chipset">
 										<option value="" selected disabled>CHIPSET 선택</option>
 											<c:forEach var="c" items="${chipsetList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
 										<option value="direct4">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect4" name="chipSet" class="form-control" value="" placeholder="CHIPSET 직접 입력">
+									<input type="text" id="selboxDirect4" name="chipset" class="form-control" value="" placeholder="CHIPSET 직접 입력">
 								</td>
 							</tr>
 							<tr>

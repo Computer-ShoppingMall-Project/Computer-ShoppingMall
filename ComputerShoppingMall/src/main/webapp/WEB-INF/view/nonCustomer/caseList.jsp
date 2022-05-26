@@ -184,10 +184,11 @@
 							<td><input type="text" name="search" class="form-control" value="${search}" placeholder="검색어를 입력해주세요"></td>
 						</tr>
 					</table>
-				<div>
-					<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
-					<a href="${pageContext.request.contextPath}/CaseListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
-				</div>
+					<div>
+						<a href="${pageContext.request.contextPath}/InsertCaseController" class="button" style="background-color: LightSkyBlue;" ><i class="fa fa-plus"></i>케이스등록</a>
+						<button type="submit" style="float: right; margin-rigth: 20px">Search</button>
+						<a href="${pageContext.request.contextPath}/CaseListController" class="btn btn-link" style="float: right; margin-rigth: 20px">Reset</a>
+					</div>
 				</form>
 				<br>
 				<h4 class="title">CASE(<span class="text-primary">${count}</span>)</h4>
@@ -209,8 +210,8 @@
 												<h3 class="big a1" data-animate="fadeInDown"></h3>
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
-															<a href="${pageContext.request.contextPath}/UpdateCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-plus">Update</i></a>
-															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>												
+															<a href="${pageContext.request.contextPath}/UpdateCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
+															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"></a>												
 															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>

@@ -36,6 +36,64 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	// kind 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct2") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// socketSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct3") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// chipSet 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct4") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
+</script>
 </head>
 <body>
 	<!-- header적용 -->
@@ -58,55 +116,93 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>CPU</span>
-					</h4>
+					<h4 class="title text-primary">CPU 등록</h4>
 					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContext.request.contextPath}/InsertCpuController?categoryName=cpu" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
-						</div>
-						<div class="form-group">
-							<input type='radio' name='companyName' value='인텔'/>인텔
-							<input type='radio' name='companyName' value='AMD'/>AMD
-						</div>
-						<div class="form-group">
-							<input type='radio' name='socketSize' value='1700' />1700 
-							<input type='radio' name='socketSize' value='AMD4' />AMD4
-						</div>
-						<div class="form-group">
-							<select class="" name="core" >
-								<option value="" selected disabled hidden>core</option>
-								<option value="16">16(core)</option>
-								<option value="12">12(core)</option>
-								<option value="8">8(core)</option>
-								<option value="6">6(core)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="" name="thread" >
-								<option value="" selected disabled hidden>thread</option>
-								<option value="32">32(thread)</option>
-								<option value="24">24(thread)</option>
-								<option value="20">20(thread)</option>
-								<option value="16">16(thread)</option>
-								<option value="12">12(thread)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number"  name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number"  name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea"  name="memo" class="form-control" placeholder="memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
+						<table class="table text-primary">
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
+								</td>
+							</tr>
+							<tr>
+								<th>COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox" name="companyName" >
+										<option value="" selected disabled>company 선택</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect"  name="companyName" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>SOCKET SIZE</th>
+								<td>
+									<select class="form-control" id="selbox2" name="socketSize" >
+										<option value="" selected disabled>socket 선택</option>
+											<c:forEach var="c" items="${socketSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct2">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="socketSize" class="form-control" value="" placeholder="socket 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>CORE</th>
+								<td>
+									<select class="form-control" id="selbox3" name="core" >
+										<option value="" selected disabled>socket 선택</option>
+											<c:forEach var="c" items="${coreList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct3">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect3"  name="core" class="form-control" value="" placeholder="core 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>THREAD</th>
+								<td>
+									<select class="form-control" id="selbox4" name="thread" >
+										<option value="" selected disabled>thread 선택</option>
+											<c:forEach var="c" items="${threadList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct4">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect4"  name="thread" class="form-control" value="" placeholder="thread 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->
