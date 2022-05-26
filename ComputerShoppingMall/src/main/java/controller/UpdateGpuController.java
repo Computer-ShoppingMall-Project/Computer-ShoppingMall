@@ -16,67 +16,71 @@ import vo.Cpu;
 import vo.Gpu;
 @WebServlet("/UpdateGpuController")
 public class UpdateGpuController extends HttpServlet {
-	private GpuDao gpuDao;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
-				HttpSession session = request.getSession();
-				if((String)session.getAttribute("sessionAdminId") == null) {
-					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-					response.sendRedirect(request.getContextPath() + "/LoginController");
-					return;
-				}
-				
-				// dao
-				gpuDao = new GpuDao();
-				// vo
-				Gpu g = new Gpu();
-				if(request.getParameter("gpuNo") != null ){
-					int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
-					g = gpuDao.selectGpuOne(gpuNo);
-					
-					request.setAttribute("gpuOne", g);
-					request.getRequestDispatcher("/WEB-INF/view/admin/updateGpuForm.jsp").forward(request, response);
-				}
-			}
-			protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				// 세션확인
-				HttpSession session = request.getSession();
-				if((String)session.getAttribute("sessionAdminId") == null) {
-					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-					response.sendRedirect(request.getContextPath() + "/LoginController");
-					return;
-				}
-		// 변수등록
-		int GpuNo = 0;
-		int price = 0;
-		int quantity = 0;
-		
-		// request값 받기
-		if(request.getParameter("GpuNo")!= null && request.getParameter("GpuNo") != "") {
-			GpuNo = Integer.parseInt(request.getParameter("GpuNo"));
-		}
-		if(request.getParameter("price")!= null && request.getParameter("price") != "") {
-			price = Integer.parseInt(request.getParameter("price"));
-		}
-		if(request.getParameter("quantity")!= null && request.getParameter("quantity") != "") {
-			quantity = Integer.parseInt(request.getParameter("quantity"));
-		}
-		
-		// vo
-		Gpu g = new Gpu();
-		g.getGpuNo();
-		g.getPrice();
-		g.getQuantity();
-		
-		// 디버깅
-		System.out.println("[updateGpuController] : " + g.toString());
-		
-		// dao
-		gpuDao = new GpuDao();
-		gpuDao.updateGpu(g);
-		
-		response.sendRedirect(request.getContextPath()+"/DigitalDownloadController");
-	}
-
-}
-
+   private GpuDao gpuDao;
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // 세션확인
+            HttpSession session = request.getSession();
+            if((String)session.getAttribute("sessionAdminId") == null) {
+               // 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+               response.sendRedirect(request.getContextPath() + "/LoginController");
+               return;
+            }
+            
+            // dao
+            gpuDao = new GpuDao();
+            // vo
+            Gpu g = new Gpu();
+            if(request.getParameter("gpuNo") != null ){
+               int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
+               System.out.println(gpuNo+"<-gpuNo UpdateGpuController.doget");
+               g = gpuDao.selectGpuOne(gpuNo);
+               request.setAttribute("gpuOne", g);
+               request.getRequestDispatcher("/WEB-INF/view/admin/updateGpuForm.jsp").forward(request, response);
+               }
+            }
+      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            // 세션확인
+            HttpSession session = request.getSession();
+            if((String)session.getAttribute("sessionAdminId") == null) {
+               // 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
+               response.sendRedirect(request.getContextPath() + "/LoginController");
+               return;
+            }
+      
+            // 요청값 처리
+            
+            String gpuName = request.getParameter("gpuName");
+            String companyName = request.getParameter("companyName");
+            String categoryName = request.getParameter("categoryName");
+            String chipsetCompany = request.getParameter("chipsetCompany");
+            int gpuSize = Integer.parseInt(request.getParameter("gpuSize"));
+            int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            String memo = request.getParameter("memo");
+            
+      // vo
+            Gpu g = new Gpu();
+            g.setGpuNo(gpuNo);
+            g.setGpuName(gpuName);
+            g.setCompanyName(companyName);
+            g.setCategoryName(categoryName);
+            g.setChipsetCompany(chipsetCompany);
+            g.setGpuSize(gpuSize);
+            g.setPrice(price);
+            g.setQuantity(quantity);
+            g.setMemo(memo);   
+      
+      // 디버깅
+            System.out.println("[updateGpuController] : " + g.toString());
+      
+      // dao
+            gpuDao = new GpuDao();
+            int row= gpuDao.updateGpu(g);
+            if (row == 1) { // update 수정 성공 시, 수정성공된 상세보기 페이지로 이동
+            	System.out.println("[updateGpuController.dopost] :"+ g.toString());
+            	response.sendRedirect(request.getContextPath()+"/adController");
+            }
+               }
+            
+            }
