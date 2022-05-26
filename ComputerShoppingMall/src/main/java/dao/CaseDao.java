@@ -143,6 +143,7 @@ public class CaseDao {
 				conn.commit();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			try {
 				conn.rollback(); // 오류 발생시, rollback
 			} catch(SQLException e1) {

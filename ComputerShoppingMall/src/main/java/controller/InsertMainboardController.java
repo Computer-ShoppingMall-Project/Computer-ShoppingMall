@@ -100,6 +100,7 @@ public class InsertMainboardController extends HttpServlet {
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
+		
 		// vo.Cpu
 		Mainboard m = new Mainboard();
 		m.setMainboardName(mainboardName);
@@ -112,6 +113,7 @@ public class InsertMainboardController extends HttpServlet {
 		m.setPrice(price);
 		m.setQuantity(quantity);
 		m.setMemo(memo);
+		
 		// 디버깅
 		System.out.println("[InsertMainboardController] : " + i.toString());
 		System.out.println("[InsertMainboardController] : " + m.toString());
