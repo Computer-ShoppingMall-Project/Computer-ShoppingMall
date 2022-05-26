@@ -85,18 +85,24 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input type="text" id="id" size="15" name="customerId" class="form-control" placeholder="Username">
+								<input type="text" id="id" size="15" name="customerId" class="form-control" value="guest" placeholder="Username">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" id="pw" name="customerPw" class="form-control" placeholder="Password"> 
+								<input type="password" id="pw" name="customerPw" class="form-control" value="0000" placeholder="Password"> 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
-								<label> <input type="checkbox"> Remember me </label>
+								<label> <input type="checkbox"> Remember me </label> 
+								<div class="text-danger">
+									고객: 로그인버튼!
+								</div>
+								<div class="text-danger">
+									관리자 아이디: admin123 비번:1234
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
