@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CaseDao;
 import dao.CpuDao;
 import dao.GpuDao;
+import vo.Case;
 import vo.Cpu;
 import vo.Gpu;
 @WebServlet("/UpdateGpuController")
@@ -23,21 +25,21 @@ public class UpdateGpuController extends HttpServlet {
 					response.sendRedirect(request.getContextPath() + "/LoginController");
 					return;
 				}
+				
 				// dao
 				gpuDao = new GpuDao();
 				// vo
 				Gpu g = new Gpu();
 				if(request.getParameter("gpuNo") != null ){
-				int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
-				g = gpuDao.selectGpuOne(gpuNo);
-							
-				request.setAttribute("gpu", g);
-				request.getRequestDispatcher("/WEB-INF/view/admin/updateGpuForm.jsp").forward(request, response);
-					}
+					int gpuNo = Integer.parseInt(request.getParameter("gpuNo"));
+					g = gpuDao.selectGpuOne(gpuNo);
+					
+					request.setAttribute("gpuOne", g);
+					request.getRequestDispatcher("/WEB-INF/view/admin/updateGpuForm.jsp").forward(request, response);
 				}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 세션확인
+			}
+			protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				// 세션확인
 				HttpSession session = request.getSession();
 				if((String)session.getAttribute("sessionAdminId") == null) {
 					// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기

@@ -52,6 +52,39 @@
 	};
 </script>
 <body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+// companyName 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct2") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+</script>
+
 	<!-- header적용 -->
 		<c:choose>
 		<c:when test="${sessionAdminId != null }">
@@ -89,67 +122,78 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<c:if test="${sessionAdminId != null }">
 					<div>
-						<a href="UpdateGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-info">UPDATE</a>
 						<a href="DeleteGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-danger">DELETE</a>
 					</div>
 				</c:if>
-				<div class="general-title text-center">
-					<h3>${requestScope.gpuOne.gpuName}</h3>
-					<hr>
-				</div>
-
 				<div class="divider"></div>
 
-				<div class="item_details">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<!-- theme_details -->
-							<div class="form-group">
-								<div class="item_price">
-									<h3>
-										<span>${requestScope.gpuOne.price}원</span>
-									</h3>
-								</div>
-							</div>
+		
 							<!-- buttons -->
 							<hr>
 							<div class="form-group">
-								<div class="text-center">
-									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
+								<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
+									<div>
 										<div class="details_section  text-center">
 										<br><br>
 											<h3>Item Details</h3>
-											<ul>
-												<li class="version">gpur_no : <span>${requestScope.gpuOne.coolerNo}</span></li>
-			                                    <li class="version">category_name : <span>${requestScope.gpuOne.categoryName}</span></li>
-			                                    <li class="designer">company_name : 
-			                                    <input type ="text" name="company_name" value="${requestScope.gpuOne.companyName}">
-			                                    <li class="designer">chipset_company : 
-			                                    <input type ="text" name="chipsetCompany" value="${requestScope.gpuOne.chipsetCompany}">
-			                                    <li class="designer">gpu_size  : 
-			                                    <input type = "number" name="gpuSize" value="${requestScope.gpuOne.gpuSize}">
-			                                    <li class="designer">quantity :
-												<input type = "number" name="quantity" value="${requestScope.gpuOne.quantity}">
-											</ul>
+											<table class="table text-primary">
+												<tr>
+													gpu_no : <span class="form-control">${requestScope.gpuOne.gpuNo}</span>
+												</tr><br></br>
+												<tr>
+													gpu_name : <span>${requestScope.gpuOne.gpuName}</span>
+													<input type="text" name="gpuName" class="form-control" placeholder="gpuName">
+												</tr><br></br>
+												<tr>
+													company_name : <span>${requestScope.gpuOne.companyName}</span>
+													<select class="form-control" id="selbox" name="companyName">
+														<option value="" selected disabled>companyName 선택</option>
+															<c:forEach var="c" items="${companyNameList}">
+																<option value="${c}">${c}</option>
+															</c:forEach>
+														<option value="direct">직접 입력</option>
+													</select>
+													<input type="text" id="selboxDirect" name="companyName" class="form-control" value="" placeholder="companyName 직접 입력">
+												</tr><br></br>
+												<tr>
+												category_name : <span class="form-control">${requestScope.gpuOne.categoryName}</span>
+												</tr><br></br>
+												<tr>
+													chipset_company : <span>${requestScope.gpuOne.chipsetCompany}</span>
+													<select class="form-control" id="selbox" name="chipsetCompany">
+														<option value="" selected disabled>companyName 선택</option>
+															<c:forEach var="c" items="${chipsetCompanyList}">
+																<option value="${c}">${c}</option>
+															</c:forEach>
+														<option value="direct">직접 입력</option>
+													</select>
+													<input type="text" id="selboxDirect2" name="chipsetCompany" class="form-control" value="" placeholder="chipsetCompany 직접 입력">
+												</tr><br></br>
+												<tr>
+												gpu_size : <span>${requestScope.gpuOne.gpuSize}
+												<input type="number" name="gupSize" min="1" class="form-control" placeholder="GpuSize"><br></br>
+												</tr>
+												<tr>
+													<li class="designer">price : <span>${requestScope.gpuOne.price}원</li>
+													<input type="number" name="price" min="1" class="form-control" placeholder="Price"><br></br>
+												</tr>>
+												<tr>
+													quantity : <span>${requestScope.gpuOne.quantity}개
+													<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+												</tr><br></br>
+													<input type="textarea" name="memo" class="theme_details col-lg-12 col-md-12 col-sm-5-" value="" placeholder="memo 직접 입력">
+												</tr>
+													<div class="theme_details col-lg-12 col-md-12 col-sm-5-">
+								
+													<div class="theme_details">
+														<div class="item-description">
+															${requestScope.gpuOne.memo}
+												</div>
+											</table>
+											<button type="submit" style="float:right">등록</button>
 										</div>
 									</div>
 								</div>
-								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-								<br>
-									<div class="theme_details">
-										<div class="item-description">
-											<p>${requestScope.gpuOne.memo}</p>
-										</div>
-										<!-- item-description -->
-									</div>  
-									<br>
-									<h4 class="text-danger text-center">재고 : ${requestScope.gpuOne.quantity}</h4>
-									<br><br>
-									<div class="rating text-center">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-										<p>Users Rating</p>
-									</div>
 								<!-- theme_details -->
 								</div>
 							</div>
@@ -170,11 +214,11 @@
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}lib/php-mail-form/validate.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}lib/hover/hoverex.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
+	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
