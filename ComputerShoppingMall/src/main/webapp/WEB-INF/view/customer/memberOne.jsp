@@ -92,6 +92,18 @@
 							<td>${requestScope.customer.zipCode}</td>
 						</tr>
 						<tr>
+							<td>시(도)</td>
+							<td>${requestScope.customer.province}</td>
+						</tr>
+						<tr>
+							<td>시군구</td>
+							<td>${requestScope.customer.city}</td>
+						</tr>
+						<tr>
+							<td>읍면</td>
+							<td>${requestScope.customer.town}</td>
+						</tr>
+						<tr>
 							<td>도로명 주소</td>
 							<td>${requestScope.customer.roadAddress}</td>
 						</tr>

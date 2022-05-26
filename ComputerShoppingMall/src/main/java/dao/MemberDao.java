@@ -61,6 +61,9 @@ public class MemberDao {
 					+ "					,email"
 					+ "					,phone"
 					+ "					,zip_code zipCode"
+					+ "					,province"
+					+ "					,city"
+					+ "					,town"
 					+ "					,road_address roadAddress"
 					+ "					,detail_address detailAddress"
 					+ "					,create_date createDate"
@@ -79,6 +82,9 @@ public class MemberDao {
 					c.setEmail(rs.getString("email"));
 					c.setPhone(rs.getString("phone"));
 					c.setZipCode(rs.getInt("zipCode"));
+					c.setProvince(rs.getString("province"));
+					c.setCity(rs.getString("city"));
+					c.setTown(rs.getString("town"));
 					c.setRoadAddress(rs.getString("roadAddress"));
 					c.setDetailAddress(rs.getString("detailAddress"));
 					c.setCreateDate(rs.getString("createDate"));
@@ -117,12 +123,14 @@ public class MemberDao {
 					+ "						   ,email"
 					+ "						   ,phone"
 					+ "						   ,zip_code"
+					+ "						   ,province"
+					+ "						   ,city"
+					+ "						   ,town"
 					+ "						   ,road_address"
 					+ "						   ,detail_address"
 					+ "						   ,create_date"
-					+ "						   ,update_date"
-					+ "						   ,last_pw_date)"
-					+ "	VALUES(?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), NOW()) ";
+					+ "						   ,update_date)"
+					+ "	VALUES(?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW()) ";
 			try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, member.getCustomerId());
@@ -132,10 +140,13 @@ public class MemberDao {
 				stmt.setString(5, member.getEmail());
 				stmt.setString(6, member.getPhone());
 				stmt.setInt(7, member.getZipCode());
-				stmt.setString(8, member.getRoadAddress());
-				stmt.setString(9, member.getDetailAddress());
-				stmt.setString(10, member.getCreateDate());
-				stmt.setString(11, member.getUpdateDate());
+				stmt.setString(8, member.getProvince());
+				stmt.setString(9, member.getCity());
+				stmt.setString(10, member.getTown());
+				stmt.setString(11, member.getRoadAddress());
+				stmt.setString(12, member.getDetailAddress());
+				stmt.setString(13, member.getCreateDate());
+				stmt.setString(14, member.getUpdateDate());
 				row = stmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -144,6 +155,42 @@ public class MemberDao {
 					stmt.close();
 					conn.close();
 				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return row;
+		}
+		
+		// 3-1) 아이디 중복 체크
+		public int idCheckMember(String customerId) {
+			// 아이디 중복 여부 리턴할 정수형 변수 선언
+			int row = -1;
+			// DB 초기화
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			// DButil
+			conn = DButil.getConnection();
+			String sql = "SELECT * FROM customer WHERE customer_id = ?";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+				rs = stmt.executeQuery();
+				
+				if(rs.next()) {
+					row = 1;
+					System.out.println("중복아이디가 존재!");
+				} else {
+					row = 0;
+					System.out.println("가입가능한 아이디입니다!");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -205,11 +252,12 @@ public class MemberDao {
 					+ "						,email=? "
 					+ "						,phone=? "
 					+ "						,zip_code=? "
+					+ "						,province=? "
+					+ "						,city=? "
+					+ "						,town=? "
 					+ "						,road_address=? "
 					+ "						,detail_address=? "
-					+ " 					,update_date = NOW()"
-					+ "						,last_pw_date = NOW()"
-					+ "	WHERE customer_id=?";
+					+ "	WHERE customer_id=? ";
 			try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, member.getName());
@@ -217,9 +265,12 @@ public class MemberDao {
 				stmt.setString(3, member.getEmail());
 				stmt.setString(4, member.getPhone());
 				stmt.setInt(5, member.getZipCode());
-				stmt.setString(6, member.getRoadAddress());
-				stmt.setString(7, member.getDetailAddress());
-				stmt.setString(8, member.getCustomerId());
+				stmt.setString(6, member.getProvince());
+				stmt.setString(7, member.getCity());
+				stmt.setString(8, member.getTown());
+				stmt.setString(9, member.getRoadAddress());
+				stmt.setString(10, member.getDetailAddress());
+				stmt.setString(11, member.getCustomerId());
 				row = stmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -234,7 +285,7 @@ public class MemberDao {
 			return row;
 		}
 		
-		//  6) 회원 비밀번호 수정
+		// 6) 비밀번호 수정
 		public int updateMemberPasswordByIdPw(Customer member, String newCustomerPw) {
 			// 회원 정보 수정 성공 여부 리턴할 정수형 변수 선언
 			int row = -1; 
@@ -249,15 +300,17 @@ public class MemberDao {
 			// DButil
 			conn = DButil.getConnection();
 			// SQL 쿼리
-			String sql = "UPDATE customer SET name = ? "
-					+ "						,nickname = ? "
-					+ "						,email = ? "
-					+ "						,phone = ? "
-					+ "						,zip_code = ? "
-					+ "						,road_address = ? "
-					+ "						,detail_address = ? "
-					+ "						,customer_pw = PASSWORD(?)"
-					+ "						,last_pw_date = date_add(NOW(), INTERVAL 3 MONTH) "					
+			String sql = "UPDATE customer SET name =? "
+					+ "						,nickname=? "
+					+ "						,email=? "
+					+ "						,phone=? "
+					+ "						,zip_code=? "
+					+ "						,province=? "
+					+ "						,city=? "
+					+ "						,town=? "
+					+ "						,road_address=? "
+					+ "						,detail_address=? "
+					+ "						,customer_pw = PASSWORD(?) "
 					+ "	WHERE customer_id=? AND customer_pw = PASSWORD(?)";
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -266,11 +319,14 @@ public class MemberDao {
 				stmt.setString(3, member.getEmail());
 				stmt.setString(4, member.getPhone());
 				stmt.setInt(5, member.getZipCode());
-				stmt.setString(6, member.getRoadAddress());
-				stmt.setString(7, member.getDetailAddress());
-				stmt.setString(8, newCustomerPw);
-				stmt.setString(9, member.getCustomerId());
-				stmt.setString(10, member.getCustomerPw());
+				stmt.setString(6, member.getProvince());
+				stmt.setString(7, member.getCity());
+				stmt.setString(8, member.getTown());
+				stmt.setString(9, member.getRoadAddress());
+				stmt.setString(10, member.getDetailAddress());
+				stmt.setString(11, newCustomerPw);
+				stmt.setString(12, member.getCustomerId());
+				stmt.setString(13, member.getCustomerPw());
 				row = stmt.executeUpdate();
 
 			} catch (Exception e) {
@@ -280,6 +336,42 @@ public class MemberDao {
 					stmt.close();
 					conn.close();
 				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return row;
+		}
+		
+		// 6-1) 현재 비밀번호 체크
+		public int pwCheckMember(String customerPw) {
+			// 아이디 중복 여부 리턴할 정수형 변수 선언
+			int row = -1;
+			// DB 초기화
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			// DButil
+			conn = DButil.getConnection();
+			String sql = "SELECT * FROM customer WHERE customer_pw = PASSWORD(?) ";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerPw);
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					row = 1;
+					System.out.println("비밀번호 일치!");
+				} else {
+					row = 0;
+					System.out.println("현재 비밀번호 틀림!");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -320,6 +412,7 @@ public class MemberDao {
 					}
 			return customerId;
 		}
+		/*
 		// 아이디리스트 -> 아이디중복 확인용
 		public ArrayList<Customer> MemberIdList() {
 			ArrayList<Customer> list = new ArrayList<Customer>();
@@ -352,8 +445,9 @@ public class MemberDao {
 					}
 			return list;
 		}
-
-		// 아이디 변경 90일 체크 
+		*/
+	
+		// 아이디 변경 90일 체크
 		public Customer lastPwDate(String customerId) {
 			Customer cu = new Customer();
 			// DB 초기화
@@ -363,15 +457,15 @@ public class MemberDao {
 			// DButiil
 			conn = DButil.getConnection();
 			// 입력된 아이디의 비밀번호 변경날짜를 시간 제외시키고 날짜만 불러오기
-			String sql = "SELECT STR_TO_DATE(last_pw_date,'%Y-%m-%d') date "
-						+ 						"FROM customer "
-						+ "WHERE customer_id = ?";
-				
+			String sql = "SELECT STR_TO_DATE(last_pw_date,'%Y-%m-%d') date " 
+					+ "FROM customer "
+					+ "WHERE customer_id = ?";
+
 			try {
 				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, customerId);	// ?에 customerId 셋팅
+				stmt.setString(1, customerId); // ?에 customerId 셋팅
 				rs = stmt.executeQuery();
-	
+
 				if (rs.next()) {
 					cu.setlastPwDate(rs.getString("date"));
 					System.out.println("MemberDao.selectlastPwDate() date :" + cu);
@@ -387,35 +481,35 @@ public class MemberDao {
 					e.printStackTrace();
 				}
 			}
-			
+
 			return cu;
 		}
-			public void updatePlusMonth(String customerId) {
 
-			    // DB연결을 위한 자원 준비
-			    Connection conn = null;
-			    PreparedStatement stmt = null;
-			    conn = DButil.getConnection();
-			    // customer의 비밀번호, 회원정보 수정당시 날짜 + 3개월 하여 연장된 값 last_pw_date에 저장 하기
-			    String sql = "UPDATE customer SET last_pw_date = date_add(NOW(), INTERVAL 3 MONTH) WHERE customer_id=?";
-			    try {
-			       stmt = conn.prepareStatement(sql);
-			       stmt.setString(1, customerId);
-			       int row = stmt.executeUpdate();
-			       if(row == 1) {
-			          System.out.println("updatePlusMonth 수정 성공");
-			       } else {
-			          System.out.println("updatePlusMonth 수정 실패");
-			       }
+		public void updatePlusMonth(String customerId) {
+			// DB연결을 위한 자원 준비
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			conn = DButil.getConnection();
+			// customer의 비밀번호, 회원정보 수정당시 날짜 + 3개월 하여 연장된 값 last_pw_date에 저장 하기
+			String sql = "UPDATE customer SET last_pw_date = date_add(NOW(), INTERVAL 3 MONTH) WHERE customer_id=?";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+				int row = stmt.executeUpdate();
+				if (row == 1) {
+					System.out.println("updatePlusMonth 수정 성공");
+				} else {
+					System.out.println("updatePlusMonth 수정 실패");
+				}
 
-			    } catch (SQLException e) {
-			       e.printStackTrace();
-			    } finally {
-			       try {
-			          conn.close();
-			       } catch (SQLException e) {
-			          e.printStackTrace();
-			       }
-			    }
-			}    
-	}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+}

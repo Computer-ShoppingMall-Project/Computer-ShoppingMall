@@ -94,11 +94,23 @@
 								</tr>
 								<tr>
 									<td>우편번호 수정</td>
-									<td><input type="text" id="zipcode" name="zipCode" class="form-control"  value="${requestScope.customer.zipCode}" readonly="readonly" onclick="execDaumPostcode()"></td>
+									<td><input type="text" id="zipcode" name="zipCode" class="form-control"  value="${requestScope.customer.zipCode}" required></td>
 								</tr>
 								<tr>
-									<td>도로명주소 수정</td>
-									<td><input style="width: 300px;" type="text" id="roadAddress" readonly="readonly" name="roadAddress" class="form-control"  value="${requestScope.customer.roadAddress}" required></td>
+									<td>시(도) 수정</td>
+									<td><input style="width: 300px;" type="text" id="province" name="province" class="form-control"  value="${requestScope.customer.province}" required></td>
+								</tr>
+								<tr>
+									<td>시군구 수정</td>
+									<td><input style="width: 300px;" type="text" id="city" name="city" class="form-control"  value="${requestScope.customer.city}" required></td>
+								</tr>
+								<tr>
+									<td>읍면 수정</td>
+									<td><input style="width: 300px;" type="text" id="town" name="town" class="form-control"  value="${requestScope.customer.town}" required></td>
+								</tr>
+								<tr>
+									<td>도로명 주소 수정</td>
+									<td><input type="text" id="roadAddress" name="roadAddress" class="form-control"  value="${requestScope.customer.roadAddress}" required></td>
 								</tr>
 								<tr>
 									<td>상세 주소 수정</td>
@@ -145,37 +157,5 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-		// 카카오 주소api
-		function execDaumPostcode() {
-			new daum.Postcode({
-				oncomplete : function(data) {
-
-					var roadAddr = data.roadAddress; // 도로명 주소 
-					var extraRoadAddr = ''; // 참고 항목
-
-					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-						extraRoadAddr += data.bname;
-					}
-					// 건물명이 있고, 공동주택일 경우 추가한다.
-					if (data.buildingName !== '' && data.apartment === 'Y') {
-						extraRoadAddr += (extraRoadAddr !== '' ? ', '
-								+ data.buildingName : data.buildingName);
-					}
-					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-					if (extraRoadAddr !== '') {
-						extraRoadAddr = ' (' + extraRoadAddr + ')';
-					}
-
-					// 우편번호와 주소 정보를 해당 필드에 넣는다.
-					document.getElementById('zipcode').value = data.zonecode;
-					document.getElementById('roadAddress').value = roadAddr;
-				}
-			}).open();
-		}
-	</script>
 </body>
 </html>

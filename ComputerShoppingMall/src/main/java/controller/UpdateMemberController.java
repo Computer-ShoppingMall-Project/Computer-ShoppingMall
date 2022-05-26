@@ -46,7 +46,11 @@ public class UpdateMemberController extends HttpServlet {
 			   return;
 		   }
 		   // null 확인코드
-		   if(request.getParameter("name") == null || request.getParameter("nickName") == null || request.getParameter("email") == null || request.getParameter("phone") == null || request.getParameter("zipCode") == null || request.getParameter("roadAddress") == null  || request.getParameter("detailAddress") == null) {
+		   if(request.getParameter("name") == null || request.getParameter("nickName") == null
+				   || request.getParameter("email") == null || request.getParameter("phone") == null 
+				   || request.getParameter("zipCode") == null || request.getParameter("province") == null  
+				   || request.getParameter("city") == null || request.getParameter("town") == null  
+				   || request.getParameter("roadAddress") == null || request.getParameter("detailAddress") == null) {
 			   System.out.println("null UpdateMembercontroller.dopost");
 			   response.sendRedirect(request.getContextPath() + "/UpdateMemberController");
 			   return;
@@ -60,6 +64,9 @@ public class UpdateMemberController extends HttpServlet {
 		   customer.setEmail(request.getParameter("email"));
 		   customer.setPhone(request.getParameter("phone"));
 		   customer.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+		   customer.setProvince(request.getParameter("province"));
+		   customer.setCity(request.getParameter("city"));
+		   customer.setTown(request.getParameter("town"));
 		   customer.setRoadAddress(request.getParameter("roadAddress"));
 		   customer.setDetailAddress(request.getParameter("detailAddress"));
 		   
