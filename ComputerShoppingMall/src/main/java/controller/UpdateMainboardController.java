@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CaseDao;
 import dao.MainboardDao;
+import vo.Case;
 import vo.Mainboard;
 
 @WebServlet("/UpdateMainboardController")
@@ -25,38 +27,19 @@ public class UpdateMainboardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		mainboardDao = new MainboardDao();
-		// 상세보기 받아오기
-		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
-		// COMPANY
-		List<String> companyList = mainboardDao.companyKind();
-		// CPU Socket
-		List<String> socketSizeList = mainboardDao.socketSizeKind();
-		// CHIPSET
-		List<String> chipsetList = mainboardDao.chipsetKind();
-		// RAM VERSION
-		List<String> ramVersionList = mainboardDao.ramVersionKind();
-		// KIND
-		List<String> kindList = mainboardDao.kindKind();
 		
-		request.setAttribute("mainboadList", mainboadList);
-		request.setAttribute("companyList", companyList);
-		request.setAttribute("socketSizeList", socketSizeList);
-		request.setAttribute("chipsetList", chipsetList);
-		request.setAttribute("ramVersionList", ramVersionList);
-		request.setAttribute("kindList", kindList);
 		// dao
-		mainboardDao = new MainboardDao();
-		// vo
-		Mainboard m = new Mainboard();
-		if(request.getParameter("mainboardNo") != null ){
-			int mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
-			m = mainboardDao.selectMainboardOne(mainboardNo);
-							
-			request.setAttribute("mainboardOne", m);
-			request.getRequestDispatcher("/WEB-INF/view/admin/updateMainboardForm.jsp").forward(request, response);
-				}
+			mainboardDao = new MainboardDao();
+			// vo
+			Mainboard m = new Mainboard();
+			if(request.getParameter("mainboardNo") != null ){
+				int mainboardNo = Integer.parseInt(request.getParameter("mainboardNo"));
+				m = mainboardDao.selectMainboardOne(mainboardNo);
+					
+				request.setAttribute("mainboard", m);
+				request.getRequestDispatcher("/WEB-INF/view/admin/updateMainboardForm.jsp").forward(request, response);
 			}
+		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();

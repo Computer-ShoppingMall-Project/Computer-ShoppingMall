@@ -73,7 +73,7 @@ public class UpdateCaseController extends HttpServlet {
 		caseDao = new CaseDao();
 		caseDao.updateCase(c);
 		
-		response.sendRedirect(request.getContextPath()+"/DigitalDownloadController");
+		response.sendRedirect(request.getContextPath()+"/WEB-INF/view/admin/updateCaseboardForm.jsp");
 	}
 
 }
