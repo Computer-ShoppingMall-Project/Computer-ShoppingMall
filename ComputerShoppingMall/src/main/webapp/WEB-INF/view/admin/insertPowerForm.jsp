@@ -36,6 +36,22 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+// 파워 정격 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+</script>
 </head>
 <body>
 	<!-- header적용 -->
@@ -52,47 +68,59 @@
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
-
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>POWER</span>
-					</h4>
-					<form id="insertPowerform" method="post" name="insertPowerform" action="${pageContext.request.contextPath}/InsertPowerController?categoryName=power" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text" name="powerName" class="form-control" placeholder="PowerName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="ratedPower">
-								<option value="" selected disabled hidden>ratedPower</option>
-								<option value="1000">1000</option>
-								<option value="850">850</option>
-								<option value="750">750</option>
-								<option value="700">700</option>
-								<option value="650">650</option>
-								<option value="600">600</option>
-								<option value="550">550</option>
-								<option value="500">500</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="text" name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
+					<h4 class="title text-primary">POWER 등록</h4>
+					<form id="insertPowerform" method="post" name=“insertPowerform” action="${pageContext.request.contextPath}/InsertPowerController?categoryName=power" enctype="multipart/form-data">
+						<table class="table text-primary">
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="powerName" class="form-control" placeholder="Power Name">
+								</td>
+							</tr>
+							<tr>
+								<th>POWER RATE</th>
+								<td>
+									<select class="form-control" id="selbox" name="kind">
+										<option value="" selected disabled>power rated 선택</option>
+											<c:forEach var="c" items="${ratedPowerList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="ratedPower" class="form-control" value="" placeholder="정격파워 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->

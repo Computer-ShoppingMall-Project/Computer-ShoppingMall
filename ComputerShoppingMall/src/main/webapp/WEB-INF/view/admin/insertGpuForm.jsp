@@ -36,6 +36,50 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	// company 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             // 직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// chipset company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             // 직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct2") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// gpuSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct3") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+</script>
 </head>
 <body>
 	<!-- header적용 -->
@@ -52,37 +96,85 @@
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
-
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>GPU</span>
-					</h4>
-					<form id="insertGpuform" method="post" name="insertGpuform" action="${pageContext.request.contextPath}/InsertGpuController?categoryName=gpu" enctype="multipart/form-data">
-						<table class="table text-primaty">
-						  <tr>
-	                        <th>NAME</th>
-	                        <td>
-                           <input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
-                        </td>
-                     </tr>
-                     <tr>
-                     	<th>KIND</th>
-                        <td>
-                           <select class="form-control" id="kindbox" name="kind" id="kindBox">
-                              <option value="" selected disabled>kind 선택</option>
-                                 <c:forEach var="c" items="${kindList}">
-                                    <option value="${c}">${c}</option>
-                                 </c:forEach>
-                              <option onclick="dis()">직접 입력</option>
-                           </select>
-                                <input type="text" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
-                        </td>
-                        </tr>
-                       </table>
+					<h4 class="title text-primary">GPU 등록</h4>
+					<form id="insertGpuform" method="post" name=“insertGpuform” action="${pageContext.request.contextPath}/InsertGpuController?categoryName=gpu" enctype="multipart/form-data">
+						<table class="table text-primary">
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="gpuName" class="form-control" placeholder="Gpu Name">
+								</td>
+							</tr>
+							<tr>
+								<th>COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox" name="companyName">
+										<option value="" selected disabled>company 선택</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="companyName" class="form-control" value="" placeholder="Company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>CHIPSET COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox2" name="chipsetCompany" >
+										<option value="" selected disabled>chipset company 선택</option>
+											<c:forEach var="c" items="${chipsetCompanyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct2">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="chipsetCompany" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>GPU SIZE</th>
+								<td>
+									<select class="form-control" id="selbox3" name="gpuSize" >
+										<option value="" selected disabled>gpu size 선택</option>
+											<c:forEach var="c" items="${gpuSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct3">직접 입력</option>
+									</select>
+									<input type="number" id="selboxDirect3"  name="gpuSize" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->

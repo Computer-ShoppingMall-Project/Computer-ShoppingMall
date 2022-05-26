@@ -114,8 +114,12 @@ public class InsertGpuController extends HttpServlet {
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertGpuController] : Gpu 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/GpuListController");
+			return;
 		} else {
 			System.out.println("[InsertGpuController] : Gpu 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/InsertGpuController");
+			return;
 		}
 	}
 	
