@@ -36,6 +36,19 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	$("#kindDirect").hide();
+	
+	if($("#kindBox").change(function dis() {
+			$("#kindDirect").show();
+		}) else {
+			$("#kindDirect").hide();
+		}
+	}) 
+});
+</script>
 </head>
 <body>
 	<!-- header적용 -->
@@ -45,20 +58,9 @@
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 				</ul>
 				<h2>상품등록</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" /> <input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
 			</div>
 		</div>
 	</section>
@@ -69,56 +71,92 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>MAINBOARD</span>
-					</h4>
+					<h4 class="title text-primary">MAINBOARD 등록</h4>
 					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContext.request.contextPath}/InsertMainboardController?categoryName=mainboard" enctype="multipart/form-data">
-						<div class="form-group">
-							<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="kind">
-								<option value="" selected disabled hidden>kind</option>
-								<option value="Z690">Z690</option>
-								<option value="Z590">Z590</option>
-								<option value="Z460">Z460</option>
-								<option value="B660">B660</option>
-								<option value="B550">B550</option>
-								<option value="B450">B450</option>
-								<option value="H610">H610</option>
-								<option value="X399">X399</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-group" name="socketSize">
-								<option value="" selected disabled hidden>soketSize</option>
-								<option value="인텔(소켓1700)">인텔(소켓1700)</option>
-								<option value="인텔(소켓1200)">인텔(소켓1200)</option>
-								<option value="AMD(소켓AM4)">AMD(소켓AM4)</option>
-								<option value="AMD(소켓TR4)">AMD(소켓TR4)</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="text" name="chipset" class="form-control" placeholder="Chipset">
-						</div>
-						<div class="form-group">
-							<input type='radio' name='ramVersion' value='DDR4' onclick="clickCheck(this)" />DDR4<input type='radio' name='ramVersion' value='DDR5' onclick="clickCheck(this)" />DDR5
-						</div>
-						<div class="form-group">
-							<input type="file" name="image" class="form-control" placeholder="Img">
-						</div>
-						<div class="form-group">
-							<input type="number" name="quantity" class="form-control" placeholder="Quantity">
-						</div>
-						<div class="form-group">
-							<input type="number" name="price" class="form-control" placeholder="Price">
-						</div>
-						<div class="form-group">
-							<input type="textarea" name="memo" class="form-control" placeholder="Memo">
-						</div>
-						<div class="form-group">
-							<input type="submit" class="button" value="등록">
-						</div>
+						<table class="table text-primary">
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+								</td>
+							</tr>
+							<tr>
+								<th>KIND</th>
+								<td>
+									<select class="form-control" id="kindbox" name="kind" id="kindBox">
+										<option value="" selected disabled>kind 선택</option>
+											<c:forEach var="c" items="${kindList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option onclick="dis()">직접 입력</option>
+									</select>
+										<input type="text" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>SOCKET SIZE</th>
+								<td>
+									<select class="form-control" name="socketSize" id="socketSizeBox">
+										<option value="" selected disabled>SOCKET SIZE 선택</option>
+											<c:forEach var="c" items="${socketSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+										<input type="hidden" id="socketSizeDirect" name="socketSize" class="form-control" placeholder="SOCKET SIZE 직접 입력">
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>CHIPSET</th>
+								<td>
+									<select class="form-control" name="chipset" id="chipsetBox">
+										<option value="" selected disabled>CHIPSET 선택</option>
+											<c:forEach var="c" items="${chipsetList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+										<input type="hidden" id="chipsetDirect" name="chipset" class="form-control" placeholder="CHIPSET 직접 입력">
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>RAM VERSION</th>
+								<td>
+									<select class="form-control" name="ramVersion" id="ramVersionBox">
+											<c:forEach var="c" items="${ramVersionList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+										<input type="text" id="ramVersionDirect" name="ramVersion" class="form-control" placeholder="RAM VERSION 직접 입력">
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>IMAGE</th>
+								<td>
+									<input type="file" name="image" placeholder="Img">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
 				<!-- end login -->

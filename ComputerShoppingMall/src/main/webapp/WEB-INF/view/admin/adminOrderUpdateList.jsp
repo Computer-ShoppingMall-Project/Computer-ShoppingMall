@@ -69,6 +69,7 @@
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
+							<th>NO</th>
 							<th class="text-center">CUSTOMER ID</th>
 							<th class="text-center">PURCHASE DATE</th>
 							<th>PRODUCT NAME</th>
@@ -78,17 +79,30 @@
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
-							<c:if test="${order.refundCheck eq 'Y' || order.cancelCheck eq 'Y'}">
-							<tr>
-								<td class="text-center">${order.customerId}</td>
-								<td class="text-center">${order.createDate}</td>
-								<td>
-									${order.productName}
-								</td>
-								<td class="text-center">${order.orderStatus}</td>
-								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=true">View Detail OrderList</a></td>
-							</tr>
-							</c:if>
+							<c:choose>
+								<c:when test="${updateCheck != null}">
+									<c:if test="${order.refundCheck eq 'Y' || order.cancelCheck eq 'Y'}">
+										<tr>
+											<td>${order.orderNo}</td>
+											<td class="text-center">${order.customerId}</td>
+											<td class="text-center">${order.createDate}</td>
+											<td>${order.productName}</td>
+											<td class="text-center">${order.orderStatus}</td>
+											<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=true&orderNo=${order.orderNo}">View Detail OrderList</a></td>
+										</tr>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td>${order.orderNo}</td>
+										<td class="text-center">${order.customerId}</td>
+										<td class="text-center">${order.createDate}</td>
+										<td>${order.productName}</td>
+										<td class="text-center">${order.orderStatus}</td>
+										<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=true&orderNo=${order.orderNo}">View Detail OrderList</a></td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</tbody>
 				</table>

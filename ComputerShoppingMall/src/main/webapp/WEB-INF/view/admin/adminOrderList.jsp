@@ -69,6 +69,7 @@
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
+							<th>NO</th>
 							<th class="text-center">CUSTOMER ID</th>
 							<th class="text-center">PURCHASE DATE</th>
 							<th>PRODUCT NAME</th>
@@ -78,21 +79,16 @@
 					</thead>
 					<tbody>
 						<c:forEach var="order" items="${orderList}">
-							<c:if test="${order.refundCheck eq 'N' || order.cancelCheck eq 'N'}">
-							<tr>
-								<td class="text-center">${order.customerId}</td>
-								<td class="text-center">${order.createDate}</td>
-								<td>
-									${order.productName}
-									<!-- 1개 이상이면 외 n개로로 띄어주기 -->
-									<c:if test="${order.productCount > 1}">
-										&nbsp; <span class="text-primary">외 ${order.productCount-1}개</span>
-									</c:if>
-								</td>
-								<td class="text-center">${order.orderStatus}</td>
-								<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
-							</tr>
-							</c:if>
+								<c:if test="${order.refundCheck eq 'N' && order.cancelCheck eq 'N'}">
+									<tr>
+										<td>${order.orderNo}</td>
+										<td class="text-center">${order.customerId}</td>
+										<td class="text-center">${order.createDate}</td>
+										<td>${order.productName}(<span class="text-primary">${order.productCount}</span>)</td>
+										<td class="text-center">${order.orderStatus}</td>
+										<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
+									</tr>
+								</c:if>
 						</c:forEach>
 					</tbody>
 				</table>

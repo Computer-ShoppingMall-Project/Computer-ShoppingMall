@@ -31,15 +31,17 @@ public class AdminDetailOrderController extends HttpServlet {
 		
 		String customerId = request.getParameter("customerId");
 		String createDate = request.getParameter("createDate");
-		
+		int orderNo = 0;
 		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
 		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
 			updateCheck = request.getParameter("updateCheck");
+			orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		} 
 		
 		orderDao = new OrderDao();
-		ArrayList<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck);
+		ArrayList<Order> list = orderDao.adminOrderList(updateCheck);
 		
+		request.setAttribute("orderNo", orderNo);
 		request.setAttribute("updateCheck", updateCheck);
 		request.setAttribute("detailOrderList", list);
 		request.setAttribute("customerId", customerId);
@@ -64,11 +66,22 @@ public class AdminDetailOrderController extends HttpServlet {
 		System.out.println("[AdminDetailOrderController.doPost] : " + customerId +"/"+ createDate);
 		
 		String updateCheck = null; // updateList에서 넘어왔다면 updateDetail(취소/환불 목록)만 보여주기
+		int orderNo = 0;
 		
 		int row = 0;
 		
+		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
+			updateCheck = request.getParameter("updateCheck");
+			orderNo = Integer.parseInt(request.getParameter("orderNo"));
+		}
+		
 		orderDao = new OrderDao();
-		row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate);
+		row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate, updateCheck, orderNo);
+		
+		if(updateCheck!=null && "".equals(updateCheck)) { // 취소폼이라면 updateCheck 여부도 같이 보내주기
+			response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate+"&&updateCheck="+updateCheck);
+			return;
+		}
 		
 		if(row > 0) { // 업데이트 성공시 리스트로 돌아가기
 			System.out.println("[AdminDetailOrderController] : 상태변경 성공 " + row + "개 정보 업데이트 완료");
@@ -76,11 +89,6 @@ public class AdminDetailOrderController extends HttpServlet {
 			System.out.println("[AdminDetailOrderController] : 상태변경 실패" + row + "개 정보 업데이트 완료 > 업데이트 실패");
 		}
 		
-		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
-			updateCheck = request.getParameter("updateCheck");
-			response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate+"&&updateCheck="+updateCheck);
-			return;
-		}	
 		response.sendRedirect(request.getContextPath()+"/AdminDetailOrderController?customerId="+customerId +"&&createDate="+createDate);
 	}
 }

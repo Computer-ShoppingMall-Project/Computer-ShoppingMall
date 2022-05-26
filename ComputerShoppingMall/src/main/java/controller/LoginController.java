@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
       // admin아이디가 있을 시
       if(returnAdminId != null) {
          session.setAttribute("sessionAdminId", returnAdminId);
-         response.sendRedirect(request.getContextPath() + "/AdminIndexController");
+         response.sendRedirect(request.getContextPath() + "/IndexController");
          return;
       }
       

@@ -63,15 +63,15 @@
 
 	<section class="section1">
 		<div class="container clearfix">
-			<div class="content col-lg-8 col-md-8 col-sm-8 col-xs-12 clearfix">
+			<div class="content col-lg-10 col-md-10 col-sm-10 col-xs-12 clearfix">
 				<div class="clearfix"></div>
 				<div class="clearfix"></div>
 				<table class="table" data-effect="fade">
 					<thead>
 						<tr>
 							<th>DATE</th>
+							<th>PRODUCT NAME</th>
 							<th>AMOUNT(WON)</th>
-							<th>ORDER STATUS</th>
 							<th>DETAILS</th>
 						</tr>
 					</thead>
@@ -79,8 +79,10 @@
 						<c:forEach var="order" items="${orderList}">
 							<tr>
 								<td>${order.createDate}</td>
+								<td>${order.productName}
+									(<span class="text-primary">${order.productCount}</span>)
+								</td>
 								<td>${order.totalPrice}won</td>
-								<td>${order.orderStatus}</td>
 								<td><a href="${pageContext.request.contextPath}/DetailOrderController?createDate=${order.createDate}">View Detail OrderList</a></td>
 							</tr>
 						</c:forEach>
@@ -90,7 +92,7 @@
 			</div>
 			<!-- end content -->
 
-			<div id="sidebar" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+			<div id="sidebar" class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 				<div class="widget">
 					<h4 class="title">
 						<span>RedVelvet</span>

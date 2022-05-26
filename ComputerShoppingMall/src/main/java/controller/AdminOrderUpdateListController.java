@@ -23,18 +23,16 @@ public class AdminOrderUpdateListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if((String)session.getAttribute("sessionAdminId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
-			response.sendRedirect(request.getContextPath() + "/MyPaymentController");
+			response.sendRedirect(request.getContextPath() + "/adminOrderUpdateList.jsp");
 			return;
 		}
-		String updateCheck = null;
-		if(request.getParameter("updateCheck")!=null && !"".equals("updateCheck")) {
-			updateCheck = request.getParameter("updateCheck");
-		}
 		
+		String updateCheck = "true";
+
 		orderDao = new OrderDao();
 		ArrayList<Order> list = orderDao.adminOrderList(updateCheck);
 		
 		request.setAttribute("orderList", list);
-		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderUpdateList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/admin/adminOrderList.jsp").forward(request, response);
 	}
 }

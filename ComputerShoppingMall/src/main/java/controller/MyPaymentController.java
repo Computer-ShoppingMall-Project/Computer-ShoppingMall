@@ -30,7 +30,7 @@ public class MyPaymentController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		
+	
 		// dao
 		orderDao = new OrderDao();
 		

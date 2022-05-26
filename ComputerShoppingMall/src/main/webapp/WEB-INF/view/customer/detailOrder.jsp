@@ -92,11 +92,12 @@
 								<td class="text-primary text-center">${order.orderStatus}</td>
 								<td>
 									<c:if test="${order.orderStatus eq '입금 확인'}">
-										<a class="btn btn-default btn-xs">주문 취소</a>
+										<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">주문 취소</a>
 									</c:if>
 									<c:if test="${order.orderStatus eq '배송 완료'}">
 										<div class="btn-group">
-											<a class="btn btn-default btn-xs">교환</a><a class="btn btn-default btn-xs">환불</a>
+											<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=refund&orderNo=${order.orderNo}&createDate=${order.createDate}">교환</a>
+											<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">환불</a>
 										</div>
 									</c:if>
 								</td>

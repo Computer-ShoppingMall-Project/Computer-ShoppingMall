@@ -61,7 +61,7 @@ public class OrderDao {
       return row;
    }
 	// 회원별 주문내역 상세보기
-	public ArrayList<Order> selectOrderList(String customerId, String createDate, String updateCheck) {
+	public ArrayList<Order> selectOrderList(String customerId, String createDate, String updateCheck, int orderNo) {
 		ArrayList<Order> list = new ArrayList<Order>();
 		Order checkout = null;
 		// DB 초기화
@@ -83,15 +83,27 @@ public class OrderDao {
 				+ "		,zip_code zipCode"
 				+ "		,road_address roadAddress"
 				+ "		,detail_address detailAddress"
-				+ " FROM `order`"
-				+ " WHERE customer_id = ? AND create_date = ?";
-		if("true".equals(updateCheck)) {
-			sql += " AND (refund_check = 'Y' OR cancel_check = 'Y')"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
-		}
+				+ "		,COUNT(*) cnt"
+				+ " FROM `order`";
+			if(updateCheck == null || "".equals(updateCheck)) {
+				sql += " WHERE customer_id = ? AND create_date = ?";
+				try {
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, customerId);
+					stmt.setString(2, createDate);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				sql += " WHERE (refund_check = 'Y' OR cancel_check = 'Y') AND order_no=?"; // AdminDetailOrdeList에서 넘어간다면 취소/환불 된 것만 보여주기
+				try {
+					stmt = conn.prepareStatement(sql);
+					stmt.setInt(1, orderNo);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		try {
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, customerId);
-			stmt.setString(2, createDate);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				checkout = new Order();
@@ -108,6 +120,7 @@ public class OrderDao {
 				checkout.setZipCode(rs.getInt("zipCode"));
 				checkout.setRoadAddress(rs.getString("roadAddress"));
 				checkout.setDetailAddress(rs.getString("detailAddress"));
+				checkout.setProductCount(rs.getInt("cnt"));
 				list.add(checkout);
 			}
 		} catch (SQLException e) {
@@ -133,9 +146,15 @@ public class OrderDao {
 		//  DBUtil
 		conn = DButil.getConnection();
 		String sql = "SELECT o.customer_id customerId"
+				+ "		,o.product_name productName"
 				+ "		,o.create_date createDate"
 				+ "		,SUM(o.category_price) totalPrice"
+				+ "		,o.order_no orderNo"
 				+ "		,o.order_status orderStatus"
+				+ "		,COUNT(*) cnt"
+				+ "		,o.zip_code zipCode"
+				+ "		,o.detail_address detailAddress"
+				+ "		,o.road_address roadAddress"
 				+ " FROM `order` o"
 				+ " WHERE customer_id=?"
 				+ " GROUP BY o.create_date"
@@ -150,6 +169,12 @@ public class OrderDao {
 				map.put("createDate", rs.getString("createDate"));
 				map.put("totalPrice", rs.getString("totalPrice"));
 				map.put("orderStatus", rs.getString("orderStatus"));
+				map.put("productName", rs.getString("productName"));
+				map.put("productCount", rs.getInt("cnt"));
+				map.put("orderNo", rs.getInt("orderNo"));
+				map.put("zipCode", rs.getString("zipCode"));
+				map.put("detailAddress", rs.getString("detailAddress"));
+				map.put("roadAddress", rs.getString("roadAddress"));
 				list.add(map);
 			}
 		} catch (SQLException e) {
@@ -193,7 +218,8 @@ public class OrderDao {
 				+ " FROM `order` o";
 		
 		if(updateCheck != null) {
-			sql += " WHERE refund_check='Y' OR cancel_check='Y'"
+			sql += " WHERE (refund_check='Y' OR cancel_check='Y')"
+					+ " GROUP BY customer_id, create_date"
 					+ " ORDER BY o.create_date DESC";
 		} else {
 			sql += " GROUP BY customer_id, create_date"
@@ -236,26 +262,32 @@ public class OrderDao {
 		}
 		return list;
 	}
-	// 관리자 주문상태 변경
-	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate) {
+	// 관리자 주문 리스트 (주문 변경/변경x)
+	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate, String updateCheck, int orderNo) {
 		int row = 0;
 		// DB 변수 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		String sql = "UPDATE `order` SET order_status=? WHERE customer_id=? AND create_date=?";
+		if(updateCheck != null) { // updateCheck가 null이 아니면 쿼리 조건 추가
+			sql += " AND order_no=?";
+		}
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, orderStatus);
 				stmt.setString(2, customerId);
 				stmt.setString(3, createDate);
+				if(updateCheck != null) {
+					stmt.setInt(4, orderNo);
+				}
 				row = stmt.executeUpdate();
-		} catch (SQLException e) {
+			} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				conn.close();
+			} finally {
+				try {
+					stmt.close();
+					conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -270,14 +302,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,c.cpu_image_no , ci.name cpuImage,SUM(category_quantity) s "
-				+ "FROM `order` o "
+		String sql ="SELECT product_name productName,c.cpu_image_no , ci.name cpuImage,SUM(o.category_quantity) s  "
+				+ " FROM `order` o "
 				+ "	INNER JOIN cpu c  "
 				+ "		ON o.product_name = c.cpu_name "
 				+ "	INNER JOIN cpu_image ci "
 				+ "		ON c.cpu_image_no = ci.cpu_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? " ;
+				+ "GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, cpuRanking);
@@ -309,14 +341,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,c.case_image_no, ci.name caseImage,SUM(category_quantity) s "
+		String sql ="SELECT o.product_name productName,c.case_image_no, ci.name caseImage,SUM(o.category_quantity) s  "
 				+ "FROM `order` o "
 				+ "	INNER JOIN `case` c "
 				+ "		ON o.product_name = c.case_name "
 				+ "	INNER JOIN case_image ci "
 				+ "		ON c.case_image_no = ci.case_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? " ;
+				+ "GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, caseRanking);
@@ -325,6 +357,7 @@ public class OrderDao {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
 					map.put("caseImage", rs.getString("caseImage"));
+					map.put("s", rs.getInt("s"));
 					list.add(map);
 				}
 		} catch (Exception e) {
@@ -348,14 +381,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,c.cooler_image_no, ci.name coolerImage,SUM(category_quantity) s "
-				+ "FROM `order` o "
+		String sql ="SELECT product_name productName,c.cooler_image_no, ci.name coolerImage,SUM(o.category_quantity) s "
+				+ " FROM `order` o "
 				+ "	INNER JOIN cooler c "
 				+ "		ON o.product_name = c.cooler_name "
 				+ "	INNER JOIN cooler_image ci "
 				+ "		ON c.cooler_image_no = ci.cooler_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? " ;
+				+ " GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, coolerRanking);
@@ -364,6 +397,7 @@ public class OrderDao {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
 					map.put("coolerImage", rs.getString("coolerImage"));
+					map.put("s", rs.getString("s"));
 					list.add(map);
 				}
 		} catch (Exception e) {
@@ -387,14 +421,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,g.gpu_image_no , ci.name gpuImage,SUM(category_quantity) s "
+		String sql ="SELECT product_name productName,g.gpu_image_no , ci.name gpuImage, SUM(o.category_quantity) s  "
 				+ "FROM `order` o "
 				+ "	INNER JOIN gpu g "
 				+ "		ON o.product_name = g.gpu_name "
 				+ "	INNER JOIN gpu_image ci "
 				+ "		ON g.gpu_image_no = ci.gpu_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? " ;
+				+ " GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, gpuRanking);
@@ -426,14 +460,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,m.mainboard_image_no , mi.name mainboardImage,SUM(category_quantity) s "
+		String sql ="SELECT o.product_name productName,m.mainboard_image_no , mi.name mainboardImage,SUM(o.category_quantity) s "
 				+ "FROM `order` o "
 				+ "	INNER JOIN mainboard m "
 				+ "		ON o.product_name = m.mainboard_name "
 				+ "	INNER JOIN mainboard_image mi "
 				+ "		ON m.mainboard_image_no = mi.mainboard_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? " ;
+				+ " GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, mianboardRanking);
@@ -465,14 +499,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,p.power_image_no , pi.name powerImage,SUM(category_quantity) s "
+		String sql ="SELECT o.product_name productName,p.power_image_no , pi.name powerImage,SUM(o.category_quantity) s "
 				+ "FROM `order` o "
 				+ "	INNER JOIN `power` p "
 				+ "		ON o.product_name = p.power_name "
 				+ "	INNER JOIN power_image pi "
 				+ "		ON p.power_no = pi.power_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? ";
+				+ " GROUP BY o.product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? ";
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, powerRanking);
@@ -504,14 +538,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,r.ram_image_no , ri.name ramImage,SUM(category_quantity) s "
-				+ "FROM `order` o "
+		String sql ="SELECT o.product_name productName,r.ram_image_no , ri.name ramImage,SUM(o.category_quantity) s  "
+				+ " FROM `order` o "
 				+ "	INNER JOIN ram r "
 				+ "		ON o.product_name = r.ram_name "
 				+ "	INNER JOIN ram_image ri "
 				+ "		ON r.ram_no = ri.ram_image_no "
 				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? ";
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? ";
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, ramRanking);
@@ -543,14 +577,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,st.storage_image_no , si.name storageImage,SUM(category_quantity) s "
-				+ "FROM `order` o "
+		String sql ="SELECT o.product_name productName,st.storage_image_no , si.name storageImage,SUM(o.category_quantity) s "
+				+ " FROM `order` o "
 				+ "	INNER JOIN `storage` st "
 				+ "		ON o.product_name = st.storage_name "
 				+ "	INNER JOIN storage_image si "
 				+ "		ON st.storage_no = si.storage_image_no "
-				+ "GROUP BY product_name "
-				+ "	order BY s desc LIMIT 0,? ";
+				+ " GROUP BY product_name "
+				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? ";
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, storageRanking);
@@ -559,6 +593,7 @@ public class OrderDao {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
 					map.put("storageImage", rs.getString("storageImage"));
+					map.put("s", rs.getString("s"));
 					list.add(map);
 				}
 		} catch (Exception e) {
@@ -576,7 +611,7 @@ public class OrderDao {
 	}
 	
 	// 취소/환불 여부 변경
-	public int updateOrderStatus(String statusUpdateCheck, int orderNo) {
+	public int updateOrderStatus(String customerUpdateCheck, int orderNo) {
 		int row = 0;
 		// DB 변수 선언
 		Connection conn = null;
@@ -584,10 +619,10 @@ public class OrderDao {
 		conn = DButil.getConnection();
 
 		String sql = null;
-		if("cancel".equals(statusUpdateCheck)) {
+		if("cancel".equals(customerUpdateCheck)) {
 			sql = "UPDATE `order` SET cancel_check='Y', order_status='취소 요청중' WHERE order_no=?";
-		} else if("refund".equals(statusUpdateCheck)) {
-			sql = "UPDATE `order` SET refund_check='Y', order_status='환불 요청중' WHERE order_no=?";
+		} else if("refund".equals(customerUpdateCheck)) {
+			sql = "UPDATE `order` SET refund_check='Y', order_status='교환 요청중' WHERE order_no=?";
 		}
 		try {
 				stmt = conn.prepareStatement(sql);
