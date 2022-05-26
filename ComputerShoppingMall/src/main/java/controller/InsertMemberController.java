@@ -52,7 +52,8 @@ public class InsertMemberController extends HttpServlet {
 		if (request.getParameter("customerId") == null || request.getParameter("name") == null
 				|| request.getParameter("nickName") == null || request.getParameterValues("email") == null
 				|| request.getParameter("phone") == null || request.getParameter("zipCode") == null
-				|| request.getParameter("roadAddress") == null
+				|| request.getParameter("province") == null || request.getParameter("city") == null
+				|| request.getParameter("town") == null || request.getParameter("roadAddress") == null
 				|| request.getParameter("detailAddress") == null || request.getParameter("customerPw1") == null || request.getParameter("customerPw2") == null) {
 			response.sendRedirect(request.getContextPath() + "/InsertMemberController?msg=null");
 			return;
@@ -74,6 +75,9 @@ public class InsertMemberController extends HttpServlet {
 	    c.setEmail(request.getParameter("email"));
 	    c.setPhone(request.getParameter("phone"));
 	    c.setZipCode(Integer.parseInt(request.getParameter("zipCode")));
+	    c.setProvince(request.getParameter("province"));
+	    c.setCity(request.getParameter("city"));
+	    c.setTown(request.getParameter("town"));
 	    c.setRoadAddress(request.getParameter("roadAddress"));
 	    c.setDetailAddress(request.getParameter("detailAddress"));
 	    

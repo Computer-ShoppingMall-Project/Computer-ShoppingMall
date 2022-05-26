@@ -8,7 +8,10 @@ public class Customer {
 	private String email;
 	private String phone;
 	private int zipCode;
-	private String roadAddress;
+	private String province; // 시도
+	private String city; // 시군구
+	private String town; // 읍면
+	private String roadAddress; // 도로명
 	private String detailAddress;
 	private String createDate;
 	private String updateDate;
@@ -18,9 +21,10 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerPw=" + customerPw + ", name=" + name + ", nickName="
-				+ nickName + ", email=" + email + ", phone=" + phone + ", zipCode=" + zipCode + ", roadAddress="
-				+ roadAddress + ", detailAddress=" + detailAddress + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + ", adminCk=" + adminCk + ", active=" + active + "]";
+				+ nickName + ", email=" + email + ", phone=" + phone + ", zipCode=" + zipCode + ", province=" + province
+				+ ", city=" + city + ", town=" + town + ", roadAddress=" + roadAddress + ", detailAddress="
+				+ detailAddress + ", createDate=" + createDate + ", updateDate=" + updateDate + ", adminCk=" + adminCk
+				+ ", active=" + active + "]";
 	}
 
 	public String getCustomerId() {
@@ -77,6 +81,30 @@ public class Customer {
 
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
 	}
 
 	public String getRoadAddress() {
