@@ -51,6 +51,7 @@ public class CartAddCpuController extends HttpServlet {
 		
 		// cpu정보 넣기
 		cpu = cpuDao.selectCpuOne(cpuNo);
+		
 		cpu.setQuantity(quantity);
 		// dao
 		cpuDao = new CpuDao();
