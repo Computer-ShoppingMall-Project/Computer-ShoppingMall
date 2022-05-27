@@ -58,7 +58,7 @@
 		
 		$("#selbox2").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -72,7 +72,7 @@
 		
 		$("#selbox3").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox3").val() == "direct3") {
+			if($("#selbox3").val() == "direct") {
 				$("#selboxDirect3").show();
 			}  else {
 				$("#selboxDirect3").hide();
@@ -86,7 +86,7 @@
 		
 		$("#selbox4").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox4").val() == "direct4") {
+			if($("#selbox4").val() == "direct") {
 				$("#selboxDirect4").show();
 			}  else {
 				$("#selboxDirect4").hide();
@@ -105,7 +105,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li> 
 				</ul>
-				<h2>상품등록</h2>
+				<h2>상품등록</h2> 
 			</div>
 		</div>
 	</section>
@@ -116,15 +116,26 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">CPU 등록</h4>
-					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContext.request.contextPath}/InsertCpuController?categoryName=cpu" enctype="multipart/form-data">
+					<h4 class="title text-primary">CPU 등록
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+					<form id="insertCpuform" method="post" name="insertCpuform" action="${pageContext.request.contextPath}/InsertCpuController" enctype="multipart/form-data">
 						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="cpu" readonly="readonly" class="form-control">
+								</td>
+							</tr>
 							<tr>
 								<th>NAME</th>
 								<td>
 									<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
 								</td>
 							</tr>
+							
 							<tr>
 								<th>COMPANY</th>
 								<td>
@@ -135,7 +146,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect"  name="companyName" class="form-control" value="" placeholder="company 직접 입력">
+									<input type="text" id="selboxDirect"  name="companyNameInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -146,9 +157,9 @@
 											<c:forEach var="c" items="${socketSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2"  name="socketSize" class="form-control" value="" placeholder="socket 직접 입력">
+									<input type="text" id="selboxDirect2"  name="socketSizeInsert" class="form-control" value="" placeholder="socket 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -159,9 +170,9 @@
 											<c:forEach var="c" items="${coreList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct3">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect3"  name="core" class="form-control" value="" placeholder="core 직접 입력">
+									<input type="text" id="selboxDirect3"  name="coreInsert" class="form-control" value="" placeholder="core 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -172,9 +183,9 @@
 											<c:forEach var="c" items="${threadList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct4">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect4"  name="thread" class="form-control" value="" placeholder="thread 직접 입력">
+									<input type="text" id="selboxDirect4"  name="threadInsert" class="form-control" value="" placeholder="thread 직접 입력">
 								</td>
 							</tr>
 							<tr>

@@ -34,7 +34,6 @@ public class InsertCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
-		
 		// compnay
 		List<String> companyList = cpuDao.companyKind();
 		// socketSize
@@ -62,8 +61,21 @@ public class InsertCpuController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertCpuForm.jsp").forward(request, response);
 		
+		cpuDao = new CpuDao();
+		// 게시글 이름, 가격 받아오기
+		ArrayList<Cpu> list = cpuDao.selectCpuList();
+		// compnay
+		List<String> companyList = cpuDao.companyKind();
+		// socketSize
+		List<String> socketSizeList = cpuDao.socketSizeKind();
+		// core
+		List<String> coreList = cpuDao.coreKind();
+		// thread
+		List<String> threadList = cpuDao.threadKind();
+		
+		
+
 		// Cpu image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
 		System.out.println("[InsertCpuController.doPost photo path] : " + path); // 디버깅 
@@ -94,11 +106,31 @@ public class InsertCpuController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String cpuName = multiReq.getParameter("cpuName");
-		String companyName = multiReq.getParameter("companyName");
+		String companyName = null;
+		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
+			companyName = multiReq.getParameter("companyNameInsert");
+		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
+			companyName = multiReq.getParameter("companyName");
+		}
 		String categoryName = multiReq.getParameter("categoryName");
-		String socketSize = multiReq.getParameter("socketSize");
-		String core = multiReq.getParameter("core");
-		String thread = multiReq.getParameter("thread");
+		String socketSize = null;
+		if(multiReq.getParameter("socketSizeInsert") != null  && !"".equals(multiReq.getParameter("socketSizeInsert"))) {
+			socketSize = multiReq.getParameter("socketSizeInsert");
+		} else if(multiReq.getParameter("socketSize") != null  && !"".equals(multiReq.getParameter("socketSize"))) {
+			socketSize = multiReq.getParameter("socketSize");
+		}
+		String core = null;
+		if(multiReq.getParameter("coreInsert") != null  && !"".equals(multiReq.getParameter("coreInsert"))) {
+			core = multiReq.getParameter("coreInsert");
+		} else if(multiReq.getParameter("core") != null  && !"".equals(multiReq.getParameter("core"))) {
+			core = multiReq.getParameter("core");
+		}
+		String thread = null;
+		if(multiReq.getParameter("threadInsert") != null  && !"".equals(multiReq.getParameter("threadInsert"))) {
+			thread = multiReq.getParameter("threadInsert");
+		} else if(multiReq.getParameter("thread") != null  && !"".equals(multiReq.getParameter("thread"))) {
+			thread = multiReq.getParameter("thread");
+		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
@@ -121,11 +153,26 @@ public class InsertCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		int row = cpuDao.insertCpu(i, c);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertCpuController] : Cpu 등록 성공");
+			request.setAttribute("cpuList", list);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("socketSizeList", socketSizeList);
+			request.setAttribute("coreList", coreList);
+			request.setAttribute("threadList", threadList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/cpuList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertCpuController] : Cpu 등록 실패");
-		}
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("socketSizeList", socketSizeList);
+			request.setAttribute("coreList", coreList);
+			request.setAttribute("threadList", threadList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertCpuForm.jsp").forward(request, response);
+		}	
 	}
 }
