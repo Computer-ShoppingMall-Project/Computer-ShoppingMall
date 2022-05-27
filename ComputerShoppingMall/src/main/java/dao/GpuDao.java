@@ -72,12 +72,16 @@ public class GpuDao {
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		int row=0;
-		String sql = "UPDATE gpu SET price=?, quantity=?, update_date=NOW() WHERE gpu_no=?";
+		String sql = "UPDATE gpu SET price=?, quantity=?, gpu_name=?, chipset_company=?, gpu_size=? memo=?  update_date=NOW() WHERE gpu_no=?";
 		try {
 			stmt= conn.prepareStatement(sql);
 			stmt.setInt(1, g.getPrice());
 			stmt.setInt(2, g.getQuantity());
 			stmt.setInt(3, g.getGpuNo());
+			stmt.setString(4, g.getGpuName());
+			stmt.setString(5, g.getChipsetCompany());
+			stmt.setInt(6, g.getGpuSize());
+			stmt.setString(7, g.getMemo());
 			row = stmt.executeUpdate();
 			if(row == 1) {
 				System.out.println("입력성공");
