@@ -71,27 +71,39 @@ public class CpuDao {
 	}
 	// cpu 상품수정
 	public int updateCpu(Cpu c) {
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE cpu SET price=?, quantity=?, update_date=NOW() WHERE cpu_no=?";
+		String sql = "UPDATE cpu SET cpu_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,socket_size=? " 
+				+ "					,core=? " 
+				+ "					,thread=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,cpu_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE cpu_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, c.getPrice());
-			stmt.setInt(2, c.getQuantity());
-			stmt.setInt(3, c.getCpuNo());
+			stmt.setString(1, c.getCpuName());
+			stmt.setString(2, c.getCompanyName());
+			stmt.setString(3, c.getCategoryName());
+			stmt.setString(4, c.getSocketSize());
+			stmt.setString(5, c.getCore());
+			stmt.setString(6, c.getThread());
+			stmt.setInt(7, c.getPrice());
+			stmt.setInt(8, c.getQuantity());
+			stmt.setInt(9, c.getCpuImageNo());
+			stmt.setString(10, c.getMemo());
+			stmt.setInt(11, c.getCpuNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				// DB 자원반납
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {

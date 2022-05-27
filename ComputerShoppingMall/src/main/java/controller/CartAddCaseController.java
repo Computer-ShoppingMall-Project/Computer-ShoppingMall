@@ -61,7 +61,7 @@ public class CartAddCaseController extends HttpServlet {
 		// 상품 데이터 등록 성공 체크 코드
 		if (row == 1) { 
 	    	System.out.println("등록 성공! CartAddCaseController.dopost");
-	    	response.sendRedirect(request.getContextPath() + "/CaseListController");
+	    	response.sendRedirect(request.getContextPath() + "/MyBasketController");
 	    	return;
 	    } else {
 	    	System.out.println("등록 실패! CartAddCaseController.dopost");

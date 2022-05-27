@@ -109,8 +109,12 @@ public class InsertStorageController extends HttpServlet {
 		int row = storageDao.insertStorage(i, s);
 		if (row == 1) {
 			System.out.println("[InsertStorageController] : 저장소 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/StorageListController");
+			return;
 		} else {
 			System.out.println("[InsertStorageController] : 저장소 등록 실패");
+			response.sendRedirect(request.getContextPath() + "/InsertStorageController");
+			return;
 		}
 	}
 }

@@ -56,7 +56,7 @@ public class CartAddGpuController extends HttpServlet {
 		
 		if (row == 1) { 
 	    	System.out.println("등록 성공! CartAddGpuController.dopost");
-	    	response.sendRedirect(request.getContextPath() + "/GpuListController");
+	    	response.sendRedirect(request.getContextPath() + "/MyBasketController");
 	    	return;
 	    } else {
 	    	System.out.println("등록 실패! CartAddGpuController.dopost");

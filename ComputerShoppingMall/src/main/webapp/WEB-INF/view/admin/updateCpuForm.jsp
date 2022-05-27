@@ -14,22 +14,21 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,138 +36,196 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
-</head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
-			document.getElementById('btn').click();
-		}
-	}
-	window.onload = function() {
-	    document.getElementById('btn').onclick = function() {
-	        document.getElementById('frm').submit();
-	        return false;
-	    };
-	};
+	// kind 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// socketSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// chipSet 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
 </script>
+</head>
 <body>
 	<!-- header적용 -->
-		<c:choose>
-		<c:when test="${sessionAdminId != null }">
-			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Main Product</li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li> 
 				</ul>
-				<h2>CPU</h2>
+				<h2>상품수정</h2> 
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
-	<section class="marketplace-top">
-		<div id="market-wrapper">
-			<div class="item_image" style="background: white;">
-				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.cpuOne.cpuImageName}" alt="">
-			</div>
-			<!-- end item_image -->
-		</div>
-	</section>
-		<section class="section1">
+	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-			<c:if test="${sessionAdminId != null }">
-				<div>
-					<a href="UpdateCpuController?cpuNo=${requestScope.cpuOne.cpuNo}" class="btn btn-info">UPDATE</a>
-					<a href="DeleteCpuController?cpuNo=${requestScope.cpuOne.cpuNo}" class="btn btn-danger">DELETE</a>
-				</div>
-			</c:if>
-				<div class="general-title text-center">
-					<h3>${requestScope.cpuOne.cpuName}</h3>
-					<hr>
-				</div>
-
-				<div class="divider"></div>
-
-				<div class="item_details">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<!-- theme_details -->
-							<div class="form-group">
-								<div class="item_price">
-									<h3>
-										<span>${requestScope.cpuOne.price}원</span>
-									</h3>
-								</div>
-							</div>
-							<!-- buttons -->
-							<hr>
-							<div class="form-group">
-								<div class="text-center">
-									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-										<div class="details_section  text-center">
-											<h3>Item Details</h3>
-											<ul>
-												<li class="version">cpu_no : <span>${requestScope.cpuOne.cpuNo}</span></li>
-			                                    <li class="version">category_name : <span>${requestScope.cpuOne.categoryName}</span></li>
-			                                    <li class="designer">case_size : 
-			                                    <input type ="text" name="case_size " value="${requestScope.cpurOne.caseSize}">
-			                                    <li class="designer">soket_size : 
-			                                    <input type ="number" name="soketSize" value="${requestScope.cpuOne.soketSize }">
-			                                    <li class="designer">core : 
-			                                    <input type = "number" name="core" value="${requestScope.cpuOne.core}">
-			                                    <li class="designer">thread : 
-			                                    <input type = "number" name="thread" value="${requestScope.cpuOne.thread}">
-			                                    <li class="designer">quantity :
-												<input type = "number" name="quantity" value="${requestScope.cpuOne.quantity}">
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-								<br>
-									<div class="theme_details">
-										<div class="item-description">
-										<br>
-											<p>${requestScope.cpuOne.memo}</p>
-										</div>
-										<!-- item-description -->
-									</div>  
-									<br>
-									<div class="text-center">
-									<br>
-									<h4 class="text-danger text-center">재고 : ${requestScope.cpuOne.quantity}</h4>
-									<br><br>
-									<div class="rating text-center">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-										<p>Users Rating</p>
-									</div> <br>
-								<!-- theme_details -->
-								</div>
-							</div>
-							<br><br>
+				<div class="col-lg-3 col-md-6 col-sm-12"></div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<h4 class="title text-primary">CPU 수정
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+						
+					<form id="updateCpuform" method="post" name="updateCpuform" action="${pageContext.request.contextPath}/UpdateCpuController">
+						<div>
+							<!-- 값넘기기 -->
+							<input type="hidden" name="cpuImageNo" readonly="readonly" value="${requestScope.cpu.cpuImageNo}" required>
+							<input type="hidden" name="cpuNo" readonly="readonly" value="${requestScope.cpu.cpuNo}" required>
 						</div>
-					</div>
-					<div class="clearfix"></div>
-					</div>
+						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="${requestScope.cpu.categoryName}" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE NAME</th>
+								<td>
+									<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>UPDATE COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox" name="companyName" >
+										<option value="" selected disabled>company 선택</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect"  name="companyNameInsert" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE SOCKET SIZE</th>
+								<td>
+									<select class="form-control" id="selbox2" name="socketSize" >
+										<option value="" selected disabled>socket 선택</option>
+											<c:forEach var="c" items="${socketSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="socketSizeInsert" class="form-control" value="" placeholder="socket 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE CORE</th>
+								<td>
+									<select class="form-control" id="selbox3" name="core" >
+										<option value="" selected disabled>socket 선택</option>
+											<c:forEach var="c" items="${coreList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect3"  name="coreInsert" class="form-control" value="" placeholder="core 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE THREAD</th>
+								<td>
+									<select class="form-control" id="selbox4" name="thread" >
+										<option value="" selected disabled>thread 선택</option>
+											<c:forEach var="c" items="${threadList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect4"  name="threadInsert" class="form-control" value="" placeholder="thread 직접 입력">
+								</td>
+							</tr>						
+							<tr>
+								<th>UPDATE QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">수정</button>
+					</form>
 				</div>
-			</section>
+				<!-- end login -->
+			</div>
+			<!-- end content -->
+		</div>
+		<!-- end container -->
+	</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
@@ -186,6 +243,6 @@
 	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 
 	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
