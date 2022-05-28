@@ -91,15 +91,20 @@
 								<td class="text-center">${order.createDate}</td>
 								<td class="text-primary text-center">${order.orderStatus}</td>
 								<td>
-									<c:if test="${order.orderStatus eq '입금 확인'}">
-										<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">주문 취소</a>
-									</c:if>
-									<c:if test="${order.orderStatus eq '배송 완료'}">
-										<div class="btn-group">
-											<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=refund&orderNo=${order.orderNo}&createDate=${order.createDate}">교환</a>
-											<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">환불</a>
-										</div>
-									</c:if>
+									<c:choose>
+										<c:when test="${order.orderStatus eq '입금 확인' || order.orderStatus eq '입금 전'}">
+											<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">주문 취소</a>
+										</c:when>
+										<c:when test="${order.orderStatus eq '배송 완료'}">
+											<div class="btn-group">
+												<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=refund&orderNo=${order.orderNo}&createDate=${order.createDate}">교환</a>
+												<a class="btn btn-default btn-xs" href="${pageContext.request.contextPath}/UpdateOrderController?customerUpdateCheck=cancel&orderNo=${order.orderNo}&createDate=${order.createDate}">환불</a>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn btn-default btn-xs" style="float:center;" disabled="disabled">변경 불가</button>
+										</c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</c:forEach>

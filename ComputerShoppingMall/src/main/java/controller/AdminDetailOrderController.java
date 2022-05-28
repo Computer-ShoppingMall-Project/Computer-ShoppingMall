@@ -34,6 +34,7 @@ public class AdminDetailOrderController extends HttpServlet {
 		String customerId = request.getParameter("customerId");
 		String createDate = request.getParameter("createDate");
 		int orderNo = 0;
+		String orderStatus = request.getParameter("odertStatus");
 		String updateCheck = null; // 배송 상태 수정이 들어오지 않았을 때 상태
 		if(request.getParameter("updateCheck") != null && !"".equals("updateCheck")) {
 			updateCheck = request.getParameter("updateCheck"); // 주문 취소/환불 사항 리스트
@@ -43,6 +44,9 @@ public class AdminDetailOrderController extends HttpServlet {
 		List<Order> list = orderDao.selectOrderList(customerId, createDate, updateCheck, orderNo);
 		
 		request.setAttribute("detailOrderList", list);
+		request.setAttribute("customerId", customerId);
+		request.setAttribute("createDate", createDate);
+		request.setAttribute("orderStatus", orderStatus);
 		request.setAttribute("updateCheck", updateCheck); // 뒤로가기 버튼 경로지정을 위해 값 전송
 		request.getRequestDispatcher("/WEB-INF/view/admin/adminDetailOrder.jsp").forward(request, response);
 	}
@@ -66,6 +70,8 @@ public class AdminDetailOrderController extends HttpServlet {
 		String updateCheck = null;
 		if(request.getParameter("updateCheck") != null && !"".equals(request.getParameter("updateCheck"))) {
 			updateCheck = request.getParameter("updateCheck");
+		}
+		if(request.getParameter("orderNo") != null && !"".equals(request.getParameter("orderNo"))) {
 			orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		}
 		
@@ -73,7 +79,7 @@ public class AdminDetailOrderController extends HttpServlet {
 		
 		System.out.println(updateCheck);
 		
-		int row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate, updateCheck, orderNo);
+		int row = orderDao.AdminUpdateOrderStatus(orderStatus, customerId, createDate, orderNo);
 		
 		if(row > 0) { // 업데이트 성공시 해당 상세보기로 돌아가기
 			System.out.println("[AdminDetailOrderController] : 상태변경 성공 " + row + "개 정보 업데이트 완료");

@@ -78,12 +78,8 @@
 								</ul></li>
 							<li><a href="#">고객센터</a>
 								<ul class="dropdown">
-									<li><a
-										href="${pageContext.request.contextPath}/QnaListController">QNA
-											목록</a></li>
-									<li><a
-										href="${pageContext.request.contextPath}/InsertQnaController">QNA
-											등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/InsertQnaController">QNA 등록</a></li>
+									<li><a href="${pageContext.request.contextPath}/QnaListController">QNA 목록</a></li>
 								</ul></li>
 							<li><a href="#">마이페이지</a>
 								<ul class="dropdown">

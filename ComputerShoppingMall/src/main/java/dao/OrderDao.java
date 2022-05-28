@@ -455,14 +455,14 @@ public class OrderDao {
 		return list;
 	}
 	// 관리자 주문 상태 변경 (주문 변경/변경x)
-	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate, String updateCheck, int orderNo) {
+	public int AdminUpdateOrderStatus(String orderStatus, String customerId, String createDate, int orderNo) {
 		int row = 0;
 		// DB 변수 선언
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
 		String sql = "UPDATE `order` SET order_status=? WHERE customer_id=? AND create_date=?";
-		if(orderNo != 0 || (updateCheck != null && !"".equals(updateCheck))) { // updateCheck가 null이 아니면 쿼리 조건 추가
+		if(orderNo != 0 && !"".equals(orderNo)) { // updateCheck가 null이 아니면 쿼리 조건 추가
 			sql += " AND order_no=?";
 		}
 		try {
@@ -470,7 +470,7 @@ public class OrderDao {
 				stmt.setString(1, orderStatus);
 				stmt.setString(2, customerId);
 				stmt.setString(3, createDate);
-				if((updateCheck != null && !"".equals(updateCheck)) || orderNo!=0) {
+				if(orderNo != 0) {
 					stmt.setInt(4, orderNo);
 				}
 				row = stmt.executeUpdate();

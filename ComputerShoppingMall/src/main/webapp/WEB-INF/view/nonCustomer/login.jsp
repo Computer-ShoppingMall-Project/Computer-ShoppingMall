@@ -98,10 +98,9 @@
 							<div class="checkbox">
 								<label> <input type="checkbox"> Remember me </label> 
 								<div class="text-danger">
-									고객: 로그인버튼!
-								</div>
-								<div class="text-danger">
-									관리자 아이디: admin123 비번:1234
+									[고객] 로그인 버튼 (아이디:guest 비밀번호:0000)
+									<br>
+									[관리자] 아이디: admin123 비밀번호:1234
 								</div>
 							</div>
 						</div>

@@ -87,10 +87,10 @@
 										<td class="text-center">${order.orderStatus}</td>
 										<c:choose>
 											<c:when test="${updateCheck != null}">
-												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=${updateCheck}">View Detail OrderList</a></td>
+												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&updateCheck=${updateCheck}&orderStatus=${order.orderStatus}">View Detail OrderList</a></td>
 											</c:when>
 											<c:otherwise>
-												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}">View Detail OrderList</a></td>
+												<td class="text-center"><a href="${pageContext.request.contextPath}/AdminDetailOrderController?customerId=${order.customerId}&createDate=${order.createDate}&orderStatus=${order.orderStatus}">View Detail OrderList</a></td>
 											</c:otherwise>
 										</c:choose>
 									</tr>

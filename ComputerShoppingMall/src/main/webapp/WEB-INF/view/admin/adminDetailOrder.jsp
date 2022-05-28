@@ -66,16 +66,41 @@
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-11 col-md-11 col-sm-11col-xs-11 clearfix">
-			<c:choose>
-				 <c:when test="${updateCheck == null || updateCheck == ''}">
-				 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn">back</a>
-				 </c:when>
-				 <c:otherwise>
-				 	<a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true" class="btn">back</a>
-				 </c:otherwise>
-			</c:choose>
-				<div class="clearfix"></div>
-				<div class="clearfix"></div>
+			<div style="vertical-align: middle; float: left;">
+				<c:choose>
+					 <c:when test="${updateCheck == null || updateCheck == ''}">
+					 	<a href="${pageContext.request.contextPath}/AdminOrderListController" class="btn btn-default" style="vertical-align: middle;">back</a>
+					 </c:when>
+					 <c:otherwise>
+					 	<a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true" class="btn btn-default" style="vertical-align: middle;">back</a>
+					 </c:otherwise>
+				</c:choose>
+			</div>
+				<!-- <div class="clearfix"></div>
+				<div class="clearfix"></div>  -->
+				<c:choose>
+					<c:when test="${updateCheck != null && updateCheck != ''}">
+						<!-- 주문 변경 여부가 있다면 전체 주분변경 불가  -->
+					</c:when>
+					<c:otherwise>
+						<!-- 주문취소가 없을 시 일괄 배송 처리가능 -->
+					<div style="float:right;">
+					<h4 class="text-primary">ALL ORDER STATUS CHANGE</h4>
+						<form method="post" action="${pageContext.request.contextPath}/AdminDetailOrderController">
+							<input type="hidden" value="${customerId}" name="customerId">
+							<input type="hidden" value="${createDate}" name="createDate">
+								<select name="orderStatus" class="form-control col-xs-4">
+									<!-- <option value="입금 전"<c:if test="${order.orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>  기능x-->
+									<option value="입금 확인"<c:if test="${order.orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
+									<!-- <option value="배송 중"<c:if test="${order.orderStatus eq '배송 중'}">selected</c:if>>배송 중</option> 기능x  -->
+									<option value="배송 완료"<c:if test="${order.orderStatus eq '배송 완료'}">selected</c:if>>배송 완료</option>
+								</select>
+								<button type="submit" class="btn" style="float:right;">UPDATE</button>
+						</form>
+					</div>
+					</c:otherwise>
+				</c:choose>
+				<br><br><br><br><br><br>
 				<h4 class="text-primary">DELIVERY ADDRESS</h4>
 				<table class="table" data-effect="fade">
 					<tr>
@@ -93,6 +118,7 @@
 					</c:if>
 				</c:forEach>
 				</table>
+				
 				<h4 class="text-primary">ORDER INFORMATION</h4>
 				<table class="table" data-effect="fade">
 					<thead>
@@ -101,7 +127,7 @@
 							<th class="text-center">ID</th>
 							<th>상품 이름</th>
 							<th class="text-center">가격</th>
-							<th class="text-center">구매 수량</th>
+							<th class="text-center">수량</th>
 							<th class="text-center">주문일</th>
 							<th class="text-center">현재 주문상태</th>
 							<th class="text-center">주문상태 수정</th>
@@ -125,6 +151,7 @@
 											<input type="hidden" value="${order.orderNo}" name="orderNo">
 											<c:choose>
 												<c:when test="${updateCheck == null|| updateCheck == ''}">
+													<input type="hidden" value="true" name="eachUpdate"> <!-- 배송상태 개별변경 -->
 													<select name="orderStatus" class="form-control" onchange="this.form.submit()">
 														<option value="입금 전"<c:if test="${order.orderStatus eq '입금 전'}">selected</c:if>>입금 전</option>
 														<option value="입금 확인"<c:if test="${order.orderStatus eq '입금 확인'}">selected</c:if>>입금 확인</option> <!-- 주문완료시 기본값 -->
