@@ -71,14 +71,15 @@
 </style>
 </head>
 <script type="text/javascript">
-	function plus() {
+	function plus(index) {
 		if (confirm('장바구니에 담으시겠습니까?')) {
-			document.getElementById('btn').click();
+			console.log('index',index)
+			document.getElementsByClassName('btn')[index].click();
 		}
 	}
-	function del() {
+	function del(index) {
 		if (confirm('상품을 삭제 하겠습니까?')) {
-			document.getElementById('btnDel').click();
+			document.getElementsByClassName('btn')[index].click();
 		}
 	}
 </script>
@@ -194,7 +195,7 @@
 					<div class="recentitems portfolio">
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
-							<c:forEach var="c" items="${coolerList}">
+							<c:forEach var="c" items="${coolerList}" varStatus="s">
 								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="${pageContext.request.contextPath}/image/${c.coolerImageName}" alt="">
@@ -205,14 +206,14 @@
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
 															<a href="${pageContext.request.contextPath}/UpdateCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
-															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
+															<a hidden="hidden" style="display: none;"  class="btn" href="${pageContext.request.contextPath}/DeleteCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del(${s.index});"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>
 														<c:otherwise>
 															<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${c.coolerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-															<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.coolerNo}&&productName=${c.coolerName}&&price=${c.coolerNo}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
+															<a hidden="hidden" style="display: none;"  class="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.coolerNo}&&productName=${c.coolerName}&&price=${c.coolerNo}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus(${s.index});"><i class="fa fa-cart-plus">Add</i></a>
 														</c:otherwise>
 													</c:choose>		
 													<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>

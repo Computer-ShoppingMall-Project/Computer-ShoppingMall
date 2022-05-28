@@ -203,7 +203,7 @@
 					<div class="recentitems portfolio">
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
-							<c:forEach var="c" items="${caseList}">
+							<c:forEach var="c" items="${caseList}" varStatus="s">
 								<div class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
 										<img src="${pageContext.request.contextPath}/image/${c.caseImageName}" alt="">
@@ -213,14 +213,14 @@
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
 															<a href="${pageContext.request.contextPath}/UpdateCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
-															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeleteCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"></a>												
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
+															<a hidden="hidden" style="display: none;" class="btnDel" href="${pageContext.request.contextPath}/DeleteCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"></a>												
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del(${s.index});"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>
 														<c:otherwise>
 															<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${c.caseNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-															<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.price}&&categoryName=${c.categoryName}"  class="dmbutton a2" data-animate="bounceInRight"></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
+															<a hidden="hidden" style="display: none;" class="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.caseNo}&&productName=${c.caseName}&&price=${c.price}&&categoryName=${c.categoryName}"  class="dmbutton a2" data-animate="bounceInRight"></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus(${s.index});"><i class="fa fa-cart-plus">Add</i></a>
 														</c:otherwise>
 													</c:choose>												
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>

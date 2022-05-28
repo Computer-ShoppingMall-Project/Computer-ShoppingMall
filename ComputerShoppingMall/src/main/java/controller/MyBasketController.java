@@ -31,6 +31,7 @@ public class MyBasketController extends HttpServlet {
 			return;
 		}
 		String customerId = (String)session.getAttribute("sessionCustomerId");
+		System.out.println(customerId);
 		if((String)session.getAttribute("sessionCustomerId") == null) {
 			// 로그인이 되어있지 않은 상태 -> 로그인 폼으로 돌아가기
 			response.sendRedirect(request.getContextPath() + "/LoginController");
@@ -40,6 +41,7 @@ public class MyBasketController extends HttpServlet {
 		// dao
 		basketDao = new BasketDao();
 		if(request.getParameter("productNumber") != null && !"".equals(request.getParameter("productNumber"))) {
+			
 			// request 값
 			int productNumber = Integer.parseInt(request.getParameter("productNumber"));
 			String productName = request.getParameter("productName");

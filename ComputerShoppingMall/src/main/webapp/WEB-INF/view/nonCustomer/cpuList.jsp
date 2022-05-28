@@ -234,13 +234,13 @@
 														<c:when test="${sessionAdminId != null }">
 															<a href="${pageContext.request.contextPath}/UpdateCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
 															<a hidden="hidden" style="display: none;" class="btn" href="${pageContext.request.contextPath}/DeleteCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del(${s.index});"><i class="fa fa-minus">Delete</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>
 														<c:otherwise>
 															<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${c.cpuNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 															<a hidden="hidden" style="display: none;" class="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.cpuNo}&&productName=${c.cpuName}&&price=${c.price}&&categoryName=${c.categoryName}" class="dmbutton a2" data-animate="bounceInRight"></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus(${s.index});"><i class="fa fa-cart-plus">Add ${c.cpuNo}</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus(${s.index});"><i class="fa fa-cart-plus">Add</i></a>
 														</c:otherwise>
 													</c:choose>		
 											<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>

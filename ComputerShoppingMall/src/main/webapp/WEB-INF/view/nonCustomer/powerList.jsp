@@ -71,14 +71,15 @@
 </style>
 </head>
 <script type="text/javascript">
-	function plus() {
+	function plus(index) {
 		if (confirm('장바구니에 담으시겠습니까?')) {
-			document.getElementById('btn').click();
+			console.log('index',index)
+			document.getElementsByClassName('btn')[index].click();
 		}
 	}
-	function del() {
+	function del(index) {
 		if (confirm('상품을 삭제 하겠습니까?')) {
-			document.getElementById('btnDel').click();
+			document.getElementsByClassName('btn')[index].click();
 		}
 	}
 </script>
@@ -166,7 +167,7 @@
 					<div class="recentitems portfolio">
 						<div class="recentitems portfolio isotope"
 							style="position: relative; overflow: hidden; height: 764px;">
-							<c:forEach var="c" items="${powerList}">
+							<c:forEach var="c" items="${powerList}" varStatus="s">
 								<div
 									class="portfolio-item col-lg-4 col-md-4 col-sm-4 col-xs-12 web-design graphic-design">
 									<div class="he-wrap tpl6 market-item">
@@ -178,14 +179,14 @@
 													<c:choose>
 														<c:when test="${sessionAdminId != null }">
 															<a href="${pageContext.request.contextPath}/UpdatePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-gear">Update</i></a>
-															<a hidden="hidden" style="display: none;" id="btnDel" href="${pageContext.request.contextPath}/DeletePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del();"><i class="fa fa-minus">Delete</i></a>
+															<a hidden="hidden" style="display: none;" class="btn" href="${pageContext.request.contextPath}/DeletePowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-minus">Delete</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="del(${s.index});"><i class="fa fa-minus">Delete</i></a>
 															<a href="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a>
 														</c:when>
 														<c:otherwise>
 															<a href="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${c.powerNo}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-search">Detail</i></a> 
-															<a hidden="hidden" style="display: none;" id="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.powerNo}&&productName=${c.powerName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
-															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus();"><i class="fa fa-cart-plus">Add</i></a>
+															<a hidden="hidden" style="display: none;" class="btn" href="${pageContext.request.contextPath}/MyBasketController?productNumber=${c.powerNo}&&productName=${c.powerName}&&price=${c.price}&&categoryName=${c.categoryName}&&campanyName=${c.companyName}" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-cart-plus">Add</i></a>
+															<a href="#" class="dmbutton a2" data-animate="bounceInRight" onclick="plus(${s.index});"><i class="fa fa-cart-plus">Add</i></a>
 														</c:otherwise>
 													</c:choose>		
 												<div class="portfolio_category text-center a2" data-animate="fadeIn"></div>
