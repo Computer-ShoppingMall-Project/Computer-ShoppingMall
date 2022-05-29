@@ -70,22 +70,38 @@ public class CaseDao {
 	}
 	// case 상품수정
 	public int updateCase(Case c) {
+		int row = -1;
+		
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE `case` SET price=?, quantity=?, update_date=NOW() WHERE case_no=?";
+	
+		String sql = "UPDATE `case` SET case_name=? "
+				+ "					,case_size=? "
+				+ "					,category_name=? "
+				+ "					,gpu_size=? "
+				+ "					,bay89mm=? "
+				+ "					,bay64mm=? "
+				+ "					,price=? "
+				+ "					,quantity=? "
+				+ "					,case_image_no=? "
+				+ "					,memo=? "
+				+ "WHERE case_no=? ";
 		try {
-			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, c.getPrice());
-			stmt.setInt(2, c.getQuantity());
-			stmt.setInt(3, c.getCaseNo());
-			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
+				stmt= conn.prepareStatement(sql);
+				stmt.setString(1, c.getCaseName());
+				stmt.setString(2, c.getCaseSize());
+				stmt.setString(3, c.getCategoryName());
+				stmt.setInt(4, c.getGpuSize());
+				stmt.setInt(5, c.getBay89mm());
+				stmt.setInt(6, c.getBay64mm());
+				stmt.setInt(7, c.getPrice());
+				stmt.setInt(8, c.getQuantity());
+				stmt.setInt(9, c.getCaseImageNo());
+				stmt.setString(10, c.getMemo());
+				stmt.setInt(11, c.getCaseNo());
+				row = stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -14,22 +14,21 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Libraries CSS Files -->
-<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
-<link href="lib/hover/hoverex-all.css" rel="stylesheet">
-<link href="lib/jetmenu/jetmenu.css" rel="stylesheet">
-<link href="lib/owl-carousel/owl-carousel.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/prettyphoto/css/prettyphoto.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/hover/hoverex-all.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,138 +36,196 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
-</head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
-			document.getElementById('btn').click();
-		}
-	}
-	window.onload = function() {
-	    document.getElementById('btn').onclick = function() {
-	        document.getElementById('frm').submit();
-	        return false;
-	    };
-	};
+	// kind 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	// company 직접입력
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+	
+	// socketSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// chipSet 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
 </script>
+</head>
 <body>
 	<!-- header적용 -->
-	<c:choose>
-		<c:when test="${sessionAdminId != null }">
-			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>CASE</li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li> 
 				</ul>
-				<h2>CASE</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<h2>상품수정</h2> 
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
 
-	<section class="marketplace-top">
-		<div id="market-wrapper">
-			<div class="item_image" style="background: white;">
-				<img data-effect="fade" class="aligncenter" width="400"
-					height="200" src="${pageContext.request.contextPath}/image/${requestScope.caseOne.caseImageName}" alt="">
-			</div>
-			<!-- end item_image -->
-		</div>
-	</section>
-
 	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<c:if test="${sessionAdminId != null }">
-					<div>
-						<a href="UpdateCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-info">UPDATE</a>
-						<a href="DeleteCaseController?caseNo=${requestScope.caseOne.caseNo}" class="btn btn-danger">DELETE</a>
-					</div>
-				</c:if>
-				<div class="general-title text-center">
-					<h3>${requestScope.updateCaseForm.caseNo}</h3>
-					<hr>
-				</div>
-
-				<div class="divider"></div>
-
-				<div class="item_details">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<!-- theme_details -->
-							<div class="form-group">
-								<div class="item_price">
-									<h3>
-										<span>${requestScope.caseOne.price}원</span>
-									</h3>
-								</div>
-							</div>
-							<!-- buttons -->
-							<hr>
-							<div class="form-group">
-								<div class="text-center">
-									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-										<div class="details_section  text-center">
-											<h3>Item Details</h3>
-											<ul>
-												<li class="version">case_no : <span>${requestScope.caseOne.caseNo}</span></li>
-												<li class="version">case_name : <span>${requestScope.caseOne.categoryName}</span></li>
-												<li class="designer">case_size : 
-												<input type ="number" name="caseSize" value="${requestScope.caseOne.caseSize}">
-												<li class="designer">gpu_size : 
-												<input type ="number" name="gpuSize" value="${requestScope.caseOne.gpuSize }">
-												<li class="designer">89cm_bay : 
-												<input type = "number" name="bay89mm" value="${requestScope.caseOne.bay89mm}">
-												<li class="designer">64cm_bay : 
-												<input type ="number" name="bay64mm" value="${requestScope.caseOne.bay64mm}">
-												<li class="designer">quantity :
-												<input type = "number" name="quantity" value="${requestScope.caseOne.quantity}">
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-								<br>
-									<div class="theme_details">
-										<div class="item-description">
-											<p>${requestScope.caseOne.memo}</p>
-										</div>
-										<!-- item-description -->
-									</div>  
-									<br>
-									<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
-									<br><br>
-									<div class="rating text-center">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-										<p>Users Rating</p>
-									</div> <br>
-								<!-- theme_details -->
-								</div>
-							</div>
-							<br><br>
+				<div class="col-lg-3 col-md-6 col-sm-12"></div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<h4 class="title text-primary">CASE 수정
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+						
+					<form id="updateCaseform" method="post" name="updateCaseform" action="${pageContext.request.contextPath}/UpdateCaseController">
+						<div>
+							<!-- 값넘기기 -->
+							<input type="hidden" name="caseImageNo" readonly="readonly" value="${requestScope.case.caseImageNo}" required>
+							<input type="hidden" name="caseNo" readonly="readonly" value="${requestScope.case.caseNo}" required>
 						</div>
-					</div>
-					<div class="clearfix"></div>
-					</div>
+						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="${requestScope.case.categoryName}" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE NAME</th>
+								<td>
+									<input type="text"  name="caseName" class="form-control" placeholder="Case Name">
+								</td>
+							</tr>
+							
+							<tr>
+								<th>UPDATE CASE SIZE</th>
+								<td>
+									<select class="form-control" id="selbox" name="caseSize" >
+										<option value="" selected disabled>case size 선택</option>
+											<c:forEach var="c" items="${caseSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect"  name="caseSizeInsert" class="form-control" value="" placeholder="Case Size 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE GPU SIZE</th>
+								<td>
+									<select class="form-control" id="selbox2" name="gpuSize" >
+										<option value="" selected disabled>gpu size 선택</option>
+											<c:forEach var="c" items="${gpuSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="gpuSizeInsert" class="form-control" value="" placeholder="Gpu Size직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE 89BAY</th>
+								<td>
+									<select class="form-control" id="selbox3" name="bay89mm" >
+										<option value="" selected disabled>89bay 선택</option>
+											<c:forEach var="c" items="${bay89mmList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect3"  name="bay89mmInsert" class="form-control" value="" placeholder="89bay 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE 64BAY</th>
+								<td>
+									<select class="form-control" id="selbox4" name="bay64mm" >
+										<option value="" selected disabled>64bay 선택</option>
+											<c:forEach var="c" items="${bay64mmList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect4"  name="bay64mmInsert" class="form-control" value="" placeholder="64bay 직접 입력">
+								</td>
+							</tr>		
+							<tr>
+								<th>UPDATE QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE PRICE</th>
+								<td>
+									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>UPDATE MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">수정</button>
+					</form>
 				</div>
-			</section>
+				<!-- end login -->
+			</div>
+			<!-- end content -->
+		</div>
+		<!-- end container -->
+	</section>
 	<!-- end section -->
+
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

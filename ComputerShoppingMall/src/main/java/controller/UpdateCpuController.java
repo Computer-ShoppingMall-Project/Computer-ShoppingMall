@@ -30,7 +30,7 @@ public class UpdateCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
-		// compnay
+		// company
 		List<String> companyList = cpuDao.companyKind();
 		// socketSize
 		List<String> socketSizeList = cpuDao.socketSizeKind();
@@ -136,7 +136,7 @@ public class UpdateCpuController extends HttpServlet {
 		System.out.println("[updateCpuController] : " + c.toString()); // 디버깅
 		
 		int row = cpuDao.updateCpu(c);
-		System.out.print(row + " <-- row UpdateMemberController.dopost"); // 디버깅
+		System.out.print(row + " <-- row UpdateCpuController.dopost"); // 디버깅
 		 
 		String msg = "";
 		// 상품수정 성공/실패 확인 코드

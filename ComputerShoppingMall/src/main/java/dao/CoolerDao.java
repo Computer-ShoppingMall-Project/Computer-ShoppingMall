@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import util.DButil;
 import vo.Cooler;
+import vo.Cpu;
 import vo.Image;
 
 public class CoolerDao {
@@ -68,36 +69,47 @@ public class CoolerDao {
 		}	
 		return row;
 	}
-	// cooler 상품수정	
+
+	// cpu 상품수정
 	public int updateCooler(Cooler c) {
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE ram SET price=?, quantity=?, update_date=NOW() WHERE cooler_no=?";
+		String sql = "UPDATE cooler SET cooler_name=? "
+				+ "					,company_name=? " 
+				+ "					,kind=? " 
+				+ "					,cooler_size=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,cooler_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE cooler_no=?"; 
 		try {
-			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, c.getPrice());
-			stmt.setInt(2, c.getQuantity());
-			stmt.setInt(3, c.getCoolerNo());
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, c.getCoolerName());
+			stmt.setString(2, c.getCompanyName());
+			stmt.setString(3, c.getKind());
+			stmt.setInt(4, c.getCoolerSize());
+			stmt.setInt(5, c.getPrice());
+			stmt.setInt(6, c.getQuantity());;
+			stmt.setInt(7, c.getCoolerImageNo());
+			stmt.setString(8, c.getMemo());
+			stmt.setInt(9, c.getCoolerNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				stmt.close();
 				conn.close();
-			} catch(SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-			return row;
+		return row;
 	}
+	
 	// cooler 상품등록
 	public int insertCooler(Image i, Cooler c) {
 		// insert 성공/실패 확인 변수 선언
