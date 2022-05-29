@@ -90,18 +90,19 @@
 
 	<section class="post-wrapper-top">
 		<div class="container">
-			<div class="container clear fix">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Product</li>
+					<li>케이스</li>
 				</ul>
-				<h2>Product</h2>
+				<h2>케이스</h2>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
-
+	
 	<section class="section1">
 		<div class="container clearfix">
 			<div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
@@ -120,7 +121,7 @@
 				</div>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- CASE 상세검색 체크박스 테이블 -->
-				<h4>CASE DETAIL SEARCH</h4>
+				<h4>케이스 상세검색</h4>
 				<form method="post" action="${pageContext.request.contextPath}/CaseListController">
 		 			<table class="table table-bordered">
 						<tr>

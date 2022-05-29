@@ -98,9 +98,9 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Product</li>
+					<li>그래픽카드</li>
 				</ul>
-				<h2>Product</h2>
+				<h2>그래픽카드</h2>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
 		</div>
@@ -128,7 +128,7 @@
 				</div>
 				<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 				<!-- GPU 상세검색 체크박스 테이블 -->
-				<h4>GPU DETAIL SEARCH</h4>
+				<h4>그래픽카드 상세검색</h4>
 				<form method="post" action="${pageContext.request.contextPath}/GpuListController">
 					<table class="table table-bordered">
 						<tr>

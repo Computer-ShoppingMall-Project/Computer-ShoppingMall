@@ -118,9 +118,9 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Product</li>
+					<li>CPU</li>
 				</ul>
-				<h2>Product</h2>
+				<h2>CPU</h2>
 			</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 		</div>
@@ -146,7 +146,7 @@
 				</div> <br><br><br>
 			<!-- 후에 일정 개수마다 줄바꿈 적용시키기 -->
 			<!-- CPU 상세검색 체크박스 테이블 // 체크박스 유지 추가 -->
-			<h4>CPU DETAIL SEARCH</h4>
+			<h4>CPU 상세검색</h4>
 			<form method="post" action="${pageContext.request.contextPath}/CpuListController">
 				<table class="table table-bordered">
 					<tr>
