@@ -57,18 +57,6 @@
 				</ul>
 				<h2>LOGIN</h2>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="${pageContext.request.contextPath}/img/pixel.gif" class="searchsubmit" alt="" />
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar.-->
-			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
@@ -137,8 +125,9 @@
 	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
 
 	<!-- Template Main Javascript File -->
-<%-- 	<script src="${pageContext.request.contextPath}/js/main.js"></script> --%>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+ 	
+	<script src="/cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript">
 	
 	<!-- 아이디 검사 -->

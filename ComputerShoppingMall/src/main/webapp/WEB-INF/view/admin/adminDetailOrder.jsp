@@ -81,6 +81,7 @@
 				<c:choose>
 					<c:when test="${updateCheck != null && updateCheck != ''}">
 						<!-- 주문 변경 여부가 있다면 전체 주분변경 불가  -->
+						<br><br>
 					</c:when>
 					<c:otherwise>
 						<!-- 주문취소가 없을 시 일괄 배송 처리가능 -->
@@ -98,9 +99,9 @@
 								<button type="submit" class="btn" style="float:right;">UPDATE</button>
 						</form>
 					</div>
+					<br><br><br><br><br><br>
 					</c:otherwise>
 				</c:choose>
-				<br><br><br><br><br><br>
 				<h4 class="text-primary">DELIVERY ADDRESS</h4>
 				<table class="table" data-effect="fade">
 					<tr>

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import util.DButil;
 import vo.Admin;
@@ -511,6 +512,71 @@ public class MemberDao {
                e.printStackTrace();
             }
          }
+      }
+      // 관리자 고객 정보 리스트&상세보기 -> ID, 고객 이름으로 검색기능(AdminCustomerListController), 탈퇴회원은 볼 수 없음
+      public List<Customer> AdminselectMemberOne(String customerId, String name, String active) {
+    	 List<Customer> list = new ArrayList<Customer>();
+         Customer c = null;
+         // DB 초기화
+         Connection conn = null;
+         PreparedStatement stmt = null;
+         ResultSet rs = null;
+         // DButil
+         conn = DButil.getConnection();
+         String sql = "SELECT customer_id customerId"
+               + "               ,name"
+               + "               ,nickname nickName"
+               + "               ,email"
+               + "               ,phone"
+               + "               ,zip_code zipCode"
+               + "               ,province"
+               + "               ,city"
+               + "               ,town"
+               + "               ,road_address roadAddress"
+               + "               ,detail_address detailAddress"
+               + "               ,create_date createDate"
+               + "               ,update_date updateDate"
+               + "               ,active"
+               + "       FROM customer"
+               + "       WHERE customer_id LIKE ? AND name LIKE ? AND active=?";
+         try {
+            stmt = conn.prepareStatement(sql);
+            System.out.println(sql);
+            stmt.setString(1, "%"+customerId+"%");
+            stmt.setString(2, "%"+name+"%");
+            stmt.setString(3, active);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+               c = new Customer();
+               c.setCustomerId(rs.getString("customerId"));
+               c.setName(rs.getString("name"));
+               c.setNickName(rs.getString("nickName"));
+               c.setEmail(rs.getString("email"));
+               c.setPhone(rs.getString("phone"));
+               c.setZipCode(rs.getInt("zipCode"));
+               c.setProvince(rs.getString("province"));
+               c.setCity(rs.getString("city"));
+               c.setTown(rs.getString("town"));
+               c.setRoadAddress(rs.getString("roadAddress"));
+               c.setDetailAddress(rs.getString("detailAddress"));
+               c.setCreateDate(rs.getString("createDate"));
+               c.setUpdateDate(rs.getString("updateDate"));
+               c.setActive(rs.getInt("active"));
+               list.add(c);
+            }
+               } catch (Exception e) {
+                  e.printStackTrace();
+               } finally {
+                  try {
+                     rs.close();
+                     stmt.close();
+                     conn.close();
+                  } catch(SQLException e) {
+                     e.printStackTrace();
+                  }
+               }      
+         return list;
       }
       
 }

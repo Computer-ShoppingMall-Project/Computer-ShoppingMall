@@ -65,15 +65,20 @@
 									<li><a href="${pageContext.request.contextPath}/InsertCoolerController">쿨러 등록</a></li>
 								</ul>
 							</li>
-							<li><a href="#">주문 확인</a>
-								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/AdminOrderListController">주문 내역</a></li>
-									<li><a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true">주문 변경 내역</a></li>
-								</ul>
-							</li>
 							<li><a href="#">Q&A</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">Q&A 관리</a></li>
+								</ul>
+							</li>
+							<li><a href="#">주문 확인</a>
+								<ul class="dropdown">
+									<li><a href="${pageContext.request.contextPath}/AdminOrderListController">주문 내역</a></li>
+									<li><a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true">취소/교환/환불 내역</a></li>
+								</ul>
+							</li>
+							<li><a href="#">고객 관리</a>
+								<ul class="dropdown">
+									<li><a href="${pageContext.request.contextPath}/AdminCustomerListController">고객 정보 조회</a></li>
 								</ul>
 							</li>
 						</ul>
