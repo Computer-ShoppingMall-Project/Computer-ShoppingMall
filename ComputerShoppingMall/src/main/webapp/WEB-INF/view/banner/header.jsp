@@ -38,7 +38,7 @@
 						<h4>
 							<span><img
 								src="${pageContext.request.contextPath}/img/logo.png" width="30"
-								height="30"></span> Red<span>Velvet</span>
+								height="30"></span> Com<span>Velvet</span>
 						</h4>
 					</a>
 				</div>

@@ -52,9 +52,9 @@
 		<div class="container">
 			<div class="ror">
 				<div class="col-md-8 col-md-offset-2">
-					<h1>RedVelvet Computer</h1>
-					<p>조립PC 부품 쇼핑몰을 MVC 방식으로 구현한 세미 프로젝트 입니다. <br>
-					TEAM RedVelvet : 송원범, 박범진, 구혜민, 이규남, 강한빛</p>
+					<h1>ComVelvet</h1>
+					<p>본인의 취향대로 골라 조립할 수 있는 조립식 컴퓨터, <br>
+					 최고의 자유도와 가성비를 ComVelvet에서 함께하세요!</p>
 				</div>
 			</div>
 		</div>
@@ -173,15 +173,13 @@
 				<div class="servicebox text-center">
 					<div class="service-icon">
 						<div class="dm-icon-effect-1" data-effect="slide-left">
-							<a href="#" class=""> <i
-								class="active dm-icon fa fa-bars fa-3x"></i>
-							</a>
+							<img alt="" src="${pageContext.request.contextPath}/img/free-delivery.png" width="130">
 						</div>
 						<div class="servicetitle">
-							<h4>Responsive Layout</h4>
+							<h4>무료배송</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+						<p>저희 ComVelvet은 모든 제품을 개수와 무관하게<br>무료배송을 원칙으로 하고있습니다.</p>
 					</div>
 					<!-- service-icon -->
 				</div>
@@ -193,15 +191,16 @@
 				<div class="servicebox text-center">
 					<div class="service-icon">
 						<div class="dm-icon-effect-1" data-effect="slide-bottom">
-							<a href="#" class=""> <i
-								class="active dm-icon fa fa-laptop fa-3x"></i>
-							</a>
+							<img alt="" src="${pageContext.request.contextPath}/img/answer.png" width="130">
 						</div>
 						<div class="servicetitle">
-							<h4>Creative Design</h4>
+							<h4>Q&A 활성화</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+						<p>저희 ComVelvet은 고객님의 문의에대해
+						<br> 항상 빠른 답변을 위해 노력하고 있습니다.
+						<br> 견적, 배송, 기타 불편사항 등 언제든 문의바랍니다.
+						</p>
 					</div>
 					<!-- service-icon -->
 				</div>
@@ -213,13 +212,15 @@
 				<div class="servicebox text-center">
 					<div class="service-icon">
 						<div class="dm-icon-effect-1" data-effect="slide-right">
-							<i class="active dm-icon fa fa-book fa-3x"></i>
+							<img alt="" src="${pageContext.request.contextPath}/img/delivery.png" width="130">
 						</div>
 						<div class="servicetitle">
-							<h4>Easy to Setup</h4>
+							<h4>꼼꼼한 포장</h4>
 							<hr>
 						</div>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"s standard dummy text ever since..</p>
+						<p>저희 ComVelvet은 꼼꼼한 안전 포장을 통해 
+						<br>고객님이 파손걱정 없이 안전하게 받아볼 수 있도록 
+						<br>노력하고 있습니다.</p>
 					</div>
 					<!-- service-icon -->
 				</div>

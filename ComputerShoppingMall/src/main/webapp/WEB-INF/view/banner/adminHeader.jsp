@@ -30,7 +30,7 @@
 					<a href="${pageContext.request.contextPath}/IndexController" title="">
 						<h4>
 							<span><img src="${pageContext.request.contextPath}/img/logo.png" width="30" height="30"></span>
-							Red<span>Velvet</span>
+							Com<span>Velvet</span>
 						</h4>
 					</a>
 				</div>
@@ -65,15 +65,15 @@
 									<li><a href="${pageContext.request.contextPath}/InsertCoolerController">쿨러 등록</a></li>
 								</ul>
 							</li>
-							<li><a href="#">Q&A</a>
-								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">Q&A 관리</a></li>
-								</ul>
-							</li>
 							<li><a href="#">주문 확인</a>
 								<ul class="dropdown">
 									<li><a href="${pageContext.request.contextPath}/AdminOrderListController">주문 내역</a></li>
 									<li><a href="${pageContext.request.contextPath}/AdminOrderListController?updateCheck=true">취소/교환/환불 내역</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Q&A</a>
+								<ul class="dropdown">
+									<li><a href="${pageContext.request.contextPath}/AdminQnaListController">Q&A 관리</a></li>
 								</ul>
 							</li>
 							<li><a href="#">고객 관리</a>
