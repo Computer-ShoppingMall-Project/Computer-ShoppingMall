@@ -34,13 +34,13 @@ public class InsertCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
-		// compnay
+		// COMPNAY
 		List<String> companyList = cpuDao.companyKind();
-		// socketSize
+		// SOCKETSIZE
 		List<String> socketSizeList = cpuDao.socketSizeKind();
-		// core
+		// CORE
 		List<String> coreList = cpuDao.coreKind();
-		// thread
+		// THREAD
 		List<String> threadList = cpuDao.threadKind();
 		
 		
@@ -65,17 +65,17 @@ public class InsertCpuController extends HttpServlet {
 		cpuDao = new CpuDao();
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
-		// compnay
+		// COMPNAY
 		List<String> companyList = cpuDao.companyKind();
-		// socketSize
+		// SOCKETSIZE
 		List<String> socketSizeList = cpuDao.socketSizeKind();
-		// core
+		// CORE
 		List<String> coreList = cpuDao.coreKind();
-		// thread
+		// THREAD
 		List<String> threadList = cpuDao.threadKind();
 		
 		
-
+		
 		// Cpu image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
 		System.out.println("[InsertCpuController.doPost photo path] : " + path); // 디버깅 
@@ -134,6 +134,7 @@ public class InsertCpuController extends HttpServlet {
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
+		
 		// vo.Cpu
 		Cpu c = new Cpu();
 		c.setCpuName(cpuName);

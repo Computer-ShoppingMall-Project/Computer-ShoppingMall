@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +16,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.PowerDao;
-import vo.Image;
 import vo.Power;
+import vo.Image;
+
 
 @WebServlet("/InsertPowerController")
 public class InsertPowerController extends HttpServlet {
@@ -31,15 +33,18 @@ public class InsertPowerController extends HttpServlet {
 		}
 		
 		powerDao = new PowerDao();
-		// power 이름, 가격 가져오기
+		// POWER 이름, 가격 가져오기
 		ArrayList<Power> powerList = powerDao.selectPowerList();
-		// rated_power
-		ArrayList<String> ratedPowerList = powerDao.ratedPowerList();
+		// RATED_POWER
+		List<String> ratedPowerList = powerDao.ratedPowerList();
 		
+		
+		// 값 셋팅 후 보내주기
 		request.setAttribute("powerList", powerList);
 		request.setAttribute("ratedPowerList", ratedPowerList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -48,7 +53,14 @@ public class InsertPowerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);
+		
+		powerDao = new PowerDao();
+		// POWER 이름, 가격 가져오기
+		ArrayList<Power> powerList = powerDao.selectPowerList();
+		// RATED_POWER
+		List<String> ratedPowerList = powerDao.ratedPowerList();
+		
+		
 		
 		// Power image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
@@ -81,10 +93,16 @@ public class InsertPowerController extends HttpServlet {
 		// Form에 입력된 값 받는 코드
 		String powerName = multiReq.getParameter("powerName");
 		String categoryName = multiReq.getParameter("categoryName");
-		String ratedPower = multiReq.getParameter("ratedPower");
+		String ratedPower = null;
+		if(multiReq.getParameter("ratedPowerInsert") != null  && !"".equals(multiReq.getParameter("ratedPowerInsert"))) {
+			ratedPower = multiReq.getParameter("ratedPowerInsert");
+		} else if(multiReq.getParameter("ratedPower") != null  && !"".equals(multiReq.getParameter("ratedPower"))) {
+			ratedPower = multiReq.getParameter("ratedPower");
+		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
+		
 		// vo.Power
 		Power p = new Power();
 		p.setPowerName(powerName);
@@ -101,15 +119,22 @@ public class InsertPowerController extends HttpServlet {
 		powerDao = new PowerDao();
 		int row = powerDao.insertPower(i, p);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertPowerController] : Power 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/PowerListController");
+			request.setAttribute("powerList", powerList);
+			request.setAttribute("ratedPowerList", ratedPowerList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/PowerList.jsp").forward(request, response);
 			return;
 		} else {
 			System.out.println("[InsertPowerController] : Power 등록 실패");
-			response.sendRedirect(request.getContextPath() + "/InsertPowerController");
-			return;
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("powerList", powerList);
+			request.setAttribute("ratedPowerList", ratedPowerList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);
 		}
 	}
 }

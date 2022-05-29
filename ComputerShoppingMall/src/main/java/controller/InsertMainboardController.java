@@ -43,6 +43,8 @@ public class InsertMainboardController extends HttpServlet {
 		// KIND
 		List<String> kindList = mainboardDao.kindKind();
 		
+		
+		// 값 셋팅 후 보내주기
 		request.setAttribute("mainboadList", mainboadList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("socketSizeList", socketSizeList);
@@ -59,7 +61,21 @@ public class InsertMainboardController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertMainboardForm.jsp").forward(request, response);
+		
+		mainboardDao = new MainboardDao();
+		// 상세보기 받아오기
+		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		// COMPANY
+		List<String> companyList = mainboardDao.companyKind();
+		// CPU Socket
+		List<String> socketSizeList = mainboardDao.socketSizeKind();
+		// CHIPSET
+		List<String> chipsetList = mainboardDao.chipsetKind();
+		// RAM VERSION
+		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		// KIND
+		List<String> kindList = mainboardDao.kindKind();
+		
 		
 		// Mainboard image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
@@ -91,12 +107,37 @@ public class InsertMainboardController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String mainboardName = multiReq.getParameter("mainboardName");
-		String categoryName = multiReq.getParameter("categoryName");
-		String companyName = multiReq.getParameter("categoryName");
-		String kind = multiReq.getParameter("kind");
-		String socketSize = multiReq.getParameter("socketSize");
-		String chipset = multiReq.getParameter("chipset");
-		String ramVersion = multiReq.getParameter("ramVersion");
+		String companyName = null;
+		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
+			companyName = multiReq.getParameter("companyNameInsert");
+		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
+			companyName = multiReq.getParameter("companyName");
+		}
+		String categoryName = multiReq.getParameter("kindName");
+		String kind = null;
+		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
+			kind = multiReq.getParameter("kindInsert");
+		} else if(multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
+			kind = multiReq.getParameter("kind");
+		}
+		String socketSize = null;
+		if(multiReq.getParameter("socketSizeInsert") != null  && !"".equals(multiReq.getParameter("socketSizeInsert"))) {
+			socketSize = multiReq.getParameter("socketSizeInsert");
+		} else if(multiReq.getParameter("socketSize") != null  && !"".equals(multiReq.getParameter("socketSize"))) {
+			socketSize = multiReq.getParameter("socketSize");
+		}
+		String chipset = null;
+		if(multiReq.getParameter("chipsetInsert") != null  && !"".equals(multiReq.getParameter("chipsetInsert"))) {
+			chipset = multiReq.getParameter("chipsetInsert");
+		} else if(multiReq.getParameter("chipset") != null  && !"".equals(multiReq.getParameter("chipset"))) {
+			chipset = multiReq.getParameter("chipset");
+		}
+		String ramVersion = null;
+		if(multiReq.getParameter("ramVersionInsert") != null  && !"".equals(multiReq.getParameter("ramVersionInsert"))) {
+			ramVersion = multiReq.getParameter("ramVersionInsert");
+		} else if(multiReq.getParameter("ramVersion") != null  && !"".equals(multiReq.getParameter("ramVersion"))) {
+			ramVersion = multiReq.getParameter("ramVersion");
+		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
@@ -122,15 +163,26 @@ public class InsertMainboardController extends HttpServlet {
 		mainboardDao = new MainboardDao();
 		int row = mainboardDao.insertMainboard(i, m);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/MainboardListController");
-			return;
+			request.setAttribute("mainboadList", mainboadList);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("socketSizeList", socketSizeList);
+			request.setAttribute("chipsetList", chipsetList);
+			request.setAttribute("ramVersionList", ramVersionList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/mainboardList.jsp").forward(request, response);
 		} else {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 실패");
-			response.sendRedirect(request.getContextPath() + "/ InsertMainboardController");
-			return;
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("socketSizeList", socketSizeList);
+			request.setAttribute("chipsetList", chipsetList);
+			request.setAttribute("ramVersionList", ramVersionList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertMainboardForm.jsp").forward(request, response);	
 		}
 	}
 }

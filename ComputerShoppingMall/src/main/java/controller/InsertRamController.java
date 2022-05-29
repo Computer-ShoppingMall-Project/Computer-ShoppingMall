@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +16,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.RamDao;
-import vo.Image;
 import vo.Ram;
+import vo.Image;
 
 @WebServlet("/InsertRamController")
 public class InsertRamController extends HttpServlet {
@@ -29,6 +30,7 @@ public class InsertRamController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
+		
 		ramDao = new RamDao();
 		// ram 제목, 가격 
 		ArrayList<Ram> rmaList = ramDao.selectRamList();
@@ -37,6 +39,8 @@ public class InsertRamController extends HttpServlet {
 		// KIND
 		ArrayList<String> kindList = ramDao.kindKind();
 		
+		
+		// 값 셋팅 후 보내주기
 		request.setAttribute("ramList", rmaList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("kindList", kindList);
@@ -51,7 +55,16 @@ public class InsertRamController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertRamForm.jsp").forward(request, response);
+		
+		ramDao = new RamDao();
+		// ram 제목, 가격 
+		ArrayList<Ram> rmaList = ramDao.selectRamList();
+		// COMPANY
+		List<String> companyList = ramDao.companyKind();
+		// KIND
+		List<String> kindList = ramDao.kindKind();
+		
+		
 		
 		// Ram image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
@@ -83,9 +96,19 @@ public class InsertRamController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String ramName = multiReq.getParameter("ramName");
-		String companyName = multiReq.getParameter("companyName");
+		String companyName = null;
+		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
+			companyName = multiReq.getParameter("companyNameInsert");
+		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
+			companyName = multiReq.getParameter("companyName");
+		}
 		String categoryName = multiReq.getParameter("categoryName");
-		String kind = multiReq.getParameter("kind");
+		String kind = null;
+		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
+			companyName = multiReq.getParameter("kindInsert");
+		} else if(multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
+			companyName = multiReq.getParameter("kind");
+		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
@@ -106,15 +129,23 @@ public class InsertRamController extends HttpServlet {
 		ramDao = new RamDao();
 		int row = ramDao.insertRam(i, r);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertRamController] : Ram 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/RamListController");
-			return;
+			request.setAttribute("ramList", rmaList);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("kindList", kindList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/ramList.jsp").forward(request, response);
 		} else {
 			System.out.println("[InsertRamController] : Ram 등록 실패");
-			response.sendRedirect(request.getContextPath() + "/InsertRamController");
-			return;
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("ramList", rmaList);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("kindList", kindList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertramForm.jsp").forward(request, response);
 		}
 	}
 }

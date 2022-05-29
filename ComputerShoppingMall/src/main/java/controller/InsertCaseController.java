@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,18 +31,20 @@ public class InsertCaseController extends HttpServlet {
 			return;
 		}
 		caseDao = new CaseDao();
-		// case  정보
+		// CASE  정보
 		ArrayList<Case> caseList = caseDao.selectCaseList();
-		// case size
+		// CASE SIZE
 		ArrayList<String> caseSizeList = caseDao.caseSizeList();
-		// gpu size
+		// GPU SIZE
 		ArrayList<String> gpuSizeList = caseDao.gpuSizeList();
-		// bay64mm
+		// BAY64MM
 		ArrayList<String> bay64mmList = caseDao.bay64mmList();
-		// bay89mm
+		// BAY89MM
 		ArrayList<String> bay89mmList = caseDao.bay89mmList();
 		
-		request.setAttribute("caseList", caseList); // 이름 중복 유효성 검사
+		
+		// 값 셋팅 후 보내주기
+		request.setAttribute("caseList", caseList);
 		request.setAttribute("caseSizeList", caseSizeList);
 		request.setAttribute("gpuSizeList", gpuSizeList);
 		request.setAttribute("bay64mmList", bay64mmList);
@@ -57,7 +60,20 @@ public class InsertCaseController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertCaseForm.jsp").forward(request, response);
+		
+		caseDao = new CaseDao();
+		// case  정보
+		ArrayList<Case> caseList = caseDao.selectCaseList();
+		// case size
+		List<String> caseSizeList = caseDao.caseSizeList();
+		// gpu size
+		List<String> gpuSizeList = caseDao.gpuSizeList();
+		// bay64mm
+		List<String> bay64mmList = caseDao.bay64mmList();
+		// bay89mm
+		List<String> bay89mmList = caseDao.bay89mmList();
+		
+		
 		
 		// Case image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
@@ -89,7 +105,12 @@ public class InsertCaseController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String caseName = multiReq.getParameter("caseName");
-		String caseSize = multiReq.getParameter("caseSize");
+		String caseSize = null;
+		if(multiReq.getParameter("caseSizeInsert") != null  && !"".equals(multiReq.getParameter("caseSizeInsert"))) {
+			caseSize = multiReq.getParameter("caseSizeInsert");
+		} else if(multiReq.getParameter("caseSize") != null  && !"".equals(multiReq.getParameter("caseSize"))) {
+			caseSize = multiReq.getParameter("caseSize");
+		}
 		String categoryName = multiReq.getParameter("categoryName");
 		int gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize"));
 		int bay89mm = Integer.parseInt(multiReq.getParameter("bay89mm"));
@@ -116,16 +137,28 @@ public class InsertCaseController extends HttpServlet {
 		caseDao = new CaseDao();
 		int row = caseDao.insertCase(i, c);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertCaseController] : Case 등록 성공");
+			request.setAttribute("caseList", caseList);
+			request.setAttribute("caseSizeList", caseSizeList);
+			request.setAttribute("gpuSizeList", gpuSizeList);
+			request.setAttribute("bay64mmList", bay64mmList);
+			request.setAttribute("bay89mmList", bay89mmList);
 			response.sendRedirect(request.getContextPath() + "/CaseListController");
 			return;
 		} else {
 			System.out.println("[InsertCaseController] : Case 등록 실패");
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("caseSizeList", caseSizeList);
+			request.setAttribute("gpuSizeList", gpuSizeList);
+			request.setAttribute("bay64mmList", bay64mmList);
+			request.setAttribute("bay89mmList", bay89mmList);
 			response.sendRedirect(request.getContextPath() + "/InsertCaseController");
 			return;
 		}
 	}
-
 }

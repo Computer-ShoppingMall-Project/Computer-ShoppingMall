@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,23 +31,26 @@ public class InsertCoolerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		coolerDao = new CoolerDao();
 		
-		// cooler 정보
+		coolerDao = new CoolerDao();
+		// 게시글 이름, 가격 받아오기
 		ArrayList<Cooler> coolerList = coolerDao.selectCoolerList();
-		// company
+		// COMPANY
 		ArrayList<String> companyList = coolerDao.companyKind();
-		// kind
+		// KIND
 		ArrayList<String> kindList = coolerDao.kindKind();
-		// size
+		// SIZE
 		ArrayList<String> sizeList = coolerDao.coolerSizeKind();
 		
+		
+		// 값 셋팅 후 보내주기
 		request.setAttribute("coolerList", coolerList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("kindList", kindList);
 		request.setAttribute("sizeList", sizeList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertCoolerForm.jsp").forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -55,7 +59,18 @@ public class InsertCoolerController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertCoolerForm.jsp").forward(request, response);
+		
+		coolerDao = new CoolerDao();
+		// 게시글 이름, 가격 받아오기
+		ArrayList<Cooler> coolerList = coolerDao.selectCoolerList();
+		// COMPANY
+		List<String> companyList = coolerDao.companyKind();
+		// KIND
+		List<String> kindList = coolerDao.kindKind();
+		// SIZE
+		List<String> sizeList = coolerDao.coolerSizeKind();
+		
+		
 		
 		// Cooler image추가 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
@@ -87,13 +102,19 @@ public class InsertCoolerController extends HttpServlet {
 		
 		// Form에 입력된 값 받는 코드
 		String coolerName = multiReq.getParameter("coolerName");
-		String companyName = multiReq.getParameter("companyName");
+		String companyName = null;
 		String categoryName = multiReq.getParameter("categoryName");
 		String kind = multiReq.getParameter("kind");
+		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
+			companyName = multiReq.getParameter("kindInsert");
+		} else if(multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
+			companyName = multiReq.getParameter("kind");
+		}
 		int coolerSize = Integer.parseInt(multiReq.getParameter("coolerSize"));
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
+		
 		// vo.Cooler
 		Cooler c = new Cooler();
 		c.setCoolerName(coolerName);
@@ -111,16 +132,24 @@ public class InsertCoolerController extends HttpServlet {
 		// dao.insertCpu
 		coolerDao = new CoolerDao();
 		int row = coolerDao.insertCooler(i, c);
-
+		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertCoolerController] : Cooler 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/CoolerListController");
-			return;
+			request.setAttribute("coolerList", coolerList);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("kindList", kindList);
+			request.setAttribute("sizeList", sizeList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/coolerList.jsp").forward(request, response);
 		} else {
 			System.out.println("[InsertCoolerController] : Cooler 등록 실패");
-			response.sendRedirect(request.getContextPath() + "/InsertCoolerController");
-			return;
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("kindList", kindList);
+			request.setAttribute("sizeList", sizeList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertCoolerForm.jsp").forward(request, response);
 		}
 	}
 }

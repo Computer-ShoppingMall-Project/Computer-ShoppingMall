@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import dao.CpuDao;
 import dao.GpuDao;
+import vo.Cpu;
 import vo.Gpu;
 import vo.Image;
 
@@ -30,7 +33,7 @@ public class InsertGpuController extends HttpServlet {
 			return;
 		}
 		gpuDao = new GpuDao();
-		// gpu 상세보기(제목, 가격)
+		// 게시글 이름, 가격 받아오기
 		ArrayList<Gpu> gpuList = gpuDao.selectGpuList();
 		// company
 		ArrayList<String> companyList = gpuDao.companyKind();
@@ -39,6 +42,8 @@ public class InsertGpuController extends HttpServlet {
 		// gpu_size
 		ArrayList<String> gpuSizeList = gpuDao.gpuSizeKind();
 		
+		
+		// 값 세팅 후 보내주기
 		request.setAttribute("gpuList", gpuList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("chipsetCompanyList", chipsetCompanyList);
@@ -54,11 +59,21 @@ public class InsertGpuController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		request.getRequestDispatcher("/WEB-INF/view/admin/insertGpuForm.jsp").forward(request, response);
+		
+		gpuDao = new GpuDao();
+		// 게시글 이름, 가격 받아오기
+		ArrayList<Gpu> gpuList = gpuDao.selectGpuList();
+		// company
+		ArrayList<String> companyList = gpuDao.companyKind();
+		// chipset_company
+		ArrayList<String> chipsetCompanyList = gpuDao.chipsetCompanyKind();
+		// gpu_size
+		ArrayList<String> gpuSizeList = gpuDao.gpuSizeKind();
+		
 		
 		// Gpu image 경로지정
 		String path = request.getSession().getServletContext().getRealPath("/image");
-		System.out.println("[InsertGpuController.doPost photo path] : " + path); // 디버깅 
+		System.out.println("[InsertGpuController.doPost photo path] : " + path); // 디버깅
 		// 사진 파일 처리
 		MultipartRequest multiReq = new MultipartRequest(request, path, 1024 * 1024 * 100, "utf-8", new DefaultFileRenamePolicy());
 		// 사진 받아오기
@@ -86,13 +101,24 @@ public class InsertGpuController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String gpuName = multiReq.getParameter("gpuName");
-		String companyName = multiReq.getParameter("companyName");
+		String companyName = null;
+		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
+			companyName = multiReq.getParameter("companyNameInsert");
+		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
+			companyName = multiReq.getParameter("companyName");
+		}
 		String categoryName = multiReq.getParameter("categoryName");
-		String chipsetCompany = multiReq.getParameter("chipsetCompany");
+		String chipsetCompany = null;
+		if(multiReq.getParameter("chipsetCompanyInsert") != null  && !"".equals(multiReq.getParameter("chipsetCompanyInsert"))) {
+			chipsetCompany = multiReq.getParameter("chipsetCompanyInsert");
+		} else if(multiReq.getParameter("chipsetCompany") != null  && !"".equals(multiReq.getParameter("chipsetCompany"))) {
+			chipsetCompany = multiReq.getParameter("chipsetCompany");
+		}
 		int gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize"));
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
+		
 		// vo.Cpu
 		Gpu g = new Gpu();
 		g.setGpuName(gpuName);
@@ -103,25 +129,34 @@ public class InsertGpuController extends HttpServlet {
 		g.setPrice(price);
 		g.setQuantity(quantity);
 		g.setMemo(memo);
+		
 		// 디버깅
 		System.out.println("[InsertGpuController] : " + i.toString());
 		System.out.println("[InsertGpuController] : " + g.toString());
 		
-		// dao.insertCpu
+		// dao.insertGpu
 		gpuDao = new GpuDao();
 		int row = gpuDao.insertGpu(i, g);
 		
+		String msg = "";
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertGpuController] : Gpu 등록 성공");
 			response.sendRedirect(request.getContextPath() + "/GpuListController");
-			return;
+			request.setAttribute("gpuList", gpuList);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("chipsetCompanyList", chipsetCompanyList);
+			request.setAttribute("gpuSizeList", gpuSizeList);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/gpuList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertGpuController] : Gpu 등록 실패");
-			response.sendRedirect(request.getContextPath() + "/InsertGpuController");
-			return;
+			msg = "에 실패했습니다.";
+			// 값 셋팅 후 보내주기
+			request.setAttribute("msg", msg);
+			request.setAttribute("companyList", companyList);
+			request.setAttribute("chipsetCompanyList", chipsetCompanyList);
+			request.setAttribute("gpuSizeList", gpuSizeList);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertGpuForm.jsp").forward(request, response);	
 		}
 	}
-	
-
 }
