@@ -62,15 +62,15 @@ public class InsertCaseController extends HttpServlet {
 		}
 		
 		caseDao = new CaseDao();
-		// case  정보
+		// CASE  정보
 		ArrayList<Case> caseList = caseDao.selectCaseList();
-		// case size
+		// CASE SIZE
 		ArrayList<String> caseSizeList = caseDao.caseSizeList();
-		// gpu size
+		// GPU SIZE
 		ArrayList<String> gpuSizeList = caseDao.gpuSizeList();
-		// bay64mm
+		// BAY64MM
 		ArrayList<String> bay64mmList = caseDao.bay64mmList();
-		// bay89mm
+		// BAY89MM
 		ArrayList<String> bay89mmList = caseDao.bay89mmList();
 		
 		
@@ -143,7 +143,7 @@ public class InsertCaseController extends HttpServlet {
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
-		// vo.Cpu
+		// vo.Case
 		Case c = new Case();
 		c.setCaseName(caseName);
 		c.setCaseSize(caseSize);
@@ -158,7 +158,7 @@ public class InsertCaseController extends HttpServlet {
 		System.out.println("[InsertCaseController] : " + i.toString());
 		System.out.println("[InsertCaseController] : " + c.toString());
 		
-		// dao.insertCpu
+		// dao.insertCase
 		caseDao = new CaseDao();
 		int row = caseDao.insertCase(i, c);
 		

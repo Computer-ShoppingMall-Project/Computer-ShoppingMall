@@ -2,7 +2,7 @@ package controller;
 
 import java.io.File; 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,21 +31,21 @@ public class InsertMainboardController extends HttpServlet {
 		}
 		mainboardDao = new MainboardDao();
 		// 상세보기 받아오기
-		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		ArrayList<Mainboard> mainboardList = mainboardDao.selectMainboardList();
 		// COMPANY
-		List<String> companyList = mainboardDao.companyKind();
+		ArrayList<String> companyList = mainboardDao.companyKind();
 		// CPU Socket
-		List<String> socketSizeList = mainboardDao.socketSizeKind();
+		ArrayList<String> socketSizeList = mainboardDao.socketSizeKind();
 		// CHIPSET
-		List<String> chipsetList = mainboardDao.chipsetKind();
+		ArrayList<String> chipsetList = mainboardDao.chipsetKind();
 		// RAM VERSION
-		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		ArrayList<String> ramVersionList = mainboardDao.ramVersionKind();
 		// KIND
-		List<String> kindList = mainboardDao.kindKind();
+		ArrayList<String> kindList = mainboardDao.kindKind();
 		
 		
 		// 값 셋팅 후 보내주기
-		request.setAttribute("mainboadList", mainboadList);
+		request.setAttribute("mainboadList", mainboardList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("socketSizeList", socketSizeList);
 		request.setAttribute("chipsetList", chipsetList);
@@ -53,6 +53,7 @@ public class InsertMainboardController extends HttpServlet {
 		request.setAttribute("kindList", kindList);
 		request.getRequestDispatcher("/WEB-INF/view/admin/insertMainboardForm.jsp").forward(request, response);
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -64,17 +65,17 @@ public class InsertMainboardController extends HttpServlet {
 		
 		mainboardDao = new MainboardDao();
 		// 상세보기 받아오기
-		List<Mainboard> mainboadList = mainboardDao.selectMainboardList();
+		ArrayList<Mainboard> mainboardList = mainboardDao.selectMainboardList();
 		// COMPANY
-		List<String> companyList = mainboardDao.companyKind();
+		ArrayList<String> companyList = mainboardDao.companyKind();
 		// CPU Socket
-		List<String> socketSizeList = mainboardDao.socketSizeKind();
+		ArrayList<String> socketSizeList = mainboardDao.socketSizeKind();
 		// CHIPSET
-		List<String> chipsetList = mainboardDao.chipsetKind();
+		ArrayList<String> chipsetList = mainboardDao.chipsetKind();
 		// RAM VERSION
-		List<String> ramVersionList = mainboardDao.ramVersionKind();
+		ArrayList<String> ramVersionList = mainboardDao.ramVersionKind();
 		// KIND
-		List<String> kindList = mainboardDao.kindKind();
+		ArrayList<String> kindList = mainboardDao.kindKind();
 		
 		
 		// Mainboard image 경로지정
@@ -142,7 +143,7 @@ public class InsertMainboardController extends HttpServlet {
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
 		
-		// vo.Cpu
+		// vo.Mainboard
 		Mainboard m = new Mainboard();
 		m.setMainboardName(mainboardName);
 		m.setCategoryName(categoryName);
@@ -159,7 +160,7 @@ public class InsertMainboardController extends HttpServlet {
 		System.out.println("[InsertMainboardController] : " + i.toString());
 		System.out.println("[InsertMainboardController] : " + m.toString());
 		
-		// dao.insertCpu
+		// dao.insertMainboard
 		mainboardDao = new MainboardDao();
 		int row = mainboardDao.insertMainboard(i, m);
 		
@@ -167,7 +168,7 @@ public class InsertMainboardController extends HttpServlet {
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 성공");
-			request.setAttribute("mainboadList", mainboadList);
+			request.setAttribute("mainboardList", mainboardList);
 			request.setAttribute("companyList", companyList);
 			request.setAttribute("socketSizeList", socketSizeList);
 			request.setAttribute("chipsetList", chipsetList);

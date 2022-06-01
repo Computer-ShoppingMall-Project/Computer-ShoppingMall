@@ -146,7 +146,7 @@ public class InsertCoolerController extends HttpServlet {
 		System.out.println("[InsertCoolerController] : " + i.toString());
 		System.out.println("[InsertCoolerController] : " + c.toString());
 
-		// dao.insertCpu
+		// dao.insertCooler
 		coolerDao = new CoolerDao();
 		int row = coolerDao.insertCooler(i, c);
 		

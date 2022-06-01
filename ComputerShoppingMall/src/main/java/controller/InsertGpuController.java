@@ -89,7 +89,7 @@ public class InsertGpuController extends HttpServlet {
 			i.setOriginalName(originalName);
 			i.setName(name);
 			i.setType(type);
-		} else { // 이미지 등록 실패시, CpuListController로 이동
+		} else { // 이미지 등록 실패시, GpuListController로 이동
 			System.out.println("[InsertGpuController] : 이미지 타입 아님");
 			// 잘못 업로드 된 파일이므로 삭제 처리
 			File file = new File(path + "\\" + name);
@@ -126,7 +126,7 @@ public class InsertGpuController extends HttpServlet {
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
 		
-		// vo.Cpu
+		// vo.Gpu
 		Gpu g = new Gpu();
 		g.setGpuName(gpuName);
 		g.setCompanyName(companyName);

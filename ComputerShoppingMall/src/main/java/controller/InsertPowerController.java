@@ -115,7 +115,7 @@ public class InsertPowerController extends HttpServlet {
 		System.out.println("[InsertPowerController] : " + i.toString());
 		System.out.println("[InsertPowerController] : " + p.toString());
 		
-		// dao.insertCpu
+		// dao.insertPower
 		powerDao = new PowerDao();
 		int row = powerDao.insertPower(i, p);
 		
