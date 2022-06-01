@@ -119,7 +119,7 @@ public class InsertStorageController extends HttpServlet {
 		String capacity = null;
 		if(multiReq.getParameter("capacityInsert") != null  && !"".equals(multiReq.getParameter("capacityInsert"))) {
 			capacity = multiReq.getParameter("capacityInsert");
-		} else if(multiReq.getParameter("capacityyName") != null  && !"".equals(multiReq.getParameter("capacityName"))) {
+		} else if(multiReq.getParameter("capacityName") != null  && !"".equals(multiReq.getParameter("capacityName"))) {
 			capacity = multiReq.getParameter("capacityName");
 		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));

@@ -30,12 +30,49 @@
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
-<!-- =======================================================
-    Template Name: MaxiBiz
-    Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
+	
+	$(function(){
+		$("#selboxDirect1").hide();
+		
+		$("#selbox1").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox1").val() == "direct") {
+				$("#selboxDirect1").show();
+			}  else {
+				$("#selboxDirect1").hide();
+			}
+		}) 
+	});
+
+	$(function(){
+		$("#selboxDirect2").hide();
+		
+		$("#selbox2").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct") {
+				$("#selboxDirect2").show();
+			}  else {
+				$("#selboxDirect2").hide();
+			}
+		}) 
+	});
+</script>
+  
+  
 </head>
 <body>
 	<!-- header적용 -->
@@ -60,79 +97,62 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">
-						<span>STORAGE</span>
+					<h4 class="title">STORAGE 등록
+						<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+						</c:if>
 					</h4>
 					<form id="insertStorageForm" method="post" name="insertStorageForm" action="${pageContext.request.contextPath}/InsertStorageController?categoryName=storage" enctype="multipart/form-data">
 						<table class="table text-primary">
 							<tr>
-								<th>NAME</th>
+								<th>CATEGORY</th>
 								<td>
-									<input type="text" name="mainboardName" class="form-control" placeholder="mainboardName">
+									<input type="text"  name="categoryName" value="storage" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>STORAGENAME</th>
+								<td>
+									<input type="text" name="storageName" class="form-control" placeholder="storageName">
 								</td>
 							</tr>
 							<tr>
 								<th>COMPANY</th>
 								<td>
-									<select class="form-control" id="company" name="company" id="company">
+									<select class="form-control" id="selbox" name="companyName">
 										<option value="" selected disabled>company 선택</option>
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="hidden" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+									<input type="text" id="selboxDirect" name="companyNameInsert" class="form-control" placeholder="COMPANYNAME 직접 입력">
 								</td>
 							</tr>
 							<tr>
-								<th>KIND</th>
+								<th>STORAGEINTERFACE</th>
 								<td>
-									<select class="form-control" id="kindbox" name="kind" id="kindBox">
-										<option value="" selected disabled>kind 선택</option>
-											<c:forEach var="c" items="${kindList}">
+									<select class="form-control" id="selbox1" name="storageInterface">
+										<option value="" selected disabled>storageinterface 선택</option>
+											<c:forEach var="c" items="${interfaceList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="hidden" id="kindDirect" name="kind" class="form-control" placeholder="KIND 직접 입력">
+									<input type="text"  id="selboxDirect1" name="storageInterfaceInsert" class="form-control" placeholder="STORAGEINTERFACE 직접 입력">
 								</td>
 							</tr>
 							<tr>
-								<th>SOCKET SIZE</th>
+								<th>CAPACITYLIST</th>
 								<td>
-									<select class="form-control" name="socketSize" id="socketSizeBox">
-										<option value="" selected disabled>SOCKET SIZE 선택</option>
-											<c:forEach var="c" items="${socketSizeList}">
+									<select class="form-control" id="selbox2" name="capacityName">
+										<option value="" selected disabled>CAPACITYLIST 선택</option>
+											<c:forEach var="c" items="${capacityList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="hidden" id="socketSizeDirect" name="socketSize" class="form-control" placeholder="SOCKET SIZE 직접 입력">
-								</td>
-							</tr>
-							<tr>
-								<th>CHIPSET</th>
-								<td>
-									<select class="form-control" name="chipset" id="chipsetBox">
-										<option value="" selected disabled>CHIPSET 선택</option>
-											<c:forEach var="c" items="${chipsetList}">
-												<option value="${c}">${c}</option>
-											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
-									</select>
-									<input type="hidden" id="chipsetDirect" name="chipset" class="form-control" placeholder="CHIPSET 직접 입력">
-								</td>
-							</tr>
-							<tr>
-								<th>RAM VERSION</th>
-								<td>
-									<select class="form-control" name="ramVersion" id="ramVersionBox">
-											<c:forEach var="c" items="${ramVersionList}">
-												<option value="${c}">${c}</option>
-											</c:forEach>
-										<option onclick="dis()">직접 입력</option>
-									</select>
-									<input type="hidden" id="ramVersionDirect" name="ramVersion" class="form-control" placeholder="RAM VERSION 직접 입력">
+									<input type="number"  id="selboxDirect2" name="capacityInsert" class="form-control" placeholder="CAPACITYLIST 직접 입력">
 								</td>
 							</tr>
 							<tr>

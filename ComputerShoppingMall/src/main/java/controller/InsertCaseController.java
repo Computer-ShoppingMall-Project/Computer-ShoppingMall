@@ -65,13 +65,13 @@ public class InsertCaseController extends HttpServlet {
 		// case  정보
 		ArrayList<Case> caseList = caseDao.selectCaseList();
 		// case size
-		List<String> caseSizeList = caseDao.caseSizeList();
+		ArrayList<String> caseSizeList = caseDao.caseSizeList();
 		// gpu size
-		List<String> gpuSizeList = caseDao.gpuSizeList();
+		ArrayList<String> gpuSizeList = caseDao.gpuSizeList();
 		// bay64mm
-		List<String> bay64mmList = caseDao.bay64mmList();
+		ArrayList<String> bay64mmList = caseDao.bay64mmList();
 		// bay89mm
-		List<String> bay89mmList = caseDao.bay89mmList();
+		ArrayList<String> bay89mmList = caseDao.bay89mmList();
 		
 		
 		
@@ -105,16 +105,41 @@ public class InsertCaseController extends HttpServlet {
 
 		// Form에 입력된 값 받는 코드
 		String caseName = multiReq.getParameter("caseName");
+		
 		String caseSize = null;
+		
 		if(multiReq.getParameter("caseSizeInsert") != null  && !"".equals(multiReq.getParameter("caseSizeInsert"))) {
 			caseSize = multiReq.getParameter("caseSizeInsert");
 		} else if(multiReq.getParameter("caseSize") != null  && !"".equals(multiReq.getParameter("caseSize"))) {
 			caseSize = multiReq.getParameter("caseSize");
 		}
+		
 		String categoryName = multiReq.getParameter("categoryName");
-		int gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize"));
-		int bay89mm = Integer.parseInt(multiReq.getParameter("bay89mm"));
-		int bay64mm = Integer.parseInt(multiReq.getParameter("bay64mm"));
+		
+		int gpuSize = 0;
+		
+		if(multiReq.getParameter("gpuSizeInsert") != null  && !"".equals(multiReq.getParameter("gpuSizeInsert"))) {
+			gpuSize = Integer.parseInt(multiReq.getParameter("gpuSizeInsert"));
+		} else if(multiReq.getParameter("gpuSize") != null  && !"".equals(multiReq.getParameter("gpuSize"))) {
+			gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize")); 
+		}
+		
+		int bay89mm = 0;
+		
+		if(multiReq.getParameter("bay89mmInsert") != null  && !"".equals(multiReq.getParameter("bay89mmInsert"))) {
+			bay89mm = Integer.parseInt(multiReq.getParameter("bay89mmInsert"));
+		} else if(multiReq.getParameter("bay89mm") != null  && !"".equals(multiReq.getParameter("bay89mm"))) {
+			bay89mm = Integer.parseInt(multiReq.getParameter("bay89mm")); 
+		}
+		
+		int bay64mm = 0;
+		
+		if(multiReq.getParameter("bay64mmInsert") != null  && !"".equals(multiReq.getParameter("bay64mmInsert"))) {
+			bay64mm = Integer.parseInt(multiReq.getParameter("bay64mmInsert"));
+		} else if(multiReq.getParameter("bay64mm") != null  && !"".equals(multiReq.getParameter("bay64mm"))) {
+			bay64mm = Integer.parseInt(multiReq.getParameter("bay64mm")); 
+		}
+		
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
@@ -146,8 +171,7 @@ public class InsertCaseController extends HttpServlet {
 			request.setAttribute("gpuSizeList", gpuSizeList);
 			request.setAttribute("bay64mmList", bay64mmList);
 			request.setAttribute("bay89mmList", bay89mmList);
-			response.sendRedirect(request.getContextPath() + "/CaseListController");
-			return;
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/caseList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertCaseController] : Case 등록 실패");
 			msg = "에 실패했습니다.";
@@ -157,8 +181,7 @@ public class InsertCaseController extends HttpServlet {
 			request.setAttribute("gpuSizeList", gpuSizeList);
 			request.setAttribute("bay64mmList", bay64mmList);
 			request.setAttribute("bay89mmList", bay89mmList);
-			response.sendRedirect(request.getContextPath() + "/InsertCaseController");
-			return;
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertCaseForm.jsp").forward(request, response);	
 		}
 	}
 }

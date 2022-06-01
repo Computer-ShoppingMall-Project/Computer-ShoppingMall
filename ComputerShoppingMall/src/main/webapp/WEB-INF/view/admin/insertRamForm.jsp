@@ -58,7 +58,7 @@
 		
 		$("#selbox2").change(function() {
 	             // 직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -91,6 +91,12 @@
 					<form id="insertRamform" method="post" name=“insertRamform” action="${pageContext.request.contextPath}/InsertRamController?categoryName=ram" enctype="multipart/form-data">
 						<table class="table text-primary">
 							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="ram" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
 								<th>NAME</th>
 								<td>
 									<input type="text" name="ramName" class="form-control" placeholder="ramName">
@@ -106,7 +112,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="kind" class="form-control" value="" placeholder="KIND 직접 입력">
+									<input type="text" id="selboxDirect" name="kindInsert" class="form-control" value="" placeholder="KIND 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -117,9 +123,9 @@
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2"  name="companyName" class="form-control" value="" placeholder="company 직접 입력">
+									<input type="text" id="selboxDirect2"  name="companyNameInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>

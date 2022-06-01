@@ -59,7 +59,7 @@
 		
 		$("#selbox2").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -73,7 +73,7 @@
 		
 		$("#selbox3").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox3").val() == "direct3") {
+			if($("#selbox3").val() == "direct") {
 				$("#selboxDirect3").show();
 			}  else {
 				$("#selboxDirect3").hide();
@@ -87,7 +87,7 @@
 		
 		$("#selbox4").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox4").val() == "direct4") {
+			if($("#selbox4").val() == "direct") {
 				$("#selboxDirect4").show();
 			}  else {
 				$("#selboxDirect4").hide();
@@ -116,9 +116,19 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">MAINBOARD 등록</h4>
+					<h4 class="title text-primary">CASE 등록
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
 					<form id="insertCaseform" method="post" name="insertCaseform" action="${pageContext.request.contextPath}/InsertCaseController?categoryName=case" enctype="multipart/form-data">
 						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="case" readonly="readonly" class="form-control">
+								</td>
+							</tr>
 							<tr>
 								<th>CASE</th>
 								<td>
@@ -135,7 +145,7 @@
 										</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="caseSize" class="form-control" value="" placeholder="casSize 직접 입력">
+									<input type="text" id="selboxDirect" name="caseSizeInsert" class="form-control" value="" placeholder="caseSize 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -146,9 +156,9 @@
 										<c:forEach var="c" items="${gpuSizeList}">
 											<option value="${c}">${c}</option>
 										</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2" name="gpuSIze" class="form-control" value="" placeholder="gpuSize 직접 입력">
+									<input type="number"  min="1" id="selboxDirect2" name="gpuSizeInsert" class="form-control" value="" placeholder="gpuSize 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -159,9 +169,9 @@
 										<c:forEach var="c" items="${bay89mmList }">
 											<option value="${c}">${c}</option>
 										</c:forEach>
-										<option value="direct3">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect3" name="bay89mm" class="form-control" value="" placeholder="bay89mm 직접 입력">
+									<input type="number" min="1" id="selboxDirect3" name="bay89mmInsert" class="form-control" value="" placeholder="bay89mm 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -172,9 +182,9 @@
 										<c:forEach var="c" items="${bay64mmList }">
 											<option value="${c}">${c}</option>
 										</c:forEach>
-										<option value="direct4">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect4" name="bay64mm" class="form-control" value="" placeholder="bay64mm 직접 입력">
+									<input type="number" min="1" id="selboxDirect4" name="bay64mmInsert" class="form-control" value="" placeholder="bay64mm 직접 입력">
 								</td>
 							</tr>	
 							<tr>

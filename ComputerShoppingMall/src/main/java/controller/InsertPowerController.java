@@ -125,8 +125,7 @@ public class InsertPowerController extends HttpServlet {
 			System.out.println("[InsertPowerController] : Power 등록 성공");
 			request.setAttribute("powerList", powerList);
 			request.setAttribute("ratedPowerList", ratedPowerList);
-			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/PowerList.jsp").forward(request, response);
-			return;
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/powerList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertPowerController] : Power 등록 실패");
 			msg = "에 실패했습니다.";
@@ -134,7 +133,7 @@ public class InsertPowerController extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("powerList", powerList);
 			request.setAttribute("ratedPowerList", ratedPowerList);
-			request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertPowerForm.jsp").forward(request, response);	
 		}
 	}
 }

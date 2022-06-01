@@ -105,9 +105,9 @@ public class InsertRamController extends HttpServlet {
 		String categoryName = multiReq.getParameter("categoryName");
 		String kind = null;
 		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
-			companyName = multiReq.getParameter("kindInsert");
+			kind = multiReq.getParameter("kindInsert");
 		} else if(multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
-			companyName = multiReq.getParameter("kind");
+			kind = multiReq.getParameter("kind");
 		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
@@ -136,7 +136,7 @@ public class InsertRamController extends HttpServlet {
 			request.setAttribute("ramList", rmaList);
 			request.setAttribute("companyList", companyList);
 			request.setAttribute("kindList", kindList);
-			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/ramList.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/ramList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertRamController] : Ram 등록 실패");
 			msg = "에 실패했습니다.";
@@ -145,7 +145,7 @@ public class InsertRamController extends HttpServlet {
 			request.setAttribute("ramList", rmaList);
 			request.setAttribute("companyList", companyList);
 			request.setAttribute("kindList", kindList);
-			request.getRequestDispatcher("/WEB-INF/view/admin/insertramForm.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/admin/ramList.jsp").forward(request, response);	
 		}
 	}
 }

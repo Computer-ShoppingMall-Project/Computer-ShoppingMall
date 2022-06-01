@@ -58,7 +58,7 @@
 		
 		$("#selbox2").change(function() {
 	             // 직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -72,7 +72,7 @@
 		
 		$("#selbox3").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox3").val() == "direct3") {
+			if($("#selbox3").val() == "direct") {
 				$("#selboxDirect3").show();
 			}  else {
 				$("#selboxDirect3").hide();
@@ -101,9 +101,19 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">GPU 등록</h4>
+					<h4 class="title text-primary">GPU 등록
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
 					<form id="insertGpuform" method="post" name=“insertGpuform” action="${pageContext.request.contextPath}/InsertGpuController?categoryName=gpu" enctype="multipart/form-data">
 						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="gpu" readonly="readonly" class="form-control">
+								</td>
+							</tr>
 							<tr>
 								<th>NAME</th>
 								<td>
@@ -120,7 +130,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="companyName" class="form-control" value="" placeholder="Company 직접 입력">
+									<input type="text" id="selboxDirect" name="companyNameInsert" class="form-control" value="" placeholder="Company 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -131,9 +141,9 @@
 											<c:forEach var="c" items="${chipsetCompanyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2"  name="chipsetCompany" class="form-control" value="" placeholder="company 직접 입력">
+									<input type="text" id="selboxDirect2"  name="chipsetCompanyInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -144,9 +154,9 @@
 											<c:forEach var="c" items="${gpuSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct3">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="number" id="selboxDirect3"  name="gpuSize" class="form-control" value="" placeholder="company 직접 입력">
+									<input type="number" min="1" id="selboxDirect3"  name="gpuSizeInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>

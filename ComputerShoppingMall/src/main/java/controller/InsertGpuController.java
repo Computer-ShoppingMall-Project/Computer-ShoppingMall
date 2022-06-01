@@ -114,7 +114,14 @@ public class InsertGpuController extends HttpServlet {
 		} else if(multiReq.getParameter("chipsetCompany") != null  && !"".equals(multiReq.getParameter("chipsetCompany"))) {
 			chipsetCompany = multiReq.getParameter("chipsetCompany");
 		}
-		int gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize"));
+		int gpuSize = 0;
+		
+		if(multiReq.getParameter("gpuSizeInsert") != null  && !"".equals(multiReq.getParameter("gpuSizeInsert"))) {
+			gpuSize = Integer.parseInt(multiReq.getParameter("gpuSizeInsert"));
+		} else if(multiReq.getParameter("gpuSize") != null  && !"".equals(multiReq.getParameter("gpuSize"))) {
+			gpuSize = Integer.parseInt(multiReq.getParameter("gpuSize")); 
+		}
+		
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");
@@ -142,7 +149,6 @@ public class InsertGpuController extends HttpServlet {
 		// 상품등록 성공/실패 확인 코드
 		if (row == 1) {
 			System.out.println("[InsertGpuController] : Gpu 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/GpuListController");
 			request.setAttribute("gpuList", gpuList);
 			request.setAttribute("companyList", companyList);
 			request.setAttribute("chipsetCompanyList", chipsetCompanyList);
@@ -156,7 +162,7 @@ public class InsertGpuController extends HttpServlet {
 			request.setAttribute("companyList", companyList);
 			request.setAttribute("chipsetCompanyList", chipsetCompanyList);
 			request.setAttribute("gpuSizeList", gpuSizeList);
-			request.getRequestDispatcher("/WEB-INF/view/admin/insertGpuForm.jsp").forward(request, response);	
+			request.getRequestDispatcher("/WEB-INF/view/admin/insertGpuForm.jsp").forward(request, response);
 		}
 	}
 }

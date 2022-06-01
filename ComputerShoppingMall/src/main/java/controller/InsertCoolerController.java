@@ -64,11 +64,11 @@ public class InsertCoolerController extends HttpServlet {
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cooler> coolerList = coolerDao.selectCoolerList();
 		// COMPANY
-		List<String> companyList = coolerDao.companyKind();
+		ArrayList<String> companyList = coolerDao.companyKind();
 		// KIND
-		List<String> kindList = coolerDao.kindKind();
+		ArrayList<String> kindList = coolerDao.kindKind();
 		// SIZE
-		List<String> sizeList = coolerDao.coolerSizeKind();
+		ArrayList<String> sizeList = coolerDao.coolerSizeKind();
 		
 		
 		
@@ -102,15 +102,32 @@ public class InsertCoolerController extends HttpServlet {
 		
 		// Form에 입력된 값 받는 코드
 		String coolerName = multiReq.getParameter("coolerName");
+		
 		String companyName = null;
-		String categoryName = multiReq.getParameter("categoryName");
-		String kind = multiReq.getParameter("kind");
-		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
-			companyName = multiReq.getParameter("kindInsert");
-		} else if(multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
-			companyName = multiReq.getParameter("kind");
+		
+		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
+			companyName = multiReq.getParameter("companyNameInsert");
+		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
+			companyName = multiReq.getParameter("companyName"); 
 		}
-		int coolerSize = Integer.parseInt(multiReq.getParameter("coolerSize"));
+		
+		String categoryName = multiReq.getParameter("categoryName");
+		
+		String kind = null;
+		
+		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
+			kind = multiReq.getParameter("kindInsert");
+		} else if( multiReq.getParameter("kind") != null  && !"".equals(multiReq.getParameter("kind"))) {
+			kind = multiReq.getParameter("kind");
+		}
+		
+		int coolerSize = 0;
+		
+		if(multiReq.getParameter("coolerSizeInsert") != null  && !"".equals(multiReq.getParameter("coolerSizeInsert"))) {
+			coolerSize = Integer.parseInt(multiReq.getParameter("coolerSizeInsert"));
+		} else if(multiReq.getParameter("coolerSize") != null  && !"".equals(multiReq.getParameter("coolerSize"))) {
+			coolerSize = Integer.parseInt(multiReq.getParameter("coolerSize")); 
+		}
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");

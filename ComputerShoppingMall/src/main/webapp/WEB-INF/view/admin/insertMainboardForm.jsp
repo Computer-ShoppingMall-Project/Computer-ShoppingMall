@@ -58,7 +58,7 @@
 		
 		$("#selbox2").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -72,7 +72,7 @@
 		
 		$("#selbox3").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox3").val() == "direct3") {
+			if($("#selbox3").val() == "direct") {
 				$("#selboxDirect3").show();
 			}  else {
 				$("#selboxDirect3").hide();
@@ -86,7 +86,7 @@
 		
 		$("#selbox4").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox4").val() == "direct4") {
+			if($("#selbox4").val() == "direct") {
 				$("#selboxDirect4").show();
 			}  else {
 				$("#selboxDirect4").hide();
@@ -100,7 +100,7 @@
 		
 		$("#selbox5").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox5").val() == "direct5") {
+			if($("#selbox5").val() == "direct") {
 				$("#selboxDirect5").show();
 			}  else {
 				$("#selboxDirect5").hide();
@@ -130,9 +130,19 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">MAINBOARD 등록</h4>
+					<h4 class="title text-primary">MAINBOARD 등록
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
 					<form id="insertMainBoardform" method="post" name=“insertMainBoardform” action="${pageContext.request.contextPath}/InsertMainboardController?categoryName=mainboard" enctype="multipart/form-data">
 						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="mainboard" readonly="readonly" class="form-control">
+								</td>
+							</tr>
 							<tr>
 								<th>NAME</th>
 								<td>
@@ -149,7 +159,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="kind" class="form-control" value="" placeholder="KIND 직접 입력">
+									<input type="text" id="selboxDirect" name="kindInsert" class="form-control" value="" placeholder="KIND 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -160,9 +170,9 @@
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2"  name="companyName" class="form-control" value="" placeholder="company 직접 입력">
+									<input type="text" id="selboxDirect2"  name="companyNameInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -173,9 +183,9 @@
 											<c:forEach var="c" items="${socketSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct3">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect3" name="socketSize" class="form-control" value="" placeholder="SOCKET SIZE 직접 입력">
+									<input type="text" id="selboxDirect3" name="socketSizeInsert" class="form-control" value="" placeholder="SOCKET SIZE 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -186,9 +196,9 @@
 											<c:forEach var="c" items="${chipsetList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct4">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect4" name="chipset" class="form-control" value="" placeholder="CHIPSET 직접 입력">
+									<input type="text" id="selboxDirect4" name="chipsetInsert" class="form-control" value="" placeholder="CHIPSET 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -198,9 +208,9 @@
 											<c:forEach var="c" items="${ramVersionList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct5">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect5" name="ramVersion" class="form-control" value="" placeholder="RAM VERSION 직접 입력">
+									<input type="text" id="selboxDirect5" name="ramVersionInsert" class="form-control" value="" placeholder="RAM VERSION 직접 입력">
 								</td>
 							</tr>
 							<tr>

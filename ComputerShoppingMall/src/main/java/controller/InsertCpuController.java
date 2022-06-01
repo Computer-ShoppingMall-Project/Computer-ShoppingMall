@@ -35,13 +35,13 @@ public class InsertCpuController extends HttpServlet {
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
 		// COMPNAY
-		List<String> companyList = cpuDao.companyKind();
+		ArrayList<String> companyList = cpuDao.companyKind();
 		// SOCKETSIZE
-		List<String> socketSizeList = cpuDao.socketSizeKind();
+		ArrayList<String> socketSizeList = cpuDao.socketSizeKind();
 		// CORE
-		List<String> coreList = cpuDao.coreKind();
+		ArrayList<String> coreList = cpuDao.coreKind();
 		// THREAD
-		List<String> threadList = cpuDao.threadKind();
+		ArrayList<String> threadList = cpuDao.threadKind();
 		
 		
 		// 값 셋팅 후 보내주기
@@ -66,13 +66,13 @@ public class InsertCpuController extends HttpServlet {
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();
 		// COMPNAY
-		List<String> companyList = cpuDao.companyKind();
+		ArrayList<String> companyList = cpuDao.companyKind();
 		// SOCKETSIZE
-		List<String> socketSizeList = cpuDao.socketSizeKind();
+		ArrayList<String> socketSizeList = cpuDao.socketSizeKind();
 		// CORE
-		List<String> coreList = cpuDao.coreKind();
+		ArrayList<String> coreList = cpuDao.coreKind();
 		// THREAD
-		List<String> threadList = cpuDao.threadKind();
+		ArrayList<String> threadList = cpuDao.threadKind();
 		
 		
 		
@@ -107,30 +107,39 @@ public class InsertCpuController extends HttpServlet {
 		// Form에 입력된 값 받는 코드
 		String cpuName = multiReq.getParameter("cpuName");
 		String companyName = null;
+		
 		if(multiReq.getParameter("companyNameInsert") != null  && !"".equals(multiReq.getParameter("companyNameInsert"))) {
 			companyName = multiReq.getParameter("companyNameInsert");
 		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
 			companyName = multiReq.getParameter("companyName");
 		}
+		
 		String categoryName = multiReq.getParameter("categoryName");
+		
 		String socketSize = null;
+		
 		if(multiReq.getParameter("socketSizeInsert") != null  && !"".equals(multiReq.getParameter("socketSizeInsert"))) {
 			socketSize = multiReq.getParameter("socketSizeInsert");
 		} else if(multiReq.getParameter("socketSize") != null  && !"".equals(multiReq.getParameter("socketSize"))) {
 			socketSize = multiReq.getParameter("socketSize");
 		}
+		
 		String core = null;
+		
 		if(multiReq.getParameter("coreInsert") != null  && !"".equals(multiReq.getParameter("coreInsert"))) {
-			core = multiReq.getParameter("coreInsert");
+			core = multiReq.getParameter(" ");
 		} else if(multiReq.getParameter("core") != null  && !"".equals(multiReq.getParameter("core"))) {
 			core = multiReq.getParameter("core");
 		}
+		
 		String thread = null;
+		
 		if(multiReq.getParameter("threadInsert") != null  && !"".equals(multiReq.getParameter("threadInsert"))) {
 			thread = multiReq.getParameter("threadInsert");
 		} else if(multiReq.getParameter("thread") != null  && !"".equals(multiReq.getParameter("thread"))) {
 			thread = multiReq.getParameter("thread");
 		}
+		
 		int price = Integer.parseInt(multiReq.getParameter("price"));
 		int quantity = Integer.parseInt(multiReq.getParameter("quantity"));
 		String memo = multiReq.getParameter("memo");

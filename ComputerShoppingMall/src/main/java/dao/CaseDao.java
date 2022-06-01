@@ -125,8 +125,9 @@ public class CaseDao {
 		// SQL 쿼리
 		String imgSql =
 			"INSERT INTO case_image(NAME, original_name, `type`, create_date, update_date) VALUES (?, ?, ?, NOW(), NOW())";
+		// 테이블명 case SQL함수 case 인식함 -> ``붙여줘야함
 		String productSql = 
-			"INSERT INTO case(case_name, case_size, category_name, gpu_size, bay89mm, bay64mm, price, quantity, case_image_no, memo, update_date)"
+			"INSERT INTO `case`(case_name, case_size, category_name, gpu_size, bay89mm, bay64mm, price, quantity, case_image_no, memo, update_date)"
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";	
 		try {
 			conn.setAutoCommit(false);

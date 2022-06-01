@@ -113,7 +113,7 @@ public class InsertMainboardController extends HttpServlet {
 		} else if(multiReq.getParameter("companyName") != null  && !"".equals(multiReq.getParameter("companyName"))) {
 			companyName = multiReq.getParameter("companyName");
 		}
-		String categoryName = multiReq.getParameter("kindName");
+		String categoryName = multiReq.getParameter("categoryName");
 		String kind = null;
 		if(multiReq.getParameter("kindInsert") != null  && !"".equals(multiReq.getParameter("kindInsert"))) {
 			kind = multiReq.getParameter("kindInsert");
@@ -172,7 +172,7 @@ public class InsertMainboardController extends HttpServlet {
 			request.setAttribute("socketSizeList", socketSizeList);
 			request.setAttribute("chipsetList", chipsetList);
 			request.setAttribute("ramVersionList", ramVersionList);
-			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/mainboardList.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/nonCustomer/mainboardList.jsp").forward(request, response);	
 		} else {
 			System.out.println("[InsertMainboardController] : Mainboard 등록 실패");
 			msg = "에 실패했습니다.";

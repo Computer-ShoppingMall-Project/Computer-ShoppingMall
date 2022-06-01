@@ -77,6 +77,12 @@
 					<form id="insertPowerform" method="post" name=“insertPowerform” action="${pageContext.request.contextPath}/InsertPowerController?categoryName=power" enctype="multipart/form-data">
 						<table class="table text-primary">
 							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="power" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
 								<th>NAME</th>
 								<td>
 									<input type="text" name="powerName" class="form-control" placeholder="Power Name">
@@ -92,7 +98,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="ratedPower" class="form-control" value="" placeholder="정격파워 직접 입력">
+									<input type="text" id="selboxDirect" name="ratedPowerInsert" class="form-control" value="" placeholder="정격파워 직접 입력">
 								</td>
 							</tr>
 							<tr>

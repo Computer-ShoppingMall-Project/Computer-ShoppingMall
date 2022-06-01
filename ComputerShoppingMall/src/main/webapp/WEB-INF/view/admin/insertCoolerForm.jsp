@@ -58,7 +58,7 @@
 		
 		$("#selbox2").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
@@ -72,7 +72,7 @@
 		
 		$("#selbox3").change(function() {
 	             //직접입력을 누를 때 나타남
-			if($("#selbox3").val() == "direct3") {
+			if($("#selbox3").val() == "direct") {
 				$("#selboxDirect3").show();
 			}  else {
 				$("#selboxDirect3").hide();
@@ -102,9 +102,20 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">cooler 등록</h4>
-						<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContext.request.contextPath}/InsertCoolerController?categoryName=cooler" enctype="multipart/form-data">
+					<h4 class="title text-primary">Cooler 등록
+							<c:if test="${msg != null || msg != ''}">
+							
+								<span class="text-danger">${msg}</span>
+							</c:if>
+							</h4>
+							<form id="insertCoolerform" method="post" name="insertCoolerform" action="${pageContext.request.contextPath}/InsertCoolerController?categoryName=cooler" enctype="multipart/form-data">
 						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="Cooler" readonly="readonly" class="form-control">
+								</td>
+							</tr>
 							<tr>
 								<th>NAME</th>
 								<td>
@@ -121,7 +132,7 @@
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="companyName" class="form-control" value="" placeholder="companyName 직접 입력">
+									<input type="text" id="selboxDirect" name="companyNameInsert" class="form-control" value="" placeholder="companyName 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -132,22 +143,22 @@
 											<c:forEach var="c" items="${kindList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct2">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect2" name="kind" class="form-control" value="" placeholder="KIND 직접 입력">
+									<input type="text" id="selboxDirect2" name="kindInsert" class="form-control" value="" placeholder="KIND 직접 입력">
 								</td>
 							</tr>
 							<tr>
 								<th>COOLER SIZE</th>
 								<td>
-									<select class="form-control" id="selbox3" name="collerSize">
+									<select class="form-control" id="selbox3" name="coolerSize">
 										<option value="" selected disabled>size 선택</option>
 											<c:forEach var="c" items="${sizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
-										<option value="direct3">직접 입력</option>
+										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect3" name="collerSize" class="form-control" value="" placeholder="cooler 직접 입력">
+									<input type="number" min="0" id="selboxDirect3" name="coolerSizeInsert" class="form-control"  placeholder="cooler 직접 입력">
 								</td>
 							</tr>
 							<tr>
@@ -178,36 +189,6 @@
 							<button type="submit" style="float:right">등록</button>
 					</form>
 				</div>
-				
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
-	<!-- end section -->
-
-	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<!-- JavaScript Libraries -->
-	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
-
-	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-</body>				</div>
 				
 				<!-- end login -->
 			</div>
