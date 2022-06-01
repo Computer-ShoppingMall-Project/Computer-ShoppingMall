@@ -1,15 +1,16 @@
 package dao;
 
-import java.sql.*;
+import java.sql.*; 
 import java.util.*;
 
 import util.DButil;
+import vo.Basket;
 import vo.Order;
 // import vo.Qna;
 
 public class OrderDao {
 	// 결제
-	public int insertOrder(String customerId, int zipCode, String roadAddress, String detailAddress) {
+	public int insertOrder(String customerId, int zipCode, String roadAddress, String detailAddress, ArrayList<Basket> list) {
 		int row = 0;
 		// DB 초기화
 		Connection conn = null;
@@ -17,9 +18,11 @@ public class OrderDao {
 		// DButil
 		conn = DButil.getConnection();
 		// SQL 쿼리
+		// 장바구니에 있는 데이터를 결제테이블로 입력
 		String orderSql = "INSERT INTO `order` (basket_no, customer_id, product_name, category_name , category_number, category_price, category_quantity, order_status, create_date, zip_code, road_address, detail_address)"
 				+ "   SELECT basket_no, customer_id, product_name, category_name, product_number, price, quantity, '입금 확인', NOW(), ?, ?, ?" // 바로 입금 확인 처리되게끔 처리 + 주소 입력
 				+ "   FROM basket WHERE customer_id = ?";
+		// 장바구니에 삭제
 		String deleteBasketSql = "DELETE b"
 				+ " FROM basket b INNER JOIN `order` o"
 				+ "	ON b.customer_id = o.customer_id "
@@ -33,6 +36,94 @@ public class OrderDao {
 			stmt.setString(4, customerId);
 			row = stmt.executeUpdate();
 			stmt.close();
+			
+			// 수량 업데이트
+			if(list.size() > 0) {
+				for(int i = 0; i < list.size(); i++) {
+					// 변수 선언
+					String checkCategoryName = list.get(i).getCategoryName();
+					int checkProduckNumber = list.get(i).getProductNumber();
+					int checkQuantity = list.get(i).getQuantity();
+					//디버깅
+					System.out.println(checkCategoryName+"<-checkCategoryName");
+					System.out.println(checkProduckNumber+"<-checkProduckNumber");
+					System.out.println(checkQuantity+"<-checkQuantity");
+					// category에 맞는 제품을 수량 설정
+					if("cpu".equals(checkCategoryName)) {
+						// cpu 수량 업데이트
+						String updateCpuQuantity = "UPDATE cpu c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM cpu c2 WHERE c2.cpu_no = ? limit 1) t) WHERE c.cpu_no=?" ;
+						stmt = conn.prepareStatement(updateCpuQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("gpu".equals(checkCategoryName)) {
+						// gpu 수량 업데이트
+						String updateGpuQuantity = "UPDATE gpu c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM gpu c2 WHERE c2.gpu_no = ? limit 1) t) WHERE c.gpu_no= ? " ;
+						stmt = conn.prepareStatement(updateGpuQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("mainboard".equals(checkCategoryName)) {
+						// mainboard 수량 업데이트
+						String updateMainboardQuantity = "UPDATE mainboard c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM mainboard c2 WHERE c2.mainboard_no = ? limit 1) t) WHERE c.mainboard_no= ? " ;
+						stmt = conn.prepareStatement(updateMainboardQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("cooler".equals(checkCategoryName)) {
+						// cooler 수량 업데이트
+						String updateCoolerQuantity = "UPDATE cooler c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM cooler c2 WHERE c2.cooler_no = ? limit 1) t) WHERE c.cooler_no= ? " ;
+						stmt = conn.prepareStatement(updateCoolerQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("ram".equals(checkCategoryName)) {
+						// ram 수량 업데이트
+						String updateRamQuantity = "UPDATE ram c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM ram c2 WHERE c2.ram_no = ? limit 1) t) WHERE c.ram_no= ? " ;
+						stmt = conn.prepareStatement(updateRamQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("case".equals(checkCategoryName)) {
+						// case 수량 업데이트
+						String updateCaseQuantity = "UPDATE case c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM case c2 WHERE c2.case_no = ? limit 1) t) WHERE c.case_no= ? " ;
+						stmt = conn.prepareStatement(updateCaseQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("storage".equals(checkCategoryName)) {
+						// storage 수량 업데이트
+						String updateStorageQuantity = "UPDATE storage c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM storage c2 WHERE c2.storage_no = ? limit 1) t) WHERE c.storage_no= ? " ;
+						stmt = conn.prepareStatement(updateStorageQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					} else if("power".equals(checkCategoryName)) {
+						// power 수량 업데이트
+						String updatePowerQuantity = "UPDATE power c SET c.quantity = (select * FROM (SELECT c2.quantity- ? FROM power c2 WHERE c2.power_no = ? limit 1) t) WHERE c.power_no= ? " ;
+						stmt = conn.prepareStatement(updatePowerQuantity);
+						stmt.setInt(1, checkQuantity);
+						stmt.setInt(2, checkProduckNumber);
+						stmt.setInt(3, checkProduckNumber);
+						stmt.executeUpdate();
+						stmt.close();
+					}
+				}
+			}
 			
 			// 장바구니 삭제
 			stmt = conn.prepareStatement(deleteBasketSql); // sql 쿼리 셋팅

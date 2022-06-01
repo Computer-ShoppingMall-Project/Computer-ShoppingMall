@@ -21,7 +21,7 @@ import vo.Order;
 public class OrderController extends HttpServlet {
 	private OrderDao dao;
 	private MemberDao memberDao;
-	private BasketDao myBasketDao;
+	private BasketDao basketDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 세션확인
 		HttpSession session = request.getSession();
@@ -38,10 +38,10 @@ public class OrderController extends HttpServlet {
 			return;
 		}
 		// MyBasketDao
-		myBasketDao = new BasketDao();
+		basketDao = new BasketDao();
 		memberDao = new MemberDao();
 		// MyBasketDao select
-		ArrayList<Basket> list = myBasketDao.selectMyBasket(customerId);
+		ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
 		// vo
 		Customer c = memberDao.selectMemberOne(customerId);
 		
@@ -65,9 +65,16 @@ public class OrderController extends HttpServlet {
 		int zipCode = Integer.parseInt(request.getParameter("zipCode"));  
 		String roadAddress = request.getParameter("roadAddress");
 		String detailAddress = request.getParameter("detailAddress");
-		// orderDao.insertOrder
+		
+		// dao
+		basketDao = new BasketDao();
 		dao = new OrderDao();
-		int row = dao.insertOrder(customerId, zipCode, roadAddress, detailAddress);
+		
+		ArrayList<Basket> list = basketDao.selectMyBasket(customerId);
+		
+		
+		// orderDao.insertOrder
+		int row = dao.insertOrder(customerId, zipCode, roadAddress, detailAddress, list);
 	
 		if(row > 0) {
 			System.out.println("결제 정보 저장 성공 OrderController.dopost");
