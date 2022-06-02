@@ -45,7 +45,7 @@ public class InsertMainboardController extends HttpServlet {
 		
 		
 		// 값 셋팅 후 보내주기
-		request.setAttribute("mainboadList", mainboardList);
+		request.setAttribute("mainboardList", mainboardList);
 		request.setAttribute("companyList", companyList);
 		request.setAttribute("socketSizeList", socketSizeList);
 		request.setAttribute("chipsetList", chipsetList);
