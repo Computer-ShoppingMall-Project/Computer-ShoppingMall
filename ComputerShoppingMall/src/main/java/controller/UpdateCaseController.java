@@ -50,7 +50,7 @@ public class UpdateCaseController extends HttpServlet {
 			int caseNo = Integer.parseInt(request.getParameter("caseNo"));
 			c = caseDao.selectCaseOne(caseNo);
 			
-			request.setAttribute("caseOne", c);
+			request.setAttribute("case", c);
 			request.getRequestDispatcher("/WEB-INF/view/admin/updateCaseForm.jsp").forward(request, response);
 		}
 	}

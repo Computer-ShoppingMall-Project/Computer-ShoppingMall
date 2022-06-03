@@ -124,7 +124,7 @@
 						
 					<form id="updateCpuform" method="post" name="updateCpuform" action="${pageContext.request.contextPath}/UpdateCpuController">
 						<div>
-							<!-- 값넘기기 -->
+							<!-- 값넘기기! -->
 							<input type="hidden" name="cpuImageNo" readonly="readonly" value="${requestScope.cpu.cpuImageNo}" required>
 							<input type="hidden" name="cpuNo" readonly="readonly" value="${requestScope.cpu.cpuNo}" required>
 						</div>
@@ -138,7 +138,7 @@
 							<tr>
 								<th>UPDATE NAME</th>
 								<td>
-									<input type="text"  name="cpuName" class="form-control" placeholder="CpuName">
+									<input type="text"  name="cpuName" value="${requestScope.cpu.cpuName}" class="form-control" placeholder="CpuName">
 								</td>
 							</tr>
 							
@@ -146,7 +146,7 @@
 								<th>UPDATE COMPANY</th>
 								<td>
 									<select class="form-control" id="selbox" name="companyName" >
-										<option value="" selected disabled>company 선택</option>
+										<option value="" selected disabled>${requestScope.cpu.companyName}</option>
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -159,7 +159,7 @@
 								<th>UPDATE SOCKET SIZE</th>
 								<td>
 									<select class="form-control" id="selbox2" name="socketSize" >
-										<option value="" selected disabled>socket 선택</option>
+										<option value="" selected disabled>${requestScope.cpu.socketSize}</option>
 											<c:forEach var="c" items="${socketSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -172,7 +172,7 @@
 								<th>UPDATE CORE</th>
 								<td>
 									<select class="form-control" id="selbox3" name="core" >
-										<option value="" selected disabled>socket 선택</option>
+										<option value="" selected disabled>${requestScope.cpu.core}</option>
 											<c:forEach var="c" items="${coreList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -185,7 +185,7 @@
 								<th>UPDATE THREAD</th>
 								<td>
 									<select class="form-control" id="selbox4" name="thread" >
-										<option value="" selected disabled>thread 선택</option>
+										<option value="" selected disabled>${requestScope.cpu.thread}</option>
 											<c:forEach var="c" items="${threadList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -197,19 +197,19 @@
 							<tr>
 								<th>UPDATE QUANTITY</th>
 								<td>
-									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+									<input type="number" name="quantity" value="${requestScope.cpu.quantity}" min="1" class="form-control" placeholder="Quantity">
 								</td>
 							</tr>
 							<tr>
 								<th>UPDATE PRICE</th>
 								<td>
-									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+									<input type="number" name="price" value="${requestScope.cpu.price}" min="1" class="form-control" placeholder="Price">
 								</td>
 							</tr>
 							<tr>
 								<th>UPDATE MEMO</th>
 								<td>
-									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+									<textarea cols="30" rows="5" name="memo" class="form-control">${requestScope.cpu.memo}</textarea>
 								</td>
 							</tr>
 						</table>

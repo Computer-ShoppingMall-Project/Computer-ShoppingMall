@@ -80,7 +80,7 @@
 		}) 
 	});
 	
-	// chipSet 직접입력
+	// chipSet 직접입력!
 	$(function(){
 		$("#selboxDirect4").hide();
 		
@@ -105,7 +105,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li> 
 				</ul>
-				<h2>상품수정</h2> 
+				<h2>상품 수정</h2> 
 			</div>
 		</div>
 	</section>
@@ -122,8 +122,8 @@
 					</c:if>
 					</h4>
 						
-					<form id="updateCaseform" method="post" name="updateCaseform" action="${pageContext.request.contextPath}/UpdateCaseController">
-						<div>
+					<form id="updateCaseForm" method="post" name="updateCaseuForm" action="${pageContext.request.contextPath}/UpdateCaseController">
+					<div>
 							<!-- 값넘기기 -->
 							<input type="hidden" name="caseImageNo" readonly="readonly" value="${requestScope.case.caseImageNo}" required>
 							<input type="hidden" name="caseNo" readonly="readonly" value="${requestScope.case.caseNo}" required>
@@ -138,7 +138,7 @@
 							<tr>
 								<th>UPDATE NAME</th>
 								<td>
-									<input type="text"  name="caseName" class="form-control" placeholder="Case Name">
+									<input type="text"  name="caseName" value="${requestScope.case.caseName}" class="form-control" placeholder="Case Name">
 								</td>
 							</tr>
 							
@@ -146,7 +146,7 @@
 								<th>UPDATE CASE SIZE</th>
 								<td>
 									<select class="form-control" id="selbox" name="caseSize" >
-										<option value="" selected disabled>case size 선택</option>
+										<option value="" selected disabled>${requestScope.case.caseSize}</option>
 											<c:forEach var="c" items="${caseSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -155,11 +155,12 @@
 									<input type="text" id="selboxDirect"  name="caseSizeInsert" class="form-control" value="" placeholder="Case Size 직접 입력">
 								</td>
 							</tr>
-							<tr>
+							
+						    <tr>
 								<th>UPDATE GPU SIZE</th>
 								<td>
 									<select class="form-control" id="selbox2" name="gpuSize" >
-										<option value="" selected disabled>gpu size 선택</option>
+										<option value="" selected disabled>${requestScope.case.gpuSize}</option>
 											<c:forEach var="c" items="${gpuSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -168,11 +169,12 @@
 									<input type="text" id="selboxDirect2"  name="gpuSizeInsert" class="form-control" value="" placeholder="Gpu Size직접 입력">
 								</td>
 							</tr>
+							
 							<tr>
 								<th>UPDATE 89BAY</th>
 								<td>
 									<select class="form-control" id="selbox3" name="bay89mm" >
-										<option value="" selected disabled>89bay 선택</option>
+										<option value="" selected disabled>${requestScope.case.bay89mm}</option>
 											<c:forEach var="c" items="${bay89mmList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -181,11 +183,12 @@
 									<input type="text" id="selboxDirect3"  name="bay89mmInsert" class="form-control" value="" placeholder="89bay 직접 입력">
 								</td>
 							</tr>
+							
 							<tr>
 								<th>UPDATE 64BAY</th>
 								<td>
 									<select class="form-control" id="selbox4" name="bay64mm" >
-										<option value="" selected disabled>64bay 선택</option>
+										<option value="" selected disabled>${requestScope.case.bay64mm}/option>
 											<c:forEach var="c" items="${bay64mmList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -194,24 +197,28 @@
 									<input type="text" id="selboxDirect4"  name="bay64mmInsert" class="form-control" value="" placeholder="64bay 직접 입력">
 								</td>
 							</tr>		
+							
 							<tr>
 								<th>UPDATE QUANTITY</th>
 								<td>
-									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+									<input type="number" name="quantity" min="1" value="${requestScope.case.quantity}" class="form-control" placeholder="Quantity">
 								</td>
 							</tr>
+							
 							<tr>
 								<th>UPDATE PRICE</th>
 								<td>
-									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+									<input type="number" name="price" min="1" value="${requestScope.case.price}" class="form-control" placeholder="Price">
 								</td>
 							</tr>
+							
 							<tr>
 								<th>UPDATE MEMO</th>
 								<td>
 									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
 								</td>
 							</tr>
+							
 						</table>
 							<button type="submit" style="float:right">수정</button>
 					</form>

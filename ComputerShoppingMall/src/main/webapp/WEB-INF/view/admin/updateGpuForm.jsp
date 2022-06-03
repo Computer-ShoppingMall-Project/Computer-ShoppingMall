@@ -14,8 +14,7 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
 <link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,8 +27,8 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,31 +36,14 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
-</head>
-<script type="text/javascript">
-	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
-			document.getElementById('btn').click();
-		}
-	}
-	window.onload = function() {
-	    document.getElementById('btn').onclick = function() {
-	        document.getElementById('frm').submit();
-	        return false;
-	    };
-	};
-</script>
-<body>
-
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-
-// companyName 직접입력 
+	// company 직접입력 
 	$(function(){
 		$("#selboxDirect").hide();
 		
 		$("#selbox").change(function() {
-	             //직접입력을 누를 때 나타남
+	             // 직접입력을 누를 때 나타남
 			if($("#selbox").val() == "direct") {
 				$("#selboxDirect").show();
 			}  else {
@@ -70,146 +52,150 @@
 		}) 
 	});
 	
-	// company 직접입력
+	// chipset company 직접입력
 	$(function(){
 		$("#selboxDirect2").hide();
 		
 		$("#selbox2").change(function() {
-	             //직접입력을 누를 때 나타남
-			if($("#selbox2").val() == "direct2") {
+	             // 직접입력을 누를 때 나타남
+			if($("#selbox2").val() == "direct") {
 				$("#selboxDirect2").show();
 			}  else {
 				$("#selboxDirect2").hide();
 			}
 		}) 
 	});
+	
+	// gpuSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
 </script>
-
+</head>
+<body>
 	<!-- header적용 -->
-		<c:choose>
-		<c:when test="${sessionAdminId != null }">
-			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
-					<li>Main Product</li>
 				</ul>
-				<h2>GRAPHIC CARD</h2>
+				<h2>상품 수정</h2>
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
-
-	<section class="marketplace-top">
-		<div id="market-wrapper">
-			<div class="item_image" style="background: white;">
-				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.gpuOne.gpuImageName}" alt="">
-			</div>
-			<!-- end item_image -->
-		</div>
-	</section>
-	
-		<section class="section1">
+	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-				<c:if test="${sessionAdminId != null }">
-					<div>
-						<a href="DeleteGpuController?gpuNo=${requestScope.gpuOne.gpuNo}" class="btn btn-danger">DELETE</a>
-					</div>
-				</c:if>
-				<div class="divider"></div>
-
-		
-							<!-- buttons -->
-							<hr>
-							<div class="form-group">
-								<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-									<div>
-										<div class="details_section  text-center">
-										<br><br>
-											<h3>Item Details</h3>
-											<table class="table text-primary">
-												<tr>
-													gpu_no : <span class="form-control">${requestScope.gpuOne.gpuNo}</span>
-												</tr><br></br>
-												<tr>
-													gpu_name : <span>${requestScope.gpuOne.gpuName}</span>
-													<input type="text" name="gpuName" class="form-control" placeholder="gpuName">
-												</tr><br></br>
-												<tr>
-													company_name : <span>${requestScope.gpuOne.companyName}</span>
-													<select class="form-control" id="selbox" name="companyName">
-														<option value="" selected disabled>companyName 선택</option>
-															<c:forEach var="c" items="${companyNameList}">
-																<option value="${c}">${c}</option>
-															</c:forEach>
-														<option value="direct">직접 입력</option>
-													</select>
-													<input type="text" id="selboxDirect" name="companyName" class="form-control" value="" placeholder="companyName 직접 입력">
-												</tr><br></br>
-												<tr>
-												category_name : <span class="form-control">${requestScope.gpuOne.categoryName}</span>
-												</tr><br></br>
-												<tr>
-													chipset_company : <span>${requestScope.gpuOne.chipsetCompany}</span>
-													<select class="form-control" id="selbox" name="chipsetCompany">
-														<option value="" selected disabled>companyName 선택</option>
-															<c:forEach var="c" items="${chipsetCompanyList}">
-																<option value="${c}">${c}</option>
-															</c:forEach>
-														<option value="direct">직접 입력</option>
-													</select>
-													<input type="text" id="selboxDirect2" name="chipsetCompany" class="form-control" value="" placeholder="chipsetCompany 직접 입력">
-												</tr><br></br>
-												<tr>
-												gpu_size : <span>${requestScope.gpuOne.gpuSize}
-												<input type="number" name="gupSize" min="1" class="form-control" placeholder="GpuSize"><br></br>
-												</tr>
-												<tr>
-													<li class="designer">price : <span>${requestScope.gpuOne.price}원</li>
-													<input type="number" name="price" min="1" class="form-control" placeholder="Price"><br></br>
-												</tr>>
-												<tr>
-													quantity : <span>${requestScope.gpuOne.quantity}개
-													<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
-												</tr><br></br>
-													<input type="textarea" name="memo" class="theme_details col-lg-12 col-md-12 col-sm-5-" value="" placeholder="memo 직접 입력">
-												</tr>
-													<div class="theme_details col-lg-12 col-md-12 col-sm-5-">
-								
-													<div class="theme_details">
-														<div class="item-description">
-															${requestScope.gpuOne.memo}
-												</div>
-											</table>
-											<button type="submit" style="float:right">등록</button>
-										</div>
-									</div>
-								</div>
-								<!-- theme_details -->
-								</div>
-							</div>
-							<br><br>
+				<div class="col-lg-3 col-md-6 col-sm-12"></div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<h4 class="title text-primary">GPU 수정
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+					<form id="updateGpuForm" method="post" name=updateGpuForm” action="${pageContext.request.contextPath}/UpdateGpuController?">
+						<div>
+							<!-- 값넘기기 -->
+							<input type="hidden" name="gpuImageNo" readonly="readonly" value="${requestScope.gpu.gpuImageNo}" required>
+							<input type="hidden" name="gpuNo" readonly="readonly" value="${requestScope.gpu.gpuNo}" required>
 						</div>
-					</div>
-					<div class="clearfix"></div>
-					</div>
+						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text"  name="categoryName" value="${requestScope.gpu.categoryName}" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="gpuName" value="${requestScope.gpu.gpuName}" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox" name="companyName">
+										<option value="" selected disabled>${requestScope.gpu.companyName}</option>
+											<c:forEach var="c" items="${companyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="companyNameInsert" class="form-control" value="" placeholder="Company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>CHIPSET COMPANY</th>
+								<td>
+									<select class="form-control" id="selbox2" name="chipsetCompany" >
+										<option value="" selected disabled>${requestScope.gpu.chipsetCompany}</option>
+											<c:forEach var="c" items="${chipsetCompanyList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect2"  name="chipsetCompanyInsert" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>
+							<tr>
+								<th>GPU SIZE</th>
+								<td>
+									<select class="form-control" id="selbox3" name="gpuSize" >
+										<option value="" selected disabled>${requestScope.gpu.gpuSize}</option>
+											<c:forEach var="c" items="${gpuSizeList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="number" min="1" id="selboxDirect3"  name="gpuSizeInsert" class="form-control" value="" placeholder="company 직접 입력">
+								</td>
+							</tr>							
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity"  value="${requestScope.gpu.quantity}" min="1" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price"  value="${requestScope.gpu.price}" min="1" class="form-control" >
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
+					</form>
 				</div>
-			</section>
+				<!-- end login -->
+			</div>
+			<!-- end content -->
+		</div>
+		<!-- end container -->
+	</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

@@ -51,7 +51,7 @@ public class UpdateCoolerController extends HttpServlet {
 			int coolerNo = Integer.parseInt(request.getParameter("coolerNo"));
 			c = coolerDao.selectCoolerOne(coolerNo);
 			
-			request.setAttribute("coolerOne", c);
+			request.setAttribute("cooler", c);
 			request.getRequestDispatcher("/WEB-INF/view/admin/updateCoolerForm.jsp").forward(request, response);
 		}
 	}

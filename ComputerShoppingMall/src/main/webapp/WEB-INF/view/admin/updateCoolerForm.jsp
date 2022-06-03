@@ -91,7 +91,7 @@
 				<ul class="breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 				</ul>
-				<h2>상품등록</h2>
+				<h2>상품수정</h2>
 			</div>
 		</div>
 	</section>
@@ -102,7 +102,12 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title text-primary">cooler 수정</h4>
+					<h4 class="title text-primary">cooler 수정
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+					
 						<form id="updateCoolerform" method="post" name="updateCoolerform" action="${pageContext.request.contextPath}/UpdateCoolerController?">
 							<div>
 								<!-- 값넘기기 -->
@@ -113,14 +118,14 @@
 							<tr>
 								<th>UPDATE NAME</th>
 								<td>
-									<input type="text" name="coolerName" class="form-control" placeholder="CoolerName">
+									<input type="text" name="coolerName" value="${requestScope.cooler.coolerName}" class="form-control" placeholder="CoolerName">
 								</td>
 							</tr>
 							<tr>
 								<th>UPDATE COMPANY</th>
 								<td>
 									<select class="form-control" id="selbox" name="companyName">
-										<option value="" selected disabled>companyName 선택</option>
+										<option value="" selected disabled>${requestScope.cooler.companyName}</option>
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -133,7 +138,7 @@
 								<th>UPDATE KIND</th>
 								<td>
 									<select class="form-control" id="selbox2" name="kind">
-										<option value="" selected disabled>kind 선택</option>
+										<option value="" selected disabled>${requestScope.cooler.kind}</option>
 											<c:forEach var="c" items="${kindList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -146,7 +151,7 @@
 								<th>UPDATE COOLER SIZE</th>
 								<td>
 									<select class="form-control" id="selbox3" name="coolerSize">
-										<option value="" selected disabled>size 선택</option>
+										<option value="" selected disabled>${requestScope.cooler.coolerSize}</option>
 											<c:forEach var="c" items="${sizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
@@ -158,13 +163,13 @@
 							<tr>
 								<th>UPDATE QUANTITY</th>
 								<td>
-									<input type="number" name="quantity" min="1" class="form-control" placeholder="Quantity">
+									<input type="number" name="quantity" value="${requestScope.cooler.quantity}" min="1" class="form-control" placeholder="Quantity">
 								</td>
 							</tr>
 							<tr>
 								<th>UPDATE PRICE</th>
 								<td>
-									<input type="number" name="price" min="1" class="form-control" placeholder="Price">
+									<input type="number" name="price" value="${requestScope.cooler.price}" min="1" class="form-control" placeholder="Price">
 								</td>
 							</tr>
 							<tr>
@@ -206,35 +211,5 @@
 
 	<!-- Template Main Javascript File -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-</body>				</div>
-				
-				<!-- end login -->
-			</div>
-			<!-- end content -->
-		</div>
-		<!-- end container -->
-	</section>
-	<!-- end section -->
-
-	<!-- footer적용 -->
-	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<!-- JavaScript Libraries -->
-	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/php-mail-form/validate.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/prettyphoto/js/prettyphoto.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/isotope/isotope.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverdir.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/hover/hoverex.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/unveil-effects/unveil-effects.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jetmenu/jetmenu.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/animate-enhanced/animate-enhanced.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/jigowatt/jigowatt.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/easypiechart/easypiechart.min.js"></script>
-
-	<!-- Template Main Javascript File -->
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-</body>
+</body>	
 </html>

@@ -11,7 +11,7 @@ import vo.Case;
 import vo.Image;
 
 public class CaseDao {
-	// 장바구니에 담기
+	// 장바구니에 담기!
 	public int insertCartCase(String customerId, Case c) {
 		int row = 0;
 		Connection conn = null;

@@ -26,7 +26,7 @@ public class UpdateCpuController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		// dao
+		// dao-
 		cpuDao = new CpuDao();
 		// 게시글 이름, 가격 받아오기
 		ArrayList<Cpu> list = cpuDao.selectCpuList();

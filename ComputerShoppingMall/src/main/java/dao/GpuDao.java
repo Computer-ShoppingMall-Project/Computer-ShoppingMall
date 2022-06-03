@@ -67,37 +67,46 @@ public class GpuDao {
 		return row;
 	}
 	// gpu 상품수정
-	public int updateGpu(Gpu g) {
+	public int updateGpu(Gpu c) {
+		// 상품 수정 확인할 리턴값 변수 선언
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE gpu SET price=?, quantity=?, gpu_name=?, chipset_company=?, gpu_size=? memo=?  update_date=NOW() WHERE gpu_no=?";
+		String sql = "UPDATE gpu SET gpu_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,chipset_company=? " 
+				+ "					,gpu_size=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,gpu_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE gpu_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, g.getPrice());
-			stmt.setInt(2, g.getQuantity());
-			stmt.setInt(3, g.getGpuNo());
-			stmt.setString(4, g.getGpuName());
-			stmt.setString(5, g.getChipsetCompany());
-			stmt.setInt(6, g.getGpuSize());
-			stmt.setString(7, g.getMemo());
+			stmt.setString(1, c.getGpuName());
+			stmt.setString(2, c.getCompanyName());
+			stmt.setString(3, c.getCategoryName());
+			stmt.setString(4, c.getChipsetCompany());
+			stmt.setInt(5, c.getGpuSize());
+			stmt.setInt(6, c.getPrice());
+			stmt.setInt(8, c.getQuantity());
+			stmt.setInt(9, c.getGpuImageNo());
+			stmt.setString(10, c.getMemo());
+			stmt.setInt(11, c.getGpuNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			
-		}try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}return row;
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
 	}
 	// gpu 상품등록
 	public int insertGpu(Image i, Gpu g) {
