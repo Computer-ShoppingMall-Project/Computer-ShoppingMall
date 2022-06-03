@@ -27,7 +27,7 @@ public class UpdateGpuController extends HttpServlet {
 
 		// dao
 		gpuDao = new GpuDao();
-		// 게시글 이름, 가격 받아오기
+		// 게시글 이름, 가격 받아오기!
 		ArrayList<Gpu> gpuList = gpuDao.selectGpuList();
 		// company
 		ArrayList<String> companyList = gpuDao.companyKind();

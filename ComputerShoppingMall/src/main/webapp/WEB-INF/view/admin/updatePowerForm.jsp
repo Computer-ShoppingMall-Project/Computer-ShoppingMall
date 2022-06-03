@@ -14,8 +14,7 @@
 <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="icon">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ruda:400,900,700" rel="stylesheet">
 
 <!-- Bootstrap CSS File -->
 <link href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,8 +27,8 @@
 <link href="${pageContext.request.contextPath}/lib/owl-carousel/owl-carousel.css" rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="css/colors/blue.css">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
 <!-- =======================================================
     Template Name: MaxiBiz
@@ -37,145 +36,112 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
-</head>
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	function plus() {
-		if (confirm('Are you sure you want to put it in your shopping cart?')) {
-			document.getElementById('btn').click();
-		}
-	}
-	window.onload = function() {
-	    document.getElementById('btn').onclick = function() {
-	        document.getElementById('frm').submit();
-	        return false;
-	    };
-	};
+// 파워 정격 직접입력 
+	$(function(){
+		$("#selboxDirect").hide();
+		
+		$("#selbox").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox").val() == "direct") {
+				$("#selboxDirect").show();
+			}  else {
+				$("#selboxDirect").hide();
+			}
+		}) 
+	});
 </script>
+</head>
 <body>
 	<!-- header적용 -->
-	<c:choose>
-		<c:when test="${sessionAdminId != null }">
-			<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/WEB-INF/view/banner/header.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+	<jsp:include page="/WEB-INF/view/banner/adminHeader.jsp"></jsp:include>
 
 	<section class="post-wrapper-top">
 		<div class="container">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<ul class="breadcrumb">
-					<li><a href="index.jsp">Home</a></li>
-					<li>Main Product</li>
+					<li><a href="${pageContext.request.contextPath}/IndexController">Home</a></li>
 				</ul>
-				<h2>POWER</h2>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- search -->
-				<div class="search-bar">
-					<form action="" method="get">
-						<fieldset>
-							<input type="image" src="img/pixel.gif" class="searchsubmit" alt="" /> 
-							<input type="text" class="search_text showtextback" name="s" id="s" value="Search..." />
-						</fieldset>
-					</form>
-				</div>
-				<!-- / end div .search-bar -->
+				<h2>상품 수정</h2>
 			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
-
-	<section class="marketplace-top">
-		<div id="market-wrapper">
-			<div class="item_image" style="background: white;">
-				<img data-effect="fade" class="aligncenter" width="400" height="200" src="${pageContext.request.contextPath}/image/${requestScope.powerOne.powerImageName}" alt="">
-			</div>
-			<!-- end item_image -->
-		</div>
-	</section>
-		<section class="section1">
+	<section class="section1">
 		<div class="container clearfix">
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
-						<c:if test="${sessionAdminId != null }">
-							<div>
-								<a href="UpdatePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-info">UPDATE</a>
-								<a href="DeletePowerController?powerNo=${requestScope.powerOne.powerNo}" class="btn btn-danger">DELETE</a>
-							</div>
-						</c:if>
-				<div class="general-title text-center">
-					<h3>${requestScope.powerOne.powerName}</h3>
-					<hr>
-				</div>
-
-				<div class="divider"></div>
-
-				<div class="item_details">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<!-- theme_details -->
-							<div class="form-group">
-								<div class="item_price">
-									<h3>
-										<span>${requestScope.powerOne.price}원</span>
-									</h3>
-								</div>
-							</div>
-							<!-- buttons -->
-							<hr>
-							<div class="form-group">
-								<div class="text-center">
-									<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-										<div class="details_section  text-center">
-											<h3>Item Details</h3>
-											<ul>
-												<li class="version">cooler_no : <span>${requestScope.powerOne.powerNo}</span></li>
-			                                    <li class="version">category_name : <span>${requestScope.powerOne.categoryName}</span></li>
-			                                    <li class="designer">company_name : 
-			                                    <input type ="text" name="company_name " value="${requestScope.powerOne.companyName}">
-			                                    <li class="designer">rated_power :
-			                                    <input type ="text" name="ratePower" value="${requestScope.powerOne.ratedPower }">
-			                                    <li class="designer">quantity :
-												<input type = "number" name="quantity" value="${requestScope.powerOne.quantity}">
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="theme_details col-lg-6 col-md-6 col-sm-6">
-								<br>
-									<div class="theme_details">
-										<div class="item-description">
-											<p>${requestScope.powerOne.memo}</p>
-										</div>
-										<!-- item-description -->
-									</div>  
-									<br>
-									<div class="text-center">
-									</div>
-									<h4 class="text-danger text-center">재고 : ${requestScope.caseOne.quantity}</h4>
-									<br><br>
-									<div class="rating text-center">
-										<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star-o"></i>
-										<p>Users Rating</p>
-									</div> <br>
-								<!-- theme_details -->
-								</div>
-							</div>
-							<br><br>
+				<div class="col-lg-3 col-md-6 col-sm-12"></div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<h4 class="title text-primary">Power 수정
+					<c:if test="${msg != null || msg != ''}">
+						<span class="text-danger">${msg}</span>
+					</c:if>
+					</h4>
+					<form id="updatePowerForm" method="post" name=“updatePowerForm” action="${pageContext.request.contextPath}/UpdatePowerController">
+						<div>
+							<!-- 값넘기기! -->
+							<input type="hidden" name="powerImageNo" readonly="readonly" value="${requestScope.power.powerImageNo}" required>
+							<input type="hidden" name="powerNo" readonly="readonly" value="${requestScope.power.powerNo}" required>
 						</div>
-					</div>
-					<div class="clearfix"></div>
-					</div>
+						<table class="table text-primary">
+							<tr>
+								<th>CATEGORY</th>
+								<td>
+									<input type="text" name="categoryName" value="${requestScope.power.categoryName}" readonly="readonly" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>NAME</th>
+								<td>
+									<input type="text" name="powerName" value="${requestScope.power.powerName}" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>POWER RATE</th>
+								<td>
+									<select class="form-control" id="selbox" name="kind">
+										<option value="" selected disabled>${requestScope.power.ratedPower}</option>
+											<c:forEach var="c" items="${ratedPowerList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="ratedPowerInsert" class="form-control" value="" placeholder="정격파워 직접 입력">
+								</td>
+							</tr>					
+							<tr>
+								<th>QUANTITY</th>
+								<td>
+									<input type="number" name="quantity" value="${requestScope.power.quantity}" min="1" class="form-control" placeholder="Quantity">
+								</td>
+							</tr>
+							<tr>
+								<th>PRICE</th>
+								<td>
+									<input type="number" name="price" value="${requestScope.power.price}" min="1" class="form-control" placeholder="Price">
+								</td>
+							</tr>
+							<tr>
+								<th>MEMO</th>
+								<td>
+									<textarea class="form-control" cols="30" rows="5" name="memo"></textarea>
+								</td>
+							</tr>
+						</table>
+							<button type="submit" style="float:right">등록</button>
+					</form>
 				</div>
-			</section>
+				<!-- end login -->
+			</div>
+			<!-- end content -->
+		</div>
+		<!-- end container -->
+	</section>
 	<!-- end section -->
 
 	<!-- footer적용 -->
 	<jsp:include page="/WEB-INF/view/banner/footer.jsp"></jsp:include>
-
-	<div class="dmtop">Scroll to Top</div>
 
 	<!-- JavaScript Libraries -->
 	<script src="${pageContext.request.contextPath}/lib/jquery/jquery.min.js"></script>

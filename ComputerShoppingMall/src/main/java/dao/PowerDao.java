@@ -70,22 +70,32 @@ public class PowerDao {
 	}
 	// power 상품수정
 	public int updatePower(Power p) {
+		// 상품 수정 확인할 리턴값 변수 선언-
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE ram SET price=?, quantity=?, update_date=NOW() WHERE ram_no=?";
+		String sql = "UPDATE power SET power_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,rated_power=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,power_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE power_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, p.getPrice());
-			stmt.setInt(2, p.getQuantity());
-			stmt.setInt(3, p.getPowerNo());
+			stmt.setString(1, p.getPowerName());
+			stmt.setString(2, p.getCompanyName());
+			stmt.setString(3, p.getCategoryName());
+			stmt.setString(4, p.getRatedPower());
+			stmt.setInt(5, p.getPrice());
+			stmt.setInt(6, p.getQuantity());
+			stmt.setInt(7, p.getPowerImageNo());
+			stmt.setString(8, p.getMemo());
+			stmt.setInt(9, p.getPowerNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

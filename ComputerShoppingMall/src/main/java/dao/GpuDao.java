@@ -11,7 +11,7 @@ import vo.Gpu;
 import vo.Image;
 
 public class GpuDao {
-	// 장바구니 담기
+	// 장바구니 담기!
 	public int insertCartGpu(String customerId, Gpu gpu) {
 		int row = 0;
 		Connection conn = null;

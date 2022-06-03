@@ -69,22 +69,38 @@ public class MainboardDao {
 	}
 	// mainboard 상품수정
 	public int updateMainboard(Mainboard m) {
+		// 상품 수정 확인할 리턴값 변수 선언-
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE mainboard SET price=?, quantity=?, update_date=NOW() WHERE mainboard_no=?";
+		String sql = "UPDATE cpu SET mainboard_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,kind=? " 
+				+ "					,socket_size=? " 
+				+ "					,chipset=? " 
+				+ "					,ramVersion=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,mainboard_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE mainboard_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, m.getPrice());
-			stmt.setInt(2, m.getQuantity());
-			stmt.setInt(3, m.getMainboardNo());
+			stmt.setString(1, m.getMainboardName());
+			stmt.setString(2, m.getCompanyName());
+			stmt.setString(3, m.getCategoryName());
+			stmt.setString(4, m.getKind());
+			stmt.setString(5, m.getSocketSize());
+			stmt.setString(6, m.getChipset());
+			stmt.setString(7, m.getRamVersion());
+			stmt.setInt(8, m.getPrice());
+			stmt.setInt(9, m.getQuantity());
+			stmt.setInt(19, m.getMainboardImageNo());
+			stmt.setString(11, m.getMemo());
+			stmt.setInt(12, m.getMainboardNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -97,6 +113,7 @@ public class MainboardDao {
 		}
 		return row;
 	}
+	
 	// mainboard 상품등록
 	public int insertMainboard(Image i, Mainboard m) {
 		// insert 성공/실패 확인 변수 선언

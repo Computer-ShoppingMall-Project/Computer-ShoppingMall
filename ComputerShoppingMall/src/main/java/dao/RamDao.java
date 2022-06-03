@@ -69,27 +69,36 @@ public class RamDao {
 	}
 	// ram 상품수정
 	public int updateRam(Ram r) {
+		// 상품 수정 확인할 리턴값 변수 선언-
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE ram SET price=?, quantity=?, update_date=NOW() WHERE ram_no=?";
+		String sql = "UPDATE ram SET ram_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,kind=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,ram_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE ram_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, r.getPrice());
-			stmt.setInt(2, r.getQuantity());
-			stmt.setInt(3, r.getRamNo());
+			stmt.setString(1, r.getRamName());
+			stmt.setString(2, r.getCompanyName());
+			stmt.setString(3, r.getCategoryName());
+			stmt.setString(4, r.getKind());
+			stmt.setInt(5, r.getPrice());
+			stmt.setInt(6, r.getQuantity());
+			stmt.setInt(7, r.getRamImageNo());
+			stmt.setString(8, r.getMemo());
+			stmt.setInt(9, r.getRamNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-
 				stmt.close();
 				conn.close();
 			} catch(SQLException e) {
@@ -98,7 +107,6 @@ public class RamDao {
 		}
 		return row;
 	}
-
 	// ram 상품등록
 	public int insertRam(Image i, Ram r) {
 		// insert 성공/실패 확인 변수 선언

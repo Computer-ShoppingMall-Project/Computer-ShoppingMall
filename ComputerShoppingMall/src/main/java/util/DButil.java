@@ -9,7 +9,7 @@ public class DButil {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://3.38.93.7:3306/computer","root","java1004");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.38.95.7/computer","root","mariadb1234");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

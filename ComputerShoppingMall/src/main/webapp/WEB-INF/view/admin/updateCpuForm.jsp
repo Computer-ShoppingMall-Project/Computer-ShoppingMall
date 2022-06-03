@@ -80,7 +80,7 @@
 		}) 
 	});
 	
-	// chipSet 직접입력!
+	// chipSet 직접입력!!
 	$(function(){
 		$("#selboxDirect4").hide();
 		

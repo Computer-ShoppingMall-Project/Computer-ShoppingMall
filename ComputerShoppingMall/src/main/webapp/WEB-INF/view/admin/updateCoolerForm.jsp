@@ -66,7 +66,7 @@
 		}) 
 	});
 	
-	// coolerSize 직접입력
+	// coolerSize 직접입력!
 	$(function(){
 		$("#selboxDirect3").hide();
 		

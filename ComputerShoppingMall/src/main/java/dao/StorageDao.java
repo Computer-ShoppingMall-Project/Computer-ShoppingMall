@@ -71,23 +71,35 @@ public class StorageDao {
 	}
 
 	// storage 상품수정
-	public int updateStorage(Storage s) {
+	public int updateStorage(Storage s)  {
+		// 상품 수정 확인할 리턴값 변수 선언-
+		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		conn = DButil.getConnection();
-		int row=0;
-		String sql = "UPDATE storage SET price=?, quantity=?, update_date=NOW() WHERE storage_no=?";
+		String sql = "UPDATE storage SET storage_name=? "
+				+ "					,company_name=? " 
+				+ "					,category_name=? " 
+				+ "					,storage_interface=? " 
+				+ "					,capacity=? " 
+				+ "					,price=? " 
+				+ "					,quantity=? " 
+				+ "					,storage_image_no=? " 
+				+ "					,memo=? "
+				+ "WHERE storage_no=?"; 
 		try {
 			stmt= conn.prepareStatement(sql);
-			stmt.setInt(1, s.getPrice());
-			stmt.setInt(2, s.getQuantity());
-			stmt.setInt(3, s.getStorageNo());
+			stmt.setString(1, s.getStorageName());
+			stmt.setString(2, s.getCompanyName());
+			stmt.setString(3, s.getCategoryName());
+			stmt.setString(4, s.getStorageInterface());
+			stmt.setString(5, s.getCapacity());
+			stmt.setInt(6, s.getPrice());
+			stmt.setInt(7, s.getQuantity());
+			stmt.setInt(8, s.getStorageImageNo());
+			stmt.setString(10, s.getMemo());
+			stmt.setInt(11, s.getStorageNo());
 			row = stmt.executeUpdate();
-			if(row == 1) {
-				System.out.println("입력성공");
-			} else {
-				System.out.println("입력실패");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

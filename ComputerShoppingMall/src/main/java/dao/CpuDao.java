@@ -71,7 +71,7 @@ public class CpuDao {
 	}
 	// cpu 상품수정
 	public int updateCpu(Cpu c) {
-		// 상품 수정 확인할 리턴값 변수 선언-
+		// 상품 수정 확인할 리턴값 변수 선언-!
 		int row = -1;
 		Connection conn = null;
 		PreparedStatement stmt = null;

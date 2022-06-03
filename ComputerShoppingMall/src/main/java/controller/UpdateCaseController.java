@@ -24,7 +24,7 @@ public class UpdateCaseController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/LoginController");
 			return;
 		}
-		// dao
+		// dao!
 		caseDao = new CaseDao();
 		// case 정보
 		ArrayList<Case> caseList = caseDao.selectCaseList();

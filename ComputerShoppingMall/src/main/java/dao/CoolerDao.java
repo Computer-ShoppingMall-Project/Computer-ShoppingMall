@@ -12,7 +12,7 @@ import vo.Cpu;
 import vo.Image;
 
 public class CoolerDao {
-	// 장바구니에 담기!
+	// 장바구니에 담기!!
 	public int insertCartCooler(String customerId, Cooler cooler) {
 		int row = 0;
 		Connection conn = null;

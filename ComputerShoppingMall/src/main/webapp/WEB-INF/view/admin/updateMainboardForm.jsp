@@ -30,8 +30,15 @@
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/colors/blue.css">
 
+<!-- =======================================================
+    Template Name: MaxiBiz
+    Template URL: https://templatemag.com/maxibiz-bootstrap-business-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+// kind 직접입력 
 	$(function(){
 		$("#selboxDirect").hide();
 		
@@ -45,19 +52,7 @@
 		}) 
 	});
 	
-	$(function(){
-		$("#selboxDirect1").hide();
-		
-		$("#selbox1").change(function() {
-	             //직접입력을 누를 때 나타남
-			if($("#selbox1").val() == "direct") {
-				$("#selboxDirect1").show();
-			}  else {
-				$("#selboxDirect1").hide();
-			}
-		}) 
-	});
-
+	// company 직접입력
 	$(function(){
 		$("#selboxDirect2").hide();
 		
@@ -70,9 +65,49 @@
 			}
 		}) 
 	});
+	
+	// socketSize 직접입력
+	$(function(){
+		$("#selboxDirect3").hide();
+		
+		$("#selbox3").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox3").val() == "direct") {
+				$("#selboxDirect3").show();
+			}  else {
+				$("#selboxDirect3").hide();
+			}
+		}) 
+	});
+	
+	// chipSet 직접입력
+	$(function(){
+		$("#selboxDirect4").hide();
+		
+		$("#selbox4").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox4").val() == "direct") {
+				$("#selboxDirect4").show();
+			}  else {
+				$("#selboxDirect4").hide();
+			}
+		}) 
+	});
+	
+	// ramVersion 직접입력
+	$(function(){
+		$("#selboxDirect5").hide();
+		
+		$("#selbox5").change(function() {
+	             //직접입력을 누를 때 나타남
+			if($("#selbox5").val() == "direct") {
+				$("#selboxDirect5").show();
+			}  else {
+				$("#selboxDirect5").hide();
+			}
+		}) 
+	});
 </script>
-  
-  
 </head>
 <body>
 	<!-- header적용 -->
@@ -86,8 +121,6 @@
 				</ul>
 				<h2>상품수정</h2>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			</div>
 		</div>
 	</section>
 	<!-- end post-wrapper-top -->
@@ -97,78 +130,105 @@
 			<div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12"></div>
 				<div class="col-lg-6 col-md-6 col-sm-12">
-					<h4 class="title">STORAGE 수정
-						<c:if test="${msg != null || msg != ''}">
+					<h4 class="title text-primary">MAINBOARD 수정
+					<c:if test="${msg != null || msg != ''}">
 						<span class="text-danger">${msg}</span>
-						</c:if>
+					</c:if>
 					</h4>
-					<form id="updateStorageForm" method="post" name="updateStorageForm" action="${pageContext.request.contextPath}/UpdateStorageController">
+					<form id="updateMainBoardForm" method="post" name=“updateMainBoardForm” action="${pageContext.request.contextPath}/UpdateMainboardController?">
 						<div>
 							<!-- 값넘기기! -->
-							<input type="hidden" name="storageImageNo" readonly="readonly" value="${requestScope.storage.storageImageNo}" required>
-							<input type="hidden" name="storageNo" readonly="readonly" value="${requestScope.storage.storageNo}" required>
+							<input type="hidden" name="mainboardImageNo" readonly="readonly" value="${requestScope.mainboard.mainboardImageNo}" required>
+							<input type="hidden" name="mainboardNo" readonly="readonly" value="${requestScope.mainboard.mainboardNo}" required>
 						</div>
 						<table class="table text-primary">
 							<tr>
 								<th>CATEGORY</th>
 								<td>
-									<input type="text"  name="categoryName" value="${requestScope.storage.categoryName}" readonly="readonly" class="form-control">
+									<input type="text"  name="categoryName" value="${requestScope.mainboard.categoryName}" readonly="readonly" class="form-control">
 								</td>
 							</tr>
 							<tr>
-								<th>STORAGENAME</th>
+								<th>NAME</th>
 								<td>
-									<input type="text" name="storageName" value="${requestScope.storage.storageName}">
+									<input type="text" name="mainboardName" value="${requestScope.mainboard.mainboardName}" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th>KIND</th>
+								<td>
+									<select class="form-control" id="selbox" name="kind">
+										<option value="" selected disabled>${requestScope.mainboard.kind}</option>
+											<c:forEach var="c" items="${kindList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect" name="kindInsert" class="form-control" value="" placeholder="KIND 직접 입력">
+								</td>
 							</tr>
 							<tr>
 								<th>COMPANY</th>
 								<td>
-									<select class="form-control" id="selbox" name="companyName">
-										<option value="" selected disabled>${requestScope.storage.companyName}</option>
+									<select class="form-control" id="selbox2" name="companyName" >
+										<option value="" selected disabled>${requestScope.mainboard.companyName}</option>
 											<c:forEach var="c" items="${companyList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text" id="selboxDirect" name="companyNameInsert" class="form-control" placeholder="COMPANYNAME 직접 입력">
+									<input type="text" id="selboxDirect2"  name="companyNameInsert" class="form-control" value="" placeholder="company 직접 입력">
 								</td>
 							</tr>
 							<tr>
-								<th>STORAGEINTERFACE</th>
+								<th>SOCKET SIZE</th>
 								<td>
-									<select class="form-control" id="selbox1" name="storageInterface">
-										<option value="" selected disabled>${requestScope.storage.storageInterface}</option>
-											<c:forEach var="c" items="${interfaceList}">
+									<select class="form-control" id="selbox3" name="socketSize">
+										<option value="" selected disabled>${requestScope.mainboard.socketSize}</option>
+											<c:forEach var="c" items="${socketSizeList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="text"  id="selboxDirect1" name="storageInterfaceInsert" class="form-control" placeholder="STORAGEINTERFACE 직접 입력">
+									<input type="text" id="selboxDirect3" name="socketSizeInsert" class="form-control" value="" placeholder="SOCKET SIZE 직접 입력">
 								</td>
 							</tr>
 							<tr>
-								<th>CAPACITYLIST</th>
+								<th>CHIPSET</th>
 								<td>
-									<select class="form-control" id="selbox2" name="capacityName">
-										<option value="" selected disabled>${requestScope.storage.capacity}</option>
-											<c:forEach var="c" items="${capacityList}">
+									<select class="form-control" id="selbox4" name="chipset">
+										<option value="" selected disabled>${requestScope.mainboard.chipset}</option>
+											<c:forEach var="c" items="${chipsetList}">
 												<option value="${c}">${c}</option>
 											</c:forEach>
 										<option value="direct">직접 입력</option>
 									</select>
-									<input type="number"  id="selboxDirect2" name="capacityInsert" class="form-control" placeholder="CAPACITYLIST 직접 입력">
+									<input type="text" id="selboxDirect4" name="chipsetInsert" class="form-control" value="" placeholder="CHIPSET 직접 입력">
 								</td>
-							</tr>					
+							</tr>
+							<tr>
+								<th>RAM VERSION</th>
+								<td>
+									<select class="form-control" id="selbox5" name="ramVersion">
+										<option value="" selected disabled>${requestScope.mainboard.ramVersion}</option>
+											<c:forEach var="c" items="${ramVersionList}">
+												<option value="${c}">${c}</option>
+											</c:forEach>
+										<option value="direct">직접 입력</option>
+									</select>
+									<input type="text" id="selboxDirect5" name="ramVersionInsert" class="form-control" value="" placeholder="RAM VERSION 직접 입력">
+								</td>
+							</tr>							
 							<tr>
 								<th>QUANTITY</th>
 								<td>
-									<input type="number" name="quantity"  value="${requestScope.storage.quantity}" min="1" class="form-control">
+									<input type="number" name="quantity" value="${requestScope.mainboard.quantity}" min="1" class="form-control">
 								</td>
 							</tr>
 							<tr>
 								<th>PRICE</th>
 								<td>
-									<input type="number" name="price"  value="${requestScope.storage.price}" min="1" class="form-control" >
+									<input type="number" name="price" value="${requestScope.mainboard.price}" min="1" class="form-control" placeholder="Price">
 								</td>
 							</tr>
 							<tr>

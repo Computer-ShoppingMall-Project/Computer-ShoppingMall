@@ -75,7 +75,7 @@ public class UpdateCpuController extends HttpServlet {
 		List<String> coreList = cpuDao.coreKind();
 		// thread
 		List<String> threadList = cpuDao.threadKind();
-		// update form null 확인코드
+		// update form null 확인코드!
 		/*
 		if (request.getParameter("cpuName") == null || request.getParameter("companyName") == null
 				|| request.getParameter("categoryName") == null || request.getParameter("socketSize") == null

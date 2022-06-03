@@ -66,7 +66,7 @@
 		}) 
 	});
 	
-	// gpuSize 직접입력
+	// gpuSize 직접입력~
 	$(function(){
 		$("#selboxDirect3").hide();
 		
