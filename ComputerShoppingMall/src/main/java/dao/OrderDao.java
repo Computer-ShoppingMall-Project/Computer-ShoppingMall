@@ -159,7 +159,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,c.cpu_image_no , ci.name cpuImage,SUM(o.category_quantity) s  "
+		String sql ="SELECT product_name productName,c.cpu_image_no ,c.cpu_no cpuNo ,ci.name cpuImage,SUM(o.category_quantity) s  "
 				+ " FROM `order` o "
 				+ "	INNER JOIN cpu c  "
 				+ "		ON o.product_name = c.cpu_name "
@@ -174,6 +174,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("cpuNo",  rs.getString("cpuNo"));
 					map.put("cpuImage", rs.getString("cpuImage"));
 					list.add(map);
 				}
@@ -198,7 +199,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,c.case_image_no, ci.name caseImage,SUM(o.category_quantity) s  "
+		String sql ="SELECT o.product_name productName,c.case_no caseNo, c.case_image_no, ci.name caseImage,SUM(o.category_quantity) s  "
 				+ "FROM `order` o "
 				+ "	INNER JOIN `case` c "
 				+ "		ON o.product_name = c.case_name "
@@ -213,6 +214,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("caseNo", rs.getString("caseNo"));
 					map.put("caseImage", rs.getString("caseImage"));
 					map.put("s", rs.getInt("s"));
 					list.add(map);
@@ -238,7 +240,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,c.cooler_image_no, ci.name coolerImage,SUM(o.category_quantity) s "
+		String sql ="SELECT product_name productName,c.cooler_no coolerNo, c.cooler_image_no, ci.name coolerImage,SUM(o.category_quantity) s "
 				+ " FROM `order` o "
 				+ "	INNER JOIN cooler c "
 				+ "		ON o.product_name = c.cooler_name "
@@ -253,6 +255,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("coolerNo", rs.getString("coolerNo"));
 					map.put("coolerImage", rs.getString("coolerImage"));
 					map.put("s", rs.getString("s"));
 					list.add(map);
@@ -278,14 +281,14 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT product_name productName,g.gpu_image_no , ci.name gpuImage, SUM(o.category_quantity) s  "
+		String sql ="SELECT product_name productName,g.gpu_image_no, g.gpu_no gpuNo , ci.name gpuImage, SUM(o.category_quantity) s  "
 				+ "FROM `order` o "
 				+ "	INNER JOIN gpu g "
 				+ "		ON o.product_name = g.gpu_name "
 				+ "	INNER JOIN gpu_image ci "
 				+ "		ON g.gpu_image_no = ci.gpu_image_no "
 				+ " GROUP BY o.product_name "
-				+ "	order BY SUM(o.category_quantity) desc LIMIT 0,? " ;
+				+ "	ORDER BY SUM(o.category_quantity) desc LIMIT 0,? " ;
 		try {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, gpuRanking);
@@ -293,6 +296,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("gpuNo", rs.getString("gpuNo"));
 					map.put("gpuImage", rs.getString("gpuImage"));
 					list.add(map);
 				}
@@ -317,7 +321,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,m.mainboard_image_no , mi.name mainboardImage,SUM(o.category_quantity) s "
+		String sql ="SELECT o.product_name productName, m.mainboard_no mainboardNo , m.mainboard_image_no , mi.name mainboardImage,SUM(o.category_quantity) s "
 				+ "FROM `order` o "
 				+ "	INNER JOIN mainboard m "
 				+ "		ON o.product_name = m.mainboard_name "
@@ -332,6 +336,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("mainboardNo", rs.getString("mainboardNo"));
 					map.put("mainboardImage", rs.getString("mainboardImage"));
 					list.add(map);
 				}
@@ -356,7 +361,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,p.power_image_no , pi.name powerImage,SUM(o.category_quantity) s "
+		String sql ="SELECT o.product_name productName, p.power_no powerNo , p.power_image_no , pi.name powerImage,SUM(o.category_quantity) s "
 				+ "FROM `order` o "
 				+ "	INNER JOIN `power` p "
 				+ "		ON o.product_name = p.power_name "
@@ -371,6 +376,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("powerNo", rs.getString("powerNo"));
 					map.put("powerImage", rs.getString("powerImage"));
 					list.add(map);
 				}
@@ -395,7 +401,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,r.ram_image_no , ri.name ramImage,SUM(o.category_quantity) s  "
+		String sql ="SELECT o.product_name productName, r.ram_no ramNo, r.ram_image_no , ri.name ramImage,SUM(o.category_quantity) s  "
 				+ " FROM `order` o "
 				+ "	INNER JOIN ram r "
 				+ "		ON o.product_name = r.ram_name "
@@ -410,6 +416,7 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("ramNo", rs.getString("ramNo"));
 					map.put("ramImage", rs.getString("ramImage"));
 					list.add(map);
 				}
@@ -434,7 +441,7 @@ public class OrderDao {
 		PreparedStatement stmt = null;
 		ResultSet rs= null;
 		conn = DButil.getConnection();
-		String sql ="SELECT o.product_name productName,st.storage_image_no , si.name storageImage,SUM(o.category_quantity) s "
+		String sql ="SELECT o.product_name productName, st.storage_no storageNo , st.storage_image_no , si.name storageImage,SUM(o.category_quantity) s "
 				+ " FROM `order` o "
 				+ "	INNER JOIN `storage` st "
 				+ "		ON o.product_name = st.storage_name "
@@ -449,8 +456,8 @@ public class OrderDao {
 				while(rs.next()) {
 					Map<String, Object> map = new HashMap<String, Object> ();
 					map.put("productName", rs.getString("productName"));
+					map.put("storageNo", rs.getString("storageNo"));
 					map.put("storageImage", rs.getString("storageImage"));
-					map.put("s", rs.getString("s"));
 					list.add(map);
 				}
 		} catch (Exception e) {

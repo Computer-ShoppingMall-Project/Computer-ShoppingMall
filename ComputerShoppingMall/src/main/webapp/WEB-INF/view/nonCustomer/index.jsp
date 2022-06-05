@@ -70,78 +70,78 @@
 			 	<!-- cpu 순위 -->
 				<c:forEach var="cpu" items="${cpuRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${cpu.cpuImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${cpu.cpuImage}" data-src="${pageContext.request.contextPath}/image/${cpu.cpuImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${cpu.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
-				</div>
+						<a href="${pageContext.request.contextPath}/CartAddCpuController?cpuNo=${cpu.cpuNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${cpu.cpuImage}" data-src="${pageContext.request.contextPath}/image/${cpu.cpuImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${cpu.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
+					</div>
 				</c:forEach>
 				<!-- case 순위 -->
 				<c:forEach var="ca" items="${caRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${ca.caseImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${ca.caseImage}" data-src="${pageContext.request.contextPath}/image/${ca.caseImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${ca.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddCaseController?caseNo=${ca.caseNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${ca.caseImage}" data-src="${pageContext.request.contextPath}/image/${ca.caseImage}" alt="">
+								<div>
+									<small>Product Design</small> <span>${ca.productName}</span> <i class="fa fa-search"></i>
+								</div>
+							</a>
 					</div>
 				</c:forEach>
 				<!-- power 순위 -->
 				<c:forEach var="power" items="${powerRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${power.powerImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${power.powerImage}" data-src="${pageContext.request.contextPath}/image/${power.powerImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${power.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddPowerController?powerNo=${power.powerNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${power.powerImage}" data-src="${pageContext.request.contextPath}/image/${power.powerImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${power.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>	
 				<!-- cooler 순위 -->
 				<c:forEach var="cooler" items="${coolerRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${cooler.coolerImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${cooler.coolerImage}" data-src="${pageContext.request.contextPath}/image/${cooler.coolerImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${cooler.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddCoolerController?coolerNo=${cooler.coolerNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${cooler.coolerImage}" data-src="${pageContext.request.contextPath}/image/${cooler.coolerImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${cooler.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>	
 				<!-- gpu 순위 -->
-				<c:forEach var="gpu" items="${GpuRank}">
+				<c:forEach var="gpu" items="${gpuRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${gpu.gpuImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${gpu.gpuImage}" data-src="${pageContext.request.contextPath}/image/${gpu.gpuImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${gpu.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddGpuController?gpuNo=${gpu.gpuNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${gpu.gpuImage}" data-src="${pageContext.request.contextPath}/image/${gpu.gpuImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${gpu.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>	
 				<!-- mainboard 순위 -->
 				<c:forEach var="mainboard" items="${mainboardRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${mainboard.mainboardImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${mainboard.mainboardImage}" data-src="${pageContext.request.contextPath}/image/${mainboard.mainboardImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${mainboard.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddMainboardController?mainboardNo=${mainboard.mainboardNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${mainboard.mainboardImage}" data-src="${pageContext.request.contextPath}/image/${mainboard.mainboardImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${mainboard.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>	
 				<!-- ram 순위 -->
 				<c:forEach var="ram" items="${ramRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${ram.ramImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${ram.ramImage}" data-src="${pageContext.request.contextPath}/image/${ram.ramImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${ram.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddRamController?ramNo=${ram.ramNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${ram.ramImage}" data-src="${pageContext.request.contextPath}/image/${ram.ramImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${ram.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>
 			</div>
@@ -151,12 +151,12 @@
 				<!-- storage순위 -->
 				<c:forEach var="storage" items="${storageRank}">
 					<div class="item">
-					<a data-rel="prettyPhoto" href="${pageContext.request.contextPath}/image/${storage.storageImage}">
-					<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${storage.storageImage}" data-src="${pageContext.request.contextPath}/image/${storage.storageImage}" alt="">
-						<div>
-							<small>Product Design</small> <span>${storage.productName}</span> <i class="fa fa-search"></i>
-						</div>
-					</a>
+						<a href="${pageContext.request.contextPath}/CartAddStorageController?storageNo=${storage.storageNo}">
+							<img class="lazyOwl" src="${pageContext.request.contextPath}/image/${storage.storageImage}" data-src="${pageContext.request.contextPath}/image/${storage.storageImage}" alt="">
+							<div>
+								<small>Product Design</small> <span>${storage.productName}</span> <i class="fa fa-search"></i>
+							</div>
+						</a>
 					</div>
 				</c:forEach>						
 			</div>

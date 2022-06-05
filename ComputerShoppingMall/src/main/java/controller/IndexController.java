@@ -19,7 +19,7 @@ public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		// 상품 몇순위까지 보여줄껀지
-		int cpuRanking = 3; // 디폴트3개
+		int cpuRanking = 3; 
 		int caseRanking = 3;
 		int coolerRanking = 3;
 		int gpuRanking = 3;
@@ -27,6 +27,7 @@ public class IndexController extends HttpServlet {
 		int powerRanking = 3;
 		int ramRanking = 3;
 		int storageRanking = 3;
+		
 		orderDao = new OrderDao();
 		List<Map<String, Object>> cpuRank = orderDao.rankCpuImage(cpuRanking);
 		List<Map<String, Object>> caseRank = orderDao.rankCaseImage(caseRanking);
@@ -36,6 +37,7 @@ public class IndexController extends HttpServlet {
 		List<Map<String, Object>> powerRank = orderDao.rankPowerImage(powerRanking);
 		List<Map<String, Object>> ramRank = orderDao.rankRamImage(ramRanking);
 		List<Map<String, Object>> storageRank = orderDao.rankStorageImage(storageRanking);
+		System.out.println(storageRank);
 		// set
 		request.setAttribute("cpuRank",cpuRank);
 		request.setAttribute("caRank",caseRank);
